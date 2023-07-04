@@ -12,5 +12,5 @@ async fn main() {
 
     let battle_result = run_battle(get_battle_tuple(1, 2));
 
-    println!("{battle_result:?}");
+    //println!("{battle_result:?}");
 }

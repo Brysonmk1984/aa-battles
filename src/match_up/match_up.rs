@@ -30,15 +30,15 @@ struct ArmyNation {
 // An Army Type with count belonging to a user
 #[derive(Debug)]
 pub struct Battalion {
-    name: String,
-    count: i32,
+    pub name: String,
+    pub count: i32,
 }
 
 // Full Army a user will use to battle
 #[derive(Debug)]
 pub struct BattleArmy {
     nation_id: i32,
-    full_army: Vec<Battalion>,
+    pub full_army: Vec<Battalion>,
 }
 
 pub fn get_battle_tuple(id_1: i32, id_2: i32) -> (BattleArmy, BattleArmy) {
