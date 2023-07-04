@@ -1,22 +1,3 @@
-use sea_orm::prelude::Decimal;
-
-struct Army {
-    pub id: i32,
-    pub name: String,
-    pub lore: String,
-    pub size: i32,
-    pub shield_rating: Decimal,
-    pub flying: bool,
-    pub range: i32,
-    pub attack_speed: Decimal,
-    pub accuracy: Decimal,
-    pub aoe: bool,
-    pub weapon_type: String,
-    pub armor_type: String,
-    pub agility: Decimal,
-    pub speed: i32,
-}
-
 // Just like how AvatarItem can have many different types of items,
 // ArmyNation can have many different armies.
 // They are represented as different rows
@@ -33,6 +14,10 @@ pub struct Battalion {
     pub name: String,
     pub count: i32,
 }
+
+// impl Marching for Battalion {
+//     fn march() {}
+// }
 
 // Full Army a user will use to battle
 #[derive(Debug)]

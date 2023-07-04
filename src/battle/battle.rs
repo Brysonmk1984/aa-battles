@@ -62,3 +62,42 @@ fn run_battle_update(mut battle: Battle) {
 
     println!("{battle:?}")
 }
+
+type Position = i32;
+
+pub trait Marching {
+    fn march(position: Position, speed: i32) -> Position;
+}
+
+enum WeaponType {
+    Piercing,
+    Edged,
+    Crushing,
+    Concussive,
+    Magic,
+}
+
+enum ArmorType {
+    Unarmored,
+    Leather,
+    ChainMail,
+    PlateMail,
+}
+
+struct DefenderStats {
+    defender_armor_type: ArmorType,
+    defender_shield_rating: f32,
+    defender_speed: i32,
+    defender_agility: f32,
+}
+
+enum AttackOutcome {
+    Hit,
+    Miss,
+    Blocked,
+    Evaded,
+}
+
+trait Attacking {
+    fn attack(weapon_type: WeaponType, defender_stats: DefenderStats) -> AttackOutcome;
+}
