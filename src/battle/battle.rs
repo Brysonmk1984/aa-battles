@@ -1,4 +1,4 @@
-use crate::match_up::match_up::BattleArmy;
+use crate::match_up::match_up::{Battalion, BattleArmy};
 
 #[derive(Debug)]
 pub struct BattleResult {
@@ -8,46 +8,15 @@ pub struct BattleResult {
 }
 
 #[derive(Debug)]
-// Here we need to track EACH battalions'
-struct BattalionState {
-    name: String,
-    count: i32,
-    position: i32,
-}
-
-#[derive(Debug)]
 struct Battle {
-    army_1_state: Vec<BattalionState>,
-    army_2_state: Vec<BattalionState>,
+    army_1_state: Vec<Battalion>,
+    army_2_state: Vec<Battalion>,
 }
 
 pub fn run_battle(battle_tuple: (BattleArmy, BattleArmy)) -> BattleResult {
     println!("{battle_tuple:?}");
 
-    let mut battle = Battle {
-        army_1_state: battle_tuple
-            .0
-            .full_army
-            .iter()
-            .map(|mut b| BattalionState {
-                name: b.name.to_owned(),
-                count: b.count.clone(),
-                position: -150,
-            })
-            .collect(),
-        army_2_state: battle_tuple
-            .1
-            .full_army
-            .iter()
-            .map(|b| BattalionState {
-                name: b.name.to_owned(),
-                count: b.count.to_owned(),
-                position: -150,
-            })
-            .collect(),
-    };
-
-    run_battle_update(battle);
+    //run_battle_update(battle);
 
     // return results
     BattleResult {

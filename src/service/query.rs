@@ -1,9 +1,9 @@
 use std::{env, error::Error};
 
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_this_or_that::as_f64;
 
-pub async fn get_all_armies() -> Result<(), Box<dyn Error>> /*Vec<Army>*/ {
+pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> /*Vec<Army>*/ {
     let body = reqwest::get(
         env::var("API_URL").expect("API_URL environment variable should exist but is missing"),
     )
@@ -11,29 +11,30 @@ pub async fn get_all_armies() -> Result<(), Box<dyn Error>> /*Vec<Army>*/ {
 
     let all_armies = body.json::<Vec<Army>>().await?;
 
-    println!("TEST {all_armies:?}");
+    //println!("TEST {all_armies:?}");
 
-    Ok(())
+    Ok(all_armies)
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Army {
-    id: i32,
-    name: String,
-    lore: String,
-    size: i32,
+    pub id: i32,
+    pub name: String,
+    pub lore: String,
+    pub count: i32,
     #[serde(deserialize_with = "as_f64")]
-    shield_rating: f64,
-    flying: bool,
-    range: i32,
+    pub shield_rating: f64,
+    pub flying: bool,
+    pub range: i32,
     #[serde(deserialize_with = "as_f64")]
-    attack_speed: f64,
+    pub attack_speed: f64,
     #[serde(deserialize_with = "as_f64")]
-    accuracy: f64,
-    aoe: bool,
-    weapon_type: String,
-    armor_type: String,
+    pub accuracy: f64,
+    pub aoe: bool,
+    pub weapon_type: String,
+    pub armor_type: String,
     #[serde(deserialize_with = "as_f64")]
-    agility: f64,
-    speed: i32,
+    pub agility: f64,
+    pub speed: i32,
+    pub position: Option<i32>,
 }
