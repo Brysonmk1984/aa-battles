@@ -36,5 +36,4 @@ pub struct Army {
     #[serde(deserialize_with = "as_f64")]
     pub agility: f64,
     pub speed: i32,
-    pub position: Option<i32>,
 }

@@ -12,8 +12,8 @@ pub struct BattleResult {
 
 #[derive(Debug)]
 struct Battle {
-    army_1_state: Vec<Army>,
-    army_2_state: Vec<Army>,
+    army_1_state: Vec<Battalion>,
+    army_2_state: Vec<Battalion>,
 }
 
 pub fn run_battle(battle_tuple: (BattleArmy, BattleArmy)) -> BattleResult {
@@ -36,7 +36,7 @@ pub fn run_battle(battle_tuple: (BattleArmy, BattleArmy)) -> BattleResult {
 }
 
 fn run_battle_update(mut battle: Battle) {
-    battle.army_1_state[0].position = Some(999);
+    battle.army_1_state[0].position = 999;
 
     println!("{battle:?}")
 }

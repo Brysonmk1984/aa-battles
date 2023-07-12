@@ -38,7 +38,7 @@ pub struct Battalion {
 #[derive(Debug)]
 pub struct BattleArmy {
     nation_id: i32,
-    pub full_army: Vec<Army>,
+    pub full_army: Vec<Battalion>,
 }
 
 pub fn get_battle_tuple(
@@ -63,7 +63,7 @@ pub fn get_full_army(id: i32, army_defaults: &Vec<Army>) -> BattleArmy {
     whole_army
 }
 
-fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Army> {
+fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
     let db_battalion_templates = army_defaults;
 
     let imperial_legionnaires = db_battalion_templates
@@ -116,19 +116,36 @@ fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Army> {
     }
 }
 
-fn get_db_battalion_properties(db_battalion_template: Army, count: i32, position: i32) -> Army {
-    Army {
+fn get_db_battalion_properties(
+    db_battalion_template: Army,
+    count: i32,
+    position: i32,
+) -> Battalion {
+    Battalion {
         count: count,
-        position: Some(position),
-        ..db_battalion_template
+        position,
+        ..Battalion::from(db_battalion_template)
     }
 }
 
 // When we try to call from or into, this doesn't work if even one property isn't the same! (position doesn't exist in DB)
 
-// impl From<Army> for Battalion {
-//     fn from(a: Army) -> Self {
-//         let serialized = serde_json::to_string(&a).unwrap();
-//         serde_json::from_str(&serialized).unwrap()
-//     }
-// }
+impl From<Army> for Battalion {
+    fn from(a: Army) -> Self {
+        Self {
+            position: 0,
+            name: a.name,
+            count: a.count,
+            shield_rating: a.shield_rating,
+            flying: a.flying,
+            range: a.range,
+            attack_speed: a.attack_speed,
+            accuracy: a.accuracy,
+            aoe: a.aoe,
+            weapon_type: a.weapon_type,
+            armor_type: a.armor_type,
+            agility: a.agility,
+            speed: a.speed,
+        }
+    }
+}
