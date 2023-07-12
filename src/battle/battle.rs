@@ -1,4 +1,7 @@
-use crate::match_up::match_up::{Battalion, BattleArmy};
+use crate::{
+    match_up::match_up::{Battalion, BattleArmy},
+    service::query::Army,
+};
 
 #[derive(Debug)]
 pub struct BattleResult {
@@ -9,14 +12,20 @@ pub struct BattleResult {
 
 #[derive(Debug)]
 struct Battle {
-    army_1_state: Vec<Battalion>,
-    army_2_state: Vec<Battalion>,
+    army_1_state: Vec<Army>,
+    army_2_state: Vec<Army>,
 }
 
 pub fn run_battle(battle_tuple: (BattleArmy, BattleArmy)) -> BattleResult {
-    println!("{battle_tuple:?}");
+    //println!("{battle_tuple:?}");
+    //dbg!(battle_tuple);
 
-    //run_battle_update(battle);
+    let battle = Battle {
+        army_1_state: battle_tuple.0.full_army,
+        army_2_state: battle_tuple.1.full_army,
+    };
+
+    run_battle_update(battle);
 
     // return results
     BattleResult {
@@ -27,7 +36,7 @@ pub fn run_battle(battle_tuple: (BattleArmy, BattleArmy)) -> BattleResult {
 }
 
 fn run_battle_update(mut battle: Battle) {
-    battle.army_1_state[0].position = 999;
+    battle.army_1_state[0].position = Some(999);
 
     println!("{battle:?}")
 }
