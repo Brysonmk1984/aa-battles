@@ -3,6 +3,8 @@ use crate::{
     service::query::Army,
 };
 
+use super::tick::run_tick::run_tick;
+
 #[derive(Debug)]
 pub struct BattleResult {
     id: i32,
@@ -25,7 +27,9 @@ pub fn run_battle(battle_tuple: (BattleArmy, BattleArmy)) -> BattleResult {
         army_2_state: battle_tuple.1.full_army,
     };
 
-    run_battle_update(battle);
+    run_tick(battle.army_1_state, battle.army_2_state);
+
+    //run_battle_update(battle);
 
     // return results
     BattleResult {

@@ -64,60 +64,38 @@ pub fn get_full_army(id: i32, army_defaults: &Vec<Army>) -> BattleArmy {
 }
 
 fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
-    let db_battalion_templates = army_defaults;
+    let mut db_battalion_templates = army_defaults.clone();
 
-    let imperial_legionnaires = db_battalion_templates
-        .iter()
-        .find(|a| a.name == "Imperial Legionnaires")
-        .unwrap()
-        .to_owned();
-    let peacekeeper_monks = db_battalion_templates
-        .iter()
-        .find(|a| a.name == "Peacekeeper Monks")
-        .unwrap()
-        .to_owned();
+    db_battalion_templates.sort_by(|a, b| a.name.cmp(&b.name));
 
-    let highborn_cavalry = db_battalion_templates
-        .iter()
-        .find(|a| a.name == "Highborn Cavalry")
-        .unwrap()
-        .to_owned();
-
-    let amazonian_huntress = db_battalion_templates
-        .iter()
-        .find(|a| a.name == "Amazonian Huntresses")
-        .unwrap()
-        .to_owned();
-
-    let ronin_immortals = db_battalion_templates
-        .iter()
-        .find(|a| a.name == "Rōnin Immortals")
-        .unwrap()
-        .to_owned();
-
-    let north_watch_longbowmen = db_battalion_templates
-        .iter()
-        .find(|a| a.name == "North Watch Longbowmen")
-        .unwrap()
-        .to_owned();
+    let amazonian_huntresses = db_battalion_templates[0].to_owned();
+    let avian_cliff_dwellers = db_battalion_templates[1].to_owned();
+    let highborn_cavalry = db_battalion_templates[2].to_owned();
+    let imperial_legionnaires = db_battalion_templates[3].to_owned();
+    let magi_enforcers = db_battalion_templates[4].to_owned();
+    let north_watch_longbowmen = db_battalion_templates[5].to_owned();
+    let peacekeeper_monks = db_battalion_templates[6].to_owned();
+    let ronin_immortals = db_battalion_templates[7].to_owned();
+    let shinobi_assassins = db_battalion_templates[8].to_owned();
+    let skull_clan_death_cultists = db_battalion_templates[9].to_owned();
 
     if id == 1 {
         vec![
-            get_db_battalion_properties(imperial_legionnaires, 1000, -150),
-            get_db_battalion_properties(peacekeeper_monks, 2000, -150),
-            get_db_battalion_properties(highborn_cavalry, 250, -150),
+            get_db_battalion_properties(&imperial_legionnaires, 1001, -150),
+            get_db_battalion_properties(&peacekeeper_monks, 2000, -150),
+            get_db_battalion_properties(&highborn_cavalry, 250, -150),
         ]
     } else {
         vec![
-            get_db_battalion_properties(amazonian_huntress, 500, 150),
-            get_db_battalion_properties(ronin_immortals, 2000, 150),
-            get_db_battalion_properties(north_watch_longbowmen, 1000, 150),
+            get_db_battalion_properties(&amazonian_huntresses, 500, 150),
+            get_db_battalion_properties(&ronin_immortals, 2000, 150),
+            get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
         ]
     }
 }
 
 fn get_db_battalion_properties(
-    db_battalion_template: Army,
+    db_battalion_template: &Army,
     count: i32,
     position: i32,
 ) -> Battalion {
@@ -128,13 +106,11 @@ fn get_db_battalion_properties(
     }
 }
 
-// When we try to call from or into, this doesn't work if even one property isn't the same! (position doesn't exist in DB)
-
-impl From<Army> for Battalion {
-    fn from(a: Army) -> Self {
+impl From<&Army> for Battalion {
+    fn from(a: &Army) -> Self {
         Self {
             position: 0,
-            name: a.name,
+            name: a.name.clone(),
             count: a.count,
             shield_rating: a.shield_rating,
             flying: a.flying,
@@ -142,8 +118,8 @@ impl From<Army> for Battalion {
             attack_speed: a.attack_speed,
             accuracy: a.accuracy,
             aoe: a.aoe,
-            weapon_type: a.weapon_type,
-            armor_type: a.armor_type,
+            weapon_type: a.weapon_type.clone(),
+            armor_type: a.armor_type.clone(),
             agility: a.agility,
             speed: a.speed,
         }
