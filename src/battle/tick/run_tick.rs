@@ -25,7 +25,7 @@ pub fn run_tick(army_1: Vec<Battalion>, army_2: Vec<Battalion>) {
     // STEP 2a: army_1 Attacks army_2 (Concurrently with step 2b)
     attack(&mut in_range_map_1, &army_1, &army_2);
     // STEP 2b: army_2 Attacks army_1 (Concurrently with step 2a)
-
+    attack(&mut in_range_map_2, &army_2, &army_1);
     //STEP 3: Reconcilliation - lower army counts by results of 2aa & 2bb
 
     // STEP 4: March forward

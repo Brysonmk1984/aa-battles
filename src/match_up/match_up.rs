@@ -30,6 +30,12 @@ pub struct Battalion {
     pub speed: i32,
 }
 
+impl Battalion {
+    pub fn decrement(&mut self) {
+        self.count -= 1;
+    }
+}
+
 // impl Marching for Battalion {
 //     fn march() {}
 // }
@@ -82,7 +88,7 @@ fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
     if id == 1 {
         vec![
             get_db_battalion_properties(&imperial_legionnaires, 1001, -150),
-            get_db_battalion_properties(&peacekeeper_monks, 2000, -150),
+            get_db_battalion_properties(&avian_cliff_dwellers, 500, -150),
             get_db_battalion_properties(&highborn_cavalry, 250, -150),
         ]
     } else {
