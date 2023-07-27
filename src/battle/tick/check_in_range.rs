@@ -45,7 +45,7 @@ pub fn check_in_range<'a>(
         flyer_vec.shuffle(&mut rand::thread_rng());
         ground_vec.shuffle(&mut rand::thread_rng());
 
-        // Flyers will be prioritiesed over ground enemies
+        // Flyers will be prioritized over ground enemies
         let combined_vec = [flyer_vec, ground_vec].concat();
 
         // push arranged, combined vec items into the in_range vec on the attacker

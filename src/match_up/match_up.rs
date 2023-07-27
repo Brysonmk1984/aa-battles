@@ -28,20 +28,31 @@ pub struct Battalion {
     pub armor_type: String,
     pub agility: f64,
     pub speed: i32,
+    pub is_marching: bool,
 }
 
 impl Battalion {
     pub fn decrement(&mut self) {
+        println!("DECREMENTING!");
         self.count -= 1;
+    }
+
+    pub fn set_is_marching(&mut self, value: bool) {
+        self.is_marching = value;
+    }
+
+    pub fn march(&mut self) {
+        let is_neg_position = self.position.is_negative();
+        self.position = if is_neg_position {
+            self.position + self.speed
+        } else {
+            self.position - self.speed
+        };
     }
 }
 
-// impl Marching for Battalion {
-//     fn march() {}
-// }
-
 // Full Army a user will use to battle
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct BattleArmy {
     nation_id: i32,
     pub full_army: Vec<Battalion>,
@@ -58,8 +69,11 @@ pub fn get_battle_tuple(
     )
 }
 
-// Get all battalions belonging to a particular nation & return as a full army (BattleArmy)
-// Takes in nation_id
+/**
+*  fn get_full_army -
+   Get all battalions belonging to a particular nation () & return as a full army (BattleArmy)
+* params - id (nation Id), army_defaults (vector of army types, to be converted to Battalion)
+*/
 pub fn get_full_army(id: i32, army_defaults: &Vec<Army>) -> BattleArmy {
     let whole_army = BattleArmy {
         nation_id: id,
@@ -87,14 +101,14 @@ fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
 
     if id == 1 {
         vec![
-            get_db_battalion_properties(&imperial_legionnaires, 1001, -150),
-            get_db_battalion_properties(&avian_cliff_dwellers, 500, -150),
-            get_db_battalion_properties(&highborn_cavalry, 250, -150),
+            get_db_battalion_properties(&imperial_legionnaires, 1000, -150),
+            get_db_battalion_properties(&avian_cliff_dwellers, 1000, -150),
+            get_db_battalion_properties(&highborn_cavalry, 1000, -150),
         ]
     } else {
         vec![
-            get_db_battalion_properties(&amazonian_huntresses, 500, 150),
-            get_db_battalion_properties(&ronin_immortals, 2000, 150),
+            get_db_battalion_properties(&amazonian_huntresses, 1000, 150),
+            get_db_battalion_properties(&ronin_immortals, 1000, 150),
             get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
         ]
     }
@@ -128,6 +142,7 @@ impl From<&Army> for Battalion {
             armor_type: a.armor_type.clone(),
             agility: a.agility,
             speed: a.speed,
+            is_marching: true,
         }
     }
 }
