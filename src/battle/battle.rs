@@ -14,7 +14,26 @@ pub struct BattleResult {
 }
 
 pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
-    run_tick(battle_state);
+    let a1 = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+        sum += b.count;
+        sum
+    });
+    let a2 = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+        sum += b.count;
+        sum
+    });
+    let mut total_army_count = a1 + a2;
+
+    let mut tick_count = 0;
+
+    while total_army_count > 0 {
+        println!("{total_army_count}");
+        tick_count += 1;
+        if tick_count > 1000 {
+            panic!("Infinite loop detected!");
+        }
+        total_army_count = run_tick(battle_state, total_army_count);
+    }
 
     // return results
     BattleResult {

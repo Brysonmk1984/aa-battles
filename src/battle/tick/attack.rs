@@ -27,6 +27,14 @@ pub fn attack<'a, 'b>(
                 attacking_b_name.as_str(),
                 *defending_b_name.unwrap(),
             );
+        } else {
+            // If attacker had no valid targets (defenders), then army will march forward
+            let mut a_battalion = attacker
+                .iter_mut()
+                .find(|battalion| battalion.name == *attacking_b_name)
+                .unwrap();
+
+            a_battalion.set_is_marching(true);
         }
     });
 }
@@ -44,27 +52,40 @@ fn run_attack_sequence(
     println!("ATTACKER: {attacking_b_name} DEFENDER: {defending_b_name}");
 
     let mut a_battalion = attacker
-        .iter()
+        .iter_mut()
         .find(|battalion| battalion.name == *attacking_b_name)
         .unwrap();
+    // Weird that that is set here. It's an artifact of needing to pass in the entire vec
+    a_battalion.set_is_marching(false);
 
     let mut d_battalion = defender
         .iter_mut()
         .find(|battalion| battalion.name == defending_b_name)
         .unwrap();
 
-    let has_dodged_attack = try_dodge(a_battalion.accuracy, d_battalion.agility, false);
-    if has_dodged_attack {
-        return;
-    }
+    // Do one attack attempt for each member of a battalion
+    for n in 0..a_battalion.count {
+        if d_battalion.count == 0 {
+            return;
+        }
 
-    let has_blocked_attack = try_block(d_battalion.shield_rating);
-    if has_blocked_attack {
-        return;
-    }
+        let has_dodged_attack = try_dodge(
+            a_battalion.accuracy,
+            d_battalion.agility,
+            d_battalion.is_marching,
+        );
+        if has_dodged_attack {
+            continue;
+        }
 
-    // IF hasn't dodged or blocked, need to figure out how to  reduce battalion count
-    d_battalion.decrement();
+        let has_blocked_attack = try_block(d_battalion.shield_rating);
+        if has_blocked_attack {
+            continue;
+        }
+
+        // IF hasn't dodged or blocked, need to figure out how to  reduce battalion count
+        d_battalion.decrement();
+    }
 }
 
 /**
@@ -76,15 +97,15 @@ fn try_dodge(a_accuracy: f64, d_agility: f64, d_is_marching: bool) -> bool {
 
     // 1.0 accuracy = 100% chance to hit - (agility + is_marching)
     let chance_to_dodge = d_agility + is_marching_modifier;
-    println!("{a_accuracy} {chance_to_dodge}");
+    //println!("ACC{a_accuracy} DDG{chance_to_dodge}");
     let chance_to_hit = ((a_accuracy - chance_to_dodge) * 100.0) as u64;
 
     let random_dodge_num = rand::thread_rng().gen_range(0..100);
-
-    let successfully_dodged = chance_to_hit > random_dodge_num;
-    if successfully_dodged {
-        println!("DODGED! {successfully_dodged}")
-    }
+    //println!("CTH{chance_to_hit} RND{random_dodge_num}");
+    let successfully_dodged = chance_to_hit < random_dodge_num;
+    // if successfully_dodged {
+    //     println!("DODGED! {successfully_dodged}")
+    // }
 
     successfully_dodged
 }
@@ -98,9 +119,9 @@ fn try_block(d_shield_rating: f64) -> bool {
     let random_block_num = rand::thread_rng().gen_range(0..100);
 
     let successfully_blocked = chance_to_block > random_block_num;
-    if successfully_blocked {
-        println!("BLOCKED! {successfully_blocked}")
-    }
+    // if successfully_blocked {
+    //     println!("BLOCKED! {successfully_blocked}")
+    // }
 
     successfully_blocked
 }

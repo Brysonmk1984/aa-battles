@@ -7,7 +7,7 @@ use crate::BattleState;
 
 use super::march::march;
 
-pub fn run_tick(battle_state: &mut BattleState) {
+pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i32 {
     //https://doc.rust-lang.org/std/collections/struct.HashMap.html
     let mut in_range_map_1: HashMap<String, Vec<&str>> = HashMap::new();
     let mut in_range_map_2: HashMap<String, Vec<&str>> = HashMap::new();
@@ -42,9 +42,20 @@ pub fn run_tick(battle_state: &mut BattleState) {
     );
 
     // STEP 3: March forward
-
     march(&mut battle_state.army_1_state);
-    //march(&mut marching_battalions_2);
+    march(&mut battle_state.army_2_state);
 
-    println!("{in_range_map_1:?} \n\n {in_range_map_2:?}");
+    //println!("{in_range_map_1:?} \n\n {in_range_map_2:?}");
+
+    let mut a1 = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+        sum += b.count;
+        sum
+    });
+    let mut a2 = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+        sum += b.count;
+        sum
+    });
+    let new_total = a1 + a2;
+
+    new_total
 }

@@ -33,7 +33,7 @@ pub struct Battalion {
 
 impl Battalion {
     pub fn decrement(&mut self) {
-        println!("DECREMENTING!");
+        //println!("DECREMENTING!");
         self.count -= 1;
     }
 
