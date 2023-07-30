@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, env};
 
 use rand::seq::SliceRandom;
 
@@ -9,11 +9,15 @@ pub fn check_in_range<'a>(
     attacker: &'a Vec<Battalion>,
     defender: &'a Vec<Battalion>,
 ) {
+    let min_range_attack_air: String = env::var("MIN_RANGE_ATTACK_AIR")
+        .expect("MIN_RANGE_ATTACK_AIR environment variable should exist but is missing");
+
     // loop through army_1 and figure out which of army_2 is in range
     for (battalion_key, in_range_vec) in attacker_map {
         let mut flyer_vec = Vec::new();
         let mut ground_vec = Vec::new();
 
+        // For each battalion in the defender's army, determine which are in range of the attacker
         defender.iter().for_each(|battalion| {
             let defender_position = battalion.position;
             let attacker_battalion = attacker
@@ -26,16 +30,21 @@ pub fn check_in_range<'a>(
             let distance_between_battalions = attacker_position - defender_position;
 
             let in_range = distance_between_battalions.abs() - attacker_range <= 0;
-
+            println!(
+                "{attacker_position} {defender_position} {distance_between_battalions} {in_range}"
+            );
             if in_range {
                 // insert defenders flyers in the flyer vec, otherwise the ground vec
-                if attacker_range > 0 && battalion.flying {
+                if attacker_range > min_range_attack_air.parse().unwrap() && battalion.flying {
+                    println!("first");
                     // In range, can hit air, and enemy is flying
                     flyer_vec.push(battalion.name.as_str());
                 } else if !battalion.flying {
+                    println!("second {}", battalion.name);
                     // In range, enemy is non-flyer
                     ground_vec.push(battalion.name.as_str())
                 } else {
+                    println!("third");
                     // In range, can't hit enemy flyer
                 }
             }
@@ -52,5 +61,6 @@ pub fn check_in_range<'a>(
         combined_vec.iter().for_each(|b_name| {
             in_range_vec.push(b_name);
         });
+        println!("I RNG VEC {in_range_vec:?}");
     }
 }

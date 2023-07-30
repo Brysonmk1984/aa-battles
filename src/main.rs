@@ -24,7 +24,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         army_1_state: battle_tuple.0.full_army,
         army_2_state: battle_tuple.1.full_army,
     };
-
+    println!("START : {battle_state:?}");
     let battle_result = run_battle(&mut battle_state);
     println!("FINAL : {battle_state:?}");
     println!("BATTLE RESULTS : {battle_result:?}");

@@ -110,13 +110,13 @@ fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
         vec![
             //get_db_battalion_properties(&imperial_legionnaires, 1000, -150),
             get_db_battalion_properties(&avian_cliff_dwellers, 1000, -150),
-            // get_db_battalion_properties(&highborn_cavalry, 1000, -150),
+            //get_db_battalion_properties(&highborn_cavalry, 1000, -150),
         ]
     } else {
         vec![
-            //get_db_battalion_properties(&amazonian_huntresses, 1000, 150),
-            //get_db_battalion_properties(&ronin_immortals, 1000, 150),
-            get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
+            get_db_battalion_properties(&amazonian_huntresses, 2000, 150),
+            //get_db_battalion_properties(&magi_enforcers, 1000, 150),
+            //get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
         ]
     }
 }

@@ -26,7 +26,7 @@ pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i3
     // STEP 1: Check for range
     check_in_range(&mut in_range_map_1, &army_1_clone, &army_2_clone);
     check_in_range(&mut in_range_map_2, &army_2_clone, &army_1_clone);
-
+    println!("IRM1 {in_range_map_1:?}");
     // STEP 2: Attack Battalions within range
     // STEP 2a: army_1 Attacks army_2 (Concurrently with step 2b)
     attack(

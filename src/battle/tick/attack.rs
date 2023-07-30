@@ -31,7 +31,7 @@ pub fn attack<'a, 'b>(
                 .unwrap();
 
             a_battalion.set_is_marching(false);
-
+            //println!("{} {}", a_battalion.name, d_battalion.name);
             run_attack_sequence(&mut a_battalion, &mut d_battalion);
         } else {
             // If attacker had no valid targets (defenders), then army will march forward
@@ -50,6 +50,10 @@ pub fn attack<'a, 'b>(
    Parent function for running functions related to an attack: try_dodge, try_block, decrement
 */
 fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
+    // println!(
+    //     "Defender info in attack seq: {} {}",
+    //     defender.name, defender.count
+    // );
     // Do one attack attempt for each member of a battalion
     for n in 0..attacker.count {
         if defender.count == 0 {
