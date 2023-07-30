@@ -26,6 +26,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     };
 
     let battle_result = run_battle(&mut battle_state);
-    println!("FINAL {battle_state:?}");
+    println!("FINAL : {battle_state:?}");
+    println!("BATTLE RESULTS : {battle_result:?}");
     Ok(())
 }

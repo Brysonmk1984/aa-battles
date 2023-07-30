@@ -2,6 +2,12 @@ use serde::{Deserialize, Serialize};
 
 use crate::service::query::Army;
 
+#[derive(Clone, Copy)]
+pub enum StartingDirection {
+    EAST,
+    WEST,
+}
+
 // Just like how AvatarItem can have many different types of items,
 // ArmyNation can have many different armies.
 // They are represented as different rows
@@ -33,7 +39,6 @@ pub struct Battalion {
 
 impl Battalion {
     pub fn decrement(&mut self) {
-        //println!("DECREMENTING!");
         self.count -= 1;
     }
 
@@ -41,13 +46,15 @@ impl Battalion {
         self.is_marching = value;
     }
 
-    pub fn march(&mut self) {
-        let is_neg_position = self.position.is_negative();
-        self.position = if is_neg_position {
-            self.position + self.speed
+    /**
+     * If Starting direction is west, army starts at -150 and marches east, west starts at 150 and marches east
+     */
+    pub fn march(&mut self, starting_direction: StartingDirection) {
+        if let StartingDirection::WEST = starting_direction {
+            self.position += self.speed;
         } else {
-            self.position - self.speed
-        };
+            self.position -= self.speed;
+        }
     }
 }
 
@@ -101,14 +108,14 @@ fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
 
     if id == 1 {
         vec![
-            get_db_battalion_properties(&imperial_legionnaires, 1000, -150),
+            //get_db_battalion_properties(&imperial_legionnaires, 1000, -150),
             get_db_battalion_properties(&avian_cliff_dwellers, 1000, -150),
-            get_db_battalion_properties(&highborn_cavalry, 1000, -150),
+            // get_db_battalion_properties(&highborn_cavalry, 1000, -150),
         ]
     } else {
         vec![
-            get_db_battalion_properties(&amazonian_huntresses, 1000, 150),
-            get_db_battalion_properties(&ronin_immortals, 1000, 150),
+            //get_db_battalion_properties(&amazonian_huntresses, 1000, 150),
+            //get_db_battalion_properties(&ronin_immortals, 1000, 150),
             get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
         ]
     }

@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use crate::battle::tick::attack::attack;
 use crate::battle::tick::check_in_range::check_in_range;
-use crate::match_up::match_up::Battalion;
+use crate::match_up::match_up::{Battalion, StartingDirection};
 use crate::BattleState;
 
 use super::march::march;
@@ -42,8 +42,8 @@ pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i3
     );
 
     // STEP 3: March forward
-    march(&mut battle_state.army_1_state);
-    march(&mut battle_state.army_2_state);
+    march(&mut battle_state.army_1_state, &StartingDirection::WEST);
+    march(&mut battle_state.army_2_state, &StartingDirection::EAST);
 
     //println!("{in_range_map_1:?} \n\n {in_range_map_2:?}");
 

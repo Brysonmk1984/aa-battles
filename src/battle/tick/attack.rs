@@ -16,17 +16,23 @@ pub fn attack<'a, 'b>(
     // For each attacker name in the map, if valid target, set marching=false and run attack sequence
     attacker_map.iter().for_each(|entry| {
         let (attacking_b_name, in_range_vec) = entry;
-
         let defending_b_name = in_range_vec.get(0);
+
+        let mut a_battalion = attacker
+            .iter_mut()
+            .find(|battalion| battalion.name == *attacking_b_name)
+            .unwrap();
 
         // If any valid targets for the attacker, run attack sequence
         if defending_b_name.is_some() {
-            run_attack_sequence(
-                attacker,
-                defender,
-                attacking_b_name.as_str(),
-                *defending_b_name.unwrap(),
-            );
+            let mut d_battalion = defender
+                .iter_mut()
+                .find(|battalion| battalion.name == *defending_b_name.unwrap())
+                .unwrap();
+
+            a_battalion.set_is_marching(false);
+
+            run_attack_sequence(&mut a_battalion, &mut d_battalion);
         } else {
             // If attacker had no valid targets (defenders), then army will march forward
             let mut a_battalion = attacker
@@ -43,48 +49,26 @@ pub fn attack<'a, 'b>(
 * fn run_attack_sequence -
    Parent function for running functions related to an attack: try_dodge, try_block, decrement
 */
-fn run_attack_sequence(
-    attacker: &mut Vec<Battalion>,
-    defender: &mut Vec<Battalion>,
-    attacking_b_name: &str,
-    defending_b_name: &str,
-) {
-    println!("ATTACKER: {attacking_b_name} DEFENDER: {defending_b_name}");
-
-    let mut a_battalion = attacker
-        .iter_mut()
-        .find(|battalion| battalion.name == *attacking_b_name)
-        .unwrap();
-    // Weird that that is set here. It's an artifact of needing to pass in the entire vec
-    a_battalion.set_is_marching(false);
-
-    let mut d_battalion = defender
-        .iter_mut()
-        .find(|battalion| battalion.name == defending_b_name)
-        .unwrap();
-
+fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
     // Do one attack attempt for each member of a battalion
-    for n in 0..a_battalion.count {
-        if d_battalion.count == 0 {
+    for n in 0..attacker.count {
+        if defender.count == 0 {
             return;
         }
 
-        let has_dodged_attack = try_dodge(
-            a_battalion.accuracy,
-            d_battalion.agility,
-            d_battalion.is_marching,
-        );
+        let has_dodged_attack =
+            try_dodge(attacker.accuracy, defender.agility, defender.is_marching);
         if has_dodged_attack {
             continue;
         }
 
-        let has_blocked_attack = try_block(d_battalion.shield_rating);
+        let has_blocked_attack = try_block(defender.shield_rating);
         if has_blocked_attack {
             continue;
         }
 
         // IF hasn't dodged or blocked, need to figure out how to  reduce battalion count
-        d_battalion.decrement();
+        defender.decrement();
     }
 }
 
