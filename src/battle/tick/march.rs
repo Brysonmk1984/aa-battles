@@ -7,12 +7,7 @@ pub fn march(army: &mut Vec<Battalion>, starting_direction: &StartingDirection) 
             StartingDirection::EAST => "2",
         };
 
-        println!(
-            "ARMY {} NAME: {} POSITION: {} MARCHING: {}",
-            which_army, a.name, a.position, a.is_marching,
-        );
-
-        if a.is_marching {
+        if a.is_marching && a.count > 0 {
             a.march(*starting_direction)
         }
     })

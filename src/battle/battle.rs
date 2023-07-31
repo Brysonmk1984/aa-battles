@@ -32,7 +32,7 @@ pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
         sum += b.count;
         sum
     });
-    let mut a2_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+    let mut a2_count = battle_state.army_2_state.iter().fold(0, |mut sum, b| {
         sum += b.count;
         sum
     });
@@ -53,15 +53,16 @@ pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
     };
 
     while a1_count > 0 && a2_count > 0 {
+        println!("CAKEE  {:?}", battle_state);
         let winner_by_position = check_for_king_captured_condition(&battle_state);
         if winner_by_position.is_some() {
             //dbg!(&winner_by_position);
             battle_result.win_type = Some(WinType::KingCaptured);
             battle_result.loser =
                 if winner_by_position.as_ref().unwrap() == &Belligerent::WesternArmy {
-                    Some(Belligerent::WesternArmy)
-                } else {
                     Some(Belligerent::EasternArmy)
+                } else {
+                    Some(Belligerent::WesternArmy)
                 };
             battle_result.winner = winner_by_position;
             return battle_result;
@@ -75,10 +76,10 @@ pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
             sum += b.count;
             sum
         });
-        println!("{a1_count} {a2_count}");
+        println!("WEST ARMY COUNT: {a1_count}, EAST ARMY COUNT: {a2_count}");
 
         battle_result.tick_count += 1;
-        if battle_result.tick_count > 1000 {
+        if battle_result.tick_count > 300 {
             panic!("Infinite loop detected!");
         }
         total_army_count = run_tick(battle_state, total_army_count);

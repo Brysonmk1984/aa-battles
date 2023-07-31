@@ -107,16 +107,18 @@ fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
     let skull_clan_death_cultists = db_battalion_templates[9].to_owned();
 
     if id == 1 {
+        // WESTERN ARMY
         vec![
-            //get_db_battalion_properties(&imperial_legionnaires, 1000, -150),
+            get_db_battalion_properties(&imperial_legionnaires, 1000, 150),
             get_db_battalion_properties(&avian_cliff_dwellers, 1000, -150),
-            //get_db_battalion_properties(&highborn_cavalry, 1000, -150),
+            get_db_battalion_properties(&highborn_cavalry, 1000, -150),
         ]
     } else {
+        // EASTER ARMY
         vec![
-            get_db_battalion_properties(&amazonian_huntresses, 2000, 150),
-            //get_db_battalion_properties(&magi_enforcers, 1000, 150),
-            //get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
+            get_db_battalion_properties(&amazonian_huntresses, 1000, -150),
+            get_db_battalion_properties(&magi_enforcers, 1000, 150),
+            get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
         ]
     }
 }
