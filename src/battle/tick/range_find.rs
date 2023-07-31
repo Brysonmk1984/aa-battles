@@ -4,7 +4,7 @@ use rand::seq::SliceRandom;
 
 use crate::match_up::match_up::Battalion;
 
-pub fn check_in_range<'a>(
+pub fn update_in_range_map<'a>(
     attacker_map: &mut HashMap<String, Vec<&'a str>>,
     attacker: &'a Vec<Battalion>,
     defender: &'a Vec<Battalion>,

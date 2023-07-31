@@ -4,11 +4,11 @@ use crate::match_up::match_up::Battalion;
 use rand::Rng;
 
 /**
-* fn attack -
+* fn attack_phase -
     Loops through every available field in the attacker_map and for each one, checks the list of possible targets (the defender vec)
     If there is an available target, the attack sequence is ran
 */
-pub fn attack<'a, 'b>(
+pub fn attack_phase<'a, 'b>(
     attacker_map: &HashMap<String, Vec<&'a str>>,
     attacker: &'b mut Vec<Battalion>,
     defender: &'b mut Vec<Battalion>,
@@ -113,3 +113,11 @@ fn try_block(d_shield_rating: f64) -> bool {
 
     successfully_blocked
 }
+
+// #[cfg(test)]
+// mod tests {
+//     #[test]
+//     fn test_try_block(d_shield_rating: f64) -> bool {
+//         assert!(false, true);
+//     }
+// }
