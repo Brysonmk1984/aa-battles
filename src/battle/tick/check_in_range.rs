@@ -36,15 +36,13 @@ pub fn check_in_range<'a>(
             if in_range {
                 // insert defenders flyers in the flyer vec, otherwise the ground vec
                 if attacker_range > min_range_attack_air.parse().unwrap() && battalion.flying {
-                    println!("first");
                     // In range, can hit air, and enemy is flying
                     flyer_vec.push(battalion.name.as_str());
                 } else if !battalion.flying {
-                    println!("second {}", battalion.name);
                     // In range, enemy is non-flyer
                     ground_vec.push(battalion.name.as_str())
                 } else {
-                    println!("third");
+
                     // In range, can't hit enemy flyer
                 }
             }
@@ -61,6 +59,5 @@ pub fn check_in_range<'a>(
         combined_vec.iter().for_each(|b_name| {
             in_range_vec.push(b_name);
         });
-        println!("I RNG VEC {in_range_vec:?}");
     }
 }

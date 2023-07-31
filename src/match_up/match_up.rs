@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::service::query::Army;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub enum StartingDirection {
     EAST,
     WEST,
