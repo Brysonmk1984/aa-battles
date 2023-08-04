@@ -1,4 +1,4 @@
-use super::attack::attack_phase;
+use super::attack_phase::attack::attack_phase;
 use super::march::march_phase;
 use super::range_find::update_in_range_map;
 use crate::match_up::match_up::{Battalion, StartingDirection};

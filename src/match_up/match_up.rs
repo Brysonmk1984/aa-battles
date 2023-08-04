@@ -2,6 +2,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::service::query::Army;
 
+use super::create_mocks::create_mock_army;
+
 #[derive(Clone, Copy, Debug)]
 pub enum StartingDirection {
     EAST,
@@ -84,46 +86,13 @@ pub fn get_battle_tuple(
 pub fn get_full_army(id: i32, army_defaults: &Vec<Army>) -> BattleArmy {
     let whole_army = BattleArmy {
         nation_id: id,
-        full_army: get_mock(id, army_defaults),
+        full_army: create_mock_army(id, army_defaults),
     };
 
     whole_army
 }
 
-fn get_mock(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
-    let mut db_battalion_templates = army_defaults.clone();
-
-    db_battalion_templates.sort_by(|a, b| a.name.cmp(&b.name));
-
-    let amazonian_huntresses = db_battalion_templates[0].to_owned();
-    let avian_cliff_dwellers = db_battalion_templates[1].to_owned();
-    let highborn_cavalry = db_battalion_templates[2].to_owned();
-    let imperial_legionnaires = db_battalion_templates[3].to_owned();
-    let magi_enforcers = db_battalion_templates[4].to_owned();
-    let north_watch_longbowmen = db_battalion_templates[5].to_owned();
-    let peacekeeper_monks = db_battalion_templates[6].to_owned();
-    let ronin_immortals = db_battalion_templates[7].to_owned();
-    let shinobi_assassins = db_battalion_templates[8].to_owned();
-    let skull_clan_death_cultists = db_battalion_templates[9].to_owned();
-
-    if id == 1 {
-        // WESTERN ARMY
-        vec![
-            get_db_battalion_properties(&imperial_legionnaires, 1000, 150),
-            get_db_battalion_properties(&avian_cliff_dwellers, 1000, -150),
-            get_db_battalion_properties(&highborn_cavalry, 1000, -150),
-        ]
-    } else {
-        // EASTER ARMY
-        vec![
-            get_db_battalion_properties(&amazonian_huntresses, 1000, -150),
-            get_db_battalion_properties(&magi_enforcers, 1000, 150),
-            get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
-        ]
-    }
-}
-
-fn get_db_battalion_properties(
+pub fn get_db_battalion_properties(
     db_battalion_template: &Army,
     count: i32,
     position: i32,
@@ -153,5 +122,57 @@ impl From<&Army> for Battalion {
             speed: a.speed,
             is_marching: true,
         }
+    }
+}
+
+#[cfg(test)]
+pub mod test {
+    use crate::match_up::create_mocks::create_mock_generic_battalion;
+
+    use super::Battalion;
+
+    #[test]
+    fn should_march_west_distance_based_on_speed() {
+        let mut test_army = vec![create_mock_generic_battalion()];
+
+        let test_battalion_ref = test_army.get_mut(0).unwrap();
+        test_battalion_ref.position = 150;
+        assert_eq!(test_battalion_ref.position, 150);
+        test_battalion_ref.march(super::StartingDirection::EAST);
+        assert_eq!(test_battalion_ref.position, 100);
+    }
+
+    #[test]
+    fn should_march_east_distance_based_on_speed() {
+        let mut test_army = vec![create_mock_generic_battalion()];
+        let test_battalion_ref = test_army.get_mut(0).unwrap();
+        test_battalion_ref.position = -150;
+        assert_eq!(test_battalion_ref.position, -150);
+        test_battalion_ref.march(super::StartingDirection::WEST);
+        assert_eq!(test_battalion_ref.position, -100);
+    }
+
+    #[test]
+    fn should_decrease_count_by_one() {
+        let mut test_army = vec![create_mock_generic_battalion()];
+
+        let test_battalion_ref = test_army.get_mut(0).unwrap();
+
+        assert_eq!(test_battalion_ref.count, 1000);
+        test_battalion_ref.decrement();
+        assert_eq!(test_battalion_ref.count, 999);
+    }
+
+    #[test]
+    fn should_set_is_marching() {
+        let mut test_army = vec![create_mock_generic_battalion()];
+
+        let test_battalion_ref = test_army.get_mut(0).unwrap();
+
+        assert_eq!(test_battalion_ref.is_marching, true);
+        test_battalion_ref.set_is_marching(false);
+        assert_eq!(test_battalion_ref.is_marching, false);
+        test_battalion_ref.set_is_marching(true);
+        assert_eq!(test_battalion_ref.is_marching, true);
     }
 }
