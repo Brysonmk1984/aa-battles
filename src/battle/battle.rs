@@ -1,30 +1,40 @@
+use std::default;
+use strum_macros::{Display, EnumString};
+
 use crate::{
+    battle::determine_win_conditions::check_for_king_captured_condition,
     match_up::match_up::{Battalion, BattleArmy},
     service::query::Army,
     BattleState,
 };
 
-use super::tick::run_tick::run_tick;
+use super::{
+    determine_win_conditions::determine_army_conquered_condition, tick::run_tick::run_tick,
+};
 
-#[derive(Debug, PartialEq)]
-enum Belligerent {
+#[derive(Debug, Display, PartialEq)]
+pub enum Belligerent {
+    #[strum(serialize = "Western Army")]
     WesternArmy,
+    #[strum(serialize = "Eastern Army")]
     EasternArmy,
 }
 
-#[derive(Debug)]
-enum WinType {
+#[derive(Debug, Display, PartialEq)]
+pub enum WinType {
+    #[strum(serialize = "Army Conquered")]
     ArmyConquered,
+    #[strum(serialize = "King Captured")]
     KingCaptured,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Default)]
 pub struct BattleResult {
-    id: i32,
-    winner: Option<Belligerent>,
-    loser: Option<Belligerent>,
-    tick_count: u16,
-    win_type: Option<WinType>,
+    pub id: i32,
+    pub winner: Option<Belligerent>,
+    pub loser: Option<Belligerent>,
+    pub tick_count: u16,
+    pub win_type: Option<WinType>,
 }
 
 pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
@@ -53,7 +63,6 @@ pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
     };
 
     while a1_count > 0 && a2_count > 0 {
-        println!("CAKEE  {:?}", battle_state);
         let winner_by_position = check_for_king_captured_condition(&battle_state);
         if winner_by_position.is_some() {
             //dbg!(&winner_by_position);
@@ -76,7 +85,7 @@ pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
             sum += b.count;
             sum
         });
-        println!("WEST ARMY COUNT: {a1_count}, EAST ARMY COUNT: {a2_count}");
+        //println!("WEST ARMY COUNT: {a1_count}, EAST ARMY COUNT: {a2_count}");
 
         battle_result.tick_count += 1;
         if battle_result.tick_count > 300 {
@@ -86,40 +95,4 @@ pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
     }
 
     determine_army_conquered_condition(battle_result, a1_count, a2_count)
-}
-
-fn check_for_king_captured_condition(battle_state: &BattleState) -> Option<Belligerent> {
-    let a1_battalion_passed_all_opponents = battle_state
-        .army_1_state
-        .iter()
-        .find(|b| (b.position > 150) && b.flying == false);
-
-    let a2_battalion_passed_all_opponents = battle_state
-        .army_2_state
-        .iter()
-        .find(|b| (b.position < -150) && b.flying == false);
-
-    if a1_battalion_passed_all_opponents.is_some() {
-        Some(Belligerent::WesternArmy)
-    } else if a2_battalion_passed_all_opponents.is_some() {
-        Some(Belligerent::EasternArmy)
-    } else {
-        None
-    }
-}
-
-fn determine_army_conquered_condition(
-    mut battle_result: BattleResult,
-    a1_count: i32,
-    a2_count: i32,
-) -> BattleResult {
-    if a1_count > a2_count {
-        battle_result.winner = Some(Belligerent::WesternArmy);
-        battle_result.loser = Some(Belligerent::EasternArmy);
-    } else {
-        battle_result.winner = Some(Belligerent::EasternArmy);
-        battle_result.loser = Some(Belligerent::WesternArmy);
-    }
-    battle_result.win_type = Some(WinType::ArmyConquered);
-    battle_result
 }

@@ -21,7 +21,7 @@ struct ArmyNation {
 }
 
 // An Army Type with count belonging to a user
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct Battalion {
     pub name: String,
     pub count: i32,
@@ -127,13 +127,14 @@ impl From<&Army> for Battalion {
 
 #[cfg(test)]
 pub mod test {
-    use crate::match_up::create_mocks::create_mock_generic_battalion;
+    use crate::match_up::create_mocks::{create_mock_generic_battalion, PartialBattalionForTests};
 
     use super::Battalion;
 
     #[test]
     fn should_march_west_distance_based_on_speed() {
-        let mut test_army = vec![create_mock_generic_battalion()];
+        let partial_mock_battalion: PartialBattalionForTests = Default::default();
+        let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
 
         let test_battalion_ref = test_army.get_mut(0).unwrap();
         test_battalion_ref.position = 150;
@@ -144,7 +145,8 @@ pub mod test {
 
     #[test]
     fn should_march_east_distance_based_on_speed() {
-        let mut test_army = vec![create_mock_generic_battalion()];
+        let partial_mock_battalion: PartialBattalionForTests = Default::default();
+        let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
         let test_battalion_ref = test_army.get_mut(0).unwrap();
         test_battalion_ref.position = -150;
         assert_eq!(test_battalion_ref.position, -150);
@@ -154,7 +156,8 @@ pub mod test {
 
     #[test]
     fn should_decrease_count_by_one() {
-        let mut test_army = vec![create_mock_generic_battalion()];
+        let partial_mock_battalion: PartialBattalionForTests = Default::default();
+        let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
 
         let test_battalion_ref = test_army.get_mut(0).unwrap();
 
@@ -165,7 +168,8 @@ pub mod test {
 
     #[test]
     fn should_set_is_marching() {
-        let mut test_army = vec![create_mock_generic_battalion()];
+        let partial_mock_battalion: PartialBattalionForTests = Default::default();
+        let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
 
         let test_battalion_ref = test_army.get_mut(0).unwrap();
 

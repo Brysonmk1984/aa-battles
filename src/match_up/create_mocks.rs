@@ -21,35 +21,39 @@ pub fn create_mock_army(id: i32, army_defaults: &Vec<Army>) -> Vec<Battalion> {
     if id == 1 {
         // WESTERN ARMY
         vec![
-            get_db_battalion_properties(&imperial_legionnaires, 1000, 150),
-            get_db_battalion_properties(&avian_cliff_dwellers, 1000, -150),
+            //get_db_battalion_properties(&imperial_legionnaires, 1000, -150),
+            // get_db_battalion_properties(&avian_cliff_dwellers, 1000, -150),
             get_db_battalion_properties(&highborn_cavalry, 1000, -150),
         ]
     } else {
         // EASTER ARMY
         vec![
-            get_db_battalion_properties(&amazonian_huntresses, 1000, -150),
-            get_db_battalion_properties(&magi_enforcers, 1000, 150),
+            //get_db_battalion_properties(&amazonian_huntresses, 1000, 150),
+            //get_db_battalion_properties(&magi_enforcers, 1000, 150),
             get_db_battalion_properties(&north_watch_longbowmen, 1000, 150),
         ]
     }
 }
 
-pub fn create_mock_generic_battalion() -> Battalion {
-    Battalion {
-        name: String::from("Generic Fighters"),
-        count: 1000,
-        position: 150,
-        shield_rating: 0.00,
-        flying: false,
-        range: 150,
-        attack_speed: 0.00,
-        accuracy: 0.75,
-        aoe: false,
-        weapon_type: String::from("piercing"),
-        armor_type: String::from("piercing"),
-        agility: 0.5,
-        speed: 50,
+#[derive(Default)]
+pub struct PartialBattalionForTests {
+    pub count: Option<i32>,
+    pub position: Option<i32>,
+    pub speed: Option<i32>,
+    pub flying: Option<bool>,
+    pub range: Option<i32>,
+}
+
+pub fn create_mock_generic_battalion(partial_battalion: PartialBattalionForTests) -> Battalion {
+    let mock_battalion = Battalion {
+        range: partial_battalion.range.or(Some(0)).unwrap(),
+        speed: partial_battalion.speed.or(Some(50)).unwrap(),
+        count: partial_battalion.count.or(Some(1000)).unwrap(),
+        position: partial_battalion.position.or(Some(150)).unwrap(),
         is_marching: true,
-    }
+        flying: partial_battalion.flying.or(Some(false)).unwrap(),
+        ..Default::default()
+    };
+
+    mock_battalion
 }
