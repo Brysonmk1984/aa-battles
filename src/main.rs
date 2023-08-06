@@ -2,16 +2,20 @@
 use color_eyre::eyre::Result;
 use match_up::match_up::Battalion;
 use service::query;
-use std::{error::Error, fs::File, io::Write};
+use std::{collections::HashMap, error::Error, fs::File, io::Write};
 
 use crate::{
-    battle::battle::run_battle, format_results::format_battle_state,
-    match_up::match_up::get_battle_tuple,
+    battle::battle::run_battle,
+    format_results::format_battle_state,
+    match_up::{create_mocks::create_mock_army_defaults, match_up::get_battle_tuple},
+    service::query::Army,
+    util::create_hash_of_defaults,
 };
 mod battle;
 mod format_results;
 mod match_up;
 mod service;
+mod util;
 
 #[derive(Debug)]
 pub struct BattleState {
@@ -23,8 +27,12 @@ pub struct BattleState {
 async fn main() -> Result<()> {
     color_eyre::install()?;
     dotenvy::dotenv().ok();
-    let army_defaults = query::get_all_armies().await.unwrap();
-    let mut battle_tuple = get_battle_tuple(1, 2, army_defaults);
+    let mut army_defaults = query::get_all_armies().await.unwrap();
+    army_defaults.sort_by(|a, b| a.name.cmp(&b.name));
+    let mut army_defaults_hash: HashMap<&str, Army> = create_hash_of_defaults(army_defaults);
+
+    let mut battle_tuple =
+        get_battle_tuple(1, 2, create_mock_army_defaults(Some(army_defaults_hash)));
 
     let mut battle_state = BattleState {
         army_1_state: battle_tuple.0.full_army,

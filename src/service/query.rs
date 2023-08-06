@@ -20,8 +20,7 @@ pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> /*Vec<Army>*/
 // Otherwise, you can skip these attributes and just use sort_by along with .cmp()
 //#[derive(Eq, Ord, PartialEq, PartialOrd)]
 
-#[derive(Deserialize, Serialize, Debug, Clone)]
-
+#[derive(Deserialize, Serialize, Debug, Clone, Default)]
 pub struct Army {
     pub id: i32,
     pub name: String,

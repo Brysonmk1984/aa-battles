@@ -1,17 +1,17 @@
 
-Winner (Western Army):
+Winner (Eastern Army):
 ----------------------
-Highborn Cavalry - 350 at position 150
+North Watch Longbowmen - 1000 at position 95
 
-Loser (Eastern Army):
+Loser (Western Army):
 ----------------------
-North Watch Longbowmen - 1000 at position 125
+Highborn Cavalry - 0 at position 20
 
 
 
 BATTLE RESULTS:
 -------------
 Battle ID: 1
-Western Army Wins
-King Captured
-Tick Count: 6
+Eastern Army Wins
+Army Conquered
+Tick Count: 19

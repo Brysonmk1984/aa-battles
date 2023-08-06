@@ -6,7 +6,6 @@ use crate::BattleState;
 use std::collections::HashMap;
 
 pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i32 {
-    //https://doc.rust-lang.org/std/collections/struct.HashMap.html
     let mut in_range_map_1: HashMap<String, Vec<&str>> = HashMap::new();
     let mut in_range_map_2: HashMap<String, Vec<&str>> = HashMap::new();
 
@@ -18,6 +17,7 @@ pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i3
         in_range_map_2.insert(army.name.clone(), vec![]);
     });
 
+    // TODO: Figure out way to handle this where cloning isn't needed to satisfy borrow checker
     let army_1_clone = battle_state.army_1_state.clone();
     let army_2_clone = battle_state.army_2_state.clone();
 
@@ -56,4 +56,65 @@ pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i3
     let new_total = a1 + a2;
 
     new_total
+}
+
+#[cfg(test)]
+mod tests {
+    use std::{collections::HashMap, env};
+
+    use crate::{
+        battle::tick::range_find::update_in_range_map,
+        match_up::{
+            create_mocks::{create_mock_army, create_mock_army_defaults},
+            match_up::StartingDirection,
+        },
+    };
+
+    #[test]
+    fn test_update_in_range_map_in_range() {
+        temp_env::with_var("MIN_RANGE_ATTACK_AIR", Some("15"), || {
+            let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+            let army_defaults = create_mock_army_defaults(None);
+            let mut attacker = create_mock_army(
+                StartingDirection::WEST,
+                &army_defaults,
+                vec!["highborn_cavalry"],
+            );
+            let mut defender = create_mock_army(
+                StartingDirection::EAST,
+                &army_defaults,
+                vec!["north_watch_longbowmen"],
+            );
+            attacker[0].position = 0;
+            defender[0].position = 0;
+
+            attacker_map.insert(attacker[0].name.clone(), Vec::new());
+            update_in_range_map(&mut attacker_map, &attacker, &defender);
+            assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 1);
+        });
+    }
+
+    #[test]
+    fn test_update_in_range_map_none_in_range() {
+        temp_env::with_var("MIN_RANGE_ATTACK_AIR", Some("15"), || {
+            let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+            let army_defaults = create_mock_army_defaults(None);
+            let mut attacker = create_mock_army(
+                StartingDirection::WEST,
+                &army_defaults,
+                vec!["highborn_cavalry"],
+            );
+            let mut defender = create_mock_army(
+                StartingDirection::EAST,
+                &army_defaults,
+                vec!["north_watch_longbowmen"],
+            );
+            attacker[0].position = -150;
+            defender[0].position = 150;
+
+            attacker_map.insert(attacker[0].name.clone(), Vec::new());
+            update_in_range_map(&mut attacker_map, &attacker, &defender);
+            assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 0);
+        });
+    }
 }

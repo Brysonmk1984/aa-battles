@@ -1,10 +1,12 @@
+use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
 
 use crate::service::query::Army;
 
 use super::create_mocks::create_mock_army;
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub enum StartingDirection {
     EAST,
     WEST,
@@ -67,41 +69,36 @@ pub struct BattleArmy {
     pub full_army: Vec<Battalion>,
 }
 
+/**
+*  fn get_battle_tuple -
+   Get all battalions belonging to both nations & return as  full armies (BattleArmy)
+* params - id_1 (nation Id), id_2, army_defaults (hashmap of army types, to be converted to Battalion)
+*/
 pub fn get_battle_tuple(
     id_1: i32,
     id_2: i32,
-    army_defaults: Vec<Army>,
+    army_defaults: HashMap<&str, Army>,
 ) -> (BattleArmy, BattleArmy) {
     (
-        get_full_army(id_1, &army_defaults),
-        get_full_army(id_2, &army_defaults),
+        BattleArmy {
+            nation_id: id_1,
+            // TODO: In the future, we need to replace this with the user's army saved in a new db table
+            full_army: create_mock_army(
+                StartingDirection::WEST,
+                &army_defaults,
+                vec!["highborn_cavalry"],
+            ),
+        },
+        BattleArmy {
+            nation_id: id_2,
+            // TODO: In the future, we need to replace this with the user's army saved in a new db table
+            full_army: create_mock_army(
+                StartingDirection::EAST,
+                &army_defaults,
+                vec!["north_watch_longbowmen"],
+            ),
+        },
     )
-}
-
-/**
-*  fn get_full_army -
-   Get all battalions belonging to a particular nation () & return as a full army (BattleArmy)
-* params - id (nation Id), army_defaults (vector of army types, to be converted to Battalion)
-*/
-pub fn get_full_army(id: i32, army_defaults: &Vec<Army>) -> BattleArmy {
-    let whole_army = BattleArmy {
-        nation_id: id,
-        full_army: create_mock_army(id, army_defaults),
-    };
-
-    whole_army
-}
-
-pub fn get_db_battalion_properties(
-    db_battalion_template: &Army,
-    count: i32,
-    position: i32,
-) -> Battalion {
-    Battalion {
-        count: count,
-        position,
-        ..Battalion::from(db_battalion_template)
-    }
 }
 
 impl From<&Army> for Battalion {
@@ -138,9 +135,13 @@ pub mod test {
 
         let test_battalion_ref = test_army.get_mut(0).unwrap();
         test_battalion_ref.position = 150;
-        assert_eq!(test_battalion_ref.position, 150);
+        let original_position = test_battalion_ref.position;
+        assert_eq!(original_position, 150);
         test_battalion_ref.march(super::StartingDirection::EAST);
-        assert_eq!(test_battalion_ref.position, 100);
+        assert_eq!(
+            test_battalion_ref.position,
+            original_position - test_battalion_ref.speed
+        );
     }
 
     #[test]
@@ -149,9 +150,13 @@ pub mod test {
         let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
         let test_battalion_ref = test_army.get_mut(0).unwrap();
         test_battalion_ref.position = -150;
-        assert_eq!(test_battalion_ref.position, -150);
+        let original_position = test_battalion_ref.position;
+        assert_eq!(original_position, -150);
         test_battalion_ref.march(super::StartingDirection::WEST);
-        assert_eq!(test_battalion_ref.position, -100);
+        assert_eq!(
+            test_battalion_ref.position,
+            original_position + test_battalion_ref.speed
+        );
     }
 
     #[test]
