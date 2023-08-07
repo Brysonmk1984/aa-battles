@@ -29,33 +29,33 @@ pub fn update_in_range_map<'a>(
             let distance_between_battalions = attacker_position - defender_position;
 
             let in_range = distance_between_battalions.abs() - attacker_range <= 0;
-            println!(
-                "{attacker_position} {defender_position} {distance_between_battalions} {in_range}"
-            );
+            // println!(
+            //     "{attacker_position} {defender_position} {distance_between_battalions} {in_range}"
+            // );
 
             // TODO: Consider a more elaborate check for range finding when both are marching and march past each other rather than attack
             // For now, resolved this by adjusting speed down and range up.
             if in_range && battalion.count > 0 {
                 // insert defenders flyers in the flyer vec, otherwise the ground vec
                 if attacker_range > min_range_attack_air.parse().unwrap() && battalion.flying {
-                    println!(
-                        "{} IN RANGE OF {}, CAN HIT FLYER",
-                        attacker_battalion.name, battalion.name
-                    );
+                    // println!(
+                    //     "{} IN RANGE OF {}, CAN HIT FLYER",
+                    //     attacker_battalion.name, battalion.name
+                    // );
                     // In range, can hit air, and enemy is flying
                     flyer_vec.push(battalion.name.as_str());
                 } else if !battalion.flying {
-                    println!(
-                        "{} IN RANGE OF {}, A GROUND FORCE",
-                        attacker_battalion.name, battalion.name
-                    );
+                    // println!(
+                    //     "{} IN RANGE OF {}, A GROUND FORCE",
+                    //     attacker_battalion.name, battalion.name
+                    // );
                     // In range, enemy is non-flyer
                     ground_vec.push(battalion.name.as_str())
                 } else {
-                    println!(
-                        "{} IN RANGE OF {}, BUT CANNOT HIT FLYER",
-                        attacker_battalion.name, battalion.name
-                    );
+                    // println!(
+                    //     "{} IN RANGE OF {}, BUT CANNOT HIT FLYER",
+                    //     attacker_battalion.name, battalion.name
+                    // );
                     // In range, can't hit enemy flyer
                 }
             }

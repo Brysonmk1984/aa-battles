@@ -29,7 +29,9 @@ pub fn create_mock_army(
         .iter()
         .enumerate()
         .map(|(index, b_name)| {
-            let army = army_defaults.get(army_selection[index]).unwrap();
+            let army = army_defaults
+                .get(army_selection[index])
+                .expect("Invalid army name, can't create mock!");
 
             Battalion {
                 position: if army_direction == StartingDirection::WEST {
