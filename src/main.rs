@@ -34,7 +34,7 @@ async fn main() -> Result<()> {
     let mut army_defaults_hash: HashMap<&str, Army> = create_hash_of_defaults(army_defaults);
 
     let mut battle_tuple =
-        get_battle_tuple(1, 2, create_mock_army_defaults(Some(army_defaults_hash)));
+        get_battle_tuple(1, 2, create_mock_army_defaults(Some(army_defaults_hash)))?;
 
     let mut battle_state = BattleState {
         army_1_state: battle_tuple.0.full_army,

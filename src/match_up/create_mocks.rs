@@ -1,8 +1,17 @@
 use std::collections::HashMap;
 
+use serde::de::Error;
+use thiserror::Error;
+
 use crate::{match_up::match_up::StartingDirection, service::query::Army};
 
 use super::{match_up::Battalion, mock_default_army_vec::get_mock_defaults};
+
+#[derive(Error, Debug)]
+pub enum MockError {
+    #[error("Invalid army name, can't create mock!")]
+    InvalidArmyName,
+}
 
 pub fn create_mock_army_defaults(
     defaults_option: Option<HashMap<&str, Army>>,
@@ -24,23 +33,25 @@ pub fn create_mock_army(
     army_direction: StartingDirection,
     army_defaults: &HashMap<&str, Army>,
     army_selection: Vec<&str>,
-) -> Vec<Battalion> {
+) -> Result<Vec<Battalion>, MockError> {
     let vec_to_return = army_selection
         .iter()
         .enumerate()
-        .map(|(index, b_name)| {
-            let army = army_defaults
-                .get(army_selection[index])
-                .expect("Invalid army name, can't create mock!");
+        .map(|(index, b_name)| -> Result<Battalion, MockError> {
+            let army = army_defaults.get(army_selection[index]);
 
-            Battalion {
+            if army.is_none() {
+                return Err(MockError::InvalidArmyName);
+            }
+
+            Ok(Battalion {
                 position: if army_direction == StartingDirection::WEST {
                     -150
                 } else {
                     150
                 },
-                ..Battalion::from(army)
-            }
+                ..Battalion::from(army.unwrap())
+            })
         })
         .collect();
 

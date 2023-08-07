@@ -78,12 +78,14 @@ mod tests {
             StartingDirection::WEST,
             &army_defaults,
             vec!["highborn_cavalry"],
-        );
+        )
+        .unwrap();
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
             vec!["north_watch_longbowmen"],
-        );
+        )
+        .unwrap();
         attacker[0].position = 0;
         defender[0].position = 0;
 
@@ -100,12 +102,14 @@ mod tests {
             StartingDirection::WEST,
             &army_defaults,
             vec!["highborn_cavalry"],
-        );
+        )
+        .unwrap();
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
             vec!["north_watch_longbowmen"],
-        );
+        )
+        .unwrap();
         attacker[0].position = -150;
         defender[0].position = 150;
 
@@ -122,12 +126,14 @@ mod tests {
             StartingDirection::WEST,
             &army_defaults,
             vec!["highborn_cavalry"],
-        );
+        )
+        .unwrap();
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
             vec!["avian_cliff_dwellers"],
-        );
+        )
+        .unwrap();
         attacker[0].position = 0;
         defender[0].position = 0;
 
@@ -144,12 +150,14 @@ mod tests {
             StartingDirection::WEST,
             &army_defaults,
             vec!["highborn_cavalry"],
-        );
+        )
+        .unwrap();
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
             vec!["peacekeeper_monks", "imperial_legionnaires"],
-        );
+        )
+        .unwrap();
         attacker[0].position = 0;
         defender[0].position = 0;
         defender[0].count = 0;
@@ -168,7 +176,8 @@ mod tests {
             StartingDirection::WEST,
             &army_defaults,
             vec!["north_watch_longbowmen"],
-        );
+        )
+        .unwrap();
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
@@ -178,7 +187,8 @@ mod tests {
                 "avian_cliff_dwellers",
                 "imperial_legionnaires",
             ],
-        );
+        )
+        .unwrap();
         attacker[0].position = 0;
         defender[0].position = 0;
         defender[1].position = 0;

@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::service::query::Army;
 
-use super::create_mocks::create_mock_army;
+use super::create_mocks::{create_mock_army, MockError};
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum StartingDirection {
@@ -78,27 +78,31 @@ pub fn get_battle_tuple(
     id_1: i32,
     id_2: i32,
     army_defaults: HashMap<&str, Army>,
-) -> (BattleArmy, BattleArmy) {
-    (
+) -> Result<(BattleArmy, BattleArmy), MockError> {
+    // TODO: In the future, we need to replace this with the user's army saved in a new db table
+    let full_army_west = create_mock_army(
+        StartingDirection::WEST,
+        &army_defaults,
+        vec!["highborn_cavalry"],
+    )?;
+
+    // TODO: In the future, we need to replace this with the user's army saved in a new db table
+    let full_army_east = create_mock_army(
+        StartingDirection::EAST,
+        &army_defaults,
+        vec!["north_watch_longbowmen"],
+    )?;
+
+    Ok((
         BattleArmy {
             nation_id: id_1,
-            // TODO: In the future, we need to replace this with the user's army saved in a new db table
-            full_army: create_mock_army(
-                StartingDirection::WEST,
-                &army_defaults,
-                vec!["highborn_cavalry"],
-            ),
+            full_army: full_army_west,
         },
         BattleArmy {
             nation_id: id_2,
-            // TODO: In the future, we need to replace this with the user's army saved in a new db table
-            full_army: create_mock_army(
-                StartingDirection::EAST,
-                &army_defaults,
-                vec!["north_watch_longbowmen"],
-            ),
+            full_army: full_army_east,
         },
-    )
+    ))
 }
 
 impl From<&Army> for Battalion {
