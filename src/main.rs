@@ -17,6 +17,8 @@ mod match_up;
 mod service;
 mod util;
 
+pub const MIN_RANGE_ATTACK_AIR: i32 = 15;
+
 #[derive(Debug)]
 pub struct BattleState {
     pub army_1_state: Vec<Battalion>,

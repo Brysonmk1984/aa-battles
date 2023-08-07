@@ -2,15 +2,13 @@ use std::{collections::HashMap, env};
 
 use rand::seq::SliceRandom;
 
-use crate::match_up::match_up::Battalion;
+use crate::{match_up::match_up::Battalion, MIN_RANGE_ATTACK_AIR};
 
 pub fn update_in_range_map<'a>(
     attacker_map: &mut HashMap<String, Vec<&'a str>>,
     attacker: &'a Vec<Battalion>,
     defender: &'a Vec<Battalion>,
 ) {
-    let min_range_attack_air: String = env::var("MIN_RANGE_ATTACK_AIR")
-        .expect("MIN_RANGE_ATTACK_AIR environment variable should exist but is missing");
     // loop through army_1 and figure out which of army_2 is in range
     for (battalion_key, in_range_vec) in attacker_map {
         let mut flyer_vec = Vec::new();
@@ -37,7 +35,7 @@ pub fn update_in_range_map<'a>(
             // For now, resolved this by adjusting speed down and range up.
             if in_range && battalion.count > 0 {
                 // insert defenders flyers in the flyer vec, otherwise the ground vec
-                if attacker_range > min_range_attack_air.parse().unwrap() && battalion.flying {
+                if attacker_range > MIN_RANGE_ATTACK_AIR && battalion.flying {
                     // println!(
                     //     "{} IN RANGE OF {}, CAN HIT FLYER",
                     //     attacker_battalion.name, battalion.name

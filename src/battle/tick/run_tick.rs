@@ -72,133 +72,123 @@ mod tests {
 
     #[test]
     fn test_update_in_range_map_in_range() {
-        temp_env::with_var("MIN_RANGE_ATTACK_AIR", Some("15"), || {
-            let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
-            let army_defaults = create_mock_army_defaults(None);
-            let mut attacker = create_mock_army(
-                StartingDirection::WEST,
-                &army_defaults,
-                vec!["highborn_cavalry"],
-            );
-            let mut defender = create_mock_army(
-                StartingDirection::EAST,
-                &army_defaults,
-                vec!["north_watch_longbowmen"],
-            );
-            attacker[0].position = 0;
-            defender[0].position = 0;
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["highborn_cavalry"],
+        );
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        );
+        attacker[0].position = 0;
+        defender[0].position = 0;
 
-            attacker_map.insert(attacker[0].name.clone(), Vec::new());
-            update_in_range_map(&mut attacker_map, &attacker, &defender);
-            assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 1);
-        });
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 1);
     }
 
     #[test]
     fn test_update_in_range_map_none_in_range() {
-        temp_env::with_var("MIN_RANGE_ATTACK_AIR", Some("15"), || {
-            let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
-            let army_defaults = create_mock_army_defaults(None);
-            let mut attacker = create_mock_army(
-                StartingDirection::WEST,
-                &army_defaults,
-                vec!["highborn_cavalry"],
-            );
-            let mut defender = create_mock_army(
-                StartingDirection::EAST,
-                &army_defaults,
-                vec!["north_watch_longbowmen"],
-            );
-            attacker[0].position = -150;
-            defender[0].position = 150;
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["highborn_cavalry"],
+        );
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        );
+        attacker[0].position = -150;
+        defender[0].position = 150;
 
-            attacker_map.insert(attacker[0].name.clone(), Vec::new());
-            update_in_range_map(&mut attacker_map, &attacker, &defender);
-            assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 0);
-        });
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 0);
     }
 
     #[test]
     fn test_update_in_range_map_air_not_in_range_of_melee() {
-        temp_env::with_var("MIN_RANGE_ATTACK_AIR", Some("15"), || {
-            let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
-            let army_defaults = create_mock_army_defaults(None);
-            let mut attacker = create_mock_army(
-                StartingDirection::WEST,
-                &army_defaults,
-                vec!["highborn_cavalry"],
-            );
-            let mut defender = create_mock_army(
-                StartingDirection::EAST,
-                &army_defaults,
-                vec!["avian_cliff_dwellers"],
-            );
-            attacker[0].position = 0;
-            defender[0].position = 0;
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["highborn_cavalry"],
+        );
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["avian_cliff_dwellers"],
+        );
+        attacker[0].position = 0;
+        defender[0].position = 0;
 
-            attacker_map.insert(attacker[0].name.clone(), Vec::new());
-            update_in_range_map(&mut attacker_map, &attacker, &defender);
-            assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 0);
-        });
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 0);
     }
 
     #[test]
     fn test_update_in_range_map_zero_count_excluded() {
-        temp_env::with_var("MIN_RANGE_ATTACK_AIR", Some("15"), || {
-            let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
-            let army_defaults = create_mock_army_defaults(None);
-            let mut attacker = create_mock_army(
-                StartingDirection::WEST,
-                &army_defaults,
-                vec!["highborn_cavalry"],
-            );
-            let mut defender = create_mock_army(
-                StartingDirection::EAST,
-                &army_defaults,
-                vec!["peacekeeper_monks", "imperial_legionnaires"],
-            );
-            attacker[0].position = 0;
-            defender[0].position = 0;
-            defender[0].count = 0;
-            defender[1].position = 0;
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["highborn_cavalry"],
+        );
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["peacekeeper_monks", "imperial_legionnaires"],
+        );
+        attacker[0].position = 0;
+        defender[0].position = 0;
+        defender[0].count = 0;
+        defender[1].position = 0;
 
-            attacker_map.insert(attacker[0].name.clone(), Vec::new());
-            update_in_range_map(&mut attacker_map, &attacker, &defender);
-            assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 1);
-        });
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        assert_eq!(attacker_map.get("Highborn Cavalry").unwrap().len(), 1);
     }
 
     #[test]
     fn test_update_in_range_map_flying_in_front() {
-        temp_env::with_var("MIN_RANGE_ATTACK_AIR", Some("15"), || {
-            let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
-            let army_defaults = create_mock_army_defaults(None);
-            let mut attacker = create_mock_army(
-                StartingDirection::WEST,
-                &army_defaults,
-                vec!["north_watch_longbowmen"],
-            );
-            let mut defender = create_mock_army(
-                StartingDirection::EAST,
-                &army_defaults,
-                vec![
-                    "north_watch_longbowmen",
-                    "peacekeeper_monks",
-                    "avian_cliff_dwellers",
-                    "imperial_legionnaires",
-                ],
-            );
-            attacker[0].position = 0;
-            defender[0].position = 0;
-            defender[1].position = 0;
-            defender[2].position = 0;
-            defender[3].position = 0;
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        );
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![
+                "north_watch_longbowmen",
+                "peacekeeper_monks",
+                "avian_cliff_dwellers",
+                "imperial_legionnaires",
+            ],
+        );
+        attacker[0].position = 0;
+        defender[0].position = 0;
+        defender[1].position = 0;
+        defender[2].position = 0;
+        defender[3].position = 0;
 
-            attacker_map.insert(attacker[0].name.clone(), Vec::new());
-            update_in_range_map(&mut attacker_map, &attacker, &defender);
-            let vec_of_in_range = attacker_map.get("North Watch Longbowmen").unwrap();
-            assert_eq!(vec_of_in_range.len(), 4);
-            assert!(vec_of_in_range[0] == "Avian Cliff Dwellers");
-        });
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let vec_of_in_range = attacker_map.get("North Watch Longbowmen").unwrap();
+        assert_eq!(vec_of_in_range.len(), 4);
+        assert!(vec_of_in_range[0] == "Avian Cliff Dwellers");
     }
 }
