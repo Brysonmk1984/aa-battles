@@ -5,7 +5,7 @@ North Watch Longbowmen - 1000 at position 95
 
 Loser (Western Army):
 ----------------------
-Highborn Cavalry - 0 at position 20
+Highborn Cavalry - 0 at position 30
 
 
 
@@ -14,4 +14,4 @@ BATTLE RESULTS:
 Battle ID: 1
 Eastern Army Wins
 Army Conquered
-Tick Count: 19
+Tick Count: 20

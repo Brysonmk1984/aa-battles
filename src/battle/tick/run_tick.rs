@@ -1,6 +1,6 @@
-use super::attack_phase::attack::attack_phase;
-use super::march::march_phase;
-use super::range_find::update_in_range_map;
+use super::phases::attack::attack_phase;
+use super::phases::march::march_phase;
+use super::phases::range_find::update_in_range_map;
 use crate::match_up::match_up::{Battalion, StartingDirection};
 use crate::BattleState;
 use std::collections::HashMap;
@@ -60,15 +60,13 @@ pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i3
 
 #[cfg(test)]
 mod tests {
-    use std::{collections::HashMap, env};
-
-    use crate::{
-        battle::tick::range_find::update_in_range_map,
-        match_up::{
-            create_mocks::{create_mock_army, create_mock_army_defaults},
-            match_up::StartingDirection,
-        },
+    use crate::battle::tick::phases::attack::attack_phase;
+    use crate::battle::tick::phases::range_find::update_in_range_map;
+    use crate::match_up::{
+        create_mocks::{create_mock_army, create_mock_army_defaults},
+        match_up::StartingDirection,
     };
+    use std::{collections::HashMap, env};
 
     #[test]
     fn test_update_in_range_map_in_range() {
@@ -201,4 +199,34 @@ mod tests {
         assert_eq!(vec_of_in_range.len(), 4);
         assert!(vec_of_in_range[0] == "Avian Cliff Dwellers");
     }
+
+    /**
+     * attack_phase test
+     */
+    #[test]
+    // fn test_attack_phase() {
+    //     let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+    //     let army_defaults = create_mock_army_defaults(None);
+    //     let mut attacker = create_mock_army(
+    //         StartingDirection::WEST,
+    //         &army_defaults,
+    //         vec!["north_watch_longbowmen"],
+    //     )
+    //     .unwrap();
+    //     let mut defender = create_mock_army(
+    //         StartingDirection::EAST,
+    //         &army_defaults,
+    //         vec!["imperial_legionnaires"],
+    //     )
+    //     .unwrap();
+    //     attacker[0].is_marching = true;
+    //     attacker[0].position = -50;
+    //     defender[0].position = 0;
+    //     attacker_map.insert(attacker[0].name.clone(), Vec::new());
+    //     update_in_range_map(&mut attacker_map, &attacker, &defender);
+    //     let mut cloned_attacker = attacker.clone();
+    //     let mut cloned_defender = attacker.clone();
+    //     attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+    //     assert!(cloned_attacker[0].is_marching == false);
+    // }
 }
