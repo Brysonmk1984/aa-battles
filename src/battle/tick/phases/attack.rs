@@ -23,20 +23,21 @@ pub fn attack_phase<'a, 'b>(
             .iter_mut()
             .find(|battalion| battalion.name == *attacking_b_name)
             .unwrap();
-        println!("itering");
+
         // If any valid targets for the attacker, run attack sequence
         if defending_b_name.is_some() {
-            println!("SOME VALID");
             let mut d_battalion = defender
                 .iter_mut()
-                .find(|battalion| battalion.name == *defending_b_name.unwrap())
+                .find(|battalion| {
+                    println!("{} {}", battalion.name, *defending_b_name.unwrap());
+                    battalion.name == *defending_b_name.unwrap()
+                })
                 .unwrap();
 
             a_battalion.set_is_marching(false);
-            println!("{} {}", a_battalion.name, d_battalion.name);
+
             run_attack_sequence(&mut a_battalion, &mut d_battalion);
         } else {
-            println!("NO VALID");
             // If attacker had no valid targets (defenders), then army will march forward
             let mut a_battalion = attacker
                 .iter_mut()

@@ -201,32 +201,64 @@ mod tests {
     }
 
     /**
-     * attack_phase test
+     * attack_phase
+     * Should stop marching in order to attack when there's a defender in range
      */
     #[test]
-    // fn test_attack_phase() {
-    //     let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
-    //     let army_defaults = create_mock_army_defaults(None);
-    //     let mut attacker = create_mock_army(
-    //         StartingDirection::WEST,
-    //         &army_defaults,
-    //         vec!["north_watch_longbowmen"],
-    //     )
-    //     .unwrap();
-    //     let mut defender = create_mock_army(
-    //         StartingDirection::EAST,
-    //         &army_defaults,
-    //         vec!["imperial_legionnaires"],
-    //     )
-    //     .unwrap();
-    //     attacker[0].is_marching = true;
-    //     attacker[0].position = -50;
-    //     defender[0].position = 0;
-    //     attacker_map.insert(attacker[0].name.clone(), Vec::new());
-    //     update_in_range_map(&mut attacker_map, &attacker, &defender);
-    //     let mut cloned_attacker = attacker.clone();
-    //     let mut cloned_defender = attacker.clone();
-    //     attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
-    //     assert!(cloned_attacker[0].is_marching == false);
-    // }
+    fn test_attack_phase_no_march() {
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["imperial_legionnaires"],
+        )
+        .unwrap();
+        attacker[0].is_marching = true;
+        attacker[0].position = -50;
+        defender[0].position = 0;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+        assert!(cloned_attacker[0].is_marching == false);
+    }
+
+    /**
+     * attack_phase
+     * Should start marching when there's no defender in range
+     */
+    #[test]
+    fn test_attack_phase_march() {
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["imperial_legionnaires"],
+        )
+        .unwrap();
+        attacker[0].is_marching = false;
+        attacker[0].position = -150;
+        defender[0].position = 150;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+        assert!(cloned_attacker[0].is_marching == true);
+    }
 }
