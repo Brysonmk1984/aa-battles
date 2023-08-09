@@ -261,4 +261,144 @@ mod tests {
         attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
         assert!(cloned_attacker[0].is_marching == true);
     }
+
+    /**
+     * attack_phase
+     * The army count of the defender should be less than what it started at after being attacked by 50 men
+     */
+    #[test]
+    fn test_attack_phase_count_change() {
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["peacekeeper_monks"],
+        )
+        .unwrap();
+        attacker[0].is_marching = false;
+        attacker[0].position = -50;
+        attacker[0].count = 50;
+        defender[0].position = 0;
+        defender[0].count = 50;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+
+        assert!(defender[0].count > cloned_defender[0].count);
+    }
+
+    /**
+     * attack_phase
+     * The army count of the defender should be equal to what it started with .75 agility + .25 marching bonus, after being attacked by 50 men
+     */
+    #[test]
+    fn test_attack_phase_should_dodge_all_with_max_agility_and_marching() {
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["peacekeeper_monks"],
+        )
+        .unwrap();
+        attacker[0].is_marching = false;
+        attacker[0].position = -50;
+        attacker[0].count = 50;
+        defender[0].position = 0;
+        defender[0].count = 50;
+        defender[0].agility = 0.75;
+        defender[0].is_marching = true;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+
+        assert_eq!(defender[0].count, cloned_defender[0].count);
+    }
+
+    /**
+     * attack_phase
+     * The army count of the defender should be equal to what it started with 1.0 shield_rating, after being attacked by 50 men
+     */
+    #[test]
+    fn test_attack_phase_should_block_all_with_max_shield_rating() {
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["peacekeeper_monks"],
+        )
+        .unwrap();
+        attacker[0].is_marching = false;
+        attacker[0].position = -50;
+        attacker[0].count = 50;
+        defender[0].position = 0;
+        defender[0].count = 50;
+        defender[0].shield_rating = 1.0;
+        defender[0].is_marching = false;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+
+        assert_eq!(defender[0].count, cloned_defender[0].count);
+    }
+
+    /**
+     * attack_phase
+     * The army count of the defender should be equal to what it started with if not in range of attacker
+     */
+    #[test]
+    fn test_attack_phase_defender_count_should_not_change_if_not_in_range() {
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["peacekeeper_monks"],
+        )
+        .unwrap();
+        attacker[0].is_marching = false;
+        attacker[0].position = -150;
+        attacker[0].count = 50;
+        defender[0].position = 150;
+        defender[0].count = 50;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+
+        assert_eq!(defender[0].count, cloned_defender[0].count);
+    }
 }

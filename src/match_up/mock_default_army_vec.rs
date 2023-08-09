@@ -113,7 +113,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
             aoe: false,
             weapon_type: "piercing".to_string(),
             armor_type: "unarmored".to_string(),
-            agility: 0.5,
+            agility: 0.25,
             speed: 5,
         },
         Army {

@@ -54,10 +54,6 @@ pub fn attack_phase<'a, 'b>(
    Parent function for running functions related to an attack: try_dodge, try_block, decrement
 */
 fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
-    // println!(
-    //     "Defender info in attack seq: {} {}",
-    //     defender.name, defender.count
-    // );
     // Do one attack attempt for each member of a battalion
     for n in 0..attacker.count {
         if defender.count == 0 {
