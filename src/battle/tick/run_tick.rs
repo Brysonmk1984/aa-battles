@@ -61,6 +61,7 @@ pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i3
 #[cfg(test)]
 mod tests {
     use crate::battle::tick::phases::attack::attack_phase;
+    use crate::battle::tick::phases::march::march_phase;
     use crate::battle::tick::phases::range_find::update_in_range_map;
     use crate::match_up::{
         create_mocks::{create_mock_army, create_mock_army_defaults},
@@ -400,5 +401,42 @@ mod tests {
         attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
 
         assert_eq!(defender[0].count, cloned_defender[0].count);
+    }
+
+    /**
+     * attack_phase
+     * The army should march - changing position and is_marching if no defenders are in range
+     */
+    #[test]
+    fn test_attack_phase_attacker_should_march_if_no_defender_in_range() {
+        let mut attacker_map: HashMap<String, Vec<&str>> = HashMap::new();
+        let army_defaults = create_mock_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec!["north_watch_longbowmen"],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec!["peacekeeper_monks"],
+        )
+        .unwrap();
+        attacker[0].is_marching = false;
+        attacker[0].position = -150;
+        defender[0].position = 150;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+
+        march_phase(&mut cloned_attacker, &StartingDirection::WEST);
+        assert_eq!(cloned_attacker[0].is_marching, true);
+        assert_eq!(
+            cloned_attacker[0].position,
+            attacker[0].position + attacker[0].speed
+        );
     }
 }
