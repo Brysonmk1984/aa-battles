@@ -3,7 +3,22 @@ use crate::match_up::match_up::{Battalion, StartingDirection};
 pub fn march_phase(army: &mut Vec<Battalion>, starting_direction: &StartingDirection) {
     army.iter_mut().for_each(|a| {
         if a.is_marching && a.count > 0 {
-            a.march(*starting_direction)
+            let opposite_direction = if *starting_direction == StartingDirection::WEST {
+                StartingDirection::EAST
+            } else {
+                StartingDirection::WEST
+            };
+
+            let marching_direction = if a.is_reverse_direction {
+                // println!(
+                //     "{} is marching in opposite direction now - {opposite_direction:?}",
+                //     a.name
+                // );
+                opposite_direction
+            } else {
+                *starting_direction
+            };
+            a.march(marching_direction)
         }
     })
 }

@@ -39,6 +39,7 @@ pub struct Battalion {
     pub agility: f64,
     pub speed: i32,
     pub is_marching: bool,
+    pub is_reverse_direction: bool,
 }
 
 impl Battalion {
@@ -48,6 +49,11 @@ impl Battalion {
 
     pub fn set_is_marching(&mut self, value: bool) {
         self.is_marching = value;
+    }
+
+    pub fn set_is_reverse_direction(&mut self, value: bool) {
+        //println!("{value} HAS REVERSED ");
+        self.is_reverse_direction = value;
     }
 
     /**
@@ -83,14 +89,14 @@ pub fn get_battle_tuple(
     let full_army_west = create_mock_army(
         StartingDirection::WEST,
         &army_defaults,
-        vec!["highborn_cavalry"],
+        vec!["imperial_legionnaires"],
     )?;
 
     // TODO: In the future, we need to replace this with the user's army saved in a new db table
     let full_army_east = create_mock_army(
         StartingDirection::EAST,
         &army_defaults,
-        vec!["north_watch_longbowmen"],
+        vec!["avian_cliff_dwellers"],
     )?;
 
     Ok((
@@ -122,6 +128,7 @@ impl From<&Army> for Battalion {
             agility: a.agility,
             speed: a.speed,
             is_marching: true,
+            is_reverse_direction: false,
         }
     }
 }

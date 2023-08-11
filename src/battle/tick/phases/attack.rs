@@ -13,40 +13,54 @@ pub fn attack_phase<'a, 'b>(
     attacker: &'b mut Vec<Battalion>,
     defender: &'b mut Vec<Battalion>,
 ) {
-    println!("INSIDE {attacker_map:?}");
     // For each attacker name in the map, if valid target, set marching=false and run attack sequence
     attacker_map.iter().for_each(|entry| {
         let (attacking_b_name, in_range_vec) = entry;
         let defending_b_name = in_range_vec.get(0);
+
+        // If no valid targets, march and early return
+        if defending_b_name.is_none() {
+            // TODO - Look into why this is necessary for air reversing, but not regular marching.
+            // Also necessary for tests passing
+            transition_to_march(attacking_b_name, attacker);
+            return;
+        }
 
         let mut a_battalion = attacker
             .iter_mut()
             .find(|battalion| battalion.name == *attacking_b_name)
             .unwrap();
 
+        let mut d_battalion = defender
+            .iter_mut()
+            .find(|battalion| battalion.name == *defending_b_name.unwrap())
+            .unwrap();
+
         // If any valid targets for the attacker, run attack sequence
-        if defending_b_name.is_some() {
-            let mut d_battalion = defender
-                .iter_mut()
-                .find(|battalion| {
-                    println!("{} {}", battalion.name, *defending_b_name.unwrap());
-                    battalion.name == *defending_b_name.unwrap()
-                })
-                .unwrap();
-
+        if d_battalion.count > 0 {
+            // if a_battalion.name == "Avian Cliff Dwellers" {
+            //     println!("They're attacking again!");
+            // }
             a_battalion.set_is_marching(false);
-
             run_attack_sequence(&mut a_battalion, &mut d_battalion);
         } else {
-            // If attacker had no valid targets (defenders), then army will march forward
-            let mut a_battalion = attacker
-                .iter_mut()
-                .find(|battalion| battalion.name == *attacking_b_name)
-                .unwrap();
-
-            a_battalion.set_is_marching(true);
+            transition_to_march(attacking_b_name, attacker);
         }
     });
+}
+
+fn transition_to_march(attacking_b_name: &String, attacker: &mut Vec<Battalion>) {
+    // If attacker had no valid targets (defenders), then army will march forward
+    let mut a_battalion = attacker
+        .iter_mut()
+        .find(|battalion| battalion.name == *attacking_b_name)
+        .unwrap();
+    // Flyers need to back track to continue finding armies that may have passed them underneath
+    if a_battalion.flying {
+        a_battalion.set_is_reverse_direction(true);
+    }
+
+    a_battalion.set_is_marching(true);
 }
 
 /**

@@ -1,17 +1,17 @@
 
-Winner (Eastern Army):
+Winner (Western Army):
 ----------------------
-North Watch Longbowmen - 1000 at position 95
+Imperial Legionnaires - 517 at position 150
 
-Loser (Western Army):
+Loser (Eastern Army):
 ----------------------
-Highborn Cavalry - 0 at position 20
+Avian Cliff Dwellers - 1000 at position 5
 
 
 
 BATTLE RESULTS:
 -------------
 Battle ID: 1
-Eastern Army Wins
-Army Conquered
-Tick Count: 19
+Western Army Wins
+King Captured
+Tick Count: 60
