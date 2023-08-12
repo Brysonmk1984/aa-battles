@@ -5,7 +5,7 @@ use crate::match_up::match_up::{Battalion, StartingDirection};
 use crate::BattleState;
 use std::collections::HashMap;
 
-pub fn run_tick(battle_state: &mut BattleState, total_combined_count: i32) -> i32 {
+pub fn run_tick(battle_state: &mut BattleState) -> i32 {
     let mut in_range_map_1: HashMap<String, Vec<&str>> = HashMap::new();
     let mut in_range_map_2: HashMap<String, Vec<&str>> = HashMap::new();
 

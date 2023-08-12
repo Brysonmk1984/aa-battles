@@ -91,7 +91,7 @@ pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
         if battle_result.tick_count > 300 {
             panic!("Infinite loop detected!");
         }
-        total_army_count = run_tick(battle_state, total_army_count);
+        total_army_count = run_tick(battle_state);
     }
 
     determine_army_conquered_condition(battle_result, a1_count, a2_count)
