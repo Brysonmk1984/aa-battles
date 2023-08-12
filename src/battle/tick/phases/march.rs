@@ -10,10 +10,6 @@ pub fn march_phase(army: &mut Vec<Battalion>, starting_direction: &StartingDirec
             };
 
             let marching_direction = if a.is_reverse_direction {
-                // println!(
-                //     "{} is marching in opposite direction now - {opposite_direction:?}",
-                //     a.name
-                // );
                 opposite_direction
             } else {
                 *starting_direction

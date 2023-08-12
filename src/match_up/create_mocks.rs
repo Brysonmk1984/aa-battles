@@ -44,14 +44,19 @@ pub fn create_mock_army(
                 return Err(MockError::InvalidArmyName);
             }
 
-            Ok(Battalion {
-                position: if army_direction == StartingDirection::WEST {
-                    -150
-                } else {
-                    150
-                },
-                ..Battalion::from(army.unwrap())
-            })
+            if army_direction == StartingDirection::WEST {
+                Ok(Battalion {
+                    position: -150,
+                    starting_direction: StartingDirection::WEST,
+                    ..Battalion::from(army.unwrap())
+                })
+            } else {
+                Ok(Battalion {
+                    position: 150,
+                    starting_direction: StartingDirection::EAST,
+                    ..Battalion::from(army.unwrap())
+                })
+            }
         })
         .collect();
 

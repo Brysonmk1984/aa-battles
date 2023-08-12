@@ -1,6 +1,6 @@
 use std::{collections::HashMap, ops::Deref};
 
-use crate::match_up::match_up::Battalion;
+use crate::match_up::match_up::{Battalion, StartingDirection};
 use rand::Rng;
 
 /**
@@ -18,45 +18,75 @@ pub fn attack_phase<'a, 'b>(
         let (attacking_b_name, in_range_vec) = entry;
         let defending_b_name = in_range_vec.get(0);
 
-        // If no valid targets, march and early return
-        if defending_b_name.is_none() {
-            // TODO - Look into why this is necessary for air reversing, but not regular marching.
-            // Also necessary for tests passing
-            transition_to_march(attacking_b_name, attacker);
-            return;
-        }
-
         let mut a_battalion = attacker
             .iter_mut()
             .find(|battalion| battalion.name == *attacking_b_name)
             .unwrap();
+
+        let has_past_all_defenders = determine_past_all_defenders(&a_battalion, &defender);
+
+        // If no valid targets, march and early return
+        if defending_b_name.is_none() {
+            transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
+            return;
+        }
 
         let mut d_battalion = defender
             .iter_mut()
             .find(|battalion| battalion.name == *defending_b_name.unwrap())
             .unwrap();
 
-        // If any valid targets for the attacker, run attack sequence
-        if d_battalion.count > 0 {
-            // if a_battalion.name == "Avian Cliff Dwellers" {
-            //     println!("They're attacking again!");
-            // }
-            a_battalion.set_is_marching(false);
-            run_attack_sequence(&mut a_battalion, &mut d_battalion);
-        } else {
-            transition_to_march(attacking_b_name, attacker);
+        // If defending battalion is already dead, from previous attacker_map iteration, march instead of attack
+        if d_battalion.count == 0 {
+            transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
+            return;
         }
+
+        // If any valid targets for the attacker, run attack sequence
+        a_battalion.set_is_marching(false);
+        run_attack_sequence(&mut a_battalion, &mut d_battalion);
     });
 }
 
-fn transition_to_march(attacking_b_name: &String, attacker: &mut Vec<Battalion>) {
+fn determine_past_all_defenders(attacker: &Battalion, defenders: &Vec<Battalion>) -> bool {
+    let attacker_is_west = attacker.starting_direction == StartingDirection::WEST;
+    let defender_is_west = !attacker_is_west;
+    let init = if defender_is_west { -150 } else { 150 };
+    // Min position is the furthest point back on the numberline, so for west it's a negative number, east it's positive
+    let defender_min_position = defenders.iter().fold(init, |mut min: i32, d| {
+        if d.count > 0 {
+            println!("{} {}", d.name, d.position);
+            if defender_is_west {
+                if d.position > min {
+                    min = d.position
+                }
+            } else {
+                if d.position < min {
+                    min = d.position
+                }
+            }
+        }
+
+        min
+    });
+
+    println!("IS WEST={defender_is_west}, {defender_min_position}");
+
+    if attacker_is_west {
+        attacker.position > defender_min_position
+    } else {
+        attacker.position < defender_min_position
+    }
+}
+
+fn transition_to_march(attacking_b_name: &String, attacker: &mut Vec<Battalion>, has_past: bool) {
     // If attacker had no valid targets (defenders), then army will march forward
     let mut a_battalion = attacker
         .iter_mut()
         .find(|battalion| battalion.name == *attacking_b_name)
         .unwrap();
     // Flyers need to back track to continue finding armies that may have passed them underneath
-    if a_battalion.flying {
+    if a_battalion.flying && has_past {
         a_battalion.set_is_reverse_direction(true);
     }
 

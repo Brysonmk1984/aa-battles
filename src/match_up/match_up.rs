@@ -2,12 +2,13 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-use crate::service::query::Army;
-
 use super::create_mocks::{create_mock_army, MockError};
+use crate::service::query::Army;
+use strum_macros::{Display, EnumString};
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub enum StartingDirection {
+    #[default]
     EAST,
     WEST,
 }
@@ -39,6 +40,7 @@ pub struct Battalion {
     pub agility: f64,
     pub speed: i32,
     pub is_marching: bool,
+    pub starting_direction: StartingDirection,
     pub is_reverse_direction: bool,
 }
 
@@ -65,7 +67,38 @@ impl Battalion {
         } else {
             self.position -= self.speed;
         }
+
+        if self.position < -150 || self.position > 150 {
+            panic!(
+                "{} are out of battlefield bounds - {}!",
+                self.name, self.position
+            );
+        }
     }
+}
+
+#[derive(Display)]
+pub enum ArmyNames {
+    #[strum(serialize = "amazonian_huntresses")]
+    AmazonianHuntresses,
+    #[strum(serialize = "avian_cliff_dwellers")]
+    AvianCliffDwellers,
+    #[strum(serialize = "amazonian_huntresses")]
+    HighbornCavalry,
+    #[strum(serialize = "imperial_legionnaires")]
+    ImperialLegionnaires,
+    #[strum(serialize = "magi_enforcers")]
+    MagiEnforcers,
+    #[strum(serialize = "north_watch_longbowmen")]
+    NorthWatchLongbowmen,
+    #[strum(serialize = "peacekeeper_monks")]
+    PeacekeeperMonks,
+    #[strum(serialize = "ronin_immortals")]
+    RoninImmortals,
+    #[strum(serialize = "shinobi_assassins")]
+    ShinobiAssassins,
+    #[strum(serialize = "skull_clan_death_cultists")]
+    SkullClanDeathCultists,
 }
 
 // Full Army a user will use to battle
@@ -89,14 +122,20 @@ pub fn get_battle_tuple(
     let full_army_west = create_mock_army(
         StartingDirection::WEST,
         &army_defaults,
-        vec!["imperial_legionnaires"],
+        vec![
+            "imperial_legionnaires",
+            "shinobi_assassins",
+            "amazonian_huntresses",
+            "peacekeeper_monks",
+            "ronin_immortals",
+        ],
     )?;
 
     // TODO: In the future, we need to replace this with the user's army saved in a new db table
     let full_army_east = create_mock_army(
         StartingDirection::EAST,
         &army_defaults,
-        vec!["avian_cliff_dwellers"],
+        vec!["avian_cliff_dwellers", "north_watch_longbowmen"],
     )?;
 
     Ok((
@@ -128,6 +167,7 @@ impl From<&Army> for Battalion {
             agility: a.agility,
             speed: a.speed,
             is_marching: true,
+            starting_direction: StartingDirection::EAST,
             is_reverse_direction: false,
         }
     }
