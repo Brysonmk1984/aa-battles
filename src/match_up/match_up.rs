@@ -47,13 +47,6 @@ pub struct Battalion {
 
 impl Battalion {
     pub fn decrement(&mut self, attacker_aoe: f64) {
-        // if attacker_aoe > 0.0 {
-        //     println!(
-        //         "HAS AOE - {attacker_aoe}, vs spread {} = hits {}",
-        //         self.spread,
-        //         determine_aoe_effect(attacker_aoe, self.spread)
-        //     );
-        // }
         let hits = determine_aoe_effect(attacker_aoe, self.spread);
         self.count -= hits as i32;
     }
@@ -225,15 +218,57 @@ pub mod test {
     }
 
     #[test]
-    fn should_decrease_count_by_one() {
+    fn should_decrease_count_by_one_normal_attack() {
         let partial_mock_battalion: PartialBattalionForTests = Default::default();
+        let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
+
+        let test_battalion_ref = test_army.get_mut(0).unwrap();
+        let attacking_army_aoe = 0.0;
+        assert_eq!(test_battalion_ref.count, 1000);
+        test_battalion_ref.decrement(attacking_army_aoe);
+        assert_eq!(test_battalion_ref.count, 999);
+    }
+
+    #[test]
+    fn should_decrease_count_by_five_aoe_attack_normal_spread() {
+        let partial_mock_battalion = PartialBattalionForTests {
+            aoe: None,
+            count: None,
+            position: None,
+            speed: None,
+            flying: None,
+            range: None,
+            spread: Some(1.0),
+        };
+
         let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
 
         let test_battalion_ref = test_army.get_mut(0).unwrap();
 
         assert_eq!(test_battalion_ref.count, 1000);
-        test_battalion_ref.decrement();
-        assert_eq!(test_battalion_ref.count, 999);
+        test_battalion_ref.decrement(1.0);
+        assert_eq!(test_battalion_ref.count, 995);
+    }
+
+    #[test]
+    fn should_decrease_count_by_two_aoe_attack_extra_spread() {
+        let partial_mock_battalion = PartialBattalionForTests {
+            aoe: None,
+            count: None,
+            position: None,
+            speed: None,
+            flying: None,
+            range: None,
+            spread: Some(2.0),
+        };
+
+        let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
+
+        let test_battalion_ref = test_army.get_mut(0).unwrap();
+
+        assert_eq!(test_battalion_ref.count, 1000);
+        test_battalion_ref.decrement(1.0);
+        assert_eq!(test_battalion_ref.count, 998);
     }
 
     #[test]

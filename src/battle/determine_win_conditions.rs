@@ -77,6 +77,8 @@ mod tests {
             speed: None,
             flying: Some(false),
             range: None,
+            aoe: None,
+            spread: None,
         };
         // Air Army
         let mock_partial_battalion_2 = PartialBattalionForTests {
@@ -85,6 +87,8 @@ mod tests {
             speed: None,
             flying: Some(true),
             range: None,
+            aoe: None,
+            spread: None,
         };
 
         let battle_state = BattleState {

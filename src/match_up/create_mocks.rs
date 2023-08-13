@@ -70,6 +70,8 @@ pub struct PartialBattalionForTests {
     pub speed: Option<i32>,
     pub flying: Option<bool>,
     pub range: Option<i32>,
+    pub aoe: Option<f64>,
+    pub spread: Option<f64>,
 }
 
 pub fn create_mock_generic_battalion(partial_battalion: PartialBattalionForTests) -> Battalion {
@@ -78,7 +80,9 @@ pub fn create_mock_generic_battalion(partial_battalion: PartialBattalionForTests
         speed: partial_battalion.speed.or(Some(5)).unwrap(),
         count: partial_battalion.count.or(Some(1000)).unwrap(),
         position: partial_battalion.position.or(Some(150)).unwrap(),
+        aoe: partial_battalion.aoe.or(Some(0.0)).unwrap(),
         is_marching: true,
+        spread: partial_battalion.spread.or(Some(1.0)).unwrap(),
         flying: partial_battalion.flying.or(Some(false)).unwrap(),
         ..Default::default()
     };
