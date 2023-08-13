@@ -34,7 +34,8 @@ pub struct Battalion {
     pub range: i32,
     pub attack_speed: f64,
     pub accuracy: f64,
-    pub aoe: bool,
+    pub aoe: f64,
+    pub spread: f64,
     pub weapon_type: String,
     pub armor_type: String,
     pub agility: f64,
@@ -45,7 +46,7 @@ pub struct Battalion {
 }
 
 impl Battalion {
-    pub fn decrement(&mut self) {
+    pub fn decrement(&mut self, attacker_spread: f64) {
         self.count -= 1;
     }
 
@@ -162,6 +163,7 @@ impl From<&Army> for Battalion {
             attack_speed: a.attack_speed,
             accuracy: a.accuracy,
             aoe: a.aoe,
+            spread: a.spread,
             weapon_type: a.weapon_type.clone(),
             armor_type: a.armor_type.clone(),
             agility: a.agility,

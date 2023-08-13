@@ -34,7 +34,10 @@ pub struct Army {
     pub attack_speed: f64,
     #[serde(deserialize_with = "as_f64")]
     pub accuracy: f64,
-    pub aoe: bool,
+    #[serde(deserialize_with = "as_f64")]
+    pub aoe: f64,
+    #[serde(deserialize_with = "as_f64")]
+    pub spread: f64,
     pub weapon_type: String,
     pub armor_type: String,
     #[serde(deserialize_with = "as_f64")]

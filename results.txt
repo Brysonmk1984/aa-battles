@@ -1,22 +1,22 @@
 
-Winner (Eastern Army):
+Winner (Western Army):
 ----------------------
-Avian Cliff Dwellers - 1000 at position 60
-North Watch Longbowmen - 237 at position 70
+Imperial Legionnaires - 230 at position 150
+Shinobi Assassins - 0 at position 0
+Amazonian Huntresses - 0 at position 50
+Peacekeeper Monks - 0 at position 45
+Rōnin Immortals - 0 at position 5
 
-Loser (Western Army):
+Loser (Eastern Army):
 ----------------------
-Imperial Legionnaires - 0 at position 65
-Shinobi Assassins - 0 at position 30
-Amazonian Huntresses - 0 at position 10
-Peacekeeper Monks - 0 at position -20
-Rōnin Immortals - 0 at position 50
+Avian Cliff Dwellers - 1000 at position 135
+North Watch Longbowmen - 0 at position 65
 
 
 
 BATTLE RESULTS:
 -------------
 Battle ID: 1
-Eastern Army Wins
-Army Conquered
-Tick Count: 48
+Western Army Wins
+King Captured
+Tick Count: 63

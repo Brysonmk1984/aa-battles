@@ -122,7 +122,7 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
         }
 
         // Defending battalion loses a member
-        defender.decrement();
+        defender.decrement(attacker.aoe);
     }
 }
 

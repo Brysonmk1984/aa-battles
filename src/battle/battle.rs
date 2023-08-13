@@ -48,12 +48,6 @@ pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
     });
     let mut total_army_count = a1_count + a2_count;
 
-    let (mut winner, mut loser, mut condition): (
-        Option<Belligerent>,
-        Option<Belligerent>,
-        Option<WinType>,
-    ) = (None, None, None);
-
     let mut battle_result = BattleResult {
         id: 1,
         winner: None,
