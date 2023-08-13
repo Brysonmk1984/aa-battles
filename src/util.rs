@@ -17,3 +17,67 @@ pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<&'static str
 
     army_defaults_hash
 }
+
+use std::sync::OnceLock;
+
+// static AOE_MAP_1M_SPREAD_CELL: OnceLock<HashMap<f64, i8>> = OnceLock::new();
+
+pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
+    if spread == 1.0 {
+        if aoe == 0.0 {
+            1
+        } else if aoe == 0.5 {
+            2
+        } else if aoe == 1.0 {
+            5
+        } else if aoe == 1.5 {
+            9
+        } else if aoe == 2.0 {
+            13
+        } else if aoe == 2.5 {
+            20
+        } else if aoe == 3.0 {
+            33
+        } else {
+            panic!("Unsupported AOE value! {} for spread {}", aoe, spread);
+        }
+    } else if spread == 2.0 {
+        if aoe == 0.0 {
+            1
+        } else if aoe == 0.5 {
+            1
+        } else if aoe == 1.0 {
+            2
+        } else if aoe == 1.5 {
+            3
+        } else if aoe == 2.0 {
+            5
+        } else if aoe == 2.5 {
+            7
+        } else if aoe == 3.0 {
+            9
+        } else {
+            panic!("Unsupported AOE value! {} for spread {}", aoe, spread);
+        }
+    } else if spread == 3.0 {
+        if aoe == 0.0 {
+            1
+        } else if aoe == 0.5 {
+            1
+        } else if aoe == 1.0 {
+            1
+        } else if aoe == 1.5 {
+            2
+        } else if aoe == 2.0 {
+            2
+        } else if aoe == 2.5 {
+            3
+        } else if aoe == 3.0 {
+            5
+        } else {
+            panic!("Unsupported AOE value! {} for spread {}", aoe, spread);
+        }
+    } else {
+        panic!("Unsupported Spread value! - {spread}");
+    }
+}

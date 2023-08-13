@@ -44,3 +44,10 @@ pub struct Army {
     pub agility: f64,
     pub speed: i32,
 }
+
+// #[derive(Debug, serde::Deserialize)]
+// pub enum Spread {
+//     OneMeter,
+//     TwoMeter,
+//     ThreeMeter,
+// }

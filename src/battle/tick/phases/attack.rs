@@ -55,7 +55,7 @@ fn determine_past_all_defenders(attacker: &Battalion, defenders: &Vec<Battalion>
     // Min position is the furthest point back on the numberline, so for west it's a negative number, east it's positive
     let defender_min_position = defenders.iter().fold(init, |mut min: i32, d| {
         if d.count > 0 {
-            println!("{} {}", d.name, d.position);
+            //println!("{} {}", d.name, d.position);
             if defender_is_west {
                 if d.position > min {
                     min = d.position
@@ -70,7 +70,7 @@ fn determine_past_all_defenders(attacker: &Battalion, defenders: &Vec<Battalion>
         min
     });
 
-    println!("IS WEST={defender_is_west}, {defender_min_position}");
+    //println!("IS WEST={defender_is_west}, {defender_min_position}");
 
     if attacker_is_west {
         attacker.position > defender_min_position

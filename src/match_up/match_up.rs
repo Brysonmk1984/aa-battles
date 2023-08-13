@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use super::create_mocks::{create_mock_army, MockError};
-use crate::service::query::Army;
+use crate::{service::query::Army, util::determine_aoe_effect};
 use strum_macros::{Display, EnumString};
 
 #[derive(Clone, Copy, Debug, PartialEq, Default, Serialize, Deserialize)]
@@ -46,8 +46,16 @@ pub struct Battalion {
 }
 
 impl Battalion {
-    pub fn decrement(&mut self, attacker_spread: f64) {
-        self.count -= 1;
+    pub fn decrement(&mut self, attacker_aoe: f64) {
+        // if attacker_aoe > 0.0 {
+        //     println!(
+        //         "HAS AOE - {attacker_aoe}, vs spread {} = hits {}",
+        //         self.spread,
+        //         determine_aoe_effect(attacker_aoe, self.spread)
+        //     );
+        // }
+        let hits = determine_aoe_effect(attacker_aoe, self.spread);
+        self.count -= hits as i32;
     }
 
     pub fn set_is_marching(&mut self, value: bool) {
@@ -125,10 +133,10 @@ pub fn get_battle_tuple(
         &army_defaults,
         vec![
             "imperial_legionnaires",
-            "shinobi_assassins",
-            "amazonian_huntresses",
-            "peacekeeper_monks",
-            "ronin_immortals",
+            // "shinobi_assassins",
+            // "amazonian_huntresses",
+            // "peacekeeper_monks",
+            // "ronin_immortals",
         ],
     )?;
 
@@ -136,7 +144,11 @@ pub fn get_battle_tuple(
     let full_army_east = create_mock_army(
         StartingDirection::EAST,
         &army_defaults,
-        vec!["avian_cliff_dwellers", "north_watch_longbowmen"],
+        vec![
+            // "avian_cliff_dwellers",
+            // "north_watch_longbowmen",
+            "skull_clan_death_cultists",
+        ],
     )?;
 
     Ok((
