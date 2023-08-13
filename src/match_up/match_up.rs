@@ -47,8 +47,13 @@ pub struct Battalion {
 
 impl Battalion {
     pub fn decrement(&mut self, attacker_aoe: f64) {
-        let hits = determine_aoe_effect(attacker_aoe, self.spread);
-        self.count -= hits as i32;
+        let hits = determine_aoe_effect(attacker_aoe, self.spread) as i32;
+        let new_count = self.count - hits;
+        if new_count > 0 {
+            self.count = new_count;
+        } else {
+            self.count = 0;
+        }
     }
 
     pub fn set_is_marching(&mut self, value: bool) {

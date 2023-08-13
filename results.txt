@@ -1,11 +1,11 @@
 
 Winner (Eastern Army):
 ----------------------
-Skull Clan Death Cultists - 1000 at position 45
+Skull Clan Death Cultists - 500 at position 45
 
 Loser (Western Army):
 ----------------------
-Imperial Legionnaires - 0 at position -15
+Imperial Legionnaires - 0 at position -40
 
 
 
@@ -14,4 +14,4 @@ BATTLE RESULTS:
 Battle ID: 1
 Eastern Army Wins
 Army Conquered
-Tick Count: 29
+Tick Count: 24
