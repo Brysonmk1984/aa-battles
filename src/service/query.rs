@@ -30,8 +30,7 @@ pub struct Army {
     pub shield_rating: f64,
     pub flying: bool,
     pub range: i32,
-    #[serde(deserialize_with = "as_f64")]
-    pub attack_speed: f64,
+    pub attack_speed: i32,
     #[serde(deserialize_with = "as_f64")]
     pub accuracy: f64,
     #[serde(deserialize_with = "as_f64")]

@@ -93,6 +93,13 @@ fn transition_to_march(attacking_b_name: &String, attacker: &mut Vec<Battalion>,
     a_battalion.set_is_marching(true);
 }
 
+#[derive(PartialEq)]
+enum EngagementOutcome {
+    Dodged,
+    Blocked,
+    Hit,
+}
+
 /**
 * fn run_attack_sequence -
    Parent function for running functions related to an attack: try_dodge, try_block, decrement
@@ -100,30 +107,40 @@ fn transition_to_march(attacking_b_name: &String, attacker: &mut Vec<Battalion>,
 fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
     // Do one attack attempt for each member of a battalion
     for n in 0..attacker.count {
-        if defender.count == 0 {
-            return;
-        }
+        for a in 0..attacker.attack_speed {
+            if defender.count == 0 {
+                return;
+            }
 
-        let has_dodged_attack = try_dodge(
-            attacker.accuracy,
-            defender.agility,
-            defender.is_marching,
-            || rand::thread_rng().gen_range(0..100),
-        );
-        if has_dodged_attack {
-            continue;
-        }
+            let result = run_engagement_steps(attacker, defender);
 
-        let has_blocked_attack = try_block(defender.shield_rating, || {
-            rand::thread_rng().gen_range(0..100)
-        });
-        if has_blocked_attack {
-            continue;
+            if result == EngagementOutcome::Hit {
+                // Defending battalion loses a member or more depending on aoe
+                defender.decrement(attacker.aoe);
+            }
         }
-
-        // Defending battalion loses a member
-        defender.decrement(attacker.aoe);
     }
+}
+
+fn run_engagement_steps(attacker: &mut Battalion, defender: &mut Battalion) -> EngagementOutcome {
+    let has_dodged_attack = try_dodge(
+        attacker.accuracy,
+        defender.agility,
+        defender.is_marching,
+        || rand::thread_rng().gen_range(0..100),
+    );
+    if has_dodged_attack {
+        return EngagementOutcome::Dodged;
+    }
+
+    let has_blocked_attack = try_block(defender.shield_rating, || {
+        rand::thread_rng().gen_range(0..100)
+    });
+    if has_blocked_attack {
+        return EngagementOutcome::Blocked;
+    }
+
+    return EngagementOutcome::Hit;
 }
 
 /**

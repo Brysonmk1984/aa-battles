@@ -32,7 +32,7 @@ pub struct Battalion {
     pub shield_rating: f64,
     pub flying: bool,
     pub range: i32,
-    pub attack_speed: f64,
+    pub attack_speed: i32,
     pub accuracy: f64,
     pub aoe: f64,
     pub spread: f64,
@@ -130,8 +130,8 @@ pub fn get_battle_tuple(
         StartingDirection::WEST,
         &army_defaults,
         vec![
-            "imperial_legionnaires",
-            // "shinobi_assassins",
+            //"imperial_legionnaires",
+            "shinobi_assassins",
             // "amazonian_huntresses",
             // "peacekeeper_monks",
             // "ronin_immortals",
@@ -145,7 +145,8 @@ pub fn get_battle_tuple(
         vec![
             // "avian_cliff_dwellers",
             // "north_watch_longbowmen",
-            "skull_clan_death_cultists",
+            //"skull_clan_death_cultists",
+            "imperial_legionnaires",
         ],
     )?;
 
