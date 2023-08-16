@@ -1,11 +1,11 @@
 
 Winner (Eastern Army):
 ----------------------
-Imperial Legionnaires - 706 at position 0
+Imperial Legionnaires - 516 at position 45
 
 Loser (Western Army):
 ----------------------
-Shinobi Assassins - 0 at position 0
+Peacekeeper Monks - 0 at position 50
 
 
 
@@ -14,4 +14,4 @@ BATTLE RESULTS:
 Battle ID: 1
 Eastern Army Wins
 Army Conquered
-Tick Count: 32
+Tick Count: 24

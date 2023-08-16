@@ -17,7 +17,7 @@ mod match_up;
 mod service;
 mod util;
 
-pub const MIN_RANGE_ATTACK_AIR: i32 = 15;
+pub const MIN_RANGE_ATTACK_AIR: i32 = 20;
 
 #[derive(Debug)]
 pub struct BattleState {

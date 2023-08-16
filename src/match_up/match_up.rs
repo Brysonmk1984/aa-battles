@@ -3,7 +3,10 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use super::create_mocks::{create_mock_army, MockError};
-use crate::{service::query::Army, util::determine_aoe_effect};
+use crate::{
+    service::query::{ArmorType, Army, WeaponType},
+    util::determine_aoe_effect,
+};
 use strum_macros::{Display, EnumString};
 
 #[derive(Clone, Copy, Debug, PartialEq, Default, Serialize, Deserialize)]
@@ -36,8 +39,8 @@ pub struct Battalion {
     pub accuracy: f64,
     pub aoe: f64,
     pub spread: f64,
-    pub weapon_type: String,
-    pub armor_type: String,
+    pub weapon_type: WeaponType,
+    pub armor_type: ArmorType,
     pub agility: f64,
     pub speed: i32,
     pub is_marching: bool,
@@ -175,8 +178,8 @@ impl From<&Army> for Battalion {
             accuracy: a.accuracy,
             aoe: a.aoe,
             spread: a.spread,
-            weapon_type: a.weapon_type.clone(),
-            armor_type: a.armor_type.clone(),
+            weapon_type: a.weapon_type,
+            armor_type: a.armor_type,
             agility: a.agility,
             speed: a.speed,
             is_marching: true,

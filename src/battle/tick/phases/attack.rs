@@ -1,6 +1,9 @@
 use std::{collections::HashMap, ops::Deref};
 
-use crate::match_up::match_up::{Battalion, StartingDirection};
+use crate::{
+    match_up::match_up::{Battalion, StartingDirection},
+    service::query::{ArmorType, WeaponType},
+};
 use rand::Rng;
 
 /**
@@ -97,6 +100,7 @@ fn transition_to_march(attacking_b_name: &String, attacker: &mut Vec<Battalion>,
 enum EngagementOutcome {
     Dodged,
     Blocked,
+    ArmorSaved,
     Hit,
 }
 
@@ -133,11 +137,19 @@ fn run_engagement_steps(attacker: &mut Battalion, defender: &mut Battalion) -> E
         return EngagementOutcome::Dodged;
     }
 
-    let has_blocked_attack = try_block(defender.shield_rating, || {
-        rand::thread_rng().gen_range(0..100)
-    });
+    let has_blocked_attack = try_block(
+        defender.shield_rating,
+        attacker.weapon_type != WeaponType::Magic,
+        || rand::thread_rng().gen_range(0..100),
+    );
     if has_blocked_attack {
         return EngagementOutcome::Blocked;
+    }
+
+    let saved_by_armor = try_armor_defense(defender.armor_type, attacker.weapon_type);
+
+    if saved_by_armor {
+        return EngagementOutcome::ArmorSaved;
     }
 
     return EngagementOutcome::Hit;
@@ -167,11 +179,23 @@ pub fn try_dodge(
 * fn try_block -
    Checks if an attack is dodged. Only shielded defenders have a chance to block
 */
-pub fn try_block(d_shield_rating: f64, randomizer_func: impl Fn() -> u64) -> bool {
+pub fn try_block(
+    d_shield_rating: f64,
+    is_valid_attack_to_block: bool,
+    randomizer_func: impl Fn() -> u64,
+) -> bool {
+    if !is_valid_attack_to_block {
+        return false;
+    }
+
     let chance_to_block = (d_shield_rating * 100.0) as u64;
     let random_block_num = randomizer_func();
 
     chance_to_block > random_block_num
+}
+
+pub fn try_armor_defense(armor: ArmorType, weapon: WeaponType) -> bool {
+    return false;
 }
 
 #[cfg(test)]
@@ -229,7 +253,7 @@ mod tests {
     fn try_block_pass() {
         let d_shield_rating = 0.4;
         let randomizer_func = || 39;
-        let successfully_blocked = try_block(d_shield_rating, randomizer_func);
+        let successfully_blocked = try_block(d_shield_rating, true, randomizer_func);
         assert!(successfully_blocked);
     }
 
@@ -237,7 +261,7 @@ mod tests {
     fn try_block_fail() {
         let d_shield_rating = 0.4;
         let randomizer_func = || 41;
-        let successfully_blocked = try_block(d_shield_rating, randomizer_func);
+        let successfully_blocked = try_block(d_shield_rating, true, randomizer_func);
         assert_eq!(successfully_blocked, false);
     }
 }
