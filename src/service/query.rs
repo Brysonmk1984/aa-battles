@@ -2,7 +2,7 @@ use std::{env, error::Error};
 
 use serde::{Deserialize, Serialize};
 use serde_this_or_that::as_f64;
-use strum_macros::EnumString;
+use strum_macros::{Display, EnumString};
 
 pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> /*Vec<Army>*/ {
     let body = reqwest::get(
@@ -45,7 +45,7 @@ pub struct Army {
     pub speed: i32,
 }
 #[serde(rename_all = "snake_case")]
-#[derive(Debug, Clone, Copy, Default, Deserialize, Serialize, EnumString, PartialEq)]
+#[derive(Debug, Clone, Copy, Default, Display, Deserialize, Serialize, EnumString, PartialEq)]
 pub enum WeaponType {
     Blunt,
     #[default]
@@ -56,7 +56,7 @@ pub enum WeaponType {
 }
 
 #[serde(rename_all = "snake_case")]
-#[derive(Debug, Clone, Copy, Default, Deserialize, Serialize, EnumString, PartialEq)]
+#[derive(Debug, Display, Clone, Copy, Default, Deserialize, Serialize, EnumString, PartialEq)]
 pub enum ArmorType {
     #[default]
     Unarmored,

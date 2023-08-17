@@ -18,10 +18,6 @@ pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<&'static str
     army_defaults_hash
 }
 
-use std::sync::OnceLock;
-
-// static AOE_MAP_1M_SPREAD_CELL: OnceLock<HashMap<f64, i8>> = OnceLock::new();
-
 pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
     if spread == 1.0 {
         if aoe == 0.0 {
@@ -80,4 +76,34 @@ pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
     } else {
         panic!("Unsupported Spread value! - {spread}");
     }
+}
+
+use std::sync::OnceLock;
+
+pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<&str, f64>> = OnceLock::new();
+
+pub fn set_weapon_armor_hash() {
+    let map = HashMap::from([
+        ("Piercing-Unarmored", 1.0),
+        ("Piercing-Leather", 0.5),
+        ("Piercing-Chain", 0.5),
+        ("Piercing-Plate", 0.25),
+        ("Crushing-Unarmored", 0.25),
+        ("Crushing-Leather", 0.50),
+        ("Crushing-Chain", 0.75),
+        ("Crushing-Plate", 1.0),
+        ("Blunt-Unarmored", 0.75),
+        ("Blunt-Leather", 0.75),
+        ("Blunt-Chain", 0.75),
+        ("Blunt-Plate", 0.25),
+        ("Edged-Unarmored", 1.0),
+        ("Edged-Leather", 0.75),
+        ("Edged-Chain", 0.5),
+        ("Edged-Plate", 0.25),
+        ("Magic-Unarmored", 0.25),
+        ("Magic-Leather", 0.50),
+        ("Magic-Chain", 1.0),
+        ("Magic-Plate", 0.75),
+    ]);
+    WEAPON_ARMOR_CELL.set(map);
 }

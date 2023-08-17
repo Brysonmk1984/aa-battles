@@ -9,7 +9,7 @@ use crate::{
     format_results::format_battle_state,
     match_up::{create_mocks::create_mock_army_defaults, match_up::get_battle_tuple},
     service::query::Army,
-    util::create_hash_of_defaults,
+    util::{create_hash_of_defaults, set_weapon_armor_hash, WEAPON_ARMOR_CELL},
 };
 mod battle;
 mod format_results;
@@ -29,6 +29,9 @@ pub struct BattleState {
 async fn main() -> Result<()> {
     color_eyre::install()?;
     dotenvy::dotenv().ok();
+
+    let weapon_armor_defaults = set_weapon_armor_hash();
+
     let mut army_defaults = query::get_all_armies().await.unwrap();
     army_defaults.sort_by(|a, b| a.name.cmp(&b.name));
     let mut army_defaults_hash: HashMap<&str, Army> = create_hash_of_defaults(army_defaults);

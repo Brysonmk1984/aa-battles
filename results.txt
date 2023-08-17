@@ -1,11 +1,11 @@
 
 Winner (Eastern Army):
 ----------------------
-Imperial Legionnaires - 516 at position 45
+Imperial Legionnaires - 750 at position 45
 
 Loser (Western Army):
 ----------------------
-Peacekeeper Monks - 0 at position 50
+Outter Steppe Barbarians - 0 at position 50
 
 
 
@@ -14,4 +14,4 @@ BATTLE RESULTS:
 Battle ID: 1
 Eastern Army Wins
 Army Conquered
-Tick Count: 24
+Tick Count: 26

@@ -3,9 +3,10 @@ use std::{collections::HashMap, ops::Deref};
 use crate::{
     match_up::match_up::{Battalion, StartingDirection},
     service::query::{ArmorType, WeaponType},
+    util::WEAPON_ARMOR_CELL,
 };
 use rand::Rng;
-
+use std::string::ToString;
 /**
 * fn attack_phase -
     Loops through every available field in the attacker_map and for each one, checks the list of possible targets (the defender vec)
@@ -195,7 +196,29 @@ pub fn try_block(
 }
 
 pub fn try_armor_defense(armor: ArmorType, weapon: WeaponType) -> bool {
-    return false;
+    let weapon_armor_map = WEAPON_ARMOR_CELL.get().unwrap();
+    let weapon_armor_combo = weapon.to_string() + "-" + armor.to_string().as_str();
+
+    let chance_to_hit_option = weapon_armor_map.get(weapon_armor_combo.as_str());
+
+    if let Some(hit_float) = chance_to_hit_option {
+        let random_attack_num = rand::thread_rng().gen_range(0..100);
+        println!(
+            "{weapon_armor_combo} {random_attack_num} {}  {}",
+            (*hit_float * 100.0).round(),
+            random_attack_num > (*hit_float * 100.0).round() as i64
+        );
+        if random_attack_num > (*hit_float * 100.0).round() as i64 {
+            // Successful hit, unsuccessful armor defense
+            return false;
+        } else {
+            return true;
+        }
+
+        return false;
+    } else {
+        panic!("WeaponType-ArmorType not supported! {weapon_armor_combo}")
+    }
 }
 
 #[cfg(test)]
