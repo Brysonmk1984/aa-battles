@@ -1,10 +1,10 @@
 use std::{env, error::Error};
 
-use serde::{Deserialize, Serialize};
+use serde::{de::IntoDeserializer, Deserialize, Deserializer, Serialize};
 use serde_this_or_that::as_f64;
 use strum_macros::{Display, EnumString};
 
-pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> /*Vec<Army>*/ {
+pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> {
     let body = reqwest::get(
         env::var("API_URL").expect("API_URL environment variable should exist but is missing"),
     )
@@ -24,7 +24,7 @@ pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> /*Vec<Army>*/
 #[derive(Deserialize, Serialize, Debug, Clone, Default)]
 pub struct Army {
     pub id: i32,
-    pub name: String,
+    pub name: ArmyName,
     pub lore: String,
     pub count: i32,
     #[serde(deserialize_with = "as_f64")]
@@ -44,6 +44,68 @@ pub struct Army {
     pub agility: f64,
     pub speed: i32,
 }
+
+#[derive(Display, Debug, Clone, Default, Deserialize, Serialize, EnumString, PartialEq)]
+pub enum ArmyName {
+    #[serde(rename = "Amazonian Huntresses")]
+    #[strum(serialize = "amazonian_huntresses")]
+    AmazonianHuntresses,
+    #[serde(rename = "Avian Cliff Dwellers")]
+    #[strum(serialize = "avian_cliff_dwellers")]
+    AvianCliffDwellers,
+    #[serde(rename = "Highborn Cavalry")]
+    #[strum(serialize = "highborn_cavalry")]
+    HighbornCavalry,
+    #[serde(rename = "Imperial Legionnaires")]
+    #[strum(serialize = "imperial_legionnaires")]
+    ImperialLegionnaires,
+    #[serde(rename = "Magi Enforcers")]
+    #[strum(serialize = "magi_enforcers")]
+    MagiEnforcers,
+    #[serde(rename = "North Watch Longbowmen")]
+    #[strum(serialize = "north_watch_longbowmen")]
+    NorthWatchLongbowmen,
+    #[serde(rename = "Peacekeeper Monks")]
+    #[strum(serialize = "peacekeeper_monks")]
+    PeacekeeperMonks,
+    #[serde(rename = "Rōnin Immortals")]
+    #[strum(serialize = "ronin_immortals")]
+    RoninImmortals,
+    #[serde(rename = "Shinobi Martial Artists")]
+    #[strum(serialize = "shinobi_martial_artists")]
+    ShinobiMartialArtists,
+    #[serde(rename = "Skull Clan Death Cultists")]
+    #[strum(serialize = "skull_clan_death_cultists")]
+    SkullClanDeathCultists,
+    #[serde(rename = "Outer Steppe Barbarians")]
+    #[strum(serialize = "outer_steppe_barbarians")]
+    OuterSteppeBarbarians,
+    #[serde(rename = "Oath-Sworn Knights")]
+    #[strum(serialize = "oath-sworn_knights")]
+    OathSwornKnights,
+    #[default]
+    #[serde(rename = "Militia")]
+    #[strum(serialize = "militia")]
+    Militia,
+    #[serde(rename = "Hooded Assassins")]
+    #[strum(serialize = "hooded_assassins")]
+    HoodedAssassins,
+}
+
+// impl<'de> Deserialize<'de> for ArmyName {
+//     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+//     where
+//         D: Deserializer<'de>,
+//     {
+//         let s = String::deserialize(deserializer)?;
+//         if s == "Peacekeeper Monks" {
+//             Ok(ArmyName::PeacekeeperMonks)
+//         } else {
+//             ArmyName::deserialize(s.into_deserializer())
+//         }
+//     }
+// }
+
 #[serde(rename_all = "snake_case")]
 #[derive(Debug, Clone, Copy, Default, Display, Deserialize, Serialize, EnumString, PartialEq)]
 pub enum WeaponType {

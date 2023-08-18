@@ -33,7 +33,8 @@ async fn main() -> Result<()> {
     let weapon_armor_defaults = set_weapon_armor_hash();
 
     let mut army_defaults = query::get_all_armies().await.unwrap();
-    army_defaults.sort_by(|a, b| a.name.cmp(&b.name));
+
+    army_defaults.sort_by(|a, b| a.name.to_string().cmp(&b.name.to_string()));
     let mut army_defaults_hash: HashMap<&str, Army> = create_hash_of_defaults(army_defaults);
 
     let mut battle_tuple =

@@ -6,15 +6,15 @@ use crate::BattleState;
 use std::collections::HashMap;
 
 pub fn run_tick(battle_state: &mut BattleState) -> i32 {
-    let mut in_range_map_1: HashMap<String, Vec<&str>> = HashMap::new();
-    let mut in_range_map_2: HashMap<String, Vec<&str>> = HashMap::new();
+    let mut in_range_map_1: HashMap<String, Vec<String>> = HashMap::new();
+    let mut in_range_map_2: HashMap<String, Vec<String>> = HashMap::new();
 
     battle_state.army_1_state.iter().for_each(|army| {
-        in_range_map_1.insert(army.name.clone(), Vec::new());
+        in_range_map_1.insert(army.name.to_string(), Vec::new());
     });
 
     battle_state.army_2_state.iter().for_each(|army| {
-        in_range_map_2.insert(army.name.clone(), vec![]);
+        in_range_map_2.insert(army.name.to_string(), vec![]);
     });
 
     // TODO: Figure out way to handle this where cloning isn't needed to satisfy borrow checker

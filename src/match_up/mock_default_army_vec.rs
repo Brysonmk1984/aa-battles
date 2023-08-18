@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use crate::{
-    service::query::{ArmorType, Army, WeaponType},
+    service::query::{ArmorType, Army, ArmyName, WeaponType},
     util::create_hash_of_defaults,
 };
 
@@ -9,7 +9,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
     let mut vec_of_mock_defaults = vec![
         Army {
             id: 7,
-            name: "Amazonian Huntresses".to_string(),
+            name: ArmyName::AmazonianHuntresses,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
@@ -26,7 +26,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 8,
-            name: "Avian Cliff Dwellers".to_string(),
+            name: ArmyName::AvianCliffDwellers,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.26,
@@ -43,7 +43,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 4,
-            name: "Highborn Cavalry".to_string(),
+            name: ArmyName::HighbornCavalry,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.5,
@@ -60,7 +60,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 2,
-            name: "Imperial Legionnaires".to_string(),
+            name: ArmyName::ImperialLegionnaires,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.75,
@@ -77,7 +77,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 9,
-            name: "Magi Enforcers".to_string(),
+            name: ArmyName::MagiEnforcers,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
@@ -94,7 +94,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 3,
-            name: "North Watch Longbowmen".to_string(),
+            name: ArmyName::NorthWatchLongbowmen,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
@@ -111,7 +111,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 1,
-            name: "Peacekeeper Monks".to_string(),
+            name: ArmyName::PeacekeeperMonks,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
@@ -128,7 +128,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 5,
-            name: "Rōnin Immortals".to_string(),
+            name: ArmyName::RoninImmortals,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
@@ -145,7 +145,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 6,
-            name: "Shinobi Assassins".to_string(),
+            name: ArmyName::ShinobiMartialArtists,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
@@ -162,7 +162,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
         },
         Army {
             id: 10,
-            name: "Skull Clan Death Cultists".to_string(),
+            name: ArmyName::SkullClanDeathCultists,
             lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
@@ -178,7 +178,7 @@ pub fn get_mock_defaults() -> HashMap<&'static str, Army> {
             speed: 5,
         },
     ];
-    vec_of_mock_defaults.sort_by(|a, b| a.name.cmp(&b.name));
+    vec_of_mock_defaults.sort_by(|a, b| a.name.to_string().cmp(&b.name.to_string()));
 
     create_hash_of_defaults(vec_of_mock_defaults)
 }

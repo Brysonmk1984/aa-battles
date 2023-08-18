@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use super::create_mocks::{create_mock_army, MockError};
 use crate::{
-    service::query::{ArmorType, Army, WeaponType},
+    service::query::{ArmorType, Army, ArmyName, WeaponType},
     util::determine_aoe_effect,
 };
 use strum_macros::{Display, EnumString};
@@ -16,20 +16,10 @@ pub enum StartingDirection {
     WEST,
 }
 
-// Just like how AvatarItem can have many different types of items,
-// ArmyNation can have many different armies.
-// They are represented as different rows
-struct ArmyNation {
-    id: i32,
-    army_id: i32,
-    nation_id: i32,
-    count: u32,
-}
-
-// An Army Type with count belonging to a user
+// An Army Type with count belonging to a user. Forms a part of a whole nation's army
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct Battalion {
-    pub name: String,
+    pub name: ArmyName,
     pub count: i32,
     pub position: i32,
     pub shield_rating: f64,
@@ -87,30 +77,6 @@ impl Battalion {
     }
 }
 
-#[derive(Display)]
-pub enum ArmyNames {
-    #[strum(serialize = "amazonian_huntresses")]
-    AmazonianHuntresses,
-    #[strum(serialize = "avian_cliff_dwellers")]
-    AvianCliffDwellers,
-    #[strum(serialize = "amazonian_huntresses")]
-    HighbornCavalry,
-    #[strum(serialize = "imperial_legionnaires")]
-    ImperialLegionnaires,
-    #[strum(serialize = "magi_enforcers")]
-    MagiEnforcers,
-    #[strum(serialize = "north_watch_longbowmen")]
-    NorthWatchLongbowmen,
-    #[strum(serialize = "peacekeeper_monks")]
-    PeacekeeperMonks,
-    #[strum(serialize = "ronin_immortals")]
-    RoninImmortals,
-    #[strum(serialize = "shinobi_assassins")]
-    ShinobiAssassins,
-    #[strum(serialize = "skull_clan_death_cultists")]
-    SkullClanDeathCultists,
-}
-
 // Full Army a user will use to battle
 #[derive(Debug, Clone)]
 pub struct BattleArmy {
@@ -134,7 +100,7 @@ pub fn get_battle_tuple(
         &army_defaults,
         vec![
             //"imperial_legionnaires",
-            "shinobi_assassins",
+            "shinobi_martial_artists",
             // "amazonian_huntresses",
             // "peacekeeper_monks",
             // "ronin_immortals",
