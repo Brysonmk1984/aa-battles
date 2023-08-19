@@ -74,10 +74,14 @@ mod tests {
         OuterSteppeBarbarians, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
         SkullClanDeathCultists,
     };
+    use crate::util::set_weapon_armor_hash;
+    use std::sync::OnceLock;
     use std::{collections::HashMap, env};
+    pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<&str, f64>> = OnceLock::new();
 
     #[test]
     fn test_update_in_range_map_in_range() {
+        set_weapon_armor_hash();
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = create_mock_army_defaults(None);
         let mut attacker = create_mock_army(
@@ -89,7 +93,7 @@ mod tests {
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
-            vec![NorthWatchLongbowmen],
+            vec![HighbornCavalry],
         )
         .unwrap();
         attacker[0].position = 0;
@@ -97,15 +101,21 @@ mod tests {
 
         attacker_map.insert(attacker[0].name.clone(), Vec::new());
         update_in_range_map(&mut attacker_map, &attacker, &defender);
-        assert_eq!(attacker_map.get(&HighbornCavalry).unwrap().len(), 1);
+
+        assert_eq!(attacker_map.get(&PeacekeeperMonks).unwrap().len(), 1);
     }
 
     #[test]
     fn test_update_in_range_map_none_in_range() {
+        set_weapon_armor_hash();
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = create_mock_army_defaults(None);
-        let mut attacker =
-            create_mock_army(StartingDirection::WEST, &army_defaults, vec![]).unwrap();
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![HighbornCavalry],
+        )
+        .unwrap();
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
@@ -218,6 +228,7 @@ mod tests {
             vec![NorthWatchLongbowmen],
         )
         .unwrap();
+
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
@@ -272,6 +283,7 @@ mod tests {
      */
     #[test]
     fn test_attack_phase_count_change() {
+        set_weapon_armor_hash();
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = create_mock_army_defaults(None);
         let mut attacker = create_mock_army(
@@ -291,10 +303,15 @@ mod tests {
         attacker[0].count = 50;
         defender[0].position = 0;
         defender[0].count = 50;
+
         attacker_map.insert(attacker[0].name.clone(), Vec::new());
+
         update_in_range_map(&mut attacker_map, &attacker, &defender);
+
         let mut cloned_attacker = attacker.clone();
         let mut cloned_defender = defender.clone();
+
+        println!("{:?} {:?}", cloned_attacker, cloned_defender);
         attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
         println!("{} {}", defender[0].count, cloned_defender[0].count);
         //assert!(defender[0].count > cloned_defender[0].count);
