@@ -2,7 +2,7 @@ use std::{collections::HashMap, ops::Deref};
 
 use crate::{
     match_up::match_up::{Battalion, StartingDirection},
-    service::query::{ArmorType, WeaponType},
+    service::query::{ArmorType, ArmyName, WeaponType},
     util::WEAPON_ARMOR_CELL,
 };
 use rand::Rng;
@@ -13,7 +13,7 @@ use std::string::ToString;
     If there is an available target, the attack sequence is ran
 */
 pub fn attack_phase<'a, 'b>(
-    attacker_map: &HashMap<String, Vec<String>>,
+    attacker_map: &HashMap<ArmyName, Vec<ArmyName>>,
     attacker: &'b mut Vec<Battalion>,
     defender: &'b mut Vec<Battalion>,
 ) {
@@ -24,7 +24,7 @@ pub fn attack_phase<'a, 'b>(
 
         let mut a_battalion = attacker
             .iter_mut()
-            .find(|battalion| battalion.name.to_string() == *attacking_b_name)
+            .find(|battalion| battalion.name == *attacking_b_name)
             .unwrap();
 
         let has_past_all_defenders = determine_past_all_defenders(&a_battalion, &defender);
@@ -37,7 +37,7 @@ pub fn attack_phase<'a, 'b>(
 
         let mut d_battalion = defender
             .iter_mut()
-            .find(|battalion| battalion.name.to_string() == *defending_b_name.unwrap())
+            .find(|battalion| battalion.name == *defending_b_name.unwrap())
             .unwrap();
 
         // If defending battalion is already dead, from previous attacker_map iteration, march instead of attack
@@ -83,11 +83,11 @@ fn determine_past_all_defenders(attacker: &Battalion, defenders: &Vec<Battalion>
     }
 }
 
-fn transition_to_march(attacking_b_name: &String, attacker: &mut Vec<Battalion>, has_past: bool) {
+fn transition_to_march(attacking_b_name: &ArmyName, attacker: &mut Vec<Battalion>, has_past: bool) {
     // If attacker had no valid targets (defenders), then army will march forward
     let mut a_battalion = attacker
         .iter_mut()
-        .find(|battalion| battalion.name.to_string() == *attacking_b_name)
+        .find(|battalion| battalion.name == *attacking_b_name)
         .unwrap();
     // Flyers need to back track to continue finding armies that may have passed them underneath
     if a_battalion.flying && has_past {

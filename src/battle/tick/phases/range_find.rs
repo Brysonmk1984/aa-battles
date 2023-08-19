@@ -2,24 +2,24 @@ use std::{collections::HashMap, env};
 
 use rand::seq::SliceRandom;
 
-use crate::{match_up::match_up::Battalion, MIN_RANGE_ATTACK_AIR};
+use crate::{match_up::match_up::Battalion, service::query::ArmyName, MIN_RANGE_ATTACK_AIR};
 
 pub fn update_in_range_map<'a>(
-    attacker_map: &mut HashMap<String, Vec<String>>,
+    attacker_map: &mut HashMap<ArmyName, Vec<ArmyName>>,
     attacker: &'a Vec<Battalion>,
     defender: &'a Vec<Battalion>,
 ) {
     // loop through army_1 and figure out which of army_2 is in range
     for (battalion_key, in_range_vec) in attacker_map {
-        let mut flyer_vec = Vec::new();
-        let mut ground_vec = Vec::new();
+        let mut flyer_vec: Vec<ArmyName> = Vec::new();
+        let mut ground_vec: Vec<ArmyName> = Vec::new();
 
         // For each battalion in the defender's army, determine which are in range of the attacker
         defender.iter().for_each(|battalion| {
             let defender_position = battalion.position;
             let attacker_battalion = attacker
                 .iter()
-                .find(|battalion| battalion.name.to_string() == *battalion_key)
+                .find(|battalion| battalion.name == *battalion_key)
                 .unwrap();
             let attacker_position = attacker_battalion.position;
             let attacker_range = attacker_battalion.range;
@@ -31,7 +31,7 @@ pub fn update_in_range_map<'a>(
             // TODO: Consider a more elaborate check for range finding when both are marching and march past each other rather than attack
             // For now, resolved this by adjusting speed down and range up.
             if in_range && battalion.count > 0 {
-                let battalion_name = battalion.name.to_string().clone();
+                let battalion_name = battalion.name.clone();
                 // insert defenders flyers in the flyer vec, otherwise the ground vec
                 if attacker_range > MIN_RANGE_ATTACK_AIR && battalion.flying {
                     // println!(
