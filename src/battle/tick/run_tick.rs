@@ -7,6 +7,7 @@ use crate::BattleState;
 use std::collections::HashMap;
 
 pub fn run_tick(battle_state: &mut BattleState) -> i32 {
+    println!("tick");
     let mut in_range_map_1: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
     let mut in_range_map_2: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
 
@@ -70,10 +71,10 @@ mod tests {
         match_up::StartingDirection,
     };
     use crate::service::query::ArmyName::{
-        self, AmazonianHuntresses, AvianCliffDwellers, HighbornCavalry, HoodedAssassins,
+        self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
+        CastlegateCrossbowmen, ElvenArchers, HighbornCavalry, HoodedAssassins,
         ImperialLegionnaires, MagiEnforcers, Militia, NorthWatchLongbowmen, OathSwornKnights,
-        OuterSteppeBarbarians, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
-        SkullClanDeathCultists,
+        PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists, SkullClanDeathCultists,
     };
     use crate::util::set_weapon_armor_hash;
     use std::sync::OnceLock;

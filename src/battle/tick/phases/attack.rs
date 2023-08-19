@@ -4,6 +4,7 @@ use crate::{
     match_up::match_up::{Battalion, StartingDirection},
     service::query::{ArmorType, ArmyName, WeaponType},
     util::WEAPON_ARMOR_CELL,
+    IS_MARCHING_AGILITY_MOD,
 };
 use rand::Rng;
 use std::string::ToString;
@@ -132,7 +133,8 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
 }
 
 fn run_engagement_steps(attacker: &mut Battalion, defender: &mut Battalion) -> EngagementOutcome {
-    //println!("{defender:?}");
+    // println!("ATTTT=,{attacker:?}");
+    // println!("DEFFFF=,{defender:?}");
     let has_dodged_attack = try_dodge(
         attacker.accuracy,
         defender.agility,
@@ -171,9 +173,13 @@ pub fn try_dodge(
     d_is_marching: bool,
     randomizer_func: impl Fn() -> u64,
 ) -> bool {
-    let is_marching_modifier = if d_is_marching { 0.25 } else { 0.0 };
+    let is_marching_mod = if d_is_marching {
+        IS_MARCHING_AGILITY_MOD
+    } else {
+        0.0
+    };
     // 1.0 accuracy = 100% chance to hit - (agility + is_marching)
-    let chance_to_dodge = d_agility + is_marching_modifier;
+    let chance_to_dodge = d_agility + is_marching_mod;
     let chance_to_hit = ((a_accuracy - chance_to_dodge) * 100.0) as u64;
 
     if chance_to_hit == 0 {
@@ -181,7 +187,7 @@ pub fn try_dodge(
             "Chance to hit in try_dodge is {chance_to_hit} and chance to dodge is {chance_to_dodge}. Is this intentional?"
         );
     }
-    println!("{chance_to_dodge} {chance_to_hit}");
+
     let random_dodge_num = randomizer_func();
 
     chance_to_hit <= random_dodge_num

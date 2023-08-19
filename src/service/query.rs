@@ -77,9 +77,9 @@ pub enum ArmyName {
     #[serde(rename = "Skull Clan Death Cultists")]
     #[strum(serialize = "skull_clan_death_cultists")]
     SkullClanDeathCultists,
-    #[serde(rename = "Outer Steppe Barbarians")]
-    #[strum(serialize = "outer_steppe_barbarians")]
-    OuterSteppeBarbarians,
+    #[serde(rename = "Barbarians of the Outer Steppe")]
+    #[strum(serialize = "Barbarians of the Outer Steppe")]
+    BarbariansOfTheOuterSteppe,
     #[serde(rename = "Oath-Sworn Knights")]
     #[strum(serialize = "oath-sworn_knights")]
     OathSwornKnights,
@@ -90,6 +90,12 @@ pub enum ArmyName {
     #[serde(rename = "Hooded Assassins")]
     #[strum(serialize = "hooded_assassins")]
     HoodedAssassins,
+    #[serde(rename = "Elven Archers")]
+    #[strum(serialize = "elven_archers")]
+    ElvenArchers,
+    #[serde(rename = "Castlegate Crossbowmen")]
+    #[strum(serialize = "castlegate_crossbowmen")]
+    CastlegateCrossbowmen,
 }
 
 #[serde(rename_all = "snake_case")]

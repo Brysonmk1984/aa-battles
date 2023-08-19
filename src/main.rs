@@ -18,6 +18,7 @@ mod service;
 mod util;
 
 pub const MIN_RANGE_ATTACK_AIR: i32 = 20;
+pub const IS_MARCHING_AGILITY_MOD: f64 = 0.15;
 
 #[derive(Debug)]
 pub struct BattleState {
