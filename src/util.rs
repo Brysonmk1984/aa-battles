@@ -92,8 +92,16 @@ pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
 
 use std::sync::OnceLock;
 
+/**
+ * WEAPON_ARMOR_CELL
+ * stores a hash map of f64s for weapon type against armor type
+ */
 pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<&str, f64>> = OnceLock::new();
 
+/**
+ * fn set_weapon_armor_map
+ * used for initializing the chance to hit given weapon type against armor type
+ */
 pub fn set_weapon_armor_hash() {
     let map = HashMap::from([
         ("Piercing-Unarmored", 1.0),

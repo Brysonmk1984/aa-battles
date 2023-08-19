@@ -33,6 +33,7 @@ pub fn run_tick(battle_state: &mut BattleState) -> i32 {
         &mut battle_state.army_1_state,
         &mut battle_state.army_2_state,
     );
+
     // STEP 2b: army_2 Attacks army_1 (Concurrently with step 2a)
     attack_phase(
         &in_range_map_2,
@@ -311,11 +312,9 @@ mod tests {
         let mut cloned_attacker = attacker.clone();
         let mut cloned_defender = defender.clone();
 
-        println!("{:?} {:?}", cloned_attacker, cloned_defender);
         attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
-        println!("{} {}", defender[0].count, cloned_defender[0].count);
-        //assert!(defender[0].count > cloned_defender[0].count);
-        assert!(true)
+
+        assert!(defender[0].count > cloned_defender[0].count);
     }
 
     /**

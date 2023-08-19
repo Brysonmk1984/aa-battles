@@ -31,6 +31,10 @@ pub fn attack_phase<'a, 'b>(
 
         // If no valid targets, march and early return
         if defending_b_name.is_none() {
+            // println!(
+            //     "No defenders. setting is marching for {} to {}",
+            //     attacker[0].name, attacker[0].count
+            // );
             transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
             return;
         }
@@ -97,7 +101,7 @@ fn transition_to_march(attacking_b_name: &ArmyName, attacker: &mut Vec<Battalion
     a_battalion.set_is_marching(true);
 }
 
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq)]
 enum EngagementOutcome {
     Dodged,
     Blocked,
@@ -128,6 +132,7 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
 }
 
 fn run_engagement_steps(attacker: &mut Battalion, defender: &mut Battalion) -> EngagementOutcome {
+    //println!("{defender:?}");
     let has_dodged_attack = try_dodge(
         attacker.accuracy,
         defender.agility,
@@ -171,6 +176,12 @@ pub fn try_dodge(
     let chance_to_dodge = d_agility + is_marching_modifier;
     let chance_to_hit = ((a_accuracy - chance_to_dodge) * 100.0) as u64;
 
+    if chance_to_hit == 0 {
+        panic!(
+            "Chance to hit in try_dodge is {chance_to_hit} and chance to dodge is {chance_to_dodge}. Is this intentional?"
+        );
+    }
+    println!("{chance_to_dodge} {chance_to_hit}");
     let random_dodge_num = randomizer_func();
 
     chance_to_hit <= random_dodge_num
@@ -192,6 +203,10 @@ pub fn try_block(
     let chance_to_block = (d_shield_rating * 100.0) as u64;
     let random_block_num = randomizer_func();
 
+    if chance_to_block == 1 {
+        panic!("Chance to block in try_block is {chance_to_block}. Is this intentional?");
+    }
+
     chance_to_block > random_block_num
 }
 
@@ -202,8 +217,8 @@ pub fn try_armor_defense(armor: ArmorType, weapon: WeaponType) -> bool {
     let chance_to_hit_option = weapon_armor_map.get(weapon_armor_combo.as_str());
 
     if let Some(hit_float) = chance_to_hit_option {
-        let random_attack_num = rand::thread_rng().gen_range(0..100);
-        if random_attack_num > (*hit_float * 100.0).round() as i64 {
+        let random_defense_num = rand::thread_rng().gen_range(0..100);
+        if random_defense_num < (*hit_float * 100.0).round() as i64 {
             // Successful hit, unsuccessful armor defense
             return false;
         } else {

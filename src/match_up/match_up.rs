@@ -59,6 +59,7 @@ impl Battalion {
     }
 
     pub fn set_is_marching(&mut self, value: bool) {
+        //println!("setting is marching {value}");
         self.is_marching = value;
     }
 
@@ -107,14 +108,20 @@ pub fn get_battle_tuple(
     let full_army_west = create_mock_army(
         StartingDirection::WEST,
         &army_defaults,
-        vec![PeacekeeperMonks],
+        /**
+         * Enter Belligerents Here
+         */
+        vec![PeacekeeperMonks, RoninImmortals, OuterSteppeBarbarians],
     )?;
 
     // TODO: In the future, we need to replace this with the user's army saved in a new db table
     let full_army_east = create_mock_army(
         StartingDirection::EAST,
         &army_defaults,
-        vec![NorthWatchLongbowmen],
+        /**
+         * Enter Belligerents Here
+         */
+        vec![NorthWatchLongbowmen, HighbornCavalry, OathSwornKnights],
     )?;
 
     Ok((
