@@ -4,7 +4,16 @@ use serde::{Deserialize, Serialize};
 
 use super::create_mocks::{create_mock_army, MockError};
 use crate::{
-    service::query::{ArmorType, Army, ArmyName, WeaponType},
+    service::query::{
+        ArmorType, Army,
+        ArmyName::{
+            self, AmazonianHuntresses, AvianCliffDwellers, HighbornCavalry, HoodedAssassins,
+            ImperialLegionnaires, MagiEnforcers, Militia, NorthWatchLongbowmen, OathSwornKnights,
+            OuterSteppeBarbarians, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
+            SkullClanDeathCultists,
+        },
+        WeaponType,
+    },
     util::determine_aoe_effect,
 };
 use strum_macros::{Display, EnumString};
@@ -92,31 +101,20 @@ pub struct BattleArmy {
 pub fn get_battle_tuple(
     id_1: i32,
     id_2: i32,
-    army_defaults: HashMap<&str, Army>,
+    army_defaults: HashMap<ArmyName, Army>,
 ) -> Result<(BattleArmy, BattleArmy), MockError> {
     // TODO: In the future, we need to replace this with the user's army saved in a new db table
     let full_army_west = create_mock_army(
         StartingDirection::WEST,
         &army_defaults,
-        vec![
-            //"imperial_legionnaires",
-            "shinobi_martial_artists",
-            // "amazonian_huntresses",
-            // "peacekeeper_monks",
-            // "ronin_immortals",
-        ],
+        vec![ShinobiMartialArtists],
     )?;
 
     // TODO: In the future, we need to replace this with the user's army saved in a new db table
     let full_army_east = create_mock_army(
         StartingDirection::EAST,
         &army_defaults,
-        vec![
-            // "avian_cliff_dwellers",
-            // "north_watch_longbowmen",
-            //"skull_clan_death_cultists",
-            "imperial_legionnaires",
-        ],
+        vec![ImperialLegionnaires],
     )?;
 
     Ok((

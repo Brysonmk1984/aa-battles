@@ -12,8 +12,6 @@ pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> {
 
     let all_armies = body.json::<Vec<Army>>().await?;
 
-    //println!("TEST {all_armies:?}");
-
     Ok(all_armies)
 }
 
@@ -45,7 +43,9 @@ pub struct Army {
     pub speed: i32,
 }
 
-#[derive(Display, Debug, Clone, Default, Deserialize, Serialize, EnumString, PartialEq)]
+#[derive(
+    Display, Debug, Clone, Default, Deserialize, Serialize, EnumString, PartialEq, Eq, Hash,
+)]
 pub enum ArmyName {
     #[serde(rename = "Amazonian Huntresses")]
     #[strum(serialize = "amazonian_huntresses")]
@@ -91,20 +91,6 @@ pub enum ArmyName {
     #[strum(serialize = "hooded_assassins")]
     HoodedAssassins,
 }
-
-// impl<'de> Deserialize<'de> for ArmyName {
-//     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-//     where
-//         D: Deserializer<'de>,
-//     {
-//         let s = String::deserialize(deserializer)?;
-//         if s == "Peacekeeper Monks" {
-//             Ok(ArmyName::PeacekeeperMonks)
-//         } else {
-//             ArmyName::deserialize(s.into_deserializer())
-//         }
-//     }
-// }
 
 #[serde(rename_all = "snake_case")]
 #[derive(Debug, Clone, Copy, Default, Display, Deserialize, Serialize, EnumString, PartialEq)]

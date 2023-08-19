@@ -8,7 +8,7 @@ use crate::{
     battle::battle::run_battle,
     format_results::format_battle_state,
     match_up::{create_mocks::create_mock_army_defaults, match_up::get_battle_tuple},
-    service::query::Army,
+    service::query::{Army, ArmyName},
     util::{create_hash_of_defaults, set_weapon_armor_hash, WEAPON_ARMOR_CELL},
 };
 mod battle;
@@ -35,7 +35,7 @@ async fn main() -> Result<()> {
     let mut army_defaults = query::get_all_armies().await.unwrap();
 
     army_defaults.sort_by(|a, b| a.name.to_string().cmp(&b.name.to_string()));
-    let mut army_defaults_hash: HashMap<&str, Army> = create_hash_of_defaults(army_defaults);
+    let mut army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults);
 
     let mut battle_tuple =
         get_battle_tuple(1, 2, create_mock_army_defaults(Some(army_defaults_hash)))?;

@@ -3,7 +3,10 @@ use std::collections::HashMap;
 use serde::de::Error;
 use thiserror::Error;
 
-use crate::{match_up::match_up::StartingDirection, service::query::Army};
+use crate::{
+    match_up::match_up::StartingDirection,
+    service::query::{Army, ArmyName},
+};
 
 use super::{match_up::Battalion, mock_default_army_vec::get_mock_defaults};
 
@@ -14,9 +17,9 @@ pub enum MockError {
 }
 
 pub fn create_mock_army_defaults(
-    defaults_option: Option<HashMap<&str, Army>>,
-) -> HashMap<&str, Army> {
-    let mut defaults: HashMap<&str, Army>;
+    defaults_option: Option<HashMap<ArmyName, Army>>,
+) -> HashMap<ArmyName, Army> {
+    let mut defaults: HashMap<ArmyName, Army>;
 
     match defaults_option {
         Some(defaults_from_db) => defaults = defaults_from_db,
@@ -31,14 +34,14 @@ pub fn create_mock_army_defaults(
  */
 pub fn create_mock_army(
     army_direction: StartingDirection,
-    army_defaults: &HashMap<&str, Army>,
-    army_selection: Vec<&str>,
+    army_defaults: &HashMap<ArmyName, Army>,
+    army_selection: Vec<ArmyName>,
 ) -> Result<Vec<Battalion>, MockError> {
     let vec_to_return = army_selection
         .iter()
         .enumerate()
         .map(|(index, b_name)| -> Result<Battalion, MockError> {
-            let army = army_defaults.get(army_selection[index]);
+            let army = army_defaults.get(&army_selection[index]);
 
             if army.is_none() {
                 return Err(MockError::InvalidArmyName);

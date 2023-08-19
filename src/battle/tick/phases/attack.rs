@@ -203,11 +203,6 @@ pub fn try_armor_defense(armor: ArmorType, weapon: WeaponType) -> bool {
 
     if let Some(hit_float) = chance_to_hit_option {
         let random_attack_num = rand::thread_rng().gen_range(0..100);
-        println!(
-            "{weapon_armor_combo} {random_attack_num} {}  {}",
-            (*hit_float * 100.0).round(),
-            random_attack_num > (*hit_float * 100.0).round() as i64
-        );
         if random_attack_num > (*hit_float * 100.0).round() as i64 {
             // Successful hit, unsuccessful armor defense
             return false;
