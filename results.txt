@@ -1,11 +1,11 @@
 
 Winner (Western Army):
 ----------------------
-peacekeeper_monks - 750 at position -45
+peacekeeper_monks - 750 at position 75
 
 Loser (Eastern Army):
 ----------------------
-hooded_assassins - 0 at position -50
+north_watch_longbowmen - 0 at position 75
 
 
 
@@ -14,4 +14,4 @@ BATTLE RESULTS:
 Battle ID: 1
 Western Army Wins
 Army Conquered
-Tick Count: 24
+Tick Count: 49

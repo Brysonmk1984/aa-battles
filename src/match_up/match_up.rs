@@ -107,14 +107,14 @@ pub fn get_battle_tuple(
     let full_army_west = create_mock_army(
         StartingDirection::WEST,
         &army_defaults,
-        vec![ShinobiMartialArtists],
+        vec![PeacekeeperMonks],
     )?;
 
     // TODO: In the future, we need to replace this with the user's army saved in a new db table
     let full_army_east = create_mock_army(
         StartingDirection::EAST,
         &army_defaults,
-        vec![ImperialLegionnaires],
+        vec![NorthWatchLongbowmen],
     )?;
 
     Ok((

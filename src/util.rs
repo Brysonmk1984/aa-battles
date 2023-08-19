@@ -4,29 +4,28 @@ use crate::service::query::{Army, ArmyName};
 
 pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<ArmyName, Army> {
     let mut army_defaults_hash: HashMap<ArmyName, Army> = HashMap::new();
-    army_defaults_hash.insert(ArmyName::AmazonianHuntresses, army_defaults[0].to_owned());
-    army_defaults_hash.insert(ArmyName::AvianCliffDwellers, army_defaults[1].to_owned());
-    army_defaults_hash.insert(ArmyName::HighbornCavalry, army_defaults[2].to_owned());
-    army_defaults_hash.insert(ArmyName::ImperialLegionnaires, army_defaults[3].to_owned());
-    army_defaults_hash.insert(ArmyName::MagiEnforcers, army_defaults[4].to_owned());
-    army_defaults_hash.insert(ArmyName::NorthWatchLongbowmen, army_defaults[5].to_owned());
-    army_defaults_hash.insert(ArmyName::PeacekeeperMonks, army_defaults[6].to_owned());
-    army_defaults_hash.insert(ArmyName::RoninImmortals, army_defaults[7].to_owned());
-    army_defaults_hash.insert(ArmyName::HoodedAssassins, army_defaults[8].to_owned());
+    army_defaults_hash.insert(ArmyName::PeacekeeperMonks, army_defaults[0].to_owned());
+    army_defaults_hash.insert(ArmyName::ImperialLegionnaires, army_defaults[1].to_owned());
+    army_defaults_hash.insert(ArmyName::NorthWatchLongbowmen, army_defaults[2].to_owned());
+    army_defaults_hash.insert(ArmyName::HighbornCavalry, army_defaults[3].to_owned());
+    army_defaults_hash.insert(ArmyName::RoninImmortals, army_defaults[4].to_owned());
+    army_defaults_hash.insert(ArmyName::ShinobiMartialArtists, army_defaults[5].to_owned());
+
+    army_defaults_hash.insert(ArmyName::AmazonianHuntresses, army_defaults[6].to_owned());
+    army_defaults_hash.insert(ArmyName::AvianCliffDwellers, army_defaults[7].to_owned());
+
+    army_defaults_hash.insert(ArmyName::MagiEnforcers, army_defaults[8].to_owned());
     army_defaults_hash.insert(
         ArmyName::SkullClanDeathCultists,
         army_defaults[9].to_owned(),
     );
     army_defaults_hash.insert(
-        ArmyName::ShinobiMartialArtists,
+        ArmyName::OuterSteppeBarbarians,
         army_defaults[10].to_owned(),
     );
     army_defaults_hash.insert(ArmyName::OathSwornKnights, army_defaults[11].to_owned());
-    army_defaults_hash.insert(
-        ArmyName::OuterSteppeBarbarians,
-        army_defaults[12].to_owned(),
-    );
-    army_defaults_hash.insert(ArmyName::Militia, army_defaults[13].to_owned());
+    army_defaults_hash.insert(ArmyName::Militia, army_defaults[12].to_owned());
+    army_defaults_hash.insert(ArmyName::HoodedAssassins, army_defaults[13].to_owned());
 
     army_defaults_hash
 }
