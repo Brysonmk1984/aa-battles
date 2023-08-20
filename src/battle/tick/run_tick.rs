@@ -2,10 +2,10 @@ use super::phases::attack::attack_phase;
 use super::phases::march::march_phase;
 use super::phases::range_find::update_in_range_map;
 use crate::types::{ArmyName, StartingDirection};
-use crate::BattleState;
+use crate::Battle;
 use std::collections::HashMap;
 
-pub fn run_tick(battle_state: &mut BattleState) -> i32 {
+pub fn run_tick(battle_state: &mut Battle) -> i32 {
     println!("tick");
     let mut in_range_map_1: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
     let mut in_range_map_2: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();

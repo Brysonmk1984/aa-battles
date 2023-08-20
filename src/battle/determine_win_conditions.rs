@@ -1,9 +1,9 @@
 use crate::{
     types::{BattleResult, Belligerent, WinType},
-    BattleState,
+    Battle,
 };
 
-pub fn check_for_king_captured_condition(battle_state: &BattleState) -> Option<Belligerent> {
+pub fn check_for_king_captured_condition(battle_state: &Battle) -> Option<Belligerent> {
     let a1_battalion_passed_all_opponents = battle_state
         .army_1_state
         .iter()
@@ -44,7 +44,7 @@ mod tests {
     use super::{check_for_king_captured_condition, determine_army_conquered_condition};
     use crate::{
         match_up::create_mocks::create_mock_generic_battalion,
-        types::{BattleResult, BattleState, Belligerent, PartialBattalionForTests, WinType},
+        types::{Battle, BattleResult, Belligerent, PartialBattalionForTests, WinType},
     };
 
     #[test]
@@ -90,7 +90,7 @@ mod tests {
             spread: None,
         };
 
-        let battle_state = BattleState {
+        let battle_state = Battle {
             army_1_state: vec![create_mock_generic_battalion(mock_partial_battalion_1)],
 
             army_2_state: vec![create_mock_generic_battalion(mock_partial_battalion_2)],
@@ -117,7 +117,7 @@ mod tests {
             ..Default::default()
         };
 
-        let battle_state = BattleState {
+        let battle_state = Battle {
             army_1_state: vec![create_mock_generic_battalion(mock_partial_battalion_1)],
             army_2_state: vec![create_mock_generic_battalion(mock_partial_battalion_2)],
         };
@@ -143,7 +143,7 @@ mod tests {
             ..Default::default()
         };
 
-        let battle_state = BattleState {
+        let battle_state = Battle {
             // Air Army
             army_1_state: vec![create_mock_generic_battalion(mock_partial_battalion_1)],
             // Ground Army that can't hit air
@@ -170,7 +170,7 @@ mod tests {
             flying: Some(false),
             ..Default::default()
         };
-        let battle_state = BattleState {
+        let battle_state = Battle {
             // Air Army
             army_1_state: vec![create_mock_generic_battalion(mock_partial_battalion_1)],
             // Ground Army that can't hit air

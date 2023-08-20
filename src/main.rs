@@ -5,14 +5,11 @@ use std::{collections::HashMap, error::Error, fs::File, io::Write};
 use types::Battalion;
 
 use crate::{
-    battle::do_battle::run_battle,
-    format_results::format_battle_state,
     match_up::{create_mocks::create_mock_army_defaults, match_up::get_battle_tuple},
-    types::{Army, ArmyName, BattleState},
+    types::{Army, ArmyName, Battle},
     util::{create_hash_of_defaults, set_weapon_armor_hash, WEAPON_ARMOR_CELL},
 };
 mod battle;
-mod format_results;
 mod match_up;
 mod service;
 mod types;
@@ -36,16 +33,16 @@ async fn main() -> Result<()> {
     let mut battle_tuple =
         get_battle_tuple(1, 2, create_mock_army_defaults(Some(army_defaults_hash)))?;
 
-    let mut battle_state = BattleState {
+    let mut battle = Battle {
         army_1_state: battle_tuple.0.full_army,
         army_2_state: battle_tuple.1.full_army,
     };
 
-    let battle_result = run_battle(&mut battle_state);
-    let final_battle_state_formatted = format_battle_state(battle_state, &battle_result);
+    let battle_result = battle.run_battle();
+    let final_battle_state_formatted = battle.format_battle_state(&battle_result);
     println!("{final_battle_state_formatted}");
 
-    let result = format_results::format_outcome(battle_result);
+    let result = battle_result.format_outcome();
     println!("{result}");
 
     let path = "results.txt";

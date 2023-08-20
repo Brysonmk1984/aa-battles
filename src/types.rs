@@ -1,13 +1,137 @@
+use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
 use serde_this_or_that::as_f64;
 use strum_macros::{Display, EnumString};
 
-use crate::util::determine_aoe_effect;
-
+use crate::battle::tick::run_tick::run_tick;
+use crate::{
+    battle::determine_win_conditions::{
+        check_for_king_captured_condition, determine_army_conquered_condition,
+    },
+    util::determine_aoe_effect,
+};
 #[derive(Debug)]
-pub struct BattleState {
+pub struct Battle {
     pub army_1_state: Vec<Battalion>,
     pub army_2_state: Vec<Battalion>,
+}
+
+impl Battle {
+    /**
+     * Keeps tally of the 2 army counts & the battle result
+     * As long as the counts are not zero it loops, checking if there's been a check_for_king_captured_condition
+     * If not, runs ticks to increment the army positions and attacks along
+     * Finally, checks if the determine_army_conquered_condition is met
+     */
+    pub fn run_battle(&mut self) -> BattleResult {
+        let mut a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
+            sum += b.count;
+            sum
+        });
+        let mut a2_count = self.army_2_state.iter().fold(0, |mut sum, b| {
+            sum += b.count;
+            sum
+        });
+        let mut total_army_count = a1_count + a2_count;
+
+        let mut battle_result = BattleResult {
+            id: 1,
+            winner: None,
+            loser: None,
+            tick_count: 0,
+            win_type: None,
+        };
+
+        while a1_count > 0 && a2_count > 0 {
+            let winner_by_position = check_for_king_captured_condition(&self);
+            if winner_by_position.is_some() {
+                //dbg!(&winner_by_position);
+                battle_result.win_type = Some(WinType::KingCaptured);
+                battle_result.loser =
+                    if winner_by_position.as_ref().unwrap() == &Belligerent::WesternArmy {
+                        Some(Belligerent::EasternArmy)
+                    } else {
+                        Some(Belligerent::WesternArmy)
+                    };
+                battle_result.winner = winner_by_position;
+                return battle_result;
+            }
+
+            a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
+                sum += b.count;
+                sum
+            });
+            a2_count = self.army_2_state.iter().fold(0, |mut sum, b| {
+                sum += b.count;
+                sum
+            });
+            //println!("WEST ARMY COUNT: {a1_count}, EAST ARMY COUNT: {a2_count}");
+
+            battle_result.tick_count += 1;
+            if battle_result.tick_count > 300 {
+                panic!("Infinite loop detected!");
+            }
+            total_army_count = run_tick(self);
+        }
+
+        determine_army_conquered_condition(battle_result, a1_count, a2_count)
+    }
+
+    /**
+     * Formats a string to reflect the final battle state
+     */
+    pub fn format_battle_state(&mut self, battle_result: &BattleResult) -> String {
+        let mut winning_army: (Belligerent, String);
+        let mut losing_army: (Belligerent, String);
+        if let Belligerent::WesternArmy = battle_result.winner.as_ref().unwrap() {
+            winning_army = (
+                Belligerent::WesternArmy,
+                self.format_army_state(Belligerent::WesternArmy),
+            );
+            losing_army = (
+                Belligerent::EasternArmy,
+                self.format_army_state(Belligerent::EasternArmy),
+            );
+        } else {
+            winning_army = (
+                Belligerent::EasternArmy,
+                self.format_army_state(Belligerent::WesternArmy),
+            );
+            losing_army = (
+                Belligerent::WesternArmy,
+                self.format_army_state(Belligerent::EasternArmy),
+            );
+        }
+
+        format!(
+            "\nWinner ({}):\n----------------------\n{}\n\nLoser ({}):\n----------------------\n{}\n",
+            winning_army.0, winning_army.1, losing_army.0, losing_army.1
+        )
+    }
+
+    /**
+     * Helps format the final string of the battle state bu formatting each of the two army states
+     */
+    fn format_army_state(&mut self, belligerent: Belligerent) -> String {
+        let mut formatted_vec = if belligerent == Belligerent::WesternArmy {
+            self.army_1_state.sort_by(|a, b| b.count.cmp(&a.count));
+            self.army_1_state
+                .iter()
+                .map(|b| format!("{} - {} at position {}", b.name, b.count, b.position))
+                .collect::<Vec<String>>()
+                .join("\n")
+        } else {
+            self.army_2_state.sort_by(|a, b| b.count.cmp(&a.count));
+            self.army_2_state
+                .iter()
+                .map(|b| format!("{} - {} at position {}", b.name, b.count, b.position))
+                .collect::<Vec<String>>()
+                .join("\n")
+        };
+
+        format!("{formatted_vec}")
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Default, Serialize, Deserialize)]
@@ -224,4 +348,20 @@ pub struct BattleResult {
     pub loser: Option<Belligerent>,
     pub tick_count: u16,
     pub win_type: Option<WinType>,
+}
+
+impl BattleResult {
+    /**
+     * Formats the final tally and outcome to be printed to the command line and the log
+     */
+    pub fn format_outcome(self) -> String {
+        let result = format!(
+            "Battle ID: {}\n{} Wins\n{}\nTick Count: {}",
+            self.id,
+            self.winner.unwrap().to_string(),
+            self.win_type.unwrap().to_string(),
+            self.tick_count
+        );
+        format!("\nBATTLE RESULTS:\n-------------\n{result}\n")
+    }
 }
