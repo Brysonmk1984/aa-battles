@@ -1,7 +1,5 @@
 use std::collections::HashMap;
 
-use crate::service::query::{Army, ArmyName};
-
 pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<ArmyName, Army> {
     let mut army_defaults_hash: HashMap<ArmyName, Army> = HashMap::new();
     army_defaults_hash.insert(ArmyName::PeacekeeperMonks, army_defaults[0].to_owned());
@@ -96,6 +94,8 @@ pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
 }
 
 use std::sync::OnceLock;
+
+use crate::types::{Army, ArmyName};
 
 /**
  * WEAPON_ARMOR_CELL

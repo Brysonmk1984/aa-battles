@@ -2,40 +2,14 @@ use std::default;
 use strum_macros::{Display, EnumString};
 
 use crate::{
-    battle::determine_win_conditions::check_for_king_captured_condition,
-    match_up::match_up::{Battalion, BattleArmy},
-    service::query::Army,
+    types::{BattleResult, Belligerent, WinType},
     BattleState,
 };
 
-use super::{
-    determine_win_conditions::determine_army_conquered_condition, tick::run_tick::run_tick,
+use super::determine_win_conditions::{
+    check_for_king_captured_condition, determine_army_conquered_condition,
 };
-
-#[derive(Debug, Display, PartialEq)]
-pub enum Belligerent {
-    #[strum(serialize = "Western Army")]
-    WesternArmy,
-    #[strum(serialize = "Eastern Army")]
-    EasternArmy,
-}
-
-#[derive(Debug, Display, PartialEq)]
-pub enum WinType {
-    #[strum(serialize = "Army Conquered")]
-    ArmyConquered,
-    #[strum(serialize = "King Captured")]
-    KingCaptured,
-}
-
-#[derive(Debug, PartialEq, Default)]
-pub struct BattleResult {
-    pub id: i32,
-    pub winner: Option<Belligerent>,
-    pub loser: Option<Belligerent>,
-    pub tick_count: u16,
-    pub win_type: Option<WinType>,
-}
+use super::tick::run_tick::run_tick;
 
 pub fn run_battle(battle_state: &mut BattleState) -> BattleResult {
     let mut a1_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {

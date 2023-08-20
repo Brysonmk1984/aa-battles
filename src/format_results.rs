@@ -1,8 +1,4 @@
-use crate::{
-    battle::battle::{BattleResult, Belligerent},
-    match_up::match_up::Battalion,
-    BattleState,
-};
+use crate::types::{Battalion, BattleResult, BattleState, Belligerent};
 
 fn format_battalion_state(battalion: &Battalion) -> String {
     let Battalion {

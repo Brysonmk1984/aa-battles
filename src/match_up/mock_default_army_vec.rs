@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use crate::{
-    service::query::{ArmorType, Army, ArmyName, WeaponType},
+    types::{ArmorType, Army, ArmyName, WeaponType},
     util::create_hash_of_defaults,
 };
 

@@ -3,12 +3,9 @@ use std::collections::HashMap;
 use serde::de::Error;
 use thiserror::Error;
 
-use crate::{
-    match_up::match_up::StartingDirection,
-    service::query::{Army, ArmyName},
-};
+use crate::types::{Army, ArmyName, Battalion, PartialBattalionForTests, StartingDirection};
 
-use super::{match_up::Battalion, mock_default_army_vec::get_mock_defaults};
+use super::mock_default_army_vec::get_mock_defaults;
 
 #[derive(Error, Debug)]
 pub enum MockError {
@@ -64,17 +61,6 @@ pub fn create_mock_army(
         .collect();
 
     vec_to_return
-}
-
-#[derive(Default)]
-pub struct PartialBattalionForTests {
-    pub count: Option<i32>,
-    pub position: Option<i32>,
-    pub speed: Option<i32>,
-    pub flying: Option<bool>,
-    pub range: Option<i32>,
-    pub aoe: Option<f64>,
-    pub spread: Option<f64>,
 }
 
 pub fn create_mock_generic_battalion(partial_battalion: PartialBattalionForTests) -> Battalion {

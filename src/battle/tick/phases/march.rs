@@ -1,4 +1,4 @@
-use crate::match_up::match_up::{Battalion, StartingDirection};
+use crate::types::{Battalion, StartingDirection};
 
 pub fn march_phase(army: &mut Vec<Battalion>, starting_direction: &StartingDirection) {
     army.iter_mut().for_each(|a| {

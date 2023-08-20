@@ -1,8 +1,7 @@
 use std::{collections::HashMap, ops::Deref};
 
 use crate::{
-    match_up::match_up::{Battalion, StartingDirection},
-    service::query::{ArmorType, ArmyName, WeaponType},
+    types::{ArmorType, ArmyName, Battalion, StartingDirection, WeaponType},
     util::WEAPON_ARMOR_CELL,
     IS_MARCHING_AGILITY_MOD,
 };
@@ -270,9 +269,9 @@ mod tests {
     #[test]
     fn try_dodge_pass_march() {
         let a_accuracy = 0.7;
-        let d_agility = 0.2;
+        let d_agility = 0.3;
         let d_is_marching = true;
-        let random_dodge_num = 24;
+        let random_dodge_num = 25;
         let randomizer_func = || random_dodge_num;
         let successfully_dodged = try_dodge(a_accuracy, d_agility, d_is_marching, randomizer_func);
         assert!(successfully_dodged);

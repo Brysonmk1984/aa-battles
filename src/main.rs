@@ -1,30 +1,25 @@
 #![allow(warnings)]
 use color_eyre::eyre::Result;
-use match_up::match_up::Battalion;
 use service::query;
 use std::{collections::HashMap, error::Error, fs::File, io::Write};
+use types::Battalion;
 
 use crate::{
-    battle::battle::run_battle,
+    battle::do_battle::run_battle,
     format_results::format_battle_state,
     match_up::{create_mocks::create_mock_army_defaults, match_up::get_battle_tuple},
-    service::query::{Army, ArmyName},
+    types::{Army, ArmyName, BattleState},
     util::{create_hash_of_defaults, set_weapon_armor_hash, WEAPON_ARMOR_CELL},
 };
 mod battle;
 mod format_results;
 mod match_up;
 mod service;
+mod types;
 mod util;
 
 pub const MIN_RANGE_ATTACK_AIR: i32 = 20;
 pub const IS_MARCHING_AGILITY_MOD: f64 = 0.15;
-
-#[derive(Debug)]
-pub struct BattleState {
-    pub army_1_state: Vec<Battalion>,
-    pub army_2_state: Vec<Battalion>,
-}
 
 #[tokio::main]
 async fn main() -> Result<()> {

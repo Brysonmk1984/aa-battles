@@ -1,6 +1,7 @@
-use crate::BattleState;
-
-use super::battle::{BattleResult, Belligerent, WinType};
+use crate::{
+    types::{BattleResult, Belligerent, WinType},
+    BattleState,
+};
 
 pub fn check_for_king_captured_condition(battle_state: &BattleState) -> Option<Belligerent> {
     let a1_battalion_passed_all_opponents = battle_state
@@ -40,13 +41,11 @@ pub fn determine_army_conquered_condition(
 
 #[cfg(test)]
 mod tests {
-    use crate::{
-        battle::battle::{BattleResult, Belligerent, WinType},
-        match_up::create_mocks::{create_mock_generic_battalion, PartialBattalionForTests},
-        BattleState,
-    };
-
     use super::{check_for_king_captured_condition, determine_army_conquered_condition};
+    use crate::{
+        match_up::create_mocks::create_mock_generic_battalion,
+        types::{BattleResult, BattleState, Belligerent, PartialBattalionForTests, WinType},
+    };
 
     #[test]
     fn test_determine_army_conquered_condition_west() {

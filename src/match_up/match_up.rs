@@ -2,97 +2,18 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-use super::create_mocks::{create_mock_army, MockError};
-use crate::{
-    service::query::{
-        ArmorType, Army,
-        ArmyName::{
-            self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
-            CastlegateCrossbowmen, ElvenArchers, HighbornCavalry, HoodedAssassins,
-            ImperialLegionnaires, MagiEnforcers, Militia, NorthWatchLongbowmen, OathSwornKnights,
-            PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists, SkullClanDeathCultists,
-        },
-        WeaponType,
+use crate::types::{
+    Army,
+    ArmyName::{
+        self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
+        CastlegateCrossbowmen, ElvenArchers, HighbornCavalry, HoodedAssassins,
+        ImperialLegionnaires, MagiEnforcers, Militia, NorthWatchLongbowmen, OathSwornKnights,
+        PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists, SkullClanDeathCultists,
     },
-    util::determine_aoe_effect,
+    Battalion, BattleArmy, StartingDirection,
 };
-use strum_macros::{Display, EnumString};
 
-#[derive(Clone, Copy, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub enum StartingDirection {
-    #[default]
-    EAST,
-    WEST,
-}
-
-// An Army Type with count belonging to a user. Forms a part of a whole nation's army
-#[derive(Debug, Serialize, Deserialize, Clone, Default)]
-pub struct Battalion {
-    pub name: ArmyName,
-    pub count: i32,
-    pub position: i32,
-    pub shield_rating: f64,
-    pub flying: bool,
-    pub range: i32,
-    pub attack_speed: i32,
-    pub accuracy: f64,
-    pub aoe: f64,
-    pub spread: f64,
-    pub weapon_type: WeaponType,
-    pub armor_type: ArmorType,
-    pub agility: f64,
-    pub speed: i32,
-    pub is_marching: bool,
-    pub starting_direction: StartingDirection,
-    pub is_reverse_direction: bool,
-}
-
-impl Battalion {
-    pub fn decrement(&mut self, attacker_aoe: f64) {
-        let hits = determine_aoe_effect(attacker_aoe, self.spread) as i32;
-        let new_count = self.count - hits;
-        if new_count > 0 {
-            self.count = new_count;
-        } else {
-            self.count = 0;
-        }
-    }
-
-    pub fn set_is_marching(&mut self, value: bool) {
-        //println!("setting is marching {value}");
-        self.is_marching = value;
-    }
-
-    pub fn set_is_reverse_direction(&mut self, value: bool) {
-        //println!("{value} HAS REVERSED ");
-        self.is_reverse_direction = value;
-    }
-
-    /**
-     * If Starting direction is west, army starts at -150 and marches east, west starts at 150 and marches east
-     */
-    pub fn march(&mut self, starting_direction: StartingDirection) {
-        if let StartingDirection::WEST = starting_direction {
-            self.position += self.speed;
-        } else {
-            self.position -= self.speed;
-        }
-
-        if self.position < -150 || self.position > 150 {
-            panic!(
-                "{} are out of battlefield bounds - {}!",
-                self.name, self.position
-            );
-        }
-    }
-}
-
-// Full Army a user will use to battle
-#[derive(Debug, Clone)]
-pub struct BattleArmy {
-    nation_id: i32,
-    pub full_army: Vec<Battalion>,
-}
+use super::create_mocks::{create_mock_army, MockError};
 
 /**
 *  fn get_battle_tuple -
@@ -162,7 +83,9 @@ impl From<&Army> for Battalion {
 
 #[cfg(test)]
 pub mod test {
-    use crate::match_up::create_mocks::{create_mock_generic_battalion, PartialBattalionForTests};
+    use crate::{
+        match_up::create_mocks::create_mock_generic_battalion, types::PartialBattalionForTests,
+    };
 
     use super::Battalion;
 
