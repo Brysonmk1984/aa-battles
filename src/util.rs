@@ -119,7 +119,7 @@ pub fn set_weapon_armor_hash() {
         ("Crushing-Plate", 1.0),
         ("Blunt-Unarmored", 0.75),
         ("Blunt-Leather", 0.75),
-        ("Blunt-Chain", 0.75),
+        ("Blunt-Chain", 0.5),
         ("Blunt-Plate", 0.25),
         ("Edged-Unarmored", 1.0),
         ("Edged-Leather", 0.75),
