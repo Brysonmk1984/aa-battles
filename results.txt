@@ -1,15 +1,11 @@
 
 Winner (Western Army):
 ----------------------
-Barbarians of the Outer Steppe - 531 at position 120
-ronin_immortals - 435 at position 120
-peacekeeper_monks - 0 at position -25
+imperial_legionnaires - 601 at position 45
 
 Loser (Eastern Army):
 ----------------------
-north_watch_longbowmen - 0 at position 115
-highborn_cavalry - 0 at position -30
-oath-sworn_knights - 0 at position 50
+elven_archers - 0 at position 50
 
 
 
@@ -18,4 +14,4 @@ BATTLE RESULTS:
 Battle ID: 1
 Western Army Wins
 Army Conquered
-Tick Count: 30
+Tick Count: 41

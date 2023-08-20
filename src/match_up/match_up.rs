@@ -32,7 +32,7 @@ pub fn get_battle_tuple(
         /**
          * Enter Belligerents Here
          */
-        vec![PeacekeeperMonks, RoninImmortals, BarbariansOfTheOuterSteppe],
+        vec![ImperialLegionnaires],
     )?;
 
     // TODO: In the future, we need to replace this with the user's army saved in a new db table
@@ -42,7 +42,7 @@ pub fn get_battle_tuple(
         /**
          * Enter Belligerents Here
          */
-        vec![NorthWatchLongbowmen, HighbornCavalry, OathSwornKnights],
+        vec![ElvenArchers],
     )?;
 
     Ok((

@@ -110,9 +110,9 @@ pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<&str, f64>> = OnceLock::new();
 pub fn set_weapon_armor_hash() {
     let map = HashMap::from([
         ("Piercing-Unarmored", 1.0),
-        ("Piercing-Leather", 0.5),
-        ("Piercing-Chain", 0.5),
-        ("Piercing-Plate", 0.25),
+        ("Piercing-Leather", 0.75),
+        ("Piercing-Chain", 0.6),
+        ("Piercing-Plate", 0.1),
         ("Crushing-Unarmored", 0.25),
         ("Crushing-Leather", 0.50),
         ("Crushing-Chain", 0.75),
