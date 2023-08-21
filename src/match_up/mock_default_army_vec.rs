@@ -10,7 +10,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 1,
             name: ArmyName::PeacekeeperMonks,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -27,7 +26,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 2,
             name: ArmyName::ImperialLegionnaires,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.75,
             flying: false,
@@ -44,7 +42,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 3,
             name: ArmyName::NorthWatchLongbowmen,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -61,7 +58,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 4,
             name: ArmyName::HighbornCavalry,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.5,
             flying: false,
@@ -78,7 +74,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 5,
             name: ArmyName::RoninImmortals,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -95,7 +90,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 6,
             name: ArmyName::ShinobiMartialArtists,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -112,7 +106,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 7,
             name: ArmyName::AmazonianHuntresses,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -129,7 +122,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 8,
             name: ArmyName::AvianCliffDwellers,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.26,
             flying: true,
@@ -146,7 +138,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 9,
             name: ArmyName::MagiEnforcers,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -163,7 +154,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 10,
             name: ArmyName::SkullClanDeathCultists,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -180,7 +170,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 11,
             name: ArmyName::BarbariansOfTheOuterSteppe,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -197,7 +186,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 12,
             name: ArmyName::OathSwornKnights,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.5,
             flying: false,
@@ -214,7 +202,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 13,
             name: ArmyName::Militia,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -231,7 +218,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 14,
             name: ArmyName::HoodedAssassins,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -248,7 +234,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 15,
             name: ArmyName::ElvenArchers,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -265,7 +250,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         Army {
             id: 16,
             name: ArmyName::CastlegateCrossbowmen,
-            lore: "TBD".to_string(),
             count: 1,
             shield_rating: 0.0,
             flying: false,
@@ -280,7 +264,6 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
             speed: 5,
         },
     ];
-    //vec_of_mock_defaults.sort_by(|a, b| a.id.cmp(&b.id));
 
     create_hash_of_defaults(vec_of_mock_defaults)
 }

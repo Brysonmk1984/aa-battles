@@ -218,7 +218,6 @@ pub struct BattleArmy {
 pub struct Army {
     pub id: i32,
     pub name: ArmyName,
-    pub lore: String,
     pub count: i32,
     #[serde(deserialize_with = "as_f64")]
     pub shield_rating: f64,
