@@ -6,7 +6,7 @@ use crate::Battle;
 use std::collections::HashMap;
 
 pub fn run_tick(battle_state: &mut Battle) -> i32 {
-    println!("tick");
+    //println!("tick");
     let mut in_range_map_1: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
     let mut in_range_map_2: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
 

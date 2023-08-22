@@ -1,7 +1,7 @@
 
 Winner (Western Army):
 ----------------------
-imperial_legionnaires - 361 at position 95
+imperial_legionnaires - 314 at position 95
 
 Loser (Eastern Army):
 ----------------------
@@ -16,4 +16,4 @@ BATTLE RESULTS:
 Battle ID: 1
 Western Army Wins
 Army Conquered
-Tick Count: 58
+Tick Count: 60

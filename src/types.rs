@@ -210,6 +210,23 @@ pub struct BattleArmy {
     pub full_army: Vec<Battalion>,
 }
 
+impl BattleArmy {
+    pub fn log_prebattle_count(&self, mut log: Vec<String>) -> Vec<String> {
+        let count_by_battalion: Vec<String>;
+
+        let mut result =
+            self.full_army
+                .iter()
+                .fold(vec![], |mut acc: Vec<String>, b: &Battalion| {
+                    acc.push(format!("{} {}", b.count, b.name));
+                    acc
+                });
+
+        log.append(&mut result);
+        log
+    }
+}
+
 // NOTE: in order to use .sort(), these four traits are required.
 // Otherwise, you can skip these attributes and just use sort_by along with .cmp()
 //#[derive(Eq, Ord, PartialEq, PartialOrd)]

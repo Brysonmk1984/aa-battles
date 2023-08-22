@@ -24,6 +24,7 @@ async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
 
     let weapon_armor_defaults = set_weapon_armor_hash();
+    let mut battle_log: Vec<String> = Vec::new();
 
     let mut army_defaults = query::get_all_armies().await.unwrap();
     army_defaults.sort_by(|a, b| a.id.cmp(&b.id));
@@ -32,6 +33,11 @@ async fn main() -> Result<()> {
 
     let mut battle_tuple =
         get_battle_tuple(1, 2, create_mock_army_defaults(Some(army_defaults_hash)))?;
+
+    battle_log = battle_tuple.0.log_prebattle_count(battle_log);
+    battle_log = battle_tuple.1.log_prebattle_count(battle_log);
+
+    println!("{battle_log:?}");
 
     let mut battle = Battle {
         army_1_state: battle_tuple.0.full_army,
