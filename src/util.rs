@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::Mutex};
 
 pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<ArmyName, Army> {
     let mut army_defaults_hash: HashMap<ArmyName, Army> = HashMap::new();
@@ -131,4 +131,48 @@ pub fn set_weapon_armor_hash() {
         ("Magic-Plate", 0.75),
     ]);
     WEAPON_ARMOR_CELL.set(map);
+}
+
+/**
+ * LOG_MUTEX
+ * Stores a vec of Strings that is added to throughout the battle with information to report
+ * To the end user and developer
+ */
+pub static LOG_MUTEX: Mutex<Vec<String>> = Mutex::new(Vec::new());
+
+pub fn push_logs(mut new_messages: Vec<String>) {
+    let mut val = LOG_MUTEX.lock().unwrap();
+    val.append(&mut new_messages);
+}
+
+pub fn push_log(message: String) {
+    let mut val = LOG_MUTEX.lock().unwrap();
+    val.push(message);
+}
+
+pub fn get_logs() -> Vec<String> {
+    LOG_MUTEX.lock().unwrap().to_vec()
+}
+
+pub fn get_logs_as_string() -> String {
+    LOG_MUTEX.lock().unwrap().to_vec().join(", ")
+}
+
+#[derive(Debug)]
+pub struct BattleLog {
+    pub headline: Option<String>,
+    pub events: Option<Vec<String>>,
+    pub end_state: Option<String>,
+    pub outcome: Option<String>,
+}
+
+impl BattleLog {
+    pub fn new() -> BattleLog {
+        BattleLog {
+            headline: None,
+            events: None,
+            end_state: None,
+            outcome: None,
+        }
+    }
 }

@@ -211,19 +211,19 @@ pub struct BattleArmy {
 }
 
 impl BattleArmy {
-    pub fn log_prebattle_count(&self, mut log: Vec<String>) -> Vec<String> {
+    pub fn log_prebattle_count(&self) -> String {
         let count_by_battalion: Vec<String>;
 
-        let mut result =
-            self.full_army
-                .iter()
-                .fold(vec![], |mut acc: Vec<String>, b: &Battalion| {
-                    acc.push(format!("{} {}", b.count, b.name));
-                    acc
-                });
+        let result = self
+            .full_army
+            .iter()
+            .fold(vec![], |mut acc: Vec<String>, b: &Battalion| {
+                acc.push(format!("{} {}", b.count, b.name));
+                acc
+            })
+            .join(", ");
 
-        log.append(&mut result);
-        log
+        result
     }
 }
 
