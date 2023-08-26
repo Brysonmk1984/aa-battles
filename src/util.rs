@@ -155,13 +155,13 @@ pub fn get_logs() -> Vec<String> {
 }
 
 pub fn get_logs_as_string() -> String {
-    LOG_MUTEX.lock().unwrap().to_vec().join(", ")
+    LOG_MUTEX.lock().unwrap().to_vec().join("\n")
 }
 
 #[derive(Debug)]
 pub struct BattleLog {
     pub headline: Option<String>,
-    pub events: Option<Vec<String>>,
+    pub events: Option<String>,
     pub end_state: Option<String>,
     pub outcome: Option<String>,
 }

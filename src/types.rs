@@ -5,6 +5,7 @@ use serde_this_or_that::as_f64;
 use strum_macros::{Display, EnumString};
 
 use crate::battle::tick::run_tick::run_tick;
+use crate::util::push_log;
 use crate::{
     battle::determine_win_conditions::{
         check_for_king_captured_condition, determine_army_conquered_condition,
@@ -25,6 +26,10 @@ impl Battle {
      * Finally, checks if the determine_army_conquered_condition is met
      */
     pub fn run_battle(&mut self) -> BattleResult {
+        push_log(
+            "The battle begins: Both western & Eastern Army are marching towards each other"
+                .to_string(),
+        );
         let mut a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
             sum += b.count;
             sum
@@ -46,7 +51,6 @@ impl Battle {
         while a1_count > 0 && a2_count > 0 {
             let winner_by_position = check_for_king_captured_condition(&self);
             if winner_by_position.is_some() {
-                //dbg!(&winner_by_position);
                 battle_result.win_type = Some(WinType::KingCaptured);
                 battle_result.loser =
                     if winner_by_position.as_ref().unwrap() == &Belligerent::WesternArmy {
@@ -66,12 +70,13 @@ impl Battle {
                 sum += b.count;
                 sum
             });
-            //println!("WEST ARMY COUNT: {a1_count}, EAST ARMY COUNT: {a2_count}");
-
             battle_result.tick_count += 1;
+            push_log(format!("Tick {}", battle_result.tick_count));
+
             if battle_result.tick_count > 300 {
                 panic!("Infinite loop detected!");
             }
+
             total_army_count = run_tick(self);
         }
 
@@ -174,13 +179,17 @@ impl Battalion {
         }
     }
 
-    pub fn set_is_marching(&mut self, value: bool) {
-        //println!("setting is marching {value}");
-        self.is_marching = value;
+    pub fn set_is_marching(&mut self, march: bool) {
+        if self.is_marching != march && march == true {
+            push_log(format!("{} are now marching ", self.name));
+        } else if self.is_marching != march && march == false {
+            push_log(format!("{} are now engaging with the enemy ", self.name));
+        }
+        self.is_marching = march;
     }
 
     pub fn set_is_reverse_direction(&mut self, value: bool) {
-        //println!("{value} HAS REVERSED ");
+        push_log(format!("A ground battalion has passed under the {} battalion, causing the fliers to reverse direction.", self.name));
         self.is_reverse_direction = value;
     }
 
@@ -259,53 +268,53 @@ pub struct Army {
 )]
 pub enum ArmyName {
     #[serde(rename = "Amazonian Huntresses")]
-    #[strum(serialize = "amazonian_huntresses")]
+    #[strum(serialize = "Amazonian Huntresses")]
     AmazonianHuntresses,
     #[serde(rename = "Avian Cliff Dwellers")]
-    #[strum(serialize = "avian_cliff_dwellers")]
+    #[strum(serialize = "Avian Cliff Dwellers")]
     AvianCliffDwellers,
     #[serde(rename = "Highborn Cavalry")]
-    #[strum(serialize = "highborn_cavalry")]
+    #[strum(serialize = "Highborn Cavalry")]
     HighbornCavalry,
     #[serde(rename = "Imperial Legionnaires")]
-    #[strum(serialize = "imperial_legionnaires")]
+    #[strum(serialize = "Imperial Legionnaires")]
     ImperialLegionnaires,
     #[serde(rename = "Magi Enforcers")]
-    #[strum(serialize = "magi_enforcers")]
+    #[strum(serialize = "Magi Enforcers")]
     MagiEnforcers,
     #[serde(rename = "North Watch Longbowmen")]
-    #[strum(serialize = "north_watch_longbowmen")]
+    #[strum(serialize = "North Watch Longbowmen")]
     NorthWatchLongbowmen,
     #[serde(rename = "Peacekeeper Monks")]
-    #[strum(serialize = "peacekeeper_monks")]
+    #[strum(serialize = "Peacekeeper Monks")]
     PeacekeeperMonks,
     #[serde(rename = "Rōnin Immortals")]
-    #[strum(serialize = "ronin_immortals")]
+    #[strum(serialize = "Rōnin Immortals")]
     RoninImmortals,
     #[serde(rename = "Shinobi Martial Artists")]
-    #[strum(serialize = "shinobi_martial_artists")]
+    #[strum(serialize = "Shinobi Martial Artists")]
     ShinobiMartialArtists,
     #[serde(rename = "Skull Clan Death Cultists")]
-    #[strum(serialize = "skull_clan_death_cultists")]
+    #[strum(serialize = "Skull Clan Death Cultists")]
     SkullClanDeathCultists,
     #[serde(rename = "Barbarians of the Outer Steppe")]
     #[strum(serialize = "Barbarians of the Outer Steppe")]
     BarbariansOfTheOuterSteppe,
     #[serde(rename = "Oath-Sworn Knights")]
-    #[strum(serialize = "oath-sworn_knights")]
+    #[strum(serialize = "Oath-Sworn Knights")]
     OathSwornKnights,
     #[default]
     #[serde(rename = "Militia")]
-    #[strum(serialize = "militia")]
+    #[strum(serialize = "Militia")]
     Militia,
     #[serde(rename = "Hooded Assassins")]
-    #[strum(serialize = "hooded_assassins")]
+    #[strum(serialize = "Hooded Assassins")]
     HoodedAssassins,
     #[serde(rename = "Elven Archers")]
-    #[strum(serialize = "elven_archers")]
+    #[strum(serialize = "Elven Archers")]
     ElvenArchers,
     #[serde(rename = "Castlegate Crossbowmen")]
-    #[strum(serialize = "castlegate_crossbowmen")]
+    #[strum(serialize = "Castlegate Crossbowmen")]
     CastlegateCrossbowmen,
 }
 

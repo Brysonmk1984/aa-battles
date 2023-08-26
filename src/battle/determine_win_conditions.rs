@@ -1,22 +1,25 @@
 use crate::{
     types::{BattleResult, Belligerent, WinType},
+    util::push_log,
     Battle,
 };
 
 pub fn check_for_king_captured_condition(battle_state: &Battle) -> Option<Belligerent> {
-    let a1_battalion_passed_all_opponents = battle_state
+    let western_army_reached_enemy_king = battle_state
         .army_1_state
         .iter()
         .find(|b| (b.position >= 150) && b.flying == false);
 
-    let a2_battalion_passed_all_opponents = battle_state
+    let eastern_army_reached_enemy_king = battle_state
         .army_2_state
         .iter()
         .find(|b| (b.position <= -150) && b.flying == false);
 
-    if a1_battalion_passed_all_opponents.is_some() {
+    if western_army_reached_enemy_king.is_some() {
+        push_log(format!("The Western army has passed all enemies and captured the Eastern army's King with a battalion of {}!", western_army_reached_enemy_king.unwrap().name));
         Some(Belligerent::WesternArmy)
-    } else if a2_battalion_passed_all_opponents.is_some() {
+    } else if eastern_army_reached_enemy_king.is_some() {
+        push_log(format!("The Eastern army has passed all enemies and captured the Western army's King with a battalion of {}!", eastern_army_reached_enemy_king.unwrap().name));
         Some(Belligerent::EasternArmy)
     } else {
         None
@@ -25,13 +28,15 @@ pub fn check_for_king_captured_condition(battle_state: &Battle) -> Option<Bellig
 
 pub fn determine_army_conquered_condition(
     mut battle_result: BattleResult,
-    a1_count: i32,
-    a2_count: i32,
+    western_count: i32,
+    eastern_count: i32,
 ) -> BattleResult {
-    if a1_count > a2_count {
+    if western_count > eastern_count {
+        push_log("Western Army has defeater all of the Eastern Army's forces!".to_string());
         battle_result.winner = Some(Belligerent::WesternArmy);
         battle_result.loser = Some(Belligerent::EasternArmy);
     } else {
+        push_log("Eastern Army has defeater all of the Western Army's forces!".to_string());
         battle_result.winner = Some(Belligerent::EasternArmy);
         battle_result.loser = Some(Belligerent::WesternArmy);
     }

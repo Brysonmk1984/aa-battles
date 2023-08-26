@@ -2,7 +2,7 @@ use std::{collections::HashMap, ops::Deref};
 
 use crate::{
     types::{ArmorType, ArmyName, Battalion, StartingDirection, WeaponType},
-    util::WEAPON_ARMOR_CELL,
+    util::{push_log, WEAPON_ARMOR_CELL},
     IS_MARCHING_AGILITY_MOD,
 };
 use rand::Rng;
@@ -31,10 +31,11 @@ pub fn attack_phase<'a, 'b>(
 
         // If no valid targets, march and early return
         if defending_b_name.is_none() {
-            // println!(
-            //     "No defenders. setting is marching for {} to {}",
-            //     attacker[0].name, attacker[0].count
-            // );
+            if a_battalion.is_marching {
+                push_log(format!("..."));
+            } else {
+                push_log(format!("{} has defeated a battalion", a_battalion.name));
+            }
             transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
             return;
         }
@@ -46,6 +47,10 @@ pub fn attack_phase<'a, 'b>(
 
         // If defending battalion is already dead, from previous attacker_map iteration, march instead of attack
         if d_battalion.count == 0 {
+            push_log(format!(
+                "{} has defeated {}",
+                a_battalion.name, d_battalion.name
+            ));
             transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
             return;
         }

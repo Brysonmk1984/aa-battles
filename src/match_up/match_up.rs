@@ -32,7 +32,13 @@ pub fn get_battle_tuple(
         /**
          * Enter Belligerents Here
          */
-        vec![ImperialLegionnaires],
+        vec![
+            //HighbornCavalry,
+            ImperialLegionnaires,
+            //ShinobiMartialArtists,
+            // HoodedAssassins,
+            // AmazonianHuntresses,
+        ],
     )?;
 
     // TODO: In the future, we need to replace this with the user's army saved in a new db table
@@ -47,6 +53,7 @@ pub fn get_battle_tuple(
             NorthWatchLongbowmen,
             CastlegateCrossbowmen,
             //BarbariansOfTheOuterSteppe,
+            //AvianCliffDwellers,
         ],
     )?;
 

@@ -62,8 +62,9 @@ async fn main() -> Result<()> {
 
     let path = "results.txt";
     let mut output = File::create(path)?;
+
     println!("{battle_log:#?}");
-    //println!("{}", get_logs_as_string());
-    // write!(output, "{}", get_logs_as_string());
+    battle_log.events = Some(get_logs_as_string());
+    write!(output, "{}", get_logs_as_string());
     Ok(())
 }
