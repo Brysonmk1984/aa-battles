@@ -41,23 +41,24 @@ pub fn run_tick(battle_state: &mut Battle) -> i32 {
         &mut battle_state.army_1_state,
     );
 
-    // STEP 3: March forward
-    march_phase(&mut battle_state.army_1_state, &StartingDirection::WEST);
-    march_phase(&mut battle_state.army_2_state, &StartingDirection::EAST);
-
-    //println!("{in_range_map_1:?} \n\n {in_range_map_2:?}");
-
-    let mut a1 = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+    // STEP 3: Adjust Counts
+    let mut western_army_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
         sum += b.count;
         sum
     });
-    let mut a2 = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+    let mut eastern_army_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
         sum += b.count;
         sum
     });
-    let new_total = a1 + a2;
 
-    new_total
+    // STEP 4: March forward
+    if western_army_count > 0 && eastern_army_count >= 0 {
+        march_phase(&mut battle_state.army_1_state, &StartingDirection::WEST);
+        march_phase(&mut battle_state.army_2_state, &StartingDirection::EAST);
+    }
+
+    let total_combined_count = western_army_count + eastern_army_count;
+    total_combined_count
 }
 
 #[cfg(test)]

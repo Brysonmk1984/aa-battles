@@ -42,7 +42,12 @@ pub fn get_battle_tuple(
         /**
          * Enter Belligerents Here
          */
-        vec![ElvenArchers, NorthWatchLongbowmen, CastlegateCrossbowmen],
+        vec![
+            ElvenArchers,
+            NorthWatchLongbowmen,
+            CastlegateCrossbowmen,
+            //BarbariansOfTheOuterSteppe,
+        ],
     )?;
 
     Ok((
