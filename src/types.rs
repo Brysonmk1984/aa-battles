@@ -96,11 +96,11 @@ impl Battle {
         } else {
             winning_army = (
                 Belligerent::EasternArmy,
-                self.format_army_state(Belligerent::WesternArmy),
+                self.format_army_state(Belligerent::EasternArmy),
             );
             losing_army = (
                 Belligerent::WesternArmy,
-                self.format_army_state(Belligerent::EasternArmy),
+                self.format_army_state(Belligerent::WesternArmy),
             );
         }
 

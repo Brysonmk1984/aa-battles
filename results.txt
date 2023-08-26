@@ -1,19 +1,19 @@
 
-Winner (Western Army):
+Winner (Eastern Army):
 ----------------------
-imperial_legionnaires - 314 at position 95
-
-Loser (Eastern Army):
-----------------------
+north_watch_longbowmen - 500 at position 100
+castlegate_crossbowmen - 130 at position 50
 elven_archers - 0 at position 50
-north_watch_longbowmen - 0 at position 100
-castlegate_crossbowmen - 0 at position 50
+
+Loser (Western Army):
+----------------------
+imperial_legionnaires - 0 at position 40
 
 
 
 BATTLE RESULTS:
 -------------
 Battle ID: 1
-Western Army Wins
+Eastern Army Wins
 Army Conquered
-Tick Count: 60
+Tick Count: 58
