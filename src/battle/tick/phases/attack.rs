@@ -32,9 +32,7 @@ pub fn attack_phase<'a, 'b>(
         // If no valid targets, march and early return
         if defending_b_name.is_none() {
             if a_battalion.is_marching {
-                push_log(format!("..."));
-            } else {
-                push_log(format!("{} has defeated a battalion", a_battalion.name));
+                push_log(format!("... marching ..."));
             }
             transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
             return;
@@ -56,7 +54,7 @@ pub fn attack_phase<'a, 'b>(
         }
 
         // If any valid targets for the attacker, run attack sequence
-        a_battalion.set_is_marching(false);
+        a_battalion.set_is_marching(false, Some(&d_battalion.name));
         run_attack_sequence(&mut a_battalion, &mut d_battalion);
     });
 }
@@ -103,7 +101,7 @@ fn transition_to_march(attacking_b_name: &ArmyName, attacker: &mut Vec<Battalion
         a_battalion.set_is_reverse_direction(true);
     }
 
-    a_battalion.set_is_marching(true);
+    a_battalion.set_is_marching(true, None);
 }
 
 #[derive(Debug, PartialEq)]
@@ -119,10 +117,12 @@ enum EngagementOutcome {
    Parent function for running functions related to an attack: try_dodge, try_block, decrement
 */
 fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
+    push_log(format!("... attacking ..."));
     // Do one attack attempt for each member of a battalion
     for n in 0..attacker.count {
         for a in 0..attacker.attack_speed {
             if defender.count == 0 {
+                push_log(format!("{} have defeated {}", attacker.name, defender.name));
                 return;
             }
 
@@ -187,9 +187,12 @@ pub fn try_dodge(
     let chance_to_hit = ((a_accuracy - chance_to_dodge) * 100.0) as u64;
 
     if chance_to_hit == 0 {
-        panic!(
-            "Chance to hit in try_dodge is {chance_to_hit} and chance to dodge is {chance_to_dodge}. Is this intentional?"
+        push_log(
+            "Defender is unhittable. Agility is too high for the attacking battalion!".to_string(),
         );
+        // panic!(
+        //     "Chance to hit in try_dodge is {chance_to_hit} and chance to dodge is {chance_to_dodge}. Is this intentional?"
+        // );
     }
 
     let random_dodge_num = randomizer_func();
@@ -214,7 +217,8 @@ pub fn try_block(
     let random_block_num = randomizer_func();
 
     if chance_to_block == 1 {
-        panic!("Chance to block in try_block is {chance_to_block}. Is this intentional?");
+        push_log("Defender is too heavily shielded for the attacking battalion!".to_string());
+        //panic!("Chance to block in try_block is {chance_to_block}. Is this intentional?");
     }
 
     chance_to_block > random_block_num

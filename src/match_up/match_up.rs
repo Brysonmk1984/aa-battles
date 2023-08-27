@@ -194,9 +194,9 @@ pub mod test {
         let test_battalion_ref = test_army.get_mut(0).unwrap();
 
         assert_eq!(test_battalion_ref.is_marching, true);
-        test_battalion_ref.set_is_marching(false);
+        test_battalion_ref.set_is_marching(false, None);
         assert_eq!(test_battalion_ref.is_marching, false);
-        test_battalion_ref.set_is_marching(true);
+        test_battalion_ref.set_is_marching(true, None);
         assert_eq!(test_battalion_ref.is_marching, true);
     }
 }

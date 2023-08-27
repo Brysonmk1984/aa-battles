@@ -27,7 +27,7 @@ impl Battle {
      */
     pub fn run_battle(&mut self) -> BattleResult {
         push_log(
-            "The battle begins: Both western & Eastern Army are marching towards each other"
+            "THE BATTLE BEGINS: Both Western & Eastern Army are marching towards each other"
                 .to_string(),
         );
         let mut a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
@@ -71,7 +71,7 @@ impl Battle {
                 sum
             });
             battle_result.tick_count += 1;
-            push_log(format!("Tick {}", battle_result.tick_count));
+            push_log(format!("TICK {}", battle_result.tick_count));
 
             if battle_result.tick_count > 300 {
                 panic!("Infinite loop detected!");
@@ -179,11 +179,15 @@ impl Battalion {
         }
     }
 
-    pub fn set_is_marching(&mut self, march: bool) {
+    pub fn set_is_marching(&mut self, march: bool, enemy_engaging_with: Option<&ArmyName>) {
         if self.is_marching != march && march == true {
-            push_log(format!("{} are now marching ", self.name));
-        } else if self.is_marching != march && march == false {
-            push_log(format!("{} are now engaging with the enemy ", self.name));
+            push_log(format!("{} are now marching", self.name));
+        } else if self.is_marching != march && march == false && enemy_engaging_with.is_some() {
+            push_log(format!(
+                "{} are now engaging with {} ",
+                self.name,
+                enemy_engaging_with.unwrap()
+            ));
         }
         self.is_marching = march;
     }

@@ -16,10 +16,10 @@ pub fn check_for_king_captured_condition(battle_state: &Battle) -> Option<Bellig
         .find(|b| (b.position <= -150) && b.flying == false);
 
     if western_army_reached_enemy_king.is_some() {
-        push_log(format!("The Western army has passed all enemies and captured the Eastern army's King with a battalion of {}!", western_army_reached_enemy_king.unwrap().name));
+        push_log(format!("THE BATTLE ENDS: Western army has passed all enemies and captured the Eastern army's King with a battalion of {}!", western_army_reached_enemy_king.unwrap().name));
         Some(Belligerent::WesternArmy)
     } else if eastern_army_reached_enemy_king.is_some() {
-        push_log(format!("The Eastern army has passed all enemies and captured the Western army's King with a battalion of {}!", eastern_army_reached_enemy_king.unwrap().name));
+        push_log(format!("THE BATTLE ENDS: The Eastern army has passed all enemies and captured the Western army's King with a battalion of {}!", eastern_army_reached_enemy_king.unwrap().name));
         Some(Belligerent::EasternArmy)
     } else {
         None
@@ -32,11 +32,17 @@ pub fn determine_army_conquered_condition(
     eastern_count: i32,
 ) -> BattleResult {
     if western_count > eastern_count {
-        push_log("Western Army has defeater all of the Eastern Army's forces!".to_string());
+        push_log(
+            "THE BATTLE ENDS: Western Army has defeated all of the Eastern Army's forces!"
+                .to_string(),
+        );
         battle_result.winner = Some(Belligerent::WesternArmy);
         battle_result.loser = Some(Belligerent::EasternArmy);
     } else {
-        push_log("Eastern Army has defeater all of the Western Army's forces!".to_string());
+        push_log(
+            "THE BATTLE ENDS: Eastern Army has defeated all of the Western Army's forces!"
+                .to_string(),
+        );
         battle_result.winner = Some(Belligerent::EasternArmy);
         battle_result.loser = Some(Belligerent::WesternArmy);
     }
