@@ -1,8 +1,8 @@
 use std::{collections::HashMap, ops::Deref};
 
 use crate::{
-    types::{ArmorType, ArmyName, Battalion, StartingDirection, WeaponType},
-    util::{push_log, WEAPON_ARMOR_CELL},
+    types::{ArmorType, ArmyName, Battalion, Belligerent, StartingDirection, WeaponType},
+    util::{push_log, push_stat_armor, push_stat_block, push_stat_dodge, WEAPON_ARMOR_CELL},
     IS_MARCHING_AGILITY_MOD,
 };
 use rand::Rng;
@@ -130,7 +130,7 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
 
             if result == EngagementOutcome::Hit {
                 // Defending battalion loses a member or more depending on aoe
-                defender.decrement(attacker.aoe);
+                defender.decrement(attacker.aoe, attacker.starting_direction);
             }
         }
     }
@@ -143,6 +143,7 @@ fn run_engagement_steps(attacker: &mut Battalion, defender: &mut Battalion) -> E
         attacker.accuracy,
         defender.agility,
         defender.is_marching,
+        defender.starting_direction,
         || rand::thread_rng().gen_range(0..100),
     );
     if has_dodged_attack {
@@ -152,13 +153,18 @@ fn run_engagement_steps(attacker: &mut Battalion, defender: &mut Battalion) -> E
     let has_blocked_attack = try_block(
         defender.shield_rating,
         attacker.weapon_type != WeaponType::Magic,
+        defender.starting_direction,
         || rand::thread_rng().gen_range(0..100),
     );
     if has_blocked_attack {
         return EngagementOutcome::Blocked;
     }
 
-    let saved_by_armor = try_armor_defense(defender.armor_type, attacker.weapon_type);
+    let saved_by_armor = try_armor_defense(
+        defender.armor_type,
+        attacker.weapon_type,
+        defender.starting_direction,
+    );
 
     if saved_by_armor {
         return EngagementOutcome::ArmorSaved;
@@ -175,6 +181,7 @@ pub fn try_dodge(
     a_accuracy: f64,
     d_agility: f64,
     d_is_marching: bool,
+    starting_direction: StartingDirection,
     randomizer_func: impl Fn() -> u64,
 ) -> bool {
     let is_marching_mod = if d_is_marching {
@@ -197,7 +204,12 @@ pub fn try_dodge(
 
     let random_dodge_num = randomizer_func();
 
-    chance_to_hit <= random_dodge_num
+    let has_dodged = chance_to_hit <= random_dodge_num;
+    if has_dodged {
+        push_stat_dodge(starting_direction);
+    }
+
+    has_dodged
 }
 
 /**
@@ -207,6 +219,7 @@ pub fn try_dodge(
 pub fn try_block(
     d_shield_rating: f64,
     is_valid_attack_to_block: bool,
+    starting_direction: StartingDirection,
     randomizer_func: impl Fn() -> u64,
 ) -> bool {
     if !is_valid_attack_to_block {
@@ -221,10 +234,19 @@ pub fn try_block(
         //panic!("Chance to block in try_block is {chance_to_block}. Is this intentional?");
     }
 
-    chance_to_block > random_block_num
+    let has_blocked = chance_to_block > random_block_num;
+
+    if has_blocked {
+        push_stat_block(starting_direction);
+    }
+    has_blocked
 }
 
-pub fn try_armor_defense(armor: ArmorType, weapon: WeaponType) -> bool {
+pub fn try_armor_defense(
+    armor: ArmorType,
+    weapon: WeaponType,
+    starting_direction: StartingDirection,
+) -> bool {
     let weapon_armor_map = WEAPON_ARMOR_CELL.get().unwrap();
     let weapon_armor_combo = weapon.to_string() + "-" + armor.to_string().as_str();
 
@@ -236,6 +258,7 @@ pub fn try_armor_defense(armor: ArmorType, weapon: WeaponType) -> bool {
             // Successful hit, unsuccessful armor defense
             return false;
         } else {
+            push_stat_armor(starting_direction);
             return true;
         }
 
@@ -247,7 +270,10 @@ pub fn try_armor_defense(armor: ArmorType, weapon: WeaponType) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use crate::battle::tick::phases::attack::{try_block, try_dodge};
+    use crate::{
+        battle::tick::phases::attack::{try_block, try_dodge},
+        types::StartingDirection,
+    };
     use rand::Rng;
 
     #[test]
@@ -261,7 +287,14 @@ mod tests {
         // .8 - (.2 + 0) = .6 * 100 = 60
         // chance_to_hit < random_dodge_num
         let randomizer_func = || random_dodge_num;
-        let successfully_dodged = try_dodge(a_accuracy, d_agility, d_is_marching, randomizer_func);
+        let starting_direction = StartingDirection::EAST;
+        let successfully_dodged = try_dodge(
+            a_accuracy,
+            d_agility,
+            d_is_marching,
+            starting_direction,
+            randomizer_func,
+        );
         assert!(successfully_dodged);
     }
     #[test]
@@ -271,7 +304,14 @@ mod tests {
         let d_is_marching = false;
         let random_dodge_num = 59;
         let randomizer_func = || random_dodge_num;
-        let successfully_dodged = try_dodge(a_accuracy, d_agility, d_is_marching, randomizer_func);
+        let starting_direction = StartingDirection::EAST;
+        let successfully_dodged = try_dodge(
+            a_accuracy,
+            d_agility,
+            d_is_marching,
+            starting_direction,
+            randomizer_func,
+        );
         assert!(!successfully_dodged);
     }
 
@@ -282,7 +322,14 @@ mod tests {
         let d_is_marching = true;
         let random_dodge_num = 25;
         let randomizer_func = || random_dodge_num;
-        let successfully_dodged = try_dodge(a_accuracy, d_agility, d_is_marching, randomizer_func);
+        let starting_direction = StartingDirection::EAST;
+        let successfully_dodged = try_dodge(
+            a_accuracy,
+            d_agility,
+            d_is_marching,
+            starting_direction,
+            randomizer_func,
+        );
         assert!(successfully_dodged);
     }
 
@@ -293,14 +340,23 @@ mod tests {
         let d_is_marching = true;
         let random_dodge_num = 23;
         let randomizer_func = || random_dodge_num;
-        let successfully_dodged = try_dodge(a_accuracy, d_agility, d_is_marching, randomizer_func);
+        let starting_direction = StartingDirection::EAST;
+        let successfully_dodged = try_dodge(
+            a_accuracy,
+            d_agility,
+            d_is_marching,
+            starting_direction,
+            randomizer_func,
+        );
         assert!(!successfully_dodged);
     }
 
     fn try_block_pass() {
         let d_shield_rating = 0.4;
         let randomizer_func = || 39;
-        let successfully_blocked = try_block(d_shield_rating, true, randomizer_func);
+        let starting_direction = StartingDirection::EAST;
+        let successfully_blocked =
+            try_block(d_shield_rating, true, starting_direction, randomizer_func);
         assert!(successfully_blocked);
     }
 
@@ -308,7 +364,9 @@ mod tests {
     fn try_block_fail() {
         let d_shield_rating = 0.4;
         let randomizer_func = || 41;
-        let successfully_blocked = try_block(d_shield_rating, true, randomizer_func);
+        let starting_direction = StartingDirection::EAST;
+        let successfully_blocked =
+            try_block(d_shield_rating, true, starting_direction, randomizer_func);
         assert_eq!(successfully_blocked, false);
     }
 }

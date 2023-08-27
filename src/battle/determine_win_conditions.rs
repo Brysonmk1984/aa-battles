@@ -89,6 +89,7 @@ mod tests {
             range: None,
             aoe: None,
             spread: None,
+            starting_direction: None,
         };
         // Air Army
         let mock_partial_battalion_2 = PartialBattalionForTests {
@@ -99,6 +100,7 @@ mod tests {
             range: None,
             aoe: None,
             spread: None,
+            starting_direction: None,
         };
 
         let battle_state = Battle {

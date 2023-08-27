@@ -93,9 +93,9 @@ pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
     }
 }
 
-use std::sync::OnceLock;
+use std::sync::{OnceLock, RwLock};
 
-use crate::types::{Army, ArmyName};
+use crate::types::{Army, ArmyName, Belligerent, StartingDirection};
 
 /**
  * WEAPON_ARMOR_CELL
@@ -140,28 +140,116 @@ pub fn set_weapon_armor_hash() {
  */
 pub static LOG_MUTEX: Mutex<Vec<String>> = Mutex::new(Vec::new());
 
-pub fn push_logs(mut new_messages: Vec<String>) {
-    let mut val = LOG_MUTEX.lock().unwrap();
-    val.append(&mut new_messages);
-}
-
 pub fn push_log(message: String) {
     let mut val = LOG_MUTEX.lock().unwrap();
     val.push(message);
 }
 
-pub fn get_logs() -> Vec<String> {
-    LOG_MUTEX.lock().unwrap().to_vec()
+pub fn get_logs() -> String {
+    LOG_MUTEX.lock().unwrap().to_vec().join("\n")
 }
 
-pub fn get_logs_as_string() -> String {
-    LOG_MUTEX.lock().unwrap().to_vec().join("\n")
+/**
+ * STATS_MUTEX
+ * Stores a Stats Struct that tracks stats about battalion performance to report
+ * To the end user and developer
+ */
+pub static STATS_RWLOCK: RwLock<(Stats, Stats)> = RwLock::new((
+    Stats {
+        dodge_count: 0,
+        block_count: 0,
+        armor_defense_count: 0,
+        kill: 0,
+    },
+    Stats {
+        dodge_count: 0,
+        block_count: 0,
+        armor_defense_count: 0,
+        kill: 0,
+    },
+));
+
+pub fn push_stat_dodge(starting_direction: StartingDirection) {
+    let mut tuple = STATS_RWLOCK.write().unwrap();
+
+    if starting_direction == StartingDirection::WEST {
+        tuple.0.dodge_count += 1;
+    } else {
+        tuple.1.dodge_count += 1;
+    }
+}
+
+pub fn push_stat_block(starting_direction: StartingDirection) {
+    let mut tuple = STATS_RWLOCK.write().unwrap();
+
+    if starting_direction == StartingDirection::WEST {
+        tuple.0.block_count += 1;
+    } else {
+        tuple.1.block_count += 1;
+    }
+}
+
+pub fn push_stat_armor(starting_direction: StartingDirection) {
+    let mut tuple = STATS_RWLOCK.write().unwrap();
+
+    if starting_direction == StartingDirection::WEST {
+        tuple.0.armor_defense_count += 1;
+    } else {
+        tuple.1.armor_defense_count += 1;
+    }
+}
+
+pub fn push_stat_kill(kills: u32, starting_direction: StartingDirection) {
+    let mut tuple = STATS_RWLOCK.write().unwrap();
+
+    if starting_direction == StartingDirection::WEST {
+        tuple.0.kill += kills;
+    } else {
+        tuple.1.kill += kills;
+    }
+}
+
+pub fn get_stats() -> (Stats, Stats) {
+    let tuple = STATS_RWLOCK.read().unwrap();
+    (
+        Stats {
+            dodge_count: tuple.0.dodge_count,
+            block_count: tuple.0.block_count,
+            armor_defense_count: tuple.0.armor_defense_count,
+            kill: tuple.0.kill,
+        },
+        Stats {
+            dodge_count: tuple.1.dodge_count,
+            block_count: tuple.1.block_count,
+            armor_defense_count: tuple.1.armor_defense_count,
+            kill: tuple.1.kill,
+        },
+    )
+}
+
+#[derive(Debug, Clone)]
+pub struct Stats {
+    pub dodge_count: u32,
+    pub block_count: u32,
+    pub armor_defense_count: u32,
+    pub kill: u32,
+}
+
+impl Stats {
+    pub fn format_battle_stats(&self) -> String {
+        let stats = format!(
+            "\n\nKills: {}\nAttacks Dodged: {}\nAttacks Blocked: {}\nKills Prevented by Armor: {}\n",
+            self.kill, self.dodge_count, self.block_count, self.armor_defense_count,
+        );
+        stats
+    }
 }
 
 #[derive(Debug)]
 pub struct BattleLog {
     pub headline: Option<String>,
     pub events: Option<String>,
+    pub stats: Stats,
     pub end_state: Option<String>,
     pub outcome: Option<String>,
 }
@@ -171,6 +259,12 @@ impl BattleLog {
         BattleLog {
             headline: None,
             events: None,
+            stats: Stats {
+                dodge_count: 0,
+                block_count: 0,
+                armor_defense_count: 0,
+                kill: 0,
+            },
             end_state: None,
             outcome: None,
         }

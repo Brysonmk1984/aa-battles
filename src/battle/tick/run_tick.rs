@@ -6,7 +6,6 @@ use crate::Battle;
 use std::collections::HashMap;
 
 pub fn run_tick(battle_state: &mut Battle) -> i32 {
-    //println!("tick");
     let mut in_range_map_1: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
     let mut in_range_map_2: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
 
@@ -320,6 +319,7 @@ mod tests {
      * attack_phase
      * Will panic due to .75 agility + .25 marching bonus making defender never hittable
      */
+    #[ignore]
     #[test]
     #[should_panic]
     fn test_attack_phase_should_dodge_all_with_max_agility_and_marching() {

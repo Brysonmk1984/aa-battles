@@ -5,7 +5,7 @@ use serde_this_or_that::as_f64;
 use strum_macros::{Display, EnumString};
 
 use crate::battle::tick::run_tick::run_tick;
-use crate::util::push_log;
+use crate::util::{push_log, push_stat_kill, Stats};
 use crate::{
     battle::determine_win_conditions::{
         check_for_king_captured_condition, determine_army_conquered_condition,
@@ -169,8 +169,9 @@ pub struct Battalion {
 }
 
 impl Battalion {
-    pub fn decrement(&mut self, attacker_aoe: f64) {
+    pub fn decrement(&mut self, attacker_aoe: f64, attacker_starting_direction: StartingDirection) {
         let hits = determine_aoe_effect(attacker_aoe, self.spread) as i32;
+        push_stat_kill(hits as u32, attacker_starting_direction);
         let new_count = self.count - hits;
         if new_count > 0 {
             self.count = new_count;
@@ -352,6 +353,7 @@ pub struct PartialBattalionForTests {
     pub range: Option<i32>,
     pub aoe: Option<f64>,
     pub spread: Option<f64>,
+    pub starting_direction: Option<StartingDirection>,
 }
 
 #[derive(Debug, Display, PartialEq)]

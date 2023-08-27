@@ -96,7 +96,8 @@ impl From<&Army> for Battalion {
 #[cfg(test)]
 pub mod test {
     use crate::{
-        match_up::create_mocks::create_mock_generic_battalion, types::PartialBattalionForTests,
+        match_up::create_mocks::create_mock_generic_battalion,
+        types::{PartialBattalionForTests, StartingDirection},
     };
 
     use super::Battalion;
@@ -140,7 +141,7 @@ pub mod test {
         let test_battalion_ref = test_army.get_mut(0).unwrap();
         let attacking_army_aoe = 0.0;
         assert_eq!(test_battalion_ref.count, 1000);
-        test_battalion_ref.decrement(attacking_army_aoe);
+        test_battalion_ref.decrement(attacking_army_aoe, test_battalion_ref.starting_direction);
         assert_eq!(test_battalion_ref.count, 999);
     }
 
@@ -154,6 +155,7 @@ pub mod test {
             flying: None,
             range: None,
             spread: Some(1.0),
+            starting_direction: None,
         };
 
         let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
@@ -161,7 +163,7 @@ pub mod test {
         let test_battalion_ref = test_army.get_mut(0).unwrap();
 
         assert_eq!(test_battalion_ref.count, 1000);
-        test_battalion_ref.decrement(1.0);
+        test_battalion_ref.decrement(1.0, test_battalion_ref.starting_direction);
         assert_eq!(test_battalion_ref.count, 995);
     }
 
@@ -175,6 +177,7 @@ pub mod test {
             flying: None,
             range: None,
             spread: Some(2.0),
+            starting_direction: None,
         };
 
         let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
@@ -182,7 +185,7 @@ pub mod test {
         let test_battalion_ref = test_army.get_mut(0).unwrap();
 
         assert_eq!(test_battalion_ref.count, 1000);
-        test_battalion_ref.decrement(1.0);
+        test_battalion_ref.decrement(1.0, test_battalion_ref.starting_direction);
         assert_eq!(test_battalion_ref.count, 998);
     }
 

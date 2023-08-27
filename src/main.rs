@@ -8,8 +8,8 @@ use crate::{
     match_up::{create_mocks::create_mock_army_defaults, match_up::get_battle_tuple},
     types::{Army, ArmyName, Battle},
     util::{
-        create_hash_of_defaults, get_logs, get_logs_as_string, push_log, push_logs,
-        set_weapon_armor_hash, BattleLog, LOG_MUTEX, WEAPON_ARMOR_CELL,
+        create_hash_of_defaults, get_logs, get_stats, push_log, set_weapon_armor_hash, BattleLog,
+        LOG_MUTEX, WEAPON_ARMOR_CELL,
     },
 };
 mod battle;
@@ -61,17 +61,24 @@ async fn main() -> Result<()> {
     let path = "results.txt";
     let mut output = File::create(path)?;
 
-    println!("{}", battle_log.headline.as_ref().unwrap());
-    println!("{}", &battle_log.end_state.as_ref().unwrap());
-    println!("{}", &battle_log.outcome.as_ref().unwrap());
+    let battle_stats = get_stats();
+    let western_stats_formatted = battle_stats.0.format_battle_stats();
+    let eastern_stats_formatted = battle_stats.1.format_battle_stats();
+    println!("Western Army Stats: {:?}", battle_stats.0);
+    println!("Eastern Army Stats: {:?}", battle_stats.1);
+    // println!("{}", battle_log.headline.as_ref().unwrap());
+    // println!("{}", &battle_log.end_state.as_ref().unwrap());
+    // println!("{}", &battle_log.outcome.as_ref().unwrap());
 
-    battle_log.events = Some(get_logs_as_string());
+    battle_log.events = Some(get_logs());
     write!(
         output,
-        "{} \n\n{} \n\n{} \n\n{}",
+        "{} \n\n{} \n\n{} \n\n{}{} \n\n{}",
         battle_log.headline.unwrap(),
-        get_logs_as_string(),
+        get_logs(),
         battle_log.end_state.unwrap(),
+        western_stats_formatted,
+        eastern_stats_formatted,
         battle_log.outcome.unwrap()
     );
     Ok(())
