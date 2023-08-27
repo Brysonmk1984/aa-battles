@@ -64,11 +64,12 @@ async fn main() -> Result<()> {
     let battle_stats = get_stats();
     let western_stats_formatted = battle_stats.0.format_battle_stats();
     let eastern_stats_formatted = battle_stats.1.format_battle_stats();
+
+    println!("{}", battle_log.headline.as_ref().unwrap());
+    println!("{}", &battle_log.end_state.as_ref().unwrap());
     println!("Western Army Stats: {:?}", battle_stats.0);
     println!("Eastern Army Stats: {:?}", battle_stats.1);
-    // println!("{}", battle_log.headline.as_ref().unwrap());
-    // println!("{}", &battle_log.end_state.as_ref().unwrap());
-    // println!("{}", &battle_log.outcome.as_ref().unwrap());
+    println!("{}", &battle_log.outcome.as_ref().unwrap());
 
     battle_log.events = Some(get_logs());
     write!(
