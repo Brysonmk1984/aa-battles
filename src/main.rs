@@ -45,8 +45,6 @@ async fn main() -> Result<()> {
 
     battle_log.headline = Some(battle_headline);
 
-    //println!("{:#?}", LOG_MUTEX.lock().unwrap().join(""));
-
     let mut battle = Battle {
         army_1_state: battle_tuple.0.full_army,
         army_2_state: battle_tuple.1.full_army,
@@ -63,8 +61,18 @@ async fn main() -> Result<()> {
     let path = "results.txt";
     let mut output = File::create(path)?;
 
-    println!("{battle_log:#?}");
+    println!("{}", battle_log.headline.as_ref().unwrap());
+    println!("{}", &battle_log.end_state.as_ref().unwrap());
+    println!("{}", &battle_log.outcome.as_ref().unwrap());
+
     battle_log.events = Some(get_logs_as_string());
-    write!(output, "{}", get_logs_as_string());
+    write!(
+        output,
+        "{} \n\n{} \n\n{} \n\n{}",
+        battle_log.headline.unwrap(),
+        get_logs_as_string(),
+        battle_log.end_state.unwrap(),
+        battle_log.outcome.unwrap()
+    );
     Ok(())
 }
