@@ -79,12 +79,10 @@ async fn main() -> Result<()> {
     battle_log.events = Some(get_logs());
     write!(
         output,
-        "{} \n\n{} \n\n{} \n\n{}{} \n\n{}",
+        "{} \n\n{} \n\n{} \n\n{}",
         battle_log.headline.unwrap(),
         get_logs(),
         battle_log.end_state.unwrap(),
-        western_stats_formatted,
-        eastern_stats_formatted,
         battle_log.outcome.unwrap()
     );
     Ok(())
