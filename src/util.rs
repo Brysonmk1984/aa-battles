@@ -95,6 +95,8 @@ pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
 
 use std::sync::{OnceLock, RwLock};
 
+use num_format::{Locale, ToFormattedString};
+
 use crate::types::{Army, ArmyName, Belligerent, StartingDirection};
 
 /**
@@ -239,7 +241,7 @@ impl Stats {
     pub fn format_battle_stats(&self) -> String {
         let stats = format!(
             "\n\nKills: {}\nAttacks Dodged: {}\nAttacks Blocked: {}\nKills Prevented by Armor: {}\n",
-            self.kill, self.dodge_count, self.block_count, self.armor_defense_count,
+            self.kill.to_formatted_string(&Locale::en), self.dodge_count.to_formatted_string(&Locale::en), self.block_count.to_formatted_string(&Locale::en), self.armor_defense_count.to_formatted_string(&Locale::en),
         );
         stats
     }
