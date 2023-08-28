@@ -86,26 +86,31 @@ impl Battle {
     /**
      * Formats a string to reflect the final battle state
      */
-    pub fn format_battle_state(&mut self, battle_result: &BattleResult) -> String {
+    pub fn format_battle_state(
+        &mut self,
+        battle_result: &BattleResult,
+        western_stats: &String,
+        eastern_stats: &String,
+    ) -> String {
         let mut winning_army: (Belligerent, String);
         let mut losing_army: (Belligerent, String);
         if let Belligerent::WesternArmy = battle_result.winner.as_ref().unwrap() {
             winning_army = (
                 Belligerent::WesternArmy,
-                self.format_army_state(Belligerent::WesternArmy),
+                self.format_army_state(Belligerent::WesternArmy, western_stats),
             );
             losing_army = (
                 Belligerent::EasternArmy,
-                self.format_army_state(Belligerent::EasternArmy),
+                self.format_army_state(Belligerent::EasternArmy, eastern_stats),
             );
         } else {
             winning_army = (
                 Belligerent::EasternArmy,
-                self.format_army_state(Belligerent::EasternArmy),
+                self.format_army_state(Belligerent::EasternArmy, eastern_stats),
             );
             losing_army = (
                 Belligerent::WesternArmy,
-                self.format_army_state(Belligerent::WesternArmy),
+                self.format_army_state(Belligerent::WesternArmy, western_stats),
             );
         }
 
@@ -118,7 +123,7 @@ impl Battle {
     /**
      * Helps format the final string of the battle state bu formatting each of the two army states
      */
-    fn format_army_state(&mut self, belligerent: Belligerent) -> String {
+    fn format_army_state(&mut self, belligerent: Belligerent, stats: &String) -> String {
         let mut formatted_vec = if belligerent == Belligerent::WesternArmy {
             self.army_1_state.sort_by(|a, b| b.count.cmp(&a.count));
             self.army_1_state
@@ -135,7 +140,7 @@ impl Battle {
                 .join("\n")
         };
 
-        format!("{formatted_vec}")
+        format!("{formatted_vec}{stats}")
     }
 }
 
