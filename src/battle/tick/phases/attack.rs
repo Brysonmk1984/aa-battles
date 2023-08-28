@@ -26,36 +26,39 @@ pub fn attack_phase<'a, 'b>(
             .iter_mut()
             .find(|battalion| battalion.name == *attacking_b_name)
             .unwrap();
+        if a_battalion.count == 0 {
+            return;
+        }
 
         let has_past_all_defenders = determine_past_all_defenders(&a_battalion, &defender);
 
-        // If no valid targets, march and early return
-        if defending_b_name.is_none() {
-            if a_battalion.is_marching {
-                push_log(format!("... marching ..."));
+        match defending_b_name {
+            Some(mut defending_b_name) => {
+                let mut d_battalion = defender
+                    .iter_mut()
+                    .find(|battalion| battalion.name == *defending_b_name)
+                    .unwrap();
+
+                // If defending battalion is already dead, from previous attacker_map iteration, march instead of attack
+                if d_battalion.count == 0 {
+                    transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
+                    return;
+                }
+
+                a_battalion.set_is_marching(false, Some(&d_battalion.name));
+
+                // If any valid targets for the attacker, run attack sequence
+                run_attack_sequence(&mut a_battalion, &mut d_battalion);
             }
-            transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
-            return;
+            None => {
+                // If no valid targets, march and early return
+                if a_battalion.is_marching {
+                    push_log(format!("... marching ..."));
+                }
+                transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
+                return;
+            }
         }
-
-        let mut d_battalion = defender
-            .iter_mut()
-            .find(|battalion| battalion.name == *defending_b_name.unwrap())
-            .unwrap();
-
-        // If defending battalion is already dead, from previous attacker_map iteration, march instead of attack
-        if d_battalion.count == 0 {
-            push_log(format!(
-                "{} has defeated {}",
-                a_battalion.name, d_battalion.name
-            ));
-            transition_to_march(attacking_b_name, attacker, has_past_all_defenders);
-            return;
-        }
-
-        // If any valid targets for the attacker, run attack sequence
-        a_battalion.set_is_marching(false, Some(&d_battalion.name));
-        run_attack_sequence(&mut a_battalion, &mut d_battalion);
     });
 }
 
@@ -117,15 +120,17 @@ enum EngagementOutcome {
    Parent function for running functions related to an attack: try_dodge, try_block, decrement
 */
 fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
+    if attacker.count == 0 {
+        return;
+    }
     push_log(format!("... attacking ..."));
     // Do one attack attempt for each member of a battalion
     for n in 0..attacker.count {
+        if defender.count == 0 {
+            push_log(format!("{} have defeated {}", attacker.name, defender.name));
+            return;
+        }
         for a in 0..attacker.attack_speed {
-            if defender.count == 0 {
-                push_log(format!("{} have defeated {}", attacker.name, defender.name));
-                return;
-            }
-
             let result = run_engagement_steps(attacker, defender);
 
             if result == EngagementOutcome::Hit {
@@ -137,8 +142,6 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
 }
 
 fn run_engagement_steps(attacker: &mut Battalion, defender: &mut Battalion) -> EngagementOutcome {
-    // println!("ATTTT=,{attacker:?}");
-    // println!("DEFFFF=,{defender:?}");
     let has_dodged_attack = try_dodge(
         attacker.accuracy,
         defender.agility,
