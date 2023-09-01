@@ -401,3 +401,15 @@ impl BattleResult {
         format!("\nBATTLE RESULTS:\n-------------\n{result}\n")
     }
 }
+
+pub struct Nation {
+    id: i32,
+    user_id: i32,
+    name: String,
+}
+pub struct NationArmy {
+    id: i32,
+    nation_id: i32,
+    army_id: String,
+    count: i32,
+}

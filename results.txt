@@ -1,9 +1,15 @@
-750 Imperial Legionnaires 
+250 Highborn Cavalry, 750 Imperial Legionnaires, 500 Shinobi Martial Artists, 250 Hooded Assassins, 750 Amazonian Huntresses 
 VS
-500 Elven Archers, 500 North Watch Longbowmen, 500 Castlegate Crossbowmen 
+500 Elven Archers, 500 North Watch Longbowmen, 500 Castlegate Crossbowmen, 750 Barbarians of the Outer Steppe, 750 Avian Cliff Dwellers 
 
 THE BATTLE BEGINS: Both Western & Eastern Army are marching towards each other
 TICK 1
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
 ... marching ...
 ... marching ...
 ... marching ...
@@ -13,7 +19,19 @@ TICK 2
 ... marching ...
 ... marching ...
 ... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
 TICK 3
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
 ... marching ...
 ... marching ...
 ... marching ...
@@ -23,7 +41,19 @@ TICK 4
 ... marching ...
 ... marching ...
 ... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
 TICK 5
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
 ... marching ...
 ... marching ...
 ... marching ...
@@ -33,9 +63,22 @@ TICK 6
 ... marching ...
 ... marching ...
 ... marching ...
+... marching ...
+North Watch Longbowmen are now engaging with Highborn Cavalry 
+... attacking ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
 TICK 7
 ... marching ...
 ... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... attacking ...
 ... marching ...
 ... marching ...
 TICK 8
@@ -43,93 +86,1674 @@ TICK 8
 ... marching ...
 ... marching ...
 ... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+... attacking ...
 TICK 9
 ... marching ...
 ... marching ...
 ... marching ...
 ... marching ...
+... marching ...
+... marching ...
+... marching ...
+Elven Archers are now engaging with Highborn Cavalry 
+... attacking ...
+... marching ...
+... attacking ...
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
 TICK 10
 ... marching ...
 ... marching ...
 ... marching ...
 ... marching ...
+... marching ...
+... marching ...
+... marching ...
+... attacking ...
+... attacking ...
+... marching ...
 TICK 11
 ... marching ...
-North Watch Longbowmen are now engaging with Imperial Legionnaires 
+... marching ...
+... marching ...
+... marching ...
+... marching ...
+Castlegate Crossbowmen are now engaging with Highborn Cavalry 
+... attacking ...
+... attacking ...
 ... attacking ...
 ... marching ...
 ... marching ...
 TICK 12
 ... marching ...
+... marching ...
+... marching ...
+... marching ...
+... marching ...
 ... attacking ...
 ... marching ...
 ... marching ...
+... attacking ...
+... attacking ...
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
 TICK 13
 ... marching ...
 ... marching ...
+Highborn Cavalry are now engaging with Barbarians of the Outer Steppe 
 ... attacking ...
 ... marching ...
+... marching ...
+... attacking ...
+Barbarians of the Outer Steppe are now engaging with Highborn Cavalry 
+... attacking ...
+Barbarians of the Outer Steppe have defeated Highborn Cavalry
+Elven Archers are now marching
+... attacking ...
 TICK 14
 ... marching ...
 ... marching ...
+... marching ...
+... marching ...
+Barbarians of the Outer Steppe are now marching
+Castlegate Crossbowmen are now marching
+Elven Archers are now engaging with Hooded Assassins 
 ... attacking ...
 ... marching ...
+... attacking ...
 TICK 15
 ... marching ...
+... marching ...
+Amazonian Huntresses are now engaging with Avian Cliff Dwellers 
 ... attacking ...
+... marching ...
+... marching ...
+... attacking ...
+... attacking ...
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
+Defender is unhittable. Agility is too high for the attacking battalion!
 ... marching ...
 ... marching ...
 TICK 16
-... marching ...
+Shinobi Martial Artists are now engaging with Barbarians of the Outer Steppe 
+... attacking ...
+... attacking ...
+Hooded Assassins are now engaging with Barbarians of the Outer Steppe 
 ... attacking ...
 ... marching ...
-Elven Archers are now engaging with Imperial Legionnaires 
+Avian Cliff Dwellers are now engaging with Hooded Assassins 
 ... attacking ...
+Avian Cliff Dwellers have defeated Hooded Assassins
+Castlegate Crossbowmen are now engaging with Shinobi Martial Artists 
+... attacking ...
+... attacking ...
+Elven Archers are now marching
 TICK 17
-... marching ...
 ... attacking ...
 ... attacking ...
 ... marching ...
+Elven Archers are now engaging with Amazonian Huntresses 
+... attacking ...
+... attacking ...
+... attacking ...
+Barbarians of the Outer Steppe are now engaging with Shinobi Martial Artists 
+... attacking ...
+... attacking ...
 TICK 18
-... marching ...
+... attacking ...
+Amazonian Huntresses have defeated Avian Cliff Dwellers
 ... attacking ...
 ... marching ...
+... attacking ...
+... attacking ...
+... attacking ...
 ... attacking ...
 TICK 19
 ... marching ...
-... marching ...
 ... attacking ...
+... attacking ...
+... attacking ...
+North Watch Longbowmen have defeated Shinobi Martial Artists
+Castlegate Crossbowmen are now marching
+Barbarians of the Outer Steppe are now marching
 ... attacking ...
 TICK 20
 ... marching ...
-... marching ...
 ... attacking ...
+Castlegate Crossbowmen are now engaging with Amazonian Huntresses 
 ... attacking ...
+Castlegate Crossbowmen have defeated Amazonian Huntresses
+... attacking ...
+Elven Archers are now marching
 TICK 21
 ... marching ...
-Castlegate Crossbowmen are now engaging with Imperial Legionnaires 
 ... attacking ...
+Elven Archers are now engaging with Imperial Legionnaires 
 ... attacking ...
-... attacking ...
+Castlegate Crossbowmen are now marching
+... marching ...
 TICK 22
 ... marching ...
-... attacking ...
-... attacking ...
-... attacking ...
-TICK 23
 ... marching ...
 ... attacking ...
 ... attacking ...
+... marching ...
+TICK 23
+Imperial Legionnaires are now engaging with Barbarians of the Outer Steppe 
+... attacking ...
+Imperial Legionnaires have defeated Barbarians of the Outer Steppe
+... attacking ...
+... marching ...
 ... attacking ...
 TICK 24
+Imperial Legionnaires are now marching
+... attacking ...
+... attacking ...
 ... marching ...
-... attacking ...
-... attacking ...
-... attacking ...
 TICK 25
 ... marching ...
 ... attacking ...
 ... attacking ...
+Castlegate Crossbowmen are now engaging with Imperial Legionnaires 
 ... attacking ...
 TICK 26
 ... marching ...
@@ -197,27 +1821,27 @@ TICK 38
 ... attacking ...
 ... attacking ...
 TICK 39
-Imperial Legionnaires are now engaging with Castlegate Crossbowmen 
-... attacking ...
+... marching ...
 ... attacking ...
 ... attacking ...
 ... attacking ...
 TICK 40
-... attacking ...
+... marching ...
 ... attacking ...
 ... attacking ...
 ... attacking ...
 TICK 41
-... attacking ...
+... marching ...
 ... attacking ...
 ... attacking ...
 ... attacking ...
 TICK 42
-... attacking ...
+... marching ...
 ... attacking ...
 ... attacking ...
 ... attacking ...
 TICK 43
+Imperial Legionnaires are now engaging with Castlegate Crossbowmen 
 ... attacking ...
 ... attacking ...
 ... attacking ...
@@ -234,15 +1858,16 @@ TICK 45
 ... attacking ...
 TICK 46
 ... attacking ...
-Imperial Legionnaires have defeated Castlegate Crossbowmen
+... attacking ...
 ... attacking ...
 ... attacking ...
 TICK 47
-Imperial Legionnaires are now marching
+... attacking ...
+Imperial Legionnaires have defeated Castlegate Crossbowmen
 ... attacking ...
 ... attacking ...
 TICK 48
-... marching ...
+Imperial Legionnaires are now marching
 ... attacking ...
 ... attacking ...
 TICK 49
@@ -258,49 +1883,129 @@ TICK 51
 ... attacking ...
 ... attacking ...
 TICK 52
-Imperial Legionnaires are now engaging with Elven Archers 
-... attacking ...
+... marching ...
 ... attacking ...
 ... attacking ...
 TICK 53
-... attacking ...
+... marching ...
 ... attacking ...
 ... attacking ...
 TICK 54
+Imperial Legionnaires are now engaging with Elven Archers 
 ... attacking ...
 ... attacking ...
 ... attacking ...
 TICK 55
 ... attacking ...
 ... attacking ...
-Elven Archers have defeated Imperial Legionnaires
-North Watch Longbowmen are now marching
+... attacking ...
 TICK 56
+... attacking ...
+... attacking ...
+... attacking ...
+TICK 57
+... attacking ...
+... attacking ...
+... attacking ...
+TICK 58
+... attacking ...
+... attacking ...
+... attacking ...
+TICK 59
+... attacking ...
+... attacking ...
+... attacking ...
+TICK 60
+... attacking ...
+... attacking ...
+... attacking ...
+TICK 61
+... attacking ...
+Imperial Legionnaires have defeated Elven Archers
+... attacking ...
+TICK 62
+Imperial Legionnaires are now marching
+... attacking ...
+TICK 63
 ... marching ...
-Elven Archers are now marching
-THE BATTLE ENDS: Eastern Army has defeated all of the Western Army's forces! 
+... attacking ...
+TICK 64
+... marching ...
+... attacking ...
+TICK 65
+... marching ...
+... attacking ...
+TICK 66
+... marching ...
+... attacking ...
+TICK 67
+... marching ...
+... attacking ...
+TICK 68
+Imperial Legionnaires are now engaging with North Watch Longbowmen 
+... attacking ...
+... attacking ...
+TICK 69
+... attacking ...
+... attacking ...
+TICK 70
+... attacking ...
+... attacking ...
+TICK 71
+... attacking ...
+... attacking ...
+TICK 72
+... attacking ...
+... attacking ...
+TICK 73
+... attacking ...
+... attacking ...
+TICK 74
+... attacking ...
+... attacking ...
+TICK 75
+... attacking ...
+... attacking ...
+TICK 76
+... attacking ...
+... attacking ...
+TICK 77
+... attacking ...
+... attacking ...
+TICK 78
+... attacking ...
+Imperial Legionnaires have defeated North Watch Longbowmen
+TICK 79
+Imperial Legionnaires are now marching
+THE BATTLE ENDS: Western Army has defeated all of the Eastern Army's forces! 
 
 
-Winner (Eastern Army):
+Winner (Western Army):
 ----------------------
-North Watch Longbowmen - 500 at position 100
-Elven Archers - 428 at position 75
-Castlegate Crossbowmen - 0 at position 50
+Imperial Legionnaires - 56 at position 120
+Highborn Cavalry - 0 at position 30
+Shinobi Martial Artists - 0 at position 0
+Hooded Assassins - 0 at position 0
+Amazonian Huntresses - 0 at position -10
 
-Kills: 750
-Attacks Dodged: 469
-Attacks Blocked: 0
-Kills Prevented by Armor: 530
+Kills: 3,000
+Attacks Dodged: 41,420
+Attacks Blocked by Shield: 31,369
+Attacks Blocked by Armor: 8,385
 
 
-Loser (Western Army):
+Loser (Eastern Army):
 ----------------------
-Imperial Legionnaires - 0 at position 65
+Elven Archers - 0 at position 95
+North Watch Longbowmen - 0 at position 125
+Castlegate Crossbowmen - 0 at position 65
+Barbarians of the Outer Steppe - 0 at position -40
+Avian Cliff Dwellers - 0 at position 0
 
-Kills: 572
-Attacks Dodged: 26,190
-Attacks Blocked: 29,092
-Kills Prevented by Armor: 6,540
+Kills: 2,444
+Attacks Dodged: 4,318
+Attacks Blocked by Shield: 316
+Attacks Blocked by Armor: 1,600
 
  
 
@@ -308,6 +2013,6 @@ Kills Prevented by Armor: 6,540
 BATTLE RESULTS:
 -------------
 Battle ID: 1
-Eastern Army Wins
+Western Army Wins
 Army Conquered
-Tick Count: 56
+Tick Count: 79

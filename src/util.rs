@@ -240,7 +240,7 @@ pub struct Stats {
 impl Stats {
     pub fn format_battle_stats(&self) -> String {
         let stats = format!(
-            "\n\nKills: {}\nAttacks Dodged: {}\nAttacks Blocked: {}\nKills Prevented by Armor: {}\n",
+            "\n\nKills: {}\nAttacks Dodged: {}\nAttacks Blocked by Shield: {}\nAttacks Blocked by Armor: {}\n",
             self.kill.to_formatted_string(&Locale::en), self.dodge_count.to_formatted_string(&Locale::en), self.block_count.to_formatted_string(&Locale::en), self.armor_defense_count.to_formatted_string(&Locale::en),
         );
         stats

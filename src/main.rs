@@ -35,6 +35,7 @@ async fn main() -> Result<()> {
 
     let mut army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults);
 
+    // get first two nations
     let mut battle_tuple =
         get_battle_tuple(1, 2, create_mock_army_defaults(Some(army_defaults_hash)))?;
 

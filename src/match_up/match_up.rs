@@ -33,11 +33,11 @@ pub fn get_battle_tuple(
          * Enter Belligerents Here
          */
         vec![
-            //HighbornCavalry,
+            HighbornCavalry,
             ImperialLegionnaires,
-            //ShinobiMartialArtists,
-            // HoodedAssassins,
-            // AmazonianHuntresses,
+            ShinobiMartialArtists,
+            HoodedAssassins,
+            AmazonianHuntresses,
         ],
     )?;
 
@@ -52,8 +52,8 @@ pub fn get_battle_tuple(
             ElvenArchers,
             NorthWatchLongbowmen,
             CastlegateCrossbowmen,
-            //BarbariansOfTheOuterSteppe,
-            //AvianCliffDwellers,
+            BarbariansOfTheOuterSteppe,
+            AvianCliffDwellers,
         ],
     )?;
 
