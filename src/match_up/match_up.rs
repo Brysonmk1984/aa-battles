@@ -10,10 +10,10 @@ use crate::types::{
         ImperialLegionnaires, MagiEnforcers, Militia, NorthWatchLongbowmen, OathSwornKnights,
         PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists, SkullClanDeathCultists,
     },
-    Battalion, BattleArmy, StartingDirection,
+    Battalion, BattleArmy, Nation, NationArmy, StartingDirection,
 };
 
-use super::create_mocks::{create_mock_army, MockError};
+use super::create_mocks::{create_battle_army, create_mock_army, MockError};
 
 /**
 *  fn get_battle_tuple -
@@ -21,52 +21,59 @@ use super::create_mocks::{create_mock_army, MockError};
 * params - id_1 (nation Id), id_2, army_defaults (hashmap of army types, to be converted to Battalion)
 */
 pub fn get_battle_tuple(
-    id_1: i32,
-    id_2: i32,
+    competitors: ((Nation, Vec<NationArmy>), (Nation, Vec<NationArmy>)),
     army_defaults: HashMap<ArmyName, Army>,
+    battalion_merge_func: impl Fn(
+        (Nation, Vec<NationArmy>),
+        &HashMap<ArmyName, Army>,
+        StartingDirection,
+    ) -> BattleArmy,
 ) -> Result<(BattleArmy, BattleArmy), MockError> {
-    // TODO: In the future, we need to replace this with the user's army saved in a new db table
-    let full_army_west = create_mock_army(
-        StartingDirection::WEST,
-        &army_defaults,
-        /**
-         * Enter Belligerents Here
-         */
-        vec![
-            HighbornCavalry,
-            ImperialLegionnaires,
-            ShinobiMartialArtists,
-            HoodedAssassins,
-            AmazonianHuntresses,
-        ],
-    )?;
-
-    // TODO: In the future, we need to replace this with the user's army saved in a new db table
-    let full_army_east = create_mock_army(
-        StartingDirection::EAST,
-        &army_defaults,
-        /**
-         * Enter Belligerents Here
-         */
-        vec![
-            ElvenArchers,
-            NorthWatchLongbowmen,
-            CastlegateCrossbowmen,
-            BarbariansOfTheOuterSteppe,
-            AvianCliffDwellers,
-        ],
-    )?;
+    let (west_competitor, east_competitor) = competitors;
 
     Ok((
-        BattleArmy {
-            nation_id: id_1,
-            full_army: full_army_west,
-        },
-        BattleArmy {
-            nation_id: id_2,
-            full_army: full_army_east,
-        },
+        battalion_merge_func(west_competitor, &army_defaults, StartingDirection::WEST),
+        battalion_merge_func(east_competitor, &army_defaults, StartingDirection::EAST),
     ))
+}
+
+/**
+ * Used to merge the nation details, the nation_army details, and the default army stats together
+ * into a BattleArmy, which is used throughout the battle algorithm
+ */
+pub fn create_battle_army(
+    competitor: (Nation, Vec<NationArmy>),
+    army_defaults: &HashMap<ArmyName, Army>,
+    starting_direction: StartingDirection,
+) -> BattleArmy {
+    let (nation_details, nation_army_details) = competitor;
+
+    nation_army_details.iter().fold(
+        BattleArmy {
+            nation_id: nation_details.id,
+            full_army: vec![],
+        },
+        |mut acc, nation_army| {
+            let name = nation_army.army_name;
+            let count = nation_army.count;
+
+            let army_default = army_defaults.get(&name).unwrap();
+
+            let merged_battalion = Battalion {
+                name,
+                count,
+                position: if starting_direction == StartingDirection::WEST {
+                    -150
+                } else {
+                    150
+                },
+                starting_direction,
+                ..Battalion::from(army_default)
+            };
+            acc.full_army.push(merged_battalion);
+            acc
+        },
+    )
 }
 
 impl From<&Army> for Battalion {
@@ -201,5 +208,32 @@ pub mod test {
         assert_eq!(test_battalion_ref.is_marching, false);
         test_battalion_ref.set_is_marching(true, None);
         assert_eq!(test_battalion_ref.is_marching, true);
+    }
+}
+
+pub fn create_mock_battle_army(
+    competitor: (Nation, Vec<NationArmy>),
+    army_defaults: &HashMap<ArmyName, Army>,
+    starting_direction: StartingDirection,
+) -> BattleArmy {
+    // TODO: In the future, we need to replace this with the user's army saved in a new db table
+    let full_army_west = create_mock_army(
+        StartingDirection::WEST,
+        &army_defaults,
+        /**
+         * Enter Belligerents Here
+         */
+        vec![
+            HighbornCavalry,
+            ImperialLegionnaires,
+            ShinobiMartialArtists,
+            HoodedAssassins,
+            AmazonianHuntresses,
+        ],
+    )?;
+
+    BattleArmy {
+        nation_id: (),
+        full_army: (),
     }
 }

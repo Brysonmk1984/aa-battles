@@ -4,7 +4,7 @@ use serde::{de::IntoDeserializer, Deserialize, Deserializer, Serialize};
 use serde_this_or_that::as_f64;
 use strum_macros::{Display, EnumString};
 
-use crate::types::{Army, BattleArmy};
+use crate::types::{Army, BattleArmy, Nation, NationArmy};
 
 pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> {
     let body = reqwest::get(
@@ -20,6 +20,16 @@ pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> {
 pub async fn get_competing_nations(
     nation_id_1: i32,
     nation_id_2: i32,
-) -> Result<(BattleArmy, BattleArmy), Box<dyn Error>> {
+) -> Result<((Nation, Vec<NationArmy>), (Nation, Vec<NationArmy>)), Box<dyn Error>> {
     // Need a query to get all nation_armies by nation_id + join with armies
+    let api_url =
+        env::var("API_URL").expect("API_URL environment variable should exist but is missing");
+    let full_url = "/matchup";
+    let url = api_url + full_url;
+
+    let response = reqwest::get(url).await?;
+    let body = response.json::<Vec<(Nation, Vec<NationArmy>)>>().await?;
+    let competitors = (body[0].to_owned(), body[1].to_owned());
+
+    Ok(competitors)
 }

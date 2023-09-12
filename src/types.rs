@@ -223,7 +223,8 @@ impl Battalion {
 }
 
 // Full Army a user will use to battle
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Deserialize, Default)]
+
 pub struct BattleArmy {
     pub nation_id: i32,
     pub full_army: Vec<Battalion>,
@@ -274,7 +275,7 @@ pub struct Army {
 }
 
 #[derive(
-    Display, Debug, Clone, Default, Deserialize, Serialize, EnumString, PartialEq, Eq, Hash,
+    Display, Debug, Clone, Copy, Default, Deserialize, Serialize, EnumString, PartialEq, Eq, Hash,
 )]
 pub enum ArmyName {
     #[serde(rename = "Amazonian Huntresses")]
@@ -402,14 +403,16 @@ impl BattleResult {
     }
 }
 
+#[derive(Debug, Deserialize, Clone, Copy, Default)]
 pub struct Nation {
-    id: i32,
-    user_id: i32,
-    name: String,
+    pub id: i32,
+    pub user_id: i32,
 }
+#[derive(Debug, Deserialize, Clone, Copy)]
 pub struct NationArmy {
     id: i32,
     nation_id: i32,
-    army_id: String,
-    count: i32,
+    army_id: i32,
+    pub count: i32,
+    pub army_name: ArmyName,
 }

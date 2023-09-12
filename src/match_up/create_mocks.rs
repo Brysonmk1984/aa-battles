@@ -3,7 +3,10 @@ use std::collections::HashMap;
 use serde::de::Error;
 use thiserror::Error;
 
-use crate::types::{Army, ArmyName, Battalion, PartialBattalionForTests, StartingDirection};
+use crate::types::{
+    Army, ArmyName, Battalion, BattleArmy, Belligerent, Nation, NationArmy,
+    PartialBattalionForTests, StartingDirection,
+};
 
 use super::mock_default_army_vec::get_mock_defaults;
 
@@ -13,17 +16,18 @@ pub enum MockError {
     InvalidArmyName,
 }
 
+/**
+ * Depending on if army defaults from the db were passed in (as a hashmap), either use those as the defaults
+ * Or use the mock_defaults for testing purposes
+ * TODO - In the future, use the actual DB values for tests
+ */
 pub fn create_mock_army_defaults(
     defaults_option: Option<HashMap<ArmyName, Army>>,
 ) -> HashMap<ArmyName, Army> {
-    let mut defaults: HashMap<ArmyName, Army>;
-
     match defaults_option {
-        Some(defaults_from_db) => defaults = defaults_from_db,
-        None => defaults = get_mock_defaults(),
+        Some(defaults_from_db) => defaults_from_db,
+        None => get_mock_defaults(),
     }
-
-    defaults
 }
 
 /**

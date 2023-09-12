@@ -2,11 +2,14 @@
 use color_eyre::eyre::Result;
 use service::query;
 use std::{collections::HashMap, error::Error, fs::File, io::Write};
-use types::Battalion;
+use types::{Battalion, NationArmy};
 
 use crate::{
-    match_up::{create_mocks::create_mock_army_defaults, match_up::get_battle_tuple},
-    types::{Army, ArmyName, Battle},
+    match_up::{
+        create_mocks::{create_battle_army, create_mock_army_defaults},
+        match_up::get_battle_tuple,
+    },
+    types::{Army, ArmyName, Battle, Nation},
     util::{
         create_hash_of_defaults, get_logs, get_stats, push_log, set_weapon_armor_hash, BattleLog,
         LOG_MUTEX, WEAPON_ARMOR_CELL,
@@ -35,9 +38,38 @@ async fn main() -> Result<()> {
 
     let mut army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults);
 
-    // get first two nations
-    let mut battle_tuple =
-        get_battle_tuple(1, 2, create_mock_army_defaults(Some(army_defaults_hash)))?;
+    let mut competitors = query::get_competing_nations(1, 2).await.unwrap();
+    println!("{competitors:?}");
+
+    // Generate BattleArmy for both competitors
+    // let mut battle_tuple = get_battle_tuple(
+    //     competitors,
+    //     create_mock_army_defaults(Some(army_defaults_hash)),
+    //     create_battle_army,
+    // )?;
+
+    // Generate BattleArmy without nation merging (for manual tests)
+    let mut battle_tuple = get_battle_tuple(
+        (
+            (
+                Nation {
+                    ..Default::default()
+                },
+                vec![] as Vec<NationArmy>,
+            ),
+            (
+                Nation {
+                    ..Default::default()
+                },
+                vec![],
+            ),
+        ),
+        create_mock_army_defaults(Some(army_defaults_hash)),
+        create_mock_battle_army,
+    )?;
+
+    println!("BTBTBT{battle_tuple:?}");
+    //get_battle_tuple_from_server(1, 2, create_mock_army_defaults(Some(army_defaults_hash)))?;
 
     let battle_headline = format!(
         "{} \nVS\n{}",
