@@ -1,13 +1,13 @@
 #![allow(warnings)]
 use color_eyre::eyre::Result;
 use service::query;
-use std::{collections::HashMap, error::Error, fs::File, io::Write};
+use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
 use types::{Battalion, NationArmy};
 
 use crate::{
     match_up::{
-        create_mocks::{create_battle_army, create_mock_army_defaults},
-        match_up::get_battle_tuple,
+        create_mocks::{create_default_competitor, create_mock_army_defaults},
+        match_up::{create_battle_army, create_mock_battle_army, get_battle_tuple},
     },
     types::{Army, ArmyName, Battle, Nation},
     util::{
@@ -39,37 +39,28 @@ async fn main() -> Result<()> {
     let mut army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults);
 
     let mut competitors = query::get_competing_nations(1, 2).await.unwrap();
-    println!("{competitors:?}");
 
-    // Generate BattleArmy for both competitors
-    // let mut battle_tuple = get_battle_tuple(
-    //     competitors,
-    //     create_mock_army_defaults(Some(army_defaults_hash)),
-    //     create_battle_army,
-    // )?;
+    let args: Vec<_> = env::args().collect();
 
-    // Generate BattleArmy without nation merging (for manual tests)
-    let mut battle_tuple = get_battle_tuple(
-        (
-            (
-                Nation {
-                    ..Default::default()
-                },
-                vec![] as Vec<NationArmy>,
-            ),
-            (
-                Nation {
-                    ..Default::default()
-                },
-                vec![],
-            ),
-        ),
-        create_mock_army_defaults(Some(army_defaults_hash)),
-        create_mock_battle_army,
-    )?;
+    let mut battle_tuple;
 
-    println!("BTBTBT{battle_tuple:?}");
-    //get_battle_tuple_from_server(1, 2, create_mock_army_defaults(Some(army_defaults_hash)))?;
+    if args.len() > 1 && args[1] == "test" {
+        println!("** USING COMPETITORS FROM MATCHUP FILE ** \n\n");
+        // Generate BattleArmy without nation merging (for manual tests)
+        battle_tuple = get_battle_tuple(
+            (create_default_competitor(), create_default_competitor()),
+            create_mock_army_defaults(Some(army_defaults_hash)),
+            create_mock_battle_army,
+        )?;
+    } else {
+        println!("** USING COMPETITORS FROM DB **\n\n");
+        // Generate BattleArmy for both competitors
+        battle_tuple = get_battle_tuple(
+            competitors,
+            create_mock_army_defaults(Some(army_defaults_hash)),
+            create_battle_army,
+        )?;
+    }
 
     let battle_headline = format!(
         "{} \nVS\n{}",

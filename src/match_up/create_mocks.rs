@@ -82,3 +82,12 @@ pub fn create_mock_generic_battalion(partial_battalion: PartialBattalionForTests
 
     mock_battalion
 }
+
+pub fn create_default_competitor() -> (Nation, Vec<NationArmy>) {
+    (
+        Nation {
+            ..Default::default()
+        },
+        vec![] as Vec<NationArmy>,
+    )
+}

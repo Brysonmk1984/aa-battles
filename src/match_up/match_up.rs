@@ -13,7 +13,7 @@ use crate::types::{
     Battalion, BattleArmy, Nation, NationArmy, StartingDirection,
 };
 
-use super::create_mocks::{create_battle_army, create_mock_army, MockError};
+use super::create_mocks::{create_mock_army, MockError};
 
 /**
 *  fn get_battle_tuple -
@@ -216,24 +216,33 @@ pub fn create_mock_battle_army(
     army_defaults: &HashMap<ArmyName, Army>,
     starting_direction: StartingDirection,
 ) -> BattleArmy {
-    // TODO: In the future, we need to replace this with the user's army saved in a new db table
-    let full_army_west = create_mock_army(
-        StartingDirection::WEST,
+    let full_army = create_mock_army(
+        starting_direction,
         &army_defaults,
         /**
          * Enter Belligerents Here
          */
-        vec![
-            HighbornCavalry,
-            ImperialLegionnaires,
-            ShinobiMartialArtists,
-            HoodedAssassins,
-            AmazonianHuntresses,
-        ],
-    )?;
+        if starting_direction == StartingDirection::WEST {
+            vec![
+                HighbornCavalry,
+                ImperialLegionnaires,
+                ShinobiMartialArtists,
+                HoodedAssassins,
+                AmazonianHuntresses,
+            ]
+        } else {
+            vec![
+                NorthWatchLongbowmen,
+                ElvenArchers,
+                CastlegateCrossbowmen,
+                BarbariansOfTheOuterSteppe,
+            ]
+        },
+    )
+    .unwrap();
 
     BattleArmy {
-        nation_id: (),
-        full_army: (),
+        full_army,
+        nation_id: competitor.0.id,
     }
 }
