@@ -69,8 +69,9 @@ mod tests {
     use crate::types::ArmyName::{
         self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
         CastlegateCrossbowmen, ElvenArchers, HighbornCavalry, HoodedAssassins,
-        ImperialLegionnaires, MagiEnforcers, Militia, NorthWatchLongbowmen, OathSwornKnights,
-        PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists, SkullClanDeathCultists,
+        ImperialLegionnaires, MagiEnforcers, MinuteMenMilitia, NorthWatchLongbowmen,
+        OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
+        SkullClanDeathCultists,
     };
     use crate::types::StartingDirection;
     use crate::util::set_weapon_armor_hash;

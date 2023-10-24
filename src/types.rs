@@ -315,9 +315,9 @@ pub enum ArmyName {
     #[strum(serialize = "Oath-Sworn Knights")]
     OathSwornKnights,
     #[default]
-    #[serde(rename = "Militia")]
-    #[strum(serialize = "Militia")]
-    Militia,
+    #[serde(rename = "Minute Men Militia")]
+    #[strum(serialize = "Minute Men Militia")]
+    MinuteMenMilitia,
     #[serde(rename = "Hooded Assassins")]
     #[strum(serialize = "Hooded Assassins")]
     HoodedAssassins,

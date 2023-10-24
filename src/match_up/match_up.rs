@@ -7,8 +7,9 @@ use crate::types::{
     ArmyName::{
         self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
         CastlegateCrossbowmen, ElvenArchers, HighbornCavalry, HoodedAssassins,
-        ImperialLegionnaires, MagiEnforcers, Militia, NorthWatchLongbowmen, OathSwornKnights,
-        PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists, SkullClanDeathCultists,
+        ImperialLegionnaires, MagiEnforcers, MinuteMenMilitia, NorthWatchLongbowmen,
+        OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
+        SkullClanDeathCultists,
     },
     Battalion, BattleArmy, Nation, NationArmy, StartingDirection,
 };
