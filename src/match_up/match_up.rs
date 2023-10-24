@@ -6,7 +6,7 @@ use crate::types::{
     Army,
     ArmyName::{
         self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
-        CastlegateCrossbowmen, ElvenArchers, HighbornCavalry, HoodedAssassins,
+        CastlegateCrossbowmen, DeathDealerAssassin, ElvenArchers, HighbornCavalry,
         ImperialLegionnaires, MagiEnforcers, MinuteMenMilitia, NorthWatchLongbowmen,
         OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
         SkullClanDeathCultists,
@@ -228,7 +228,7 @@ pub fn create_mock_battle_army(
                 HighbornCavalry,
                 ImperialLegionnaires,
                 ShinobiMartialArtists,
-                HoodedAssassins,
+                DeathDealerAssassin,
                 AmazonianHuntresses,
             ]
         } else {

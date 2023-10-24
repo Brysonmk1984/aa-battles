@@ -23,7 +23,7 @@ pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<ArmyName, Ar
     );
     army_defaults_hash.insert(ArmyName::OathSwornKnights, army_defaults[11].to_owned());
     army_defaults_hash.insert(ArmyName::MinuteMenMilitia, army_defaults[12].to_owned());
-    army_defaults_hash.insert(ArmyName::HoodedAssassins, army_defaults[13].to_owned());
+    army_defaults_hash.insert(ArmyName::DeathDealerAssassin, army_defaults[13].to_owned());
     army_defaults_hash.insert(ArmyName::ElvenArchers, army_defaults[14].to_owned());
     army_defaults_hash.insert(
         ArmyName::CastlegateCrossbowmen,
