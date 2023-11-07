@@ -68,7 +68,7 @@ mod tests {
     use crate::match_up::create_mocks::{create_mock_army, create_mock_army_defaults};
     use crate::types::ArmyName::{
         self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
-        CastlegateCrossbowmen, DeathDealerAssassin, ElvenArchers, HighbornCavalry,
+        CastlegateCrossbowmen, DeathDealerAssassins, ElvenArchers, HighbornCavalry,
         ImperialLegionnaires, MagiEnforcers, MinuteMenMilitia, NorthWatchLongbowmen,
         OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
         SkullClanDeathCultists,

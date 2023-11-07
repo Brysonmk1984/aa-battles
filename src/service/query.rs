@@ -1,4 +1,4 @@
-use std::{env, error::Error};
+use std::{collections::HashMap, env, error::Error};
 
 use serde::{de::IntoDeserializer, Deserialize, Deserializer, Serialize};
 use serde_this_or_that::as_f64;
@@ -26,8 +26,13 @@ pub async fn get_competing_nations(
         env::var("API_URL").expect("API_URL environment variable should exist but is missing");
     let full_url = "/matchup";
     let url = api_url + full_url;
+    let client = reqwest::Client::new();
+    let mut body = HashMap::new();
+    body.insert("east_competitor", nation_id_1);
+    body.insert("west_competitor", nation_id_2);
 
-    let response = reqwest::get(url).await?;
+    let response = client.post(url).json(&body).send().await?;
+
     let body = response.json::<Vec<(Nation, Vec<NationArmy>)>>().await?;
     let competitors = (body[0].to_owned(), body[1].to_owned());
 

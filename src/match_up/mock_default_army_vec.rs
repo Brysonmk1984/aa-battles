@@ -217,7 +217,7 @@ pub fn get_mock_defaults() -> HashMap<ArmyName, Army> {
         },
         Army {
             id: 14,
-            name: ArmyName::DeathDealerAssassin,
+            name: ArmyName::DeathDealerAssassins,
             count: 1,
             shield_rating: 0.0,
             flying: false,

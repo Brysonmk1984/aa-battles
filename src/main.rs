@@ -38,7 +38,18 @@ async fn main() -> Result<()> {
 
     let mut army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults);
 
-    let mut competitors = query::get_competing_nations(1, 2).await.unwrap();
+    let east_army = env::var("EAST_ARMY_DEFAULT")
+        .unwrap()
+        .parse::<i32>()
+        .unwrap();
+    let west_army = env::var("WEST_ARMY_DEFAULT")
+        .unwrap()
+        .parse::<i32>()
+        .unwrap();
+
+    let mut competitors = query::get_competing_nations(east_army, west_army)
+        .await
+        .unwrap();
 
     let args: Vec<_> = env::args().collect();
 
