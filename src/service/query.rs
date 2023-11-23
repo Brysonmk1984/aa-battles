@@ -7,10 +7,12 @@ use strum_macros::{Display, EnumString};
 use crate::types::{Army, BattleArmy, Nation, NationArmy};
 
 pub async fn get_all_armies() -> Result<Vec<Army>, Box<dyn Error>> {
-    let body = reqwest::get(
-        env::var("API_URL").expect("API_URL environment variable should exist but is missing"),
-    )
-    .await?;
+    let api =
+        env::var("API_URL").expect("API_URL environment variable should exist but is missing");
+    let full_url = api + "/armies";
+
+    println!("{full_url}");
+    let body = reqwest::get(full_url).await?;
 
     let all_armies = body.json::<Vec<Army>>().await?;
 
@@ -24,7 +26,7 @@ pub async fn get_competing_nations(
     // Need a query to get all nation_armies by nation_id + join with armies
     let api_url =
         env::var("API_URL").expect("API_URL environment variable should exist but is missing");
-    let full_url = "/matchup";
+    let full_url = "/battles";
     let url = api_url + full_url;
     let client = reqwest::Client::new();
     let mut body = HashMap::new();
