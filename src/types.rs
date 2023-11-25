@@ -251,25 +251,20 @@ impl BattleArmy {
 // Otherwise, you can skip these attributes and just use sort_by along with .cmp()
 //#[derive(Eq, Ord, PartialEq, PartialOrd)]
 
-#[derive(Deserialize, Serialize, Debug, Clone, Default)]
+#[derive(Debug, Clone, Default)]
 pub struct Army {
     pub id: i32,
     pub name: ArmyName,
     pub count: i32,
-    #[serde(deserialize_with = "as_f64")]
     pub shield_rating: f64,
     pub flying: bool,
     pub range: i32,
     pub attack_speed: i32,
-    #[serde(deserialize_with = "as_f64")]
     pub accuracy: f64,
-    #[serde(deserialize_with = "as_f64")]
     pub aoe: f64,
-    #[serde(deserialize_with = "as_f64")]
     pub spread: f64,
     pub weapon_type: WeaponType,
     pub armor_type: ArmorType,
-    #[serde(deserialize_with = "as_f64")]
     pub agility: f64,
     pub speed: i32,
 }
@@ -330,6 +325,7 @@ pub enum ArmyName {
 }
 
 #[serde(rename_all = "snake_case")]
+#[strum(serialize_all = "lowercase")]
 #[derive(Debug, Clone, Copy, Default, Display, Deserialize, Serialize, EnumString, PartialEq)]
 pub enum WeaponType {
     Blunt,
@@ -341,6 +337,7 @@ pub enum WeaponType {
 }
 
 #[serde(rename_all = "snake_case")]
+#[strum(serialize_all = "lowercase")]
 #[derive(Debug, Display, Clone, Copy, Default, Deserialize, Serialize, EnumString, PartialEq)]
 pub enum ArmorType {
     #[default]
@@ -403,16 +400,18 @@ impl BattleResult {
     }
 }
 
-#[derive(Debug, Deserialize, Clone, Copy, Default)]
+#[derive(Debug, Deserialize, Clone, Default)]
 pub struct Nation {
     pub id: i32,
     pub user_id: i32,
+    pub name: String,
+    pub gold: i32,
 }
 #[derive(Debug, Deserialize, Clone, Copy)]
 pub struct NationArmy {
-    id: i32,
-    nation_id: i32,
-    army_id: i32,
+    pub id: i32,
+    pub nation_id: i32,
+    pub army_id: i32,
     pub count: i32,
     pub army_name: ArmyName,
 }
