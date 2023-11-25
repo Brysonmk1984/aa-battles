@@ -406,6 +406,7 @@ pub struct Nation {
     pub user_id: i32,
     pub name: String,
     pub gold: i32,
+    pub is_npc: bool,
 }
 #[derive(Debug, Deserialize, Clone, Copy)]
 pub struct NationArmy {

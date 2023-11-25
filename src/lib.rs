@@ -52,7 +52,7 @@ pub fn do_battle(
     println!("** USING COMPETITORS FROM DB **\n\n");
     // Generate BattleArmy for both competitors
     battle_tuple = get_battle_tuple(
-        competitors,
+        (competitors.0, competitors.1),
         create_mock_army_defaults(Some(army_defaults_hash)),
         create_battle_army,
     )
