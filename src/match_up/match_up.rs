@@ -30,11 +30,11 @@ pub fn get_battle_tuple(
         StartingDirection,
     ) -> BattleArmy,
 ) -> Result<(BattleArmy, BattleArmy), MockError> {
-    let (west_competitor, east_competitor) = competitors;
+    let (east_competitor, west_competitor) = competitors;
 
     Ok((
-        battalion_merge_func(west_competitor, &army_defaults, StartingDirection::WEST),
         battalion_merge_func(east_competitor, &army_defaults, StartingDirection::EAST),
+        battalion_merge_func(west_competitor, &army_defaults, StartingDirection::WEST),
     ))
 }
 
@@ -63,7 +63,7 @@ pub fn create_battle_army(
             let merged_battalion = Battalion {
                 name,
                 count,
-                position: if starting_direction == StartingDirection::WEST {
+                position: if starting_direction == StartingDirection::EAST {
                     -150
                 } else {
                     150

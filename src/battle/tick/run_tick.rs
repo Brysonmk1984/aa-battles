@@ -41,19 +41,19 @@ pub fn run_tick(battle_state: &mut Battle) -> i32 {
     );
 
     // STEP 3: Adjust Counts
-    let mut western_army_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+    let mut eastern_army_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
         sum += b.count;
         sum
     });
-    let mut eastern_army_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
+    let mut western_army_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
         sum += b.count;
         sum
     });
 
     // STEP 4: March forward
     if western_army_count > 0 && eastern_army_count >= 0 {
-        march_phase(&mut battle_state.army_1_state, &StartingDirection::WEST);
-        march_phase(&mut battle_state.army_2_state, &StartingDirection::EAST);
+        march_phase(&mut battle_state.army_1_state, &StartingDirection::EAST);
+        march_phase(&mut battle_state.army_2_state, &StartingDirection::WEST);
     }
 
     let total_combined_count = western_army_count + eastern_army_count;

@@ -63,14 +63,14 @@ pub fn attack_phase<'a, 'b>(
 }
 
 fn determine_past_all_defenders(attacker: &Battalion, defenders: &Vec<Battalion>) -> bool {
-    let attacker_is_west = attacker.starting_direction == StartingDirection::WEST;
-    let defender_is_west = !attacker_is_west;
-    let init = if defender_is_west { -150 } else { 150 };
-    // Min position is the furthest point back on the numberline, so for west it's a negative number, east it's positive
+    let attacker_is_east = attacker.starting_direction == StartingDirection::EAST;
+    let defender_is_east = !attacker_is_east;
+    let init = if defender_is_east { -150 } else { 150 };
+    // Min position is the furthest point back on the numberline, so for east it's a negative number, west it's positive
     let defender_min_position = defenders.iter().fold(init, |mut min: i32, d| {
         if d.count > 0 {
             //println!("{} {}", d.name, d.position);
-            if defender_is_west {
+            if defender_is_east {
                 if d.position > min {
                     min = d.position
                 }
@@ -86,7 +86,7 @@ fn determine_past_all_defenders(attacker: &Battalion, defenders: &Vec<Battalion>
 
     //println!("IS WEST={defender_is_west}, {defender_min_position}");
 
-    if attacker_is_west {
+    if attacker_is_east {
         attacker.position > defender_min_position
     } else {
         attacker.position < defender_min_position

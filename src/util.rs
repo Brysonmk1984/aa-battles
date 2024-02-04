@@ -184,7 +184,7 @@ pub fn push_stat_dodge(starting_direction: StartingDirection) {
 pub fn push_stat_block(starting_direction: StartingDirection) {
     let mut tuple = STATS_RWLOCK.write().unwrap();
 
-    if starting_direction == StartingDirection::WEST {
+    if starting_direction == StartingDirection::EAST {
         tuple.0.block_count += 1;
     } else {
         tuple.1.block_count += 1;
@@ -194,7 +194,7 @@ pub fn push_stat_block(starting_direction: StartingDirection) {
 pub fn push_stat_armor(starting_direction: StartingDirection) {
     let mut tuple = STATS_RWLOCK.write().unwrap();
 
-    if starting_direction == StartingDirection::WEST {
+    if starting_direction == StartingDirection::EAST {
         tuple.0.armor_defense_count += 1;
     } else {
         tuple.1.armor_defense_count += 1;
@@ -204,7 +204,7 @@ pub fn push_stat_armor(starting_direction: StartingDirection) {
 pub fn push_stat_kill(kills: u32, starting_direction: StartingDirection) {
     let mut tuple = STATS_RWLOCK.write().unwrap();
 
-    if starting_direction == StartingDirection::WEST {
+    if starting_direction == StartingDirection::EAST {
         tuple.0.kill += kills;
     } else {
         tuple.1.kill += kills;

@@ -27,7 +27,7 @@ impl Battle {
      */
     pub fn run_battle(&mut self) -> BattleResult {
         push_log(
-            "THE BATTLE BEGINS: Both Western & Eastern Army are marching towards each other"
+            "THE BATTLE BEGINS: Both Eastern & Western Army are marching towards each other"
                 .to_string(),
         );
         let mut a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
@@ -53,10 +53,10 @@ impl Battle {
             if winner_by_position.is_some() {
                 battle_result.win_type = Some(WinType::KingCaptured);
                 battle_result.loser =
-                    if winner_by_position.as_ref().unwrap() == &Belligerent::WesternArmy {
-                        Some(Belligerent::EasternArmy)
-                    } else {
+                    if winner_by_position.as_ref().unwrap() == &Belligerent::EasternArmy {
                         Some(Belligerent::WesternArmy)
+                    } else {
+                        Some(Belligerent::EasternArmy)
                     };
                 battle_result.winner = winner_by_position;
                 return battle_result;
@@ -89,28 +89,28 @@ impl Battle {
     pub fn format_battle_state(
         &mut self,
         battle_result: &BattleResult,
-        western_stats: &String,
         eastern_stats: &String,
+        western_stats: &String,
     ) -> String {
         let mut winning_army: (Belligerent, String);
         let mut losing_army: (Belligerent, String);
-        if let Belligerent::WesternArmy = battle_result.winner.as_ref().unwrap() {
+        if let Belligerent::EasternArmy = battle_result.winner.as_ref().unwrap() {
             winning_army = (
-                Belligerent::WesternArmy,
-                self.format_army_state(Belligerent::WesternArmy, western_stats),
-            );
-            losing_army = (
                 Belligerent::EasternArmy,
                 self.format_army_state(Belligerent::EasternArmy, eastern_stats),
+            );
+            losing_army = (
+                Belligerent::WesternArmy,
+                self.format_army_state(Belligerent::WesternArmy, western_stats),
             );
         } else {
             winning_army = (
-                Belligerent::EasternArmy,
-                self.format_army_state(Belligerent::EasternArmy, eastern_stats),
-            );
-            losing_army = (
                 Belligerent::WesternArmy,
                 self.format_army_state(Belligerent::WesternArmy, western_stats),
+            );
+            losing_army = (
+                Belligerent::EasternArmy,
+                self.format_army_state(Belligerent::EasternArmy, eastern_stats),
             );
         }
 
@@ -124,7 +124,7 @@ impl Battle {
      * Helps format the final string of the battle state bu formatting each of the two army states
      */
     fn format_army_state(&mut self, belligerent: Belligerent, stats: &String) -> String {
-        let mut formatted_vec = if belligerent == Belligerent::WesternArmy {
+        let mut formatted_vec = if belligerent == Belligerent::EasternArmy {
             self.army_1_state.sort_by(|a, b| b.count.cmp(&a.count));
             self.army_1_state
                 .iter()
@@ -204,10 +204,10 @@ impl Battalion {
     }
 
     /**
-     * If Starting direction is west, army starts at -150 and marches east, west starts at 150 and marches east
+     * If Starting direction is EAST, army starts at -150 and marches west, WEST starts at 150 and marches east
      */
     pub fn march(&mut self, starting_direction: StartingDirection) {
-        if let StartingDirection::WEST = starting_direction {
+        if let StartingDirection::EAST = starting_direction {
             self.position += self.speed;
         } else {
             self.position -= self.speed;
@@ -388,12 +388,12 @@ impl BattleResult {
     /**
      * Formats the final tally and outcome to be printed to the command line and the log
      */
-    pub fn format_outcome(self) -> String {
+    pub fn format_outcome(&self) -> String {
         let result = format!(
             "Battle ID: {}\n{} Wins\n{}\nTick Count: {}",
             self.id,
-            self.winner.unwrap().to_string(),
-            self.win_type.unwrap().to_string(),
+            self.winner.as_ref().unwrap().to_string(),
+            self.win_type.as_ref().unwrap().to_string(),
             self.tick_count
         );
         format!("\nBATTLE RESULTS:\n-------------\n{result}\n")

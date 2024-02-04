@@ -1,6 +1,6 @@
 #![allow(warnings)]
 use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
-use types::{Battalion, NationArmy};
+use types::{Battalion, BattleResult, NationArmy};
 
 use crate::{
     match_up::{
@@ -27,7 +27,7 @@ type NationWithNationArmies = (Nation, Vec<NationArmy>);
 pub fn do_battle(
     army_defaults: Vec<Army>,
     competitors: (NationWithNationArmies, NationWithNationArmies),
-) -> String {
+) -> (BattleResult, String) {
     dotenvy::dotenv().ok();
 
     let weapon_armor_defaults = set_weapon_armor_hash();
@@ -73,22 +73,22 @@ pub fn do_battle(
     };
 
     let battle_result = battle.run_battle();
-
+    println!("'THRESULTS: {battle_result:?}");
     let battle_stats = get_stats();
-    let western_stats_formatted = battle_stats.0.format_battle_stats();
-    let eastern_stats_formatted = battle_stats.1.format_battle_stats();
 
-    let western_stats_formatted = battle_stats.0.format_battle_stats();
+    let eastern_stats_formatted = battle_stats.0.format_battle_stats();
+    let western_stats_formatted = battle_stats.1.format_battle_stats();
+
     let final_battle_state_formatted = battle.format_battle_state(
         &battle_result,
-        &western_stats_formatted,
         &eastern_stats_formatted,
+        &western_stats_formatted,
     );
 
     battle_log.end_state = Some(final_battle_state_formatted);
 
-    let outcome = battle_result.format_outcome();
-    battle_log.outcome = Some(outcome);
+    let outcome = &battle_result.format_outcome();
+    battle_log.outcome = Some(outcome.to_string());
 
     //let path = "results.txt";
     //let mut output = File::create(path)?;
@@ -99,7 +99,7 @@ pub fn do_battle(
 
     battle_log.events = Some(get_logs());
 
-    let result = format!(
+    let result_description = format!(
         // "{output:?}",
         "{} \n\n{} \n\n{} \n\n{}",
         battle_log.headline.unwrap(),
@@ -108,5 +108,5 @@ pub fn do_battle(
         battle_log.outcome.unwrap()
     );
 
-    result
+    (battle_result, result_description)
 }
