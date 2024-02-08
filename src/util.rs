@@ -156,20 +156,23 @@ pub fn get_logs() -> String {
  * Stores a Stats Struct that tracks stats about battalion performance to report
  * To the end user and developer
  */
-pub static STATS_RWLOCK: RwLock<(Stats, Stats)> = RwLock::new((
+pub static STATS_RWLOCK: RwLock<(Stats, Stats)> =
+    RwLock::new((get_stat_defaults(), get_stat_defaults()));
+
+const fn get_stat_defaults() -> Stats {
     Stats {
         dodge_count: 0,
         block_count: 0,
         armor_defense_count: 0,
         kill: 0,
-    },
-    Stats {
-        dodge_count: 0,
-        block_count: 0,
-        armor_defense_count: 0,
-        kill: 0,
-    },
-));
+    }
+}
+
+pub fn reset_stats() {
+    let mut tuple = STATS_RWLOCK.write().unwrap();
+    tuple.0 = get_stat_defaults();
+    tuple.1 = get_stat_defaults();
+}
 
 pub fn push_stat_dodge(starting_direction: StartingDirection) {
     let mut tuple = STATS_RWLOCK.write().unwrap();

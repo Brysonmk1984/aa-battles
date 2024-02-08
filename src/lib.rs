@@ -9,8 +9,8 @@ use crate::{
     },
     types::{Army, ArmyName, Battle, Nation},
     util::{
-        create_hash_of_defaults, get_logs, get_stats, push_log, set_weapon_armor_hash, BattleLog,
-        LOG_MUTEX, WEAPON_ARMOR_CELL,
+        create_hash_of_defaults, get_logs, get_stats, push_log, reset_stats, set_weapon_armor_hash,
+        BattleLog, LOG_MUTEX, WEAPON_ARMOR_CELL,
     },
 };
 
@@ -107,6 +107,9 @@ pub fn do_battle(
         battle_log.end_state.unwrap(),
         battle_log.outcome.unwrap()
     );
+
+    //LOG_MUTEX.lock().unwrap().clear();
+    reset_stats();
 
     (battle_result, result_description)
 }
