@@ -1,4 +1,5 @@
 #![allow(warnings)]
+use anyhow::{Context, Result};
 use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
 use types::{Battalion, BattleResult, NationArmy};
 
@@ -27,7 +28,7 @@ type NationWithNationArmies = (Nation, Vec<NationArmy>);
 pub fn do_battle(
     army_defaults: Vec<Army>,
     competitors: (NationWithNationArmies, NationWithNationArmies),
-) -> (BattleResult, String) {
+) -> Result<(BattleResult, String)> {
     dotenvy::dotenv().ok();
 
     let weapon_armor_defaults = set_weapon_armor_hash();
@@ -35,29 +36,16 @@ pub fn do_battle(
 
     let mut army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults);
 
-    // let args: Vec<_> = env::args().collect();
-
     let mut battle_tuple;
 
-    // if args.len() > 1 && args[1] == "test" {
-    //     println!("** USING COMPETITORS FROM MATCHUP FILE ** \n\n");
-    //     // Generate BattleArmy without nation merging (for manual tests)
-    //     battle_tuple = get_battle_tuple(
-    //         (create_default_competitor(), create_default_competitor()),
-    //         create_mock_army_defaults(Some(army_defaults_hash)),
-    //         create_mock_battle_army,
-    //     )
-    //     .unwrap();
-    // } else {
     println!("** USING COMPETITORS FROM DB **\n\n");
-    // Generate BattleArmy for both competitors
+
     battle_tuple = get_battle_tuple(
         (competitors.0, competitors.1),
         create_mock_army_defaults(Some(army_defaults_hash)),
         create_battle_army,
     )
-    .unwrap();
-    // }
+    .context("Couldn't create battle tuple")?;
 
     let battle_headline = format!(
         "{} \nVS\n{}",
@@ -90,26 +78,18 @@ pub fn do_battle(
     let outcome = &battle_result.format_outcome();
     battle_log.outcome = Some(outcome.to_string());
 
-    //let path = "results.txt";
-    //let mut output = File::create(path)?;
-
-    // println!("{}", battle_log.headline.as_ref().unwrap());
-    // println!("{}", &battle_log.end_state.as_ref().unwrap());
-    // println!("{}", &battle_log.outcome.as_ref().unwrap());
-
     battle_log.events = Some(get_logs());
 
     let result_description = format!(
         // "{output:?}",
         "{} \n\n{} \n\n{} \n\n{}",
-        battle_log.headline.unwrap(),
+        battle_log.headline.context("Couldn't unwrap headline")?,
         get_logs(),
-        battle_log.end_state.unwrap(),
-        battle_log.outcome.unwrap()
+        battle_log.end_state.context("Couldn't unwrap end_state")?,
+        battle_log.outcome.context("Couldn't unwrap outcome")?
     );
 
-    //LOG_MUTEX.lock().unwrap().clear();
     reset_stats();
 
-    (battle_result, result_description)
+    Ok((battle_result, result_description))
 }

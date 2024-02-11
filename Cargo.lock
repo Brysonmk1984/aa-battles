@@ -6,6 +6,7 @@ version = 3
 name = "aa-battles"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "color-eyre",
  "dotenvy",
  "mockall",
@@ -42,6 +43,12 @@ checksum = "43f6cb1bf222025340178f382c426f13757b2960e89779dfcb319c32542a5a41"
 dependencies = [
  "memchr",
 ]
+
+[[package]]
+name = "anyhow"
+version = "1.0.79"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "080e9890a082662b09c1ad45f567faeeb47f22b5fb23895fbe1e651e718e25ca"
 
 [[package]]
 name = "arrayvec"
