@@ -359,7 +359,7 @@ pub struct PartialBattalionForTests {
     pub starting_direction: Option<StartingDirection>,
 }
 
-#[derive(Debug, Display, PartialEq)]
+#[derive(Serialize, Debug, Display, PartialEq)]
 pub enum Belligerent {
     #[strum(serialize = "Western Army")]
     WesternArmy,
@@ -367,7 +367,7 @@ pub enum Belligerent {
     EasternArmy,
 }
 
-#[derive(Debug, Display, PartialEq)]
+#[derive(Serialize, Debug, Display, PartialEq)]
 pub enum WinType {
     #[strum(serialize = "Army Conquered")]
     ArmyConquered,
@@ -375,7 +375,7 @@ pub enum WinType {
     KingCaptured,
 }
 
-#[derive(Debug, PartialEq, Default)]
+#[derive(Serialize, Debug, PartialEq, Default)]
 pub struct BattleResult {
     pub id: i32,
     pub winner: Option<Belligerent>,

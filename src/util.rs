@@ -147,8 +147,8 @@ pub fn push_log(message: String) {
     val.push(message);
 }
 
-pub fn get_logs() -> String {
-    LOG_MUTEX.lock().unwrap().to_vec().join("\n")
+pub fn get_logs() -> Vec<String> {
+    LOG_MUTEX.lock().unwrap().to_vec()
 }
 
 /**
@@ -253,7 +253,7 @@ impl Stats {
 #[derive(Debug)]
 pub struct BattleLog {
     pub headline: Option<String>,
-    pub events: Option<String>,
+    pub events: Option<Vec<String>>,
     pub stats: Stats,
     pub end_state: Option<String>,
     pub outcome: Option<String>,

@@ -1,5 +1,6 @@
 #![allow(warnings)]
 use anyhow::{Context, Result};
+use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
 use types::{Battalion, BattleResult, NationArmy};
 
@@ -28,7 +29,7 @@ type NationWithNationArmies = (Nation, Vec<NationArmy>);
 pub fn do_battle(
     army_defaults: Vec<Army>,
     competitors: (NationWithNationArmies, NationWithNationArmies),
-) -> Result<(BattleResult, String)> {
+) -> Result<EndBattlePayload> {
     dotenvy::dotenv().ok();
 
     let weapon_armor_defaults = set_weapon_armor_hash();
@@ -80,16 +81,24 @@ pub fn do_battle(
 
     battle_log.events = Some(get_logs());
 
-    let result_description = format!(
-        // "{output:?}",
-        "{} \n\n{} \n\n{} \n\n{}",
-        battle_log.headline.context("Couldn't unwrap headline")?,
-        get_logs(),
-        battle_log.end_state.context("Couldn't unwrap end_state")?,
-        battle_log.outcome.context("Couldn't unwrap outcome")?
-    );
-
     reset_stats();
 
-    Ok((battle_result, result_description))
+    let end_battle_payload = EndBattlePayload {
+        battle_result,
+        headline: battle_log.headline.unwrap(),
+        events: battle_log.events.unwrap(),
+        end_state: battle_log.end_state.unwrap(),
+        outcome: battle_log.outcome.unwrap(),
+    };
+
+    Ok(end_battle_payload)
+}
+
+#[derive(Serialize, Debug)]
+pub struct EndBattlePayload {
+    pub battle_result: BattleResult,
+    headline: String,
+    events: Vec<String>,
+    end_state: String,
+    outcome: String,
 }

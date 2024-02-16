@@ -3,7 +3,7 @@ use crate::{
     util::push_log,
     Battle,
 };
-use anyhow::Context
+use anyhow::Context;
 
 pub fn check_for_king_captured_condition(battle_state: &Battle) -> Option<Belligerent> {
     let eastern_army_reached_enemy_king = battle_state
