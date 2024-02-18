@@ -96,6 +96,7 @@ pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
 use std::sync::{OnceLock, RwLock};
 
 use num_format::{Locale, ToFormattedString};
+use serde::Serialize;
 
 use crate::types::{Army, ArmyName, Belligerent, StartingDirection};
 
@@ -232,7 +233,7 @@ pub fn get_stats() -> (Stats, Stats) {
     )
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct Stats {
     pub dodge_count: u32,
     pub block_count: u32,

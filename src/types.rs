@@ -223,7 +223,7 @@ impl Battalion {
 }
 
 // Full Army a user will use to battle
-#[derive(Debug, Clone, Deserialize, Default)]
+#[derive(Debug, Clone, Deserialize, Serialize, Default)]
 
 pub struct BattleArmy {
     pub nation_id: i32,
