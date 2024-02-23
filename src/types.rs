@@ -416,3 +416,7 @@ pub struct NationArmy {
     pub count: i32,
     pub army_name: ArmyName,
 }
+
+pub struct GameDefaults {
+    pub weapons_vs_armor: &'static HashMap<&'static str, f64>,
+}

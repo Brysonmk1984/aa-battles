@@ -2,7 +2,7 @@
 use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
-use types::{Battalion, BattleArmy, BattleResult, NationArmy};
+use types::{Battalion, BattleArmy, BattleResult, GameDefaults, NationArmy};
 use util::Stats;
 
 use crate::{
@@ -12,8 +12,8 @@ use crate::{
     },
     types::{Army, ArmyName, Battle, Nation},
     util::{
-        create_hash_of_defaults, get_logs, get_stats, push_log, reset_stats, set_weapon_armor_hash,
-        BattleLog, LOG_MUTEX, WEAPON_ARMOR_CELL,
+        create_hash_of_defaults, get_logs, get_stats, push_log, reset_stats, BattleLog, LOG_MUTEX,
+        WEAPON_ARMOR_CELL,
     },
 };
 
@@ -28,12 +28,15 @@ pub const IS_MARCHING_AGILITY_MOD: f64 = 0.15;
 type NationWithNationArmies = (Nation, Vec<NationArmy>);
 
 pub fn do_battle(
+    game_defaults: GameDefaults,
     army_defaults: Vec<Army>,
     competitors: (NationWithNationArmies, NationWithNationArmies),
 ) -> Result<EndBattlePayload> {
     dotenvy::dotenv().ok();
     reset_stats();
-    let weapon_armor_defaults = set_weapon_armor_hash();
+
+    WEAPON_ARMOR_CELL.set(game_defaults.weapons_vs_armor.clone());
+
     let mut battle_log = BattleLog::new();
 
     let mut army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults);

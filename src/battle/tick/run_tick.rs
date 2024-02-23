@@ -77,7 +77,6 @@ mod tests {
     use crate::util::set_weapon_armor_hash;
     use std::sync::OnceLock;
     use std::{collections::HashMap, env};
-    pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<&str, f64>> = OnceLock::new();
 
     #[test]
     fn test_update_in_range_map_in_range() {
