@@ -60,27 +60,27 @@ mod tests {
     };
 
     #[test]
-    fn test_determine_army_conquered_condition_west() {
-        let mut battle_result: BattleResult = Default::default();
-
-        let updated_battle_result = determine_army_conquered_condition(battle_result, 1000, 0);
-        assert_eq!(updated_battle_result.winner, Some(Belligerent::WesternArmy));
-        assert_eq!(updated_battle_result.loser, Some(Belligerent::EasternArmy));
-        assert_eq!(updated_battle_result.win_type, Some(WinType::ArmyConquered));
-    }
-
-    #[test]
     fn test_determine_army_conquered_condition_east() {
         let mut battle_result: BattleResult = Default::default();
 
-        let updated_battle_result = determine_army_conquered_condition(battle_result, 0, 1000);
+        let updated_battle_result = determine_army_conquered_condition(battle_result, 1000, 0);
         assert_eq!(updated_battle_result.winner, Some(Belligerent::EasternArmy));
         assert_eq!(updated_battle_result.loser, Some(Belligerent::WesternArmy));
         assert_eq!(updated_battle_result.win_type, Some(WinType::ArmyConquered));
     }
 
     #[test]
-    fn test_check_for_king_captured_condition_west_win() {
+    fn test_determine_army_conquered_condition_west() {
+        let mut battle_result: BattleResult = Default::default();
+
+        let updated_battle_result = determine_army_conquered_condition(battle_result, 0, 1000);
+        assert_eq!(updated_battle_result.winner, Some(Belligerent::WesternArmy));
+        assert_eq!(updated_battle_result.loser, Some(Belligerent::EasternArmy));
+        assert_eq!(updated_battle_result.win_type, Some(WinType::ArmyConquered));
+    }
+
+    #[test]
+    fn test_check_for_king_captured_condition_east_win() {
         // Ground Army that can't hit air
         let mock_partial_battalion_1 = PartialBattalionForTests {
             count: Some(1000),
@@ -111,11 +111,12 @@ mod tests {
         };
 
         let belligerent = check_for_king_captured_condition(&battle_state).unwrap();
-        assert_eq!(belligerent, Belligerent::WesternArmy);
+
+        assert_eq!(belligerent, Belligerent::EasternArmy);
     }
 
     #[test]
-    fn test_check_for_king_captured_condition_east_win() {
+    fn test_check_for_king_captured_condition_west_win() {
         // Air Army
         let mock_partial_battalion_1 = PartialBattalionForTests {
             count: Some(1),
@@ -137,7 +138,7 @@ mod tests {
         };
 
         let belligerent = check_for_king_captured_condition(&battle_state).unwrap();
-        assert_eq!(belligerent, Belligerent::EasternArmy);
+        assert_eq!(belligerent, Belligerent::WesternArmy);
     }
 
     #[test]

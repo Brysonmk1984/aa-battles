@@ -116,13 +116,14 @@ pub mod test {
         let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
 
         let test_battalion_ref = test_army.get_mut(0).unwrap();
-        test_battalion_ref.position = 150;
+        test_battalion_ref.position = -150;
         let original_position = test_battalion_ref.position;
-        assert_eq!(original_position, 150);
+        assert_eq!(original_position, -150);
+
         test_battalion_ref.march(super::StartingDirection::EAST);
         assert_eq!(
             test_battalion_ref.position,
-            original_position - test_battalion_ref.speed
+            original_position + test_battalion_ref.speed
         );
     }
 
@@ -131,13 +132,13 @@ pub mod test {
         let partial_mock_battalion: PartialBattalionForTests = Default::default();
         let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
         let test_battalion_ref = test_army.get_mut(0).unwrap();
-        test_battalion_ref.position = -150;
+        test_battalion_ref.position = 150;
         let original_position = test_battalion_ref.position;
-        assert_eq!(original_position, -150);
+        assert_eq!(original_position, 150);
         test_battalion_ref.march(super::StartingDirection::WEST);
         assert_eq!(
             test_battalion_ref.position,
-            original_position + test_battalion_ref.speed
+            original_position - test_battalion_ref.speed
         );
     }
 

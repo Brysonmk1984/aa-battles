@@ -62,10 +62,12 @@ pub fn run_tick(battle_state: &mut Battle) -> i32 {
 
 #[cfg(test)]
 mod tests {
+    use crate::battle::tick::mocks::tick_mocks::TickMocks;
     use crate::battle::tick::phases::attack::attack_phase;
     use crate::battle::tick::phases::march::march_phase;
     use crate::battle::tick::phases::range_find::update_in_range_map;
     use crate::match_up::create_mocks::{create_mock_army, create_mock_army_defaults};
+
     use crate::types::ArmyName::{
         self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
         CastlegateCrossbowmen, DeathDealerAssassins, ElvenArchers, HighbornCavalry,
@@ -74,13 +76,13 @@ mod tests {
         SkullClanDeathCultists,
     };
     use crate::types::StartingDirection;
-    use crate::util::set_weapon_armor_hash;
+    use crate::util::WEAPON_ARMOR_CELL;
+
     use std::sync::OnceLock;
     use std::{collections::HashMap, env};
 
     #[test]
     fn test_update_in_range_map_in_range() {
-        set_weapon_armor_hash();
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = create_mock_army_defaults(None);
         let mut attacker = create_mock_army(
@@ -106,7 +108,7 @@ mod tests {
 
     #[test]
     fn test_update_in_range_map_none_in_range() {
-        set_weapon_armor_hash();
+        WEAPON_ARMOR_CELL.set(TickMocks::generate_weapon_armor_hash());
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = create_mock_army_defaults(None);
         let mut attacker = create_mock_army(
@@ -282,7 +284,7 @@ mod tests {
      */
     #[test]
     fn test_attack_phase_count_change() {
-        set_weapon_armor_hash();
+        WEAPON_ARMOR_CELL.set(TickMocks::generate_weapon_armor_hash());
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = create_mock_army_defaults(None);
         let mut attacker = create_mock_army(
@@ -318,8 +320,8 @@ mod tests {
     /**
      * attack_phase
      * Will panic due to .75 agility + .25 marching bonus making defender never hittable
+     * Removed panic from too many dodges. Don't want to actually trigger a panic in
      */
-    #[ignore]
     #[test]
     #[should_panic]
     fn test_attack_phase_should_dodge_all_with_max_agility_and_marching() {
@@ -425,32 +427,35 @@ mod tests {
      * attack_phase
      * The army should march - changing position and is_marching if no defenders are in range
      */
+
     #[test]
     fn test_attack_phase_attacker_should_march_if_no_defender_in_range() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = create_mock_army_defaults(None);
         let mut attacker = create_mock_army(
-            StartingDirection::WEST,
-            &army_defaults,
-            vec![NorthWatchLongbowmen],
-        )
-        .unwrap();
-        let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
             vec![PeacekeeperMonks],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![NorthWatchLongbowmen],
         )
         .unwrap();
         attacker[0].is_marching = false;
         attacker[0].position = -150;
         defender[0].position = 150;
         attacker_map.insert(attacker[0].name.clone(), Vec::new());
+
         update_in_range_map(&mut attacker_map, &attacker, &defender);
         let mut cloned_attacker = attacker.clone();
         let mut cloned_defender = defender.clone();
         attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
 
-        march_phase(&mut cloned_attacker, &StartingDirection::WEST);
+        march_phase(&mut cloned_attacker, &StartingDirection::EAST);
+
         assert_eq!(cloned_attacker[0].is_marching, true);
         assert_eq!(
             cloned_attacker[0].position,

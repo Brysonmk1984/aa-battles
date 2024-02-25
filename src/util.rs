@@ -125,11 +125,14 @@ pub fn get_logs() -> Vec<String> {
  * Stores a Stats Struct that tracks stats about battalion performance to report
  * To the end user and developer
  */
-pub static STATS_RWLOCK: RwLock<(Stats, Stats)> =
-    RwLock::new((get_stat_defaults(), get_stat_defaults()));
+pub static STATS_RWLOCK: RwLock<(Stats, Stats)> = RwLock::new((
+    get_stat_defaults(StartingDirection::EAST),
+    get_stat_defaults(StartingDirection::WEST),
+));
 
-const fn get_stat_defaults() -> Stats {
+const fn get_stat_defaults(starting_direction: StartingDirection) -> Stats {
     Stats {
+        starting_direction,
         dodge_count: 0,
         block_count: 0,
         armor_defense_count: 0,
@@ -139,8 +142,8 @@ const fn get_stat_defaults() -> Stats {
 
 pub fn reset_stats() {
     let mut tuple = STATS_RWLOCK.write().unwrap();
-    tuple.0 = get_stat_defaults();
-    tuple.1 = get_stat_defaults();
+    tuple.0 = get_stat_defaults(StartingDirection::EAST);
+    tuple.1 = get_stat_defaults(StartingDirection::WEST);
 }
 
 pub fn push_stat_dodge(starting_direction: StartingDirection) {
@@ -187,12 +190,14 @@ pub fn get_stats() -> (Stats, Stats) {
     let tuple = STATS_RWLOCK.read().unwrap();
     (
         Stats {
+            starting_direction: StartingDirection::EAST,
             dodge_count: tuple.0.dodge_count,
             block_count: tuple.0.block_count,
             armor_defense_count: tuple.0.armor_defense_count,
             kill: tuple.0.kill,
         },
         Stats {
+            starting_direction: StartingDirection::WEST,
             dodge_count: tuple.1.dodge_count,
             block_count: tuple.1.block_count,
             armor_defense_count: tuple.1.armor_defense_count,
@@ -203,6 +208,7 @@ pub fn get_stats() -> (Stats, Stats) {
 
 #[derive(Debug, Clone, Serialize)]
 pub struct Stats {
+    pub starting_direction: StartingDirection,
     pub dodge_count: u32,
     pub block_count: u32,
     pub armor_defense_count: u32,
@@ -234,6 +240,7 @@ impl BattleLog {
             headline: None,
             events: None,
             stats: Stats {
+                starting_direction: StartingDirection::EAST,
                 dodge_count: 0,
                 block_count: 0,
                 armor_defense_count: 0,

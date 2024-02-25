@@ -1,4 +1,4 @@
-use std::{collections::HashMap, ops::Deref};
+use std::{collections::HashMap, env, ops::Deref};
 
 use crate::{
     types::{ArmorType, ArmyName, Battalion, Belligerent, StartingDirection, WeaponType},
@@ -124,6 +124,7 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
         return;
     }
     push_log(format!("... attacking ..."));
+    let mut test_only_count_dodges = 0;
     // Do one attack attempt for each member of a battalion
     for n in 0..attacker.count {
         if defender.count == 0 {
@@ -136,8 +137,22 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
             if result == EngagementOutcome::Hit {
                 // Defending battalion loses a member or more depending on aoe
                 defender.decrement(attacker.aoe, attacker.starting_direction);
+            } else if result == EngagementOutcome::Dodged
+                && env::var("ENVIRONMENT").unwrap_or("test".to_string()) == "test".to_string()
+            {
+                test_only_count_dodges += 1;
             }
         }
+    }
+
+    if (test_only_count_dodges >= attacker.count
+        && attacker.count >= 50
+        && env::var("ENVIRONMENT").unwrap_or("test".to_string()) == "test".to_string())
+    {
+        panic!(
+            "{test_only_count_dodges} attacks dodged out of {} possible attacks!",
+            attacker.count
+        );
     }
 }
 
@@ -300,6 +315,7 @@ mod tests {
         );
         assert!(successfully_dodged);
     }
+
     #[test]
     fn try_dodge_fail_no_march() {
         let a_accuracy = 0.8;
@@ -354,6 +370,7 @@ mod tests {
         assert!(!successfully_dodged);
     }
 
+    #[test]
     fn try_block_pass() {
         let d_shield_rating = 0.4;
         let randomizer_func = || 39;

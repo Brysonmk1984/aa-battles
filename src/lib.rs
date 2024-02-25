@@ -33,6 +33,12 @@ pub fn do_battle(
     competitors: (NationWithNationArmies, NationWithNationArmies),
 ) -> Result<EndBattlePayload> {
     dotenvy::dotenv().ok();
+
+    match env::var("ENVIRONMENT") {
+        Ok(_) => (),
+        Err(e) => env::set_var("ENVIRONMENT", game_defaults.environment),
+    }
+
     reset_stats();
 
     WEAPON_ARMOR_CELL.set(game_defaults.weapons_vs_armor.clone());
@@ -68,19 +74,21 @@ pub fn do_battle(
     let battle_result = battle.run_battle();
     println!("'THRESULTS: {battle_result:?}");
 
-    //let battle_stats = get_stats();
+    let battle_stats = get_stats();
 
-    //let eastern_stats_formatted = battle_stats.0.format_battle_stats();
-    //let western_stats_formatted = battle_stats.1.format_battle_stats();
+    let eastern_stats_formatted = battle_stats.0.format_battle_stats();
+    let western_stats_formatted = battle_stats.1.format_battle_stats();
 
-    // let final_battle_state_formatted = battle.format_battle_state(
-    //     &battle_result,
-    //     &eastern_stats_formatted,
-    //     &western_stats_formatted,
-    // );
+    let final_battle_state_formatted = battle.format_battle_state(
+        &battle_result,
+        &eastern_stats_formatted,
+        &western_stats_formatted,
+    );
 
-    //battle_log.end_state = Some(final_battle_state_formatted);
-    //battle_log.events = Some(get_logs());
+    println!("FINALFORMATTED {final_battle_state_formatted}");
+
+    // battle_log.end_state = Some(final_battle_state_formatted);
+    // battle_log.events = Some(get_logs());
 
     let end_battle_payload = EndBattlePayload {
         battle_result,
