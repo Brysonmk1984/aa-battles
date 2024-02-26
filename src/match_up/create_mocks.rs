@@ -17,20 +17,6 @@ pub enum MockError {
 }
 
 /**
- * Depending on if army defaults from the db were passed in (as a hashmap), either use those as the defaults
- * Or use the mock_defaults for testing purposes
- * TODO - In the future, use the actual DB values for tests
- */
-pub fn create_mock_army_defaults(
-    defaults_option: Option<HashMap<ArmyName, Army>>,
-) -> HashMap<ArmyName, Army> {
-    match defaults_option {
-        Some(defaults_from_db) => defaults_from_db,
-        None => get_mock_defaults(),
-    }
-}
-
-/**
  * Temporary func for generating armies
  */
 pub fn create_mock_army(

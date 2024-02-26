@@ -7,13 +7,13 @@ use util::Stats;
 
 use crate::{
     match_up::{
-        create_mocks::{create_default_competitor, create_mock_army_defaults},
+        create_mocks::create_default_competitor,
         match_up::{create_battle_army, create_mock_battle_army, get_battle_tuple},
     },
     types::{Army, ArmyName, Battle, Nation},
     util::{
-        create_hash_of_defaults, get_logs, get_stats, push_log, reset_stats, BattleLog, LOG_MUTEX,
-        WEAPON_ARMOR_CELL,
+        create_hash_of_defaults, get_logs, get_stats, map_army_defaults, push_log, reset_stats,
+        BattleLog, LOG_MUTEX, WEAPON_ARMOR_CELL,
     },
 };
 
@@ -29,7 +29,7 @@ type NationWithNationArmies = (Nation, Vec<NationArmy>);
 
 pub fn do_battle(
     game_defaults: GameDefaults,
-    army_defaults: Vec<Army>,
+    army_defaults_vec: Vec<Army>,
     competitors: (NationWithNationArmies, NationWithNationArmies),
 ) -> Result<EndBattlePayload> {
     dotenvy::dotenv().ok();
@@ -39,21 +39,21 @@ pub fn do_battle(
         Err(e) => env::set_var("ENVIRONMENT", game_defaults.environment),
     }
 
+    // Needed since stats RwLock is stored in memory, and reused throughout battle and doesn't get removed after script is ran.
     reset_stats();
 
     WEAPON_ARMOR_CELL.set(game_defaults.weapons_vs_armor.clone());
 
     let mut battle_log = BattleLog::new();
 
-    let mut army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults);
+    let army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults_vec);
+    let army_defaults = map_army_defaults(Some(army_defaults_hash));
 
     let mut battle_tuple;
 
-    println!("** USING COMPETITORS FROM DB **\n\n");
-
     battle_tuple = get_battle_tuple(
         (competitors.0, competitors.1),
-        create_mock_army_defaults(Some(army_defaults_hash)),
+        army_defaults,
         create_battle_army,
     )
     .context("Couldn't create battle tuple")?;

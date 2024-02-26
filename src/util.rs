@@ -1,3 +1,4 @@
+use std::env;
 use std::{collections::HashMap, sync::Mutex};
 
 pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<ArmyName, Army> {
@@ -31,6 +32,28 @@ pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<ArmyName, Ar
     );
 
     army_defaults_hash
+}
+
+pub fn map_army_defaults(
+    army_defaults_option: Option<HashMap<ArmyName, Army>>,
+) -> HashMap<ArmyName, Army> {
+    if env::var("ENVIRONMENT").unwrap_or("test".to_string()) == "test".to_string() {
+        return match army_defaults_option {
+            Some(defaults_from_db) => {
+                println!("** USING COMPETITORS FROM DB **\n\n");
+                defaults_from_db
+            }
+            None => {
+                println!("USING MOCK ARMIES");
+                get_mock_defaults()
+            }
+        };
+    }
+
+    match army_defaults_option {
+        Some(defaults_from_db) => defaults_from_db,
+        None => panic!("No Army defaults provided!"),
+    }
 }
 
 pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
@@ -98,6 +121,7 @@ use std::sync::{OnceLock, RwLock};
 use num_format::{Locale, ToFormattedString};
 use serde::Serialize;
 
+use crate::match_up::mock_default_army_vec::get_mock_defaults;
 use crate::types::{Army, ArmyName, Belligerent, StartingDirection};
 /**
  * WEAPON_ARMOR_CELL

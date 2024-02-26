@@ -66,7 +66,7 @@ mod tests {
     use crate::battle::tick::phases::attack::attack_phase;
     use crate::battle::tick::phases::march::march_phase;
     use crate::battle::tick::phases::range_find::update_in_range_map;
-    use crate::match_up::create_mocks::{create_mock_army, create_mock_army_defaults};
+    use crate::match_up::create_mocks::create_mock_army;
 
     use crate::types::ArmyName::{
         self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
@@ -76,7 +76,7 @@ mod tests {
         SkullClanDeathCultists,
     };
     use crate::types::StartingDirection;
-    use crate::util::WEAPON_ARMOR_CELL;
+    use crate::util::{map_army_defaults, WEAPON_ARMOR_CELL};
 
     use std::sync::OnceLock;
     use std::{collections::HashMap, env};
@@ -84,7 +84,7 @@ mod tests {
     #[test]
     fn test_update_in_range_map_in_range() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -110,7 +110,7 @@ mod tests {
     fn test_update_in_range_map_none_in_range() {
         WEAPON_ARMOR_CELL.set(TickMocks::generate_weapon_armor_hash());
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -134,7 +134,7 @@ mod tests {
     #[test]
     fn test_update_in_range_map_air_not_in_range_of_melee() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -158,7 +158,7 @@ mod tests {
     #[test]
     fn test_update_in_range_map_zero_count_excluded() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -184,7 +184,7 @@ mod tests {
     #[test]
     fn test_update_in_range_map_flying_in_front() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -222,7 +222,7 @@ mod tests {
     #[test]
     fn test_attack_phase_no_march() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -254,7 +254,7 @@ mod tests {
     #[test]
     fn test_attack_phase_march() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -286,7 +286,7 @@ mod tests {
     fn test_attack_phase_count_change() {
         WEAPON_ARMOR_CELL.set(TickMocks::generate_weapon_armor_hash());
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -326,7 +326,7 @@ mod tests {
     #[should_panic]
     fn test_attack_phase_should_dodge_all_with_max_agility_and_marching() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -360,7 +360,7 @@ mod tests {
     #[test]
     fn test_attack_phase_should_block_all_with_max_shield_rating() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -396,7 +396,7 @@ mod tests {
     #[test]
     fn test_attack_phase_defender_count_should_not_change_if_not_in_range() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::WEST,
             &army_defaults,
@@ -431,7 +431,7 @@ mod tests {
     #[test]
     fn test_attack_phase_attacker_should_march_if_no_defender_in_range() {
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-        let army_defaults = create_mock_army_defaults(None);
+        let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,
