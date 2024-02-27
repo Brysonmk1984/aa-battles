@@ -253,6 +253,8 @@ mod tests {
      */
     #[test]
     fn test_attack_phase_march() {
+        dotenvy::dotenv().ok();
+
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
@@ -284,6 +286,7 @@ mod tests {
      */
     #[test]
     fn test_attack_phase_count_change() {
+        dotenvy::dotenv().ok();
         WEAPON_ARMOR_CELL.set(TickMocks::generate_weapon_armor_hash());
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = map_army_defaults(None);
@@ -359,6 +362,7 @@ mod tests {
      */
     #[test]
     fn test_attack_phase_should_block_all_with_max_shield_rating() {
+        dotenvy::dotenv().ok();
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(

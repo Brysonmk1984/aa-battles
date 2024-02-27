@@ -138,7 +138,7 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
                 // Defending battalion loses a member or more depending on aoe
                 defender.decrement(attacker.aoe, attacker.starting_direction);
             } else if result == EngagementOutcome::Dodged
-                && env::var("ENVIRONMENT").unwrap_or("test".to_string()) == "test".to_string()
+                && env::var("ENVIRONMENT").unwrap() == "test".to_string()
             {
                 test_only_count_dodges += 1;
             }
@@ -147,7 +147,7 @@ fn run_attack_sequence(attacker: &mut Battalion, defender: &mut Battalion) {
 
     if (test_only_count_dodges >= attacker.count
         && attacker.count >= 50
-        && env::var("ENVIRONMENT").unwrap_or("test".to_string()) == "test".to_string())
+        && env::var("ENVIRONMENT").unwrap() == "test".to_string())
     {
         panic!(
             "{test_only_count_dodges} attacks dodged out of {} possible attacks!",

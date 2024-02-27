@@ -33,7 +33,9 @@ pub fn do_battle(
     competitors: (NationWithNationArmies, NationWithNationArmies),
 ) -> Result<EndBattlePayload> {
     dotenvy::dotenv().ok();
-
+    // for (key, value) in env::vars() {
+    //     println!("{}: {}", key, value);
+    // }
     match env::var("ENVIRONMENT") {
         Ok(_) => (),
         Err(e) => env::set_var("ENVIRONMENT", game_defaults.environment),
