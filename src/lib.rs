@@ -20,7 +20,7 @@ use crate::{
 mod battle;
 mod match_up;
 pub mod types;
-mod util;
+pub mod util;
 
 pub const MIN_RANGE_ATTACK_AIR: i32 = 20;
 pub const IS_MARCHING_AGILITY_MOD: f64 = 0.15;
@@ -29,7 +29,6 @@ type NationWithNationArmies = (Nation, Vec<NationArmy>);
 
 pub fn do_battle(
     game_defaults: GameDefaults,
-    army_defaults_vec: Vec<Army>,
     competitors: (NationWithNationArmies, NationWithNationArmies),
 ) -> Result<EndBattlePayload> {
     dotenvy::dotenv().ok();
@@ -48,7 +47,7 @@ pub fn do_battle(
 
     let mut battle_log = BattleLog::new();
 
-    let army_defaults_hash: HashMap<ArmyName, Army> = create_hash_of_defaults(army_defaults_vec);
+    let army_defaults_hash = game_defaults.army_defaults;
     let army_defaults = map_army_defaults(Some(army_defaults_hash));
 
     let mut battle_tuple;

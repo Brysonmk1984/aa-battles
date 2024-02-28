@@ -35,13 +35,13 @@ pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<ArmyName, Ar
 }
 
 pub fn map_army_defaults(
-    army_defaults_option: Option<HashMap<ArmyName, Army>>,
+    army_defaults_option: Option<&'static HashMap<ArmyName, Army>>,
 ) -> HashMap<ArmyName, Army> {
     if env::var("ENVIRONMENT").unwrap_or("test".to_string()) == "test".to_string() {
         return match army_defaults_option {
             Some(defaults_from_db) => {
                 println!("** USING COMPETITORS FROM DB **\n\n");
-                defaults_from_db
+                defaults_from_db.clone()
             }
             None => {
                 println!("USING MOCK ARMIES");
@@ -51,7 +51,7 @@ pub fn map_army_defaults(
     }
 
     match army_defaults_option {
-        Some(defaults_from_db) => defaults_from_db,
+        Some(defaults_from_db) => defaults_from_db.clone(),
         None => panic!("No Army defaults provided!"),
     }
 }
