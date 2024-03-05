@@ -418,7 +418,7 @@ pub struct NationArmy {
 }
 
 pub struct GameDefaults {
-    pub weapons_vs_armor: &'static HashMap<&'static str, f64>,
+    pub weapons_vs_armor: &'static HashMap<String, f64>,
     pub army_defaults: &'static HashMap<ArmyName, Army>,
     pub environment: String,
 }

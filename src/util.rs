@@ -127,7 +127,7 @@ use crate::types::{Army, ArmyName, Belligerent, StartingDirection};
  * WEAPON_ARMOR_CELL
  * stores a hash map of f64s for weapon type against armor type
  */
-pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<&str, f64>> = OnceLock::new();
+pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<String, f64>> = OnceLock::new();
 /**
  * LOG_MUTEX
  * Stores a vec of Strings that is added to throughout the battle with information to report
