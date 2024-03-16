@@ -1,5 +1,5 @@
 use crate::{
-    types::{BattleResult, Belligerent, WinType},
+    types::{ArmyName, Battalion, BattleResult, Belligerent, EndingBattalionStats, WinType},
     util::push_log,
     Battle,
 };
@@ -28,6 +28,7 @@ pub fn check_for_king_captured_condition(battle_state: &Battle) -> Option<Bellig
 }
 
 pub fn determine_army_conquered_condition(
+    ending_army_states: (Vec<Battalion>, Vec<Battalion>),
     mut battle_result: BattleResult,
     eastern_count: i32,
     western_count: i32,
@@ -39,14 +40,37 @@ pub fn determine_army_conquered_condition(
         );
         battle_result.winner = Some(Belligerent::EasternArmy);
         battle_result.loser = Some(Belligerent::WesternArmy);
-    } else {
+    } else if eastern_count < western_count {
         push_log(
             "THE BATTLE ENDS: Western Army has defeated all of the Eastern Army's forces!"
                 .to_string(),
         );
         battle_result.winner = Some(Belligerent::WesternArmy);
         battle_result.loser = Some(Belligerent::EasternArmy);
+    } else {
+        panic!("Need to figure this out. A tie where both armies are zero");
     }
+
+    battle_result.eastern_battalions = ending_army_states
+        .0
+        .iter()
+        .map(|battalion| EndingBattalionStats {
+            name: battalion.name,
+            count: battalion.count,
+            position: battalion.position,
+        })
+        .collect();
+
+    battle_result.western_battalions = ending_army_states
+        .1
+        .iter()
+        .map(|battalion| EndingBattalionStats {
+            name: battalion.name,
+            count: battalion.count,
+            position: battalion.position,
+        })
+        .collect();
+
     battle_result.win_type = Some(WinType::ArmyConquered);
     battle_result
 }

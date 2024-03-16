@@ -46,6 +46,8 @@ impl Battle {
             loser: None,
             tick_count: 0,
             win_type: None,
+            eastern_battalions: vec![],
+            western_battalions: vec![],
         };
 
         while a1_count > 0 && a2_count > 0 {
@@ -80,7 +82,8 @@ impl Battle {
             total_army_count = run_tick(self);
         }
 
-        determine_army_conquered_condition(battle_result, a1_count, a2_count)
+        let ending_army_states = (self.army_1_state.clone(), self.army_2_state.clone());
+        determine_army_conquered_condition(ending_army_states, battle_result, a1_count, a2_count)
     }
 
     /**
@@ -152,7 +155,7 @@ pub enum StartingDirection {
 }
 
 // An Army Type with count belonging to a user. Forms a part of a whole nation's army
-#[derive(Debug, Serialize, Deserialize, Clone, Default)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 pub struct Battalion {
     pub name: ArmyName,
     pub count: i32,
@@ -382,6 +385,8 @@ pub struct BattleResult {
     pub loser: Option<Belligerent>,
     pub tick_count: u16,
     pub win_type: Option<WinType>,
+    pub eastern_battalions: Vec<EndingBattalionStats>,
+    pub western_battalions: Vec<EndingBattalionStats>,
 }
 
 impl BattleResult {
@@ -398,6 +403,13 @@ impl BattleResult {
         );
         format!("\nBATTLE RESULTS:\n-------------\n{result}\n")
     }
+}
+
+#[derive(Serialize, Debug, PartialEq, Clone)]
+pub struct EndingBattalionStats {
+    pub name: ArmyName,
+    pub count: i32,
+    pub position: i32,
 }
 
 #[derive(Debug, Deserialize, Clone, Default)]
