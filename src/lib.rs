@@ -96,6 +96,7 @@ pub fn do_battle(
         stats: get_stats(),
     };
     clear_logs();
+    println!("LOGS HAVE BEEEN CLEARED {:?}", get_logs());
     Ok(end_battle_payload)
 }
 
