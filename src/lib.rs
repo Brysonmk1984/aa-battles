@@ -38,9 +38,6 @@ pub fn do_battle(
         Err(e) => env::set_var("ENVIRONMENT", game_defaults.environment),
     }
 
-    // Needed since stats RwLock is stored in memory, and reused throughout battle and doesn't get removed after script is ran.
-    reset_stats();
-
     WEAPON_ARMOR_CELL.set(game_defaults.weapons_vs_armor.clone());
 
     let mut battle_log = BattleLog::new();
@@ -95,8 +92,12 @@ pub fn do_battle(
         events: get_logs(),
         stats: get_stats(),
     };
+
+    // Needed since stats RwLock is stored in memory, and reused throughout battle and doesn't get removed after script is ran.
+    reset_stats();
+    // Same with clear Logs and being a Mutex
     clear_logs();
-    println!("LOGS HAVE BEEEN CLEARED {:?}", get_logs());
+
     Ok(end_battle_payload)
 }
 
