@@ -144,6 +144,11 @@ pub fn get_logs() -> Vec<String> {
     LOG_MUTEX.lock().unwrap().to_vec()
 }
 
+pub fn clear_logs() {
+    let mut val = LOG_MUTEX.lock().unwrap();
+    val.clear();
+}
+
 /**
  * STATS_MUTEX
  * Stores a Stats Struct that tracks stats about battalion performance to report

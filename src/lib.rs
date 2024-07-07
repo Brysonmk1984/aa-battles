@@ -3,7 +3,7 @@ use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
 use types::{Battalion, BattleArmy, BattleResult, GameDefaults, NationArmy};
-use util::Stats;
+use util::{clear_logs, Stats};
 
 use crate::{
     match_up::{
@@ -95,7 +95,7 @@ pub fn do_battle(
         events: get_logs(),
         stats: get_stats(),
     };
-
+    clear_logs();
     Ok(end_battle_payload)
 }
 
