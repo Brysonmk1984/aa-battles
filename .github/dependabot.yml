@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: 'cargo'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    # Max # of open pull requests from Dependabot; default is 5
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'chore: dependabot/cargo'
