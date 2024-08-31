@@ -56,64 +56,14 @@ pub fn map_army_defaults(
     }
 }
 
-pub fn determine_aoe_effect(aoe: f64, spread: f64) -> i8 {
-    if spread == 1.0 {
-        if aoe == 0.0 {
-            1
-        } else if aoe == 0.5 {
-            2
-        } else if aoe == 1.0 {
-            5
-        } else if aoe == 1.5 {
-            9
-        } else if aoe == 2.0 {
-            13
-        } else if aoe == 2.5 {
-            20
-        } else if aoe == 3.0 {
-            33
-        } else {
-            panic!("Unsupported AOE value! {} for spread {}", aoe, spread);
-        }
-    } else if spread == 2.0 {
-        if aoe == 0.0 {
-            1
-        } else if aoe == 0.5 {
-            1
-        } else if aoe == 1.0 {
-            2
-        } else if aoe == 1.5 {
-            3
-        } else if aoe == 2.0 {
-            5
-        } else if aoe == 2.5 {
-            7
-        } else if aoe == 3.0 {
-            9
-        } else {
-            panic!("Unsupported AOE value! {} for spread {}", aoe, spread);
-        }
-    } else if spread == 3.0 {
-        if aoe == 0.0 {
-            1
-        } else if aoe == 0.5 {
-            1
-        } else if aoe == 1.0 {
-            1
-        } else if aoe == 1.5 {
-            2
-        } else if aoe == 2.0 {
-            2
-        } else if aoe == 2.5 {
-            3
-        } else if aoe == 3.0 {
-            5
-        } else {
-            panic!("Unsupported AOE value! {} for spread {}", aoe, spread);
-        }
-    } else {
-        panic!("Unsupported Spread value! - {spread}");
-    }
+pub fn determine_aoe_effect(aoe: &f64, spread: u8) -> u8 {
+    let aoe_spread_map = AOE_SPREAD_CELL.get().unwrap();
+    let matching_aoe_array = aoe_spread_map[&spread];
+    matching_aoe_array
+        .iter()
+        .find(|item| item.0 == *aoe)
+        .unwrap()
+        .1
 }
 
 use std::sync::{OnceLock, RwLock};
@@ -128,6 +78,12 @@ use crate::types::{Army, ArmyName, Belligerent, StartingDirection};
  * stores a hash map of f64s for weapon type against armor type
  */
 pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<String, f64>> = OnceLock::new();
+
+/**
+ * AOE_SPREAD_CELL
+ * stores a hash map of f64s for aoe impact against different spread values
+ */
+pub static AOE_SPREAD_CELL: OnceLock<HashMap<u8, [(f64, u8); 7]>> = OnceLock::new();
 /**
  * LOG_MUTEX
  * Stores a vec of Strings that is added to throughout the battle with information to report

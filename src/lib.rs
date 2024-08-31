@@ -3,7 +3,7 @@ use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
 use types::{Battalion, BattleArmy, BattleResult, GameDefaults, NationArmy};
-use util::{clear_logs, Stats};
+use util::{clear_logs, Stats, AOE_SPREAD_CELL};
 
 use crate::{
     match_up::{
@@ -39,6 +39,7 @@ pub fn do_battle(
     }
 
     WEAPON_ARMOR_CELL.set(game_defaults.weapons_vs_armor.clone());
+    AOE_SPREAD_CELL.set(game_defaults.aoe_vs_spread.clone());
 
     let mut battle_log = BattleLog::new();
 

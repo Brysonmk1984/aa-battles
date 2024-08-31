@@ -178,9 +178,9 @@ pub struct Battalion {
 
 impl Battalion {
     pub fn decrement(&mut self, attacker_aoe: f64, attacker_starting_direction: StartingDirection) {
-        let hits = determine_aoe_effect(attacker_aoe, self.spread) as i32;
+        let hits = determine_aoe_effect(&attacker_aoe, self.spread as u8);
         push_stat_kill(hits as u32, attacker_starting_direction);
-        let new_count = self.count - hits;
+        let new_count = self.count - hits as i32;
         if new_count > 0 {
             self.count = new_count;
         } else {
@@ -431,6 +431,7 @@ pub struct NationArmy {
 
 pub struct GameDefaults {
     pub weapons_vs_armor: &'static HashMap<String, f64>,
+    pub aoe_vs_spread: &'static HashMap<u8, [(f64, u8); 7]>,
     pub army_defaults: &'static HashMap<ArmyName, Army>,
     pub environment: String,
 }
