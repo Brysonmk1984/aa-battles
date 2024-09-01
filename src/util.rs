@@ -56,9 +56,9 @@ pub fn map_army_defaults(
     }
 }
 
-pub fn determine_aoe_effect(aoe: &f64, spread: u8) -> u8 {
+pub fn determine_aoe_effect(aoe: &f64, spread: i32) -> i32 {
     let aoe_spread_map = AOE_SPREAD_CELL.get().unwrap();
-    let matching_aoe_array = aoe_spread_map[&spread];
+    let matching_aoe_array = &aoe_spread_map[&spread];
     matching_aoe_array
         .iter()
         .find(|item| item.0 == *aoe)
@@ -83,7 +83,7 @@ pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<String, f64>> = OnceLock::new();
  * AOE_SPREAD_CELL
  * stores a hash map of f64s for aoe impact against different spread values
  */
-pub static AOE_SPREAD_CELL: OnceLock<HashMap<u8, [(f64, u8); 7]>> = OnceLock::new();
+pub static AOE_SPREAD_CELL: OnceLock<HashMap<i32, Vec<(f64, i32)>>> = OnceLock::new();
 /**
  * LOG_MUTEX
  * Stores a vec of Strings that is added to throughout the battle with information to report
