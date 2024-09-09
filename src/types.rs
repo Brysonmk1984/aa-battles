@@ -254,7 +254,7 @@ impl BattleArmy {
 // Otherwise, you can skip these attributes and just use sort_by along with .cmp()
 //#[derive(Eq, Ord, PartialEq, PartialOrd)]
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize)]
 pub struct Army {
     pub id: i32,
     pub name: ArmyName,
