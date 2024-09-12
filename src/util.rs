@@ -35,7 +35,7 @@ pub fn create_hash_of_defaults(army_defaults: Vec<Army>) -> HashMap<ArmyName, Ar
 }
 
 pub fn map_army_defaults(
-    army_defaults_option: Option<&'static HashMap<ArmyName, Army>>,
+    army_defaults_option: Option<HashMap<ArmyName, Army>>,
 ) -> HashMap<ArmyName, Army> {
     if env::var("ENVIRONMENT").unwrap_or("test".to_string()) == "test".to_string() {
         return match army_defaults_option {
