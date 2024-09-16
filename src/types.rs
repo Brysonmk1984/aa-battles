@@ -420,7 +420,7 @@ pub struct Nation {
     pub gold: i32,
     pub is_npc: bool,
 }
-#[derive(Debug, Deserialize, Clone, Copy)]
+#[derive(Debug, Deserialize, Clone, Copy, Default)]
 pub struct NationArmy {
     pub id: i32,
     pub nation_id: i32,
