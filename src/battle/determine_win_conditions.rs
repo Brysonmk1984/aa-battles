@@ -80,14 +80,27 @@ mod tests {
     use super::{check_for_king_captured_condition, determine_army_conquered_condition};
     use crate::{
         match_up::create_mocks::create_mock_generic_battalion,
-        types::{Battle, BattleResult, Belligerent, PartialBattalionForTests, WinType},
+        types::{
+            Battle, BattleResult, Belligerent, PartialBattalionForTests, StartingDirection, WinType,
+        },
     };
 
     #[test]
     fn test_determine_army_conquered_condition_east() {
         let mut battle_result: BattleResult = Default::default();
+        let east = vec![create_mock_generic_battalion(PartialBattalionForTests {
+            count: Some(1000),
+            starting_direction: Some((StartingDirection::EAST)),
+            ..Default::default()
+        })];
+        let west = vec![create_mock_generic_battalion(PartialBattalionForTests {
+            count: Some(0),
+            starting_direction: Some((StartingDirection::EAST)),
+            ..Default::default()
+        })];
 
-        let updated_battle_result = determine_army_conquered_condition(battle_result, 1000, 0);
+        let updated_battle_result =
+            determine_army_conquered_condition((east, west), battle_result, 1000, 0);
         assert_eq!(updated_battle_result.winner, Some(Belligerent::EasternArmy));
         assert_eq!(updated_battle_result.loser, Some(Belligerent::WesternArmy));
         assert_eq!(updated_battle_result.win_type, Some(WinType::ArmyConquered));
@@ -96,8 +109,19 @@ mod tests {
     #[test]
     fn test_determine_army_conquered_condition_west() {
         let mut battle_result: BattleResult = Default::default();
+        let east = vec![create_mock_generic_battalion(PartialBattalionForTests {
+            count: Some(0),
+            starting_direction: Some((StartingDirection::EAST)),
+            ..Default::default()
+        })];
+        let west = vec![create_mock_generic_battalion(PartialBattalionForTests {
+            count: Some(1000),
+            starting_direction: Some((StartingDirection::EAST)),
+            ..Default::default()
+        })];
 
-        let updated_battle_result = determine_army_conquered_condition(battle_result, 0, 1000);
+        let updated_battle_result =
+            determine_army_conquered_condition((east, west), battle_result, 0, 1000);
         assert_eq!(updated_battle_result.winner, Some(Belligerent::WesternArmy));
         assert_eq!(updated_battle_result.loser, Some(Belligerent::EasternArmy));
         assert_eq!(updated_battle_result.win_type, Some(WinType::ArmyConquered));
