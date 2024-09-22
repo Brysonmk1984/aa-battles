@@ -5,6 +5,7 @@ use serde_this_or_that::as_f64;
 use strum_macros::{Display, EnumString};
 
 use crate::battle::tick::run_tick::run_tick;
+use crate::mocks::nation_army::NationArmyMock;
 use crate::util::{push_log, push_stat_kill, Stats};
 use crate::{
     battle::determine_win_conditions::{
@@ -12,7 +13,7 @@ use crate::{
     },
     util::determine_aoe_effect,
 };
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Battle {
     pub army_1_state: Vec<Battalion>,
     pub army_2_state: Vec<Battalion>,
@@ -78,7 +79,7 @@ impl Battle {
             if battle_result.tick_count > 300 {
                 panic!("Infinite loop detected!");
             }
-
+            // should return more info about the tick, including how to update the battle state, rather than updating from internally
             total_army_count = run_tick(self);
         }
 
@@ -429,9 +430,21 @@ pub struct NationArmy {
     pub army_name: ArmyName,
 }
 
+impl From<NationArmyMock> for NationArmy {
+    fn from(m: NationArmyMock) -> Self {
+        Self {
+            id: m.id,
+            nation_id: m.nation_id,
+            army_id: m.army_id,
+            count: m.count,
+            army_name: m.army_name,
+        }
+    }
+}
+
 pub struct GameDefaults {
-    pub weapons_vs_armor: &'static HashMap<String, f64>,
-    pub aoe_vs_spread: &'static HashMap<i32, Vec<(f64, i32)>>,
+    pub weapons_vs_armor: HashMap<String, f64>,
+    pub aoe_vs_spread: HashMap<i32, Vec<(f64, i32)>>,
     pub army_defaults: HashMap<ArmyName, Army>,
     pub environment: String,
 }

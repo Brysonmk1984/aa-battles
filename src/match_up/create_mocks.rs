@@ -8,8 +8,6 @@ use crate::types::{
     PartialBattalionForTests, StartingDirection,
 };
 
-use super::mock_default_army_vec::get_mock_defaults;
-
 #[derive(Error, Debug)]
 pub enum MockError {
     #[error("Invalid army name, can't create mock!")]

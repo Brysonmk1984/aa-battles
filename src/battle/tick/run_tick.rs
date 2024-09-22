@@ -1,9 +1,11 @@
 use super::phases::attack::attack_phase;
+use super::phases::attack_new::attack_phase_new;
 use super::phases::march::march_phase;
 use super::phases::range_find::update_in_range_map;
 use crate::types::{ArmyName, StartingDirection};
 use crate::Battle;
 use std::collections::HashMap;
+use std::thread::spawn;
 
 pub fn run_tick(battle_state: &mut Battle) -> i32 {
     let mut in_range_map_1: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
@@ -24,6 +26,8 @@ pub fn run_tick(battle_state: &mut Battle) -> i32 {
     // STEP 1: Check for range
     update_in_range_map(&mut in_range_map_1, &army_1_clone, &army_2_clone);
     update_in_range_map(&mut in_range_map_2, &army_2_clone, &army_1_clone);
+
+    let result = attack_phase_new(&in_range_map_1, &in_range_map_2, &battle_state);
 
     // STEP 2: Attack Battalions within range
     // STEP 2a: army_1 Attacks army_2 (Concurrently with step 2b)
@@ -62,11 +66,11 @@ pub fn run_tick(battle_state: &mut Battle) -> i32 {
 
 #[cfg(test)]
 mod tests {
-    use crate::battle::tick::mocks::tick_mocks::TickMocks;
     use crate::battle::tick::phases::attack::attack_phase;
     use crate::battle::tick::phases::march::march_phase;
     use crate::battle::tick::phases::range_find::update_in_range_map;
     use crate::match_up::create_mocks::create_mock_army;
+    use crate::mocks::game_defaults::GameDefaultsMocks;
 
     use crate::types::ArmyName::{
         self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
@@ -76,7 +80,7 @@ mod tests {
         SkullClanDeathCultists,
     };
     use crate::types::StartingDirection;
-    use crate::util::{map_army_defaults, WEAPON_ARMOR_CELL};
+    use crate::util::{map_army_defaults, AOE_SPREAD_CELL, WEAPON_ARMOR_CELL};
 
     use std::sync::OnceLock;
     use std::{collections::HashMap, env};
@@ -108,7 +112,7 @@ mod tests {
 
     #[test]
     fn test_update_in_range_map_none_in_range() {
-        WEAPON_ARMOR_CELL.set(TickMocks::generate_weapon_armor_hash());
+        WEAPON_ARMOR_CELL.set(GameDefaultsMocks::generate_weapon_armor_hash());
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
@@ -287,7 +291,8 @@ mod tests {
     #[test]
     fn test_attack_phase_count_change() {
         dotenvy::dotenv().ok();
-        WEAPON_ARMOR_CELL.set(TickMocks::generate_weapon_armor_hash());
+        AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
+        WEAPON_ARMOR_CELL.set(GameDefaultsMocks::generate_weapon_armor_hash());
         let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
         let army_defaults = map_army_defaults(None);
         let mut attacker = create_mock_army(
@@ -296,6 +301,7 @@ mod tests {
             vec![NorthWatchLongbowmen],
         )
         .unwrap();
+
         let mut defender = create_mock_army(
             StartingDirection::EAST,
             &army_defaults,

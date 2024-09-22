@@ -106,6 +106,8 @@ pub mod test {
     use crate::{
         match_up::create_mocks::create_mock_generic_battalion,
         types::{PartialBattalionForTests, StartingDirection},
+        util::AOE_SPREAD_CELL,
+        GameDefaultsMocks,
     };
 
     use super::Battalion;
@@ -144,6 +146,7 @@ pub mod test {
 
     #[test]
     fn should_decrease_count_by_one_normal_attack() {
+        AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
         let partial_mock_battalion: PartialBattalionForTests = Default::default();
         let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
 
@@ -156,6 +159,7 @@ pub mod test {
 
     #[test]
     fn should_decrease_count_by_five_aoe_attack_normal_spread() {
+        AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
         let partial_mock_battalion = PartialBattalionForTests {
             aoe: None,
             count: None,
@@ -178,6 +182,7 @@ pub mod test {
 
     #[test]
     fn should_decrease_count_by_two_aoe_attack_extra_spread() {
+        AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
         let partial_mock_battalion = PartialBattalionForTests {
             aoe: None,
             count: None,
@@ -188,11 +193,8 @@ pub mod test {
             spread: Some(2.0),
             starting_direction: None,
         };
-
         let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
-
         let test_battalion_ref = test_army.get_mut(0).unwrap();
-
         assert_eq!(test_battalion_ref.count, 1000);
         test_battalion_ref.decrement(1.0, test_battalion_ref.starting_direction);
         assert_eq!(test_battalion_ref.count, 998);

@@ -45,7 +45,7 @@ pub fn map_army_defaults(
             }
             None => {
                 println!("USING MOCK ARMIES");
-                get_mock_defaults()
+                GameDefaultsMocks::generate_mock_army_defaults()
             }
         };
     }
@@ -71,7 +71,7 @@ use std::sync::{OnceLock, RwLock};
 use num_format::{Locale, ToFormattedString};
 use serde::Serialize;
 
-use crate::match_up::mock_default_army_vec::get_mock_defaults;
+use crate::mocks::game_defaults::GameDefaultsMocks;
 use crate::types::{Army, ArmyName, Belligerent, StartingDirection};
 /**
  * WEAPON_ARMOR_CELL
@@ -82,6 +82,9 @@ pub static WEAPON_ARMOR_CELL: OnceLock<HashMap<String, f64>> = OnceLock::new();
 /**
  * AOE_SPREAD_CELL
  * stores a hash map of f64s for aoe impact against different spread values
+ * key = the spread
+ * value = list containing every aoe amount (f64) and it's corresponding hit amount (i32), saved as a tuple (f64, i32)
+ * Data structure ends up being i32 : Vec<(f64, i32)>
  */
 pub static AOE_SPREAD_CELL: OnceLock<HashMap<i32, Vec<(f64, i32)>>> = OnceLock::new();
 /**
