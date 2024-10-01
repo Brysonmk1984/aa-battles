@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::sync::atomic::AtomicU32;
 
 use serde::{Deserialize, Serialize};
 use serde_this_or_that::as_f64;
@@ -159,7 +160,7 @@ pub enum StartingDirection {
 #[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
 pub struct Battalion {
     pub name: ArmyName,
-    pub count: i32,
+    pub count: AtomicU32,
     pub position: i32,
     pub shield_rating: f64,
     pub flying: bool,

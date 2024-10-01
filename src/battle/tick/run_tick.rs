@@ -1,22 +1,23 @@
 use super::phases::attack::attack_phase;
-use super::phases::attack_new::attack_phase_new;
+
 use super::phases::march::march_phase;
 use super::phases::range_find::update_in_range_map;
+use super::spawn_attack_threads::spawn_attack_threads;
 use crate::types::{ArmyName, StartingDirection};
 use crate::Battle;
 use std::collections::HashMap;
 use std::thread::spawn;
 
-pub fn run_tick(battle_state: &mut Battle) -> i32 {
-    let mut in_range_map_1: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
-    let mut in_range_map_2: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+pub fn run_tick(battle_state: &Battle) -> i32 {
+    let mut in_range_map_east: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+    let mut in_range_map_west: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
 
     battle_state.army_1_state.iter().for_each(|army| {
-        in_range_map_1.insert(army.name.clone(), Vec::new());
+        in_range_map_east.insert(army.name.clone(), Vec::new());
     });
 
     battle_state.army_2_state.iter().for_each(|army| {
-        in_range_map_2.insert(army.name.clone(), Vec::new());
+        in_range_map_west.insert(army.name.clone(), Vec::new());
     });
 
     // TODO: Figure out way to handle this where cloning isn't needed to satisfy borrow checker
@@ -24,25 +25,11 @@ pub fn run_tick(battle_state: &mut Battle) -> i32 {
     let army_2_clone = battle_state.army_2_state.clone();
 
     // STEP 1: Check for range
-    update_in_range_map(&mut in_range_map_1, &army_1_clone, &army_2_clone);
-    update_in_range_map(&mut in_range_map_2, &army_2_clone, &army_1_clone);
+    update_in_range_map(&mut in_range_map_east, &army_1_clone, &army_2_clone);
+    update_in_range_map(&mut in_range_map_west, &army_2_clone, &army_1_clone);
 
-    let result = attack_phase_new(&in_range_map_1, &in_range_map_2, &battle_state);
-
-    // STEP 2: Attack Battalions within range
-    // STEP 2a: army_1 Attacks army_2 (Concurrently with step 2b)
-    attack_phase(
-        &in_range_map_1,
-        &mut battle_state.army_1_state,
-        &mut battle_state.army_2_state,
-    );
-
-    // STEP 2b: army_2 Attacks army_1 (Concurrently with step 2a)
-    attack_phase(
-        &in_range_map_2,
-        &mut battle_state.army_2_state,
-        &mut battle_state.army_1_state,
-    );
+    // STEP 2: Do attacks (both sides)
+    spawn_attack_threads(&in_range_map_east, &in_range_map_west, battle_state);
 
     // STEP 3: Adjust Counts
     let mut eastern_army_count = battle_state.army_1_state.iter().fold(0, |mut sum, b| {
