@@ -113,7 +113,7 @@ pub mod test {
     use crate::{
         entities::testing_entities::partial_battalion_for_testing::PartialBattalionForTests,
         enums::StartingDirection, match_up::create_mocks::create_mock_generic_battalion,
-        util::AOE_SPREAD_CELL, GameDefaultsMocks,
+        mocks::game_defaults::GameDefaultsMocks, util::AOE_SPREAD_CELL,
     };
 
     use super::Battalion;

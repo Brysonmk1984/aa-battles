@@ -1,21 +1,5 @@
-use std::collections::HashMap;
-use std::sync::atomic::{AtomicU32, Ordering};
-
 use serde::{Deserialize, Serialize};
-use serde_this_or_that::as_f64;
-use strum_macros::{Display, EnumString};
-
-use crate::battle::tick::run_tick::run_tick;
-use crate::entities::army::Army;
-use crate::entities::battalion::battalion::Battalion;
-use crate::mocks::nation_army::NationArmyMock;
-use crate::util::{push_log, push_stat_kill, Stats};
-use crate::{
-    battle::determine_win_conditions::{
-        check_for_king_captured_condition, determine_army_conquered_condition,
-    },
-    util::determine_aoe_effect,
-};
+use strum::{Display, EnumString};
 
 #[derive(Clone, Copy, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub enum StartingDirection {

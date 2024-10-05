@@ -1,34 +1,25 @@
 #![allow(warnings)]
+
+mod battle;
+mod entities;
+mod enums;
+mod match_up;
+mod mocks;
+mod util;
+
 use anyhow::{Context, Result};
 use entities::{
     battle::battle::Battle, battle_army::battle_army::BattleArmy,
     battle_result::battle_result::BattleResult, game_defaults::GameDefaults, nation::Nation,
     nation_army::nation_army::NationArmy,
 };
-use enums::StartingDirection;
-use mocks::game_defaults::GameDefaultsMocks;
-use serde::{Deserialize, Serialize};
-use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
-use util::{clear_logs, Stats, AOE_SPREAD_CELL};
-
-use crate::{
-    enums::ArmyName,
-    match_up::{
-        create_mocks::create_default_competitor,
-        match_up::{create_battle_army, create_mock_battle_army, get_battle_tuple},
-    },
-    util::{
-        create_hash_of_defaults, get_logs, get_stats, map_army_defaults, push_log, reset_stats,
-        BattleLog, LOG_MUTEX, WEAPON_ARMOR_CELL,
-    },
+use match_up::match_up::{create_battle_army, get_battle_tuple};
+use serde::Serialize;
+use std::env;
+use util::{
+    clear_logs, get_logs, get_stats, map_army_defaults, reset_stats, BattleLog, Stats,
+    AOE_SPREAD_CELL, WEAPON_ARMOR_CELL,
 };
-
-mod battle;
-mod entities;
-pub mod enums;
-mod match_up;
-mod mocks;
-pub mod util;
 
 pub const MIN_RANGE_ATTACK_AIR: i32 = 20;
 pub const IS_MARCHING_AGILITY_MOD: f64 = 0.15;
@@ -124,13 +115,10 @@ pub struct EndBattlePayload {
 }
 
 mod tests {
-    use std::collections::HashMap;
-
-    use crate::do_battle;
-    use crate::match_up::create_mocks::create_mock_army;
-
-    use crate::mocks::game_defaults::{get_competitors, get_game_defaults, GameDefaultsMocks};
-    use crate::util::{create_hash_of_defaults, map_army_defaults, WEAPON_ARMOR_CELL};
+    use crate::{
+        do_battle,
+        mocks::game_defaults::{get_competitors, get_game_defaults},
+    };
 
     /**
      * do_battle
