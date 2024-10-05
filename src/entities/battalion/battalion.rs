@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::sync::atomic::{AtomicU32, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
 
 use serde::{Deserialize, Serialize};
 use serde_this_or_that::as_f64;
@@ -33,7 +33,7 @@ pub struct Battalion {
     pub armor_type: ArmorType,
     pub agility: f64,
     pub speed: i32,
-    pub is_marching: bool,
+    pub is_marching: AtomicBool,
     pub starting_direction: StartingDirection,
     pub is_reverse_direction: bool,
 }

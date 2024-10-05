@@ -1,4 +1,7 @@
-use std::{collections::HashMap, sync::atomic::AtomicU32};
+use std::{
+    collections::HashMap,
+    sync::atomic::{AtomicBool, AtomicU32},
+};
 
 use serde::{Deserialize, Serialize};
 
@@ -99,7 +102,7 @@ impl From<&Army> for Battalion {
             armor_type: a.armor_type,
             agility: a.agility,
             speed: a.speed,
-            is_marching: true,
+            is_marching: AtomicBool::new(true),
             starting_direction: StartingDirection::EAST,
             is_reverse_direction: false,
         }
@@ -108,7 +111,7 @@ impl From<&Army> for Battalion {
 
 #[cfg(test)]
 pub mod test {
-    use std::sync::atomic::Ordering;
+    use std::sync::atomic::{AtomicBool, Ordering};
 
     use crate::{
         entities::testing_entities::partial_battalion_for_testing::PartialBattalionForTests,
@@ -213,11 +216,11 @@ pub mod test {
 
         let test_battalion_ref = test_army.get_mut(0).unwrap();
 
-        assert_eq!(test_battalion_ref.is_marching, true);
-        test_battalion_ref.set_is_marching(false, None);
-        assert_eq!(test_battalion_ref.is_marching, false);
-        test_battalion_ref.set_is_marching(true, None);
-        assert_eq!(test_battalion_ref.is_marching, true);
+        assert_eq!(test_battalion_ref.is_marching.load(Ordering::SeqCst), true);
+        test_battalion_ref.set_is_marching(AtomicBool::new(false), None);
+        assert_eq!(test_battalion_ref.is_marching.load(Ordering::SeqCst), false);
+        test_battalion_ref.set_is_marching(AtomicBool::new(true), None);
+        assert_eq!(test_battalion_ref.is_marching.load(Ordering::SeqCst), true);
     }
 }
 

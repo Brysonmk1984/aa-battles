@@ -1,6 +1,6 @@
 use std::{
     collections::HashMap,
-    sync::atomic::{AtomicU32, Ordering},
+    sync::atomic::{AtomicBool, AtomicU32, Ordering},
 };
 
 use serde::de::Error;
@@ -68,7 +68,7 @@ pub fn create_mock_generic_battalion(partial_battalion: PartialBattalionForTests
             .unwrap(),
         position: partial_battalion.position.or(Some(150)).unwrap(),
         aoe: partial_battalion.aoe.or(Some(0.0)).unwrap(),
-        is_marching: true,
+        is_marching: AtomicBool::new(true),
         spread: partial_battalion.spread.or(Some(1.0)).unwrap(),
         flying: partial_battalion.flying.or(Some(false)).unwrap(),
         ..Default::default()

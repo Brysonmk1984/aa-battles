@@ -46,7 +46,9 @@ impl Battle {
             western_battalions: vec![],
         };
 
+        // As long as both armies have forces
         while a1_count > 0 && a2_count > 0 {
+            // STEP 1 - CHECK KING CAPTURED CONDITION
             let winner_by_position = check_for_king_captured_condition(&self);
             if winner_by_position.is_some() {
                 battle_result.win_type = Some(WinType::KingCaptured);
@@ -74,11 +76,14 @@ impl Battle {
             if battle_result.tick_count > 300 {
                 panic!("Infinite loop detected!");
             }
-            // should return more info about the tick, including how to update the battle state, rather than updating from internally
+
+            // STEP 2 - RUN NEXT TICK IF KING CAPTURED CONDITION IS NOT SATISFIED
             total_army_count = run_tick(self);
         }
 
         let ending_army_states = (&self.army_1_state, &self.army_2_state);
+
+        // STEP 3 - DETERMINE WHICH ARMY WAS CONQUERED since at least one side has zero forces left
         determine_army_conquered_condition(ending_army_states, battle_result, a1_count, a2_count)
     }
 

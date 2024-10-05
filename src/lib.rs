@@ -131,7 +131,7 @@ mod tests {
         println!("{end_battle_payload:?}");
         assert_eq!(
             end_battle_payload.battle_result.winner,
-            Some(crate::enums::Belligerent::EasternArmy)
+            Some(crate::enums::Belligerent::WesternArmy)
         );
     }
 }

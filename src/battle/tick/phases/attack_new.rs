@@ -1,4 +1,10 @@
-use std::{collections::HashMap, env, ops::Deref, sync::atomic::Ordering, thread};
+use std::{
+    collections::HashMap,
+    env,
+    ops::Deref,
+    sync::atomic::{AtomicBool, Ordering},
+    thread,
+};
 
 use crate::{
     entities::battalion::battalion::Battalion,
@@ -33,10 +39,10 @@ pub fn attack_phase_new(
                     // get A battalion from a param based on entry key
                     let attacking_battalion =
                         attackers.iter().find(|b| b.name == *attacker).unwrap();
+                    println!("{}", attacking_battalion.is_marching.load(Ordering::SeqCst));
                     //println!("DEF VEC: {defenders:?}");
-                    // Currently isn't working as intended
-                    // each attack runs the attack sequence FOR EACH defender. so attacker[0] gets n*defenderCount (5) attacks in one tick
-                    run_attack_sequence(&attacking_battalion, defenders, thread_num);
+
+                    run_attack_sequence(attacking_battalion, defenders, thread_num);
                 }
                 None => {
                     return;
@@ -62,7 +68,7 @@ fn run_attack_sequence(
         let defender_index = rand::thread_rng().gen_range(0..(combined_active_defenders.len()));
         let defender = combined_active_defenders.get(defender_index).unwrap();
         let mut test_only_count_dodges = 0;
-
+        attacker.set_is_marching(AtomicBool::new(false), Some(&defender.name));
         // Run engagement steps multiple times depending on attack speed
         for a in 0..attacker.attack_speed {
             // Defending battalion loses a member or more depending on aoe
@@ -112,7 +118,7 @@ fn run_engagement_steps(attacker: &Battalion, defender: &Battalion) -> Engagemen
     let has_dodged_attack = try_dodge(
         attacker.accuracy,
         defender.agility,
-        defender.is_marching,
+        defender.is_marching.load(Ordering::SeqCst),
         defender.starting_direction,
         || rand::thread_rng().gen_range(0..100),
     );

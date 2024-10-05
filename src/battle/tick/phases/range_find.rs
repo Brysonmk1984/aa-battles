@@ -1,4 +1,4 @@
-use std::{collections::HashMap, env};
+use std::{collections::HashMap, env, sync::atomic::AtomicBool};
 
 use rand::seq::SliceRandom;
 
@@ -68,5 +68,13 @@ pub fn update_in_range_map<'a>(
         combined_vec.into_iter().for_each(|b_name| {
             in_range_vec.push(b_name);
         });
+
+        if (in_range_vec.len() == 0) {
+            let attacker_battalion = attacker
+                .iter()
+                .find(|battalion| battalion.name == *battalion_key)
+                .unwrap();
+            attacker_battalion.set_is_marching(AtomicBool::new(true), None);
+        }
     }
 }

@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::sync::atomic::{AtomicU32, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
 
 use serde::{Deserialize, Serialize};
 use serde_this_or_that::as_f64;
@@ -16,20 +16,26 @@ use crate::{
     util::determine_aoe_effect,
 };
 
-use super::battalion::Battalion;
+use super::battalion::{self, Battalion};
 
 impl Battalion {
-    pub fn set_is_marching(&mut self, march: bool, enemy_engaging_with: Option<&ArmyName>) {
-        if self.is_marching != march && march == true {
+    pub fn set_is_marching(&self, march: AtomicBool, enemy_engaging_with: Option<&ArmyName>) {
+        let march_command = march.load(Ordering::SeqCst);
+        let battalion_is_marching = self.is_marching.load(Ordering::SeqCst);
+
+        if battalion_is_marching != march_command && march_command == true {
             push_log(format!("{} are now marching", self.name));
-        } else if self.is_marching != march && march == false && enemy_engaging_with.is_some() {
+        } else if battalion_is_marching != march_command
+            && march_command == false
+            && enemy_engaging_with.is_some()
+        {
             push_log(format!(
                 "{} are now engaging with {} ",
                 self.name,
                 enemy_engaging_with.unwrap()
             ));
         }
-        self.is_marching = march;
+        self.is_marching.store(march_command, Ordering::SeqCst);
     }
 
     pub fn set_is_reverse_direction(&mut self, value: bool) {
