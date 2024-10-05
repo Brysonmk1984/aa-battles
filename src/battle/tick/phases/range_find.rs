@@ -2,10 +2,7 @@ use std::{collections::HashMap, env};
 
 use rand::seq::SliceRandom;
 
-use crate::{
-    types::{ArmyName, Battalion},
-    MIN_RANGE_ATTACK_AIR,
-};
+use crate::{entities::battalion::battalion::Battalion, enums::ArmyName, MIN_RANGE_ATTACK_AIR};
 
 pub fn update_in_range_map<'a>(
     attacker_map: &mut HashMap<ArmyName, Vec<ArmyName>>,

@@ -1,17 +1,22 @@
 #![allow(warnings)]
 use anyhow::{Context, Result};
+use entities::{
+    battle::battle::Battle, battle_army::battle_army::BattleArmy,
+    battle_result::battle_result::BattleResult, game_defaults::GameDefaults, nation::Nation,
+    nation_army::nation_army::NationArmy,
+};
+use enums::StartingDirection;
 use mocks::game_defaults::GameDefaultsMocks;
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env, error::Error, fs::File, io::Write};
-use types::{Battalion, BattleArmy, BattleResult, GameDefaults, NationArmy, StartingDirection};
 use util::{clear_logs, Stats, AOE_SPREAD_CELL};
 
 use crate::{
+    enums::ArmyName,
     match_up::{
         create_mocks::create_default_competitor,
         match_up::{create_battle_army, create_mock_battle_army, get_battle_tuple},
     },
-    types::{Army, ArmyName, Battle, Nation},
     util::{
         create_hash_of_defaults, get_logs, get_stats, map_army_defaults, push_log, reset_stats,
         BattleLog, LOG_MUTEX, WEAPON_ARMOR_CELL,
@@ -19,9 +24,10 @@ use crate::{
 };
 
 mod battle;
+mod entities;
+pub mod enums;
 mod match_up;
 mod mocks;
-pub mod types;
 pub mod util;
 
 pub const MIN_RANGE_ATTACK_AIR: i32 = 20;
@@ -124,7 +130,6 @@ mod tests {
     use crate::match_up::create_mocks::create_mock_army;
 
     use crate::mocks::game_defaults::{get_competitors, get_game_defaults, GameDefaultsMocks};
-    use crate::types::GameDefaults;
     use crate::util::{create_hash_of_defaults, map_army_defaults, WEAPON_ARMOR_CELL};
 
     /**
@@ -133,11 +138,12 @@ mod tests {
      */
     #[test]
     fn test_do_battle() {
-        let end_battle_payload = do_battle(get_game_defaults(), get_competitors()).unwrap();
+        let end_battle_payload =
+            do_battle(get_game_defaults(), get_competitors(700, 1000)).unwrap();
         println!("{end_battle_payload:?}");
         assert_eq!(
             end_battle_payload.battle_result.winner,
-            Some(crate::types::Belligerent::EasternArmy)
+            Some(crate::enums::Belligerent::EasternArmy)
         );
     }
 }

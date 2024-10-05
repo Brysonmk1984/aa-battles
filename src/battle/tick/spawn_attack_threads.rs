@@ -1,6 +1,9 @@
-use std::{collections::HashMap, thread};
+use std::{
+    collections::HashMap,
+    thread::{self, ScopedJoinHandle},
+};
 
-use crate::types::{ArmyName, Battalion, Battle};
+use crate::{entities::battle::battle::Battle, enums::ArmyName};
 
 use super::phases::attack_new::attack_phase_new;
 
@@ -21,27 +24,29 @@ pub fn spawn_attack_threads(
      */
 
     thread::scope(|scope| {
-        for n in 1..threads_per_army {
-            let west_thread_num = n * 2;
-            let east_thread_num = n * 2 - 1;
+        for n in 0..threads_per_army {
+            let index = n + 1;
+            let west_thread_num = index * 2;
+            let east_thread_num = index * 2 - 1;
 
-            // EAST attacks
             scope.spawn(move || {
+                // EAST attacks
                 attack_phase_new(
                     attacker_map_east,
                     army_1_state,
                     army_2_state,
                     east_thread_num,
-                )
-            });
-            // WEST attacks
-            scope.spawn(move || {
-                attack_phase_new(
-                    attacker_map_west,
-                    army_2_state,
-                    army_1_state,
-                    west_thread_num,
-                )
+                );
+
+                // WEST attacks
+                scope.spawn(move || {
+                    attack_phase_new(
+                        attacker_map_west,
+                        army_2_state,
+                        army_1_state,
+                        west_thread_num,
+                    )
+                });
             });
         }
     });

@@ -71,8 +71,9 @@ use std::sync::{OnceLock, RwLock};
 use num_format::{Locale, ToFormattedString};
 use serde::Serialize;
 
+use crate::entities::army::Army;
+use crate::enums::{ArmyName, Belligerent, StartingDirection};
 use crate::mocks::game_defaults::GameDefaultsMocks;
-use crate::types::{Army, ArmyName, Belligerent, StartingDirection};
 /**
  * WEAPON_ARMOR_CELL
  * stores a hash map of f64s for weapon type against armor type

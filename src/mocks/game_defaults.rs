@@ -1,11 +1,12 @@
 use std::collections::HashMap;
 
 use crate::{
-    match_up::create_mocks::create_mock_generic_battalion,
-    types::{
-        ArmorType, Army, ArmyName, GameDefaults, Nation, NationArmy, PartialBattalionForTests,
-        StartingDirection, WeaponType,
+    entities::{
+        army::Army, game_defaults::GameDefaults, nation::Nation,
+        nation_army::nation_army::NationArmy,
     },
+    enums::{ArmorType, ArmyName, StartingDirection, WeaponType},
+    match_up::create_mocks::create_mock_generic_battalion,
     util::create_hash_of_defaults,
 };
 
@@ -338,19 +339,21 @@ impl GameDefaultsMocks {
         hash
     }
 
-    pub fn generate_example_competitors() -> ((Nation, Vec<NationArmy>), (Nation, Vec<NationArmy>))
-    {
+    pub fn generate_example_competitors(
+        east_count: i32,
+        west_count: i32,
+    ) -> ((Nation, Vec<NationArmy>), (Nation, Vec<NationArmy>)) {
         let competitor_one = (
             Nation {
                 ..Default::default()
             },
-            vec![NationArmy::from(NationArmyMock::new(700))],
+            vec![NationArmy::from(NationArmyMock::new(east_count))],
         );
         let competitor_two = (
             Nation {
                 ..Default::default()
             },
-            vec![NationArmy::from(NationArmyMock::new(1000))],
+            vec![NationArmy::from(NationArmyMock::new(west_count))],
         );
 
         (competitor_one, competitor_two)
@@ -366,6 +369,9 @@ pub fn get_game_defaults() -> GameDefaults {
     }
 }
 
-pub fn get_competitors() -> ((Nation, Vec<NationArmy>), (Nation, Vec<NationArmy>)) {
-    GameDefaultsMocks::generate_example_competitors()
+pub fn get_competitors(
+    east_count: i32,
+    west_count: i32,
+) -> ((Nation, Vec<NationArmy>), (Nation, Vec<NationArmy>)) {
+    GameDefaultsMocks::generate_example_competitors(east_count, west_count)
 }

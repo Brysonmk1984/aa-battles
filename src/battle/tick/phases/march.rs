@@ -1,4 +1,4 @@
-use crate::types::{Battalion, StartingDirection};
+use crate::{entities::battalion::battalion::Battalion, enums::StartingDirection};
 
 pub fn march_phase(army: &mut Vec<Battalion>, starting_direction: &StartingDirection) {
     army.iter_mut().for_each(|a| {

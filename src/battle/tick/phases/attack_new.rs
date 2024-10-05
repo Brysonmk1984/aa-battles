@@ -1,7 +1,8 @@
 use std::{collections::HashMap, env, ops::Deref, sync::atomic::Ordering, thread};
 
 use crate::{
-    types::{ArmorType, ArmyName, Battalion, Battle, Belligerent, StartingDirection, WeaponType},
+    entities::battalion::battalion::Battalion,
+    enums::{ArmorType, ArmyName, Belligerent, StartingDirection, WeaponType},
     util::{
         determine_aoe_effect, push_log, push_stat_armor, push_stat_block, push_stat_dodge,
         push_stat_kill, WEAPON_ARMOR_CELL,
@@ -18,18 +19,30 @@ pub fn attack_phase_new(
     thread_num: u8,
 ) {
     // For each map key
-    attacker_map.iter().enumerate().for_each(|(i, entry)| {
-        println!("ATTACKER: {:?}", entry.0);
-        // get first in vec of values
-        let defending_b_name = entry.1.get(i).unwrap();
+    attacker_map
+        .iter()
+        .enumerate()
+        .for_each(|(i, (attacker, matching_defenders))| {
+            //println!("ATTACKER: {:?}", attacker);
+            // get first in vec of values
+            let defending_b_name = matching_defenders.get(i).or_else(|| None);
 
-        // get A battalion from a param based on entry key
-        let attacking_battalion = attackers.iter().find(|b| b.name == *entry.0).unwrap();
-
-        // Currently isn't working as intended
-        // each attack runs the attack sequence FOR EACH defender. so attacker[0] gets n*defenderCount (5) attacks in one tick
-        run_attack_sequence(&attacking_battalion, defenders, thread_num);
-    });
+            match defending_b_name {
+                Some(d) => {
+                    println!("AM: {attacker_map:?}");
+                    // get A battalion from a param based on entry key
+                    let attacking_battalion =
+                        attackers.iter().find(|b| b.name == *attacker).unwrap();
+                    //println!("DEF VEC: {defenders:?}");
+                    // Currently isn't working as intended
+                    // each attack runs the attack sequence FOR EACH defender. so attacker[0] gets n*defenderCount (5) attacks in one tick
+                    run_attack_sequence(&attacking_battalion, defenders, thread_num);
+                }
+                None => {
+                    return;
+                }
+            }
+        });
 }
 
 /**
@@ -42,9 +55,11 @@ fn run_attack_sequence(
     thread_num: u8,
 ) {
     let attacker_count = attacker.count.load(Ordering::Acquire);
+    // println!("RUNNING ATTACK SEQUENCE - attacker count:{attacker_count}");
     for n in 0..attacker_count {
+        //println!("{}", combined_active_defenders.len());
         // Pick a defender
-        let defender_index = rand::thread_rng().gen_range(0..(combined_active_defenders.len() - 1));
+        let defender_index = rand::thread_rng().gen_range(0..(combined_active_defenders.len()));
         let defender = combined_active_defenders.get(defender_index).unwrap();
         let mut test_only_count_dodges = 0;
 
@@ -55,11 +70,12 @@ fn run_attack_sequence(
 
             if result == EngagementOutcome::Hit {
                 let hits = determine_aoe_effect(&attacker.aoe, defender.spread as i32);
-
+                //println!("HITS: {hits:?}");
                 // DO ATOMIC OPERATIONS
                 defender
                     .count
                     .fetch_update(Ordering::SeqCst, Ordering::SeqCst, |count| {
+                        //println!("COUNT: {count}");
                         if count == 0 {
                             return Some(0);
                         } else {
@@ -69,9 +85,9 @@ fn run_attack_sequence(
                                 actual_hits = 0;
                             } else {
                                 actual_hits = count - hits as u32;
+                                push_stat_kill(hits as u32, attacker.starting_direction);
                             }
 
-                            push_stat_kill(actual_hits as u32, attacker.starting_direction);
                             return Some(actual_hits);
                         }
                     });
@@ -187,6 +203,7 @@ pub fn try_block(
     let has_blocked = chance_to_block > random_block_num;
 
     if has_blocked {
+        println!(" BLOCKED {chance_to_block} {random_block_num}");
         push_stat_block(starting_direction);
     }
     has_blocked
@@ -222,7 +239,7 @@ pub fn try_armor_defense(
 mod tests {
     use crate::{
         battle::tick::phases::attack_new::{try_block, try_dodge},
-        types::StartingDirection,
+        enums::StartingDirection,
     };
     use rand::Rng;
 

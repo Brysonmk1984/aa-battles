@@ -6,9 +6,13 @@ use std::{
 use serde::de::Error;
 use thiserror::Error;
 
-use crate::types::{
-    Army, ArmyName, Battalion, BattleArmy, Belligerent, Nation, NationArmy,
-    PartialBattalionForTests, StartingDirection,
+use crate::{
+    entities::{
+        army::Army, battalion::battalion::Battalion, nation::Nation,
+        nation_army::nation_army::NationArmy,
+        testing_entities::partial_battalion_for_testing::PartialBattalionForTests,
+    },
+    enums::{ArmyName, Belligerent, StartingDirection},
 };
 
 #[derive(Error, Debug)]

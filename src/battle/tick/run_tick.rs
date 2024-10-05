@@ -1,7 +1,7 @@
 use super::phases::march::march_phase;
 use super::phases::range_find::update_in_range_map;
 use super::spawn_attack_threads::spawn_attack_threads;
-use crate::types::{ArmyName, StartingDirection};
+use crate::enums::{ArmyName, StartingDirection};
 use crate::Battle;
 use std::collections::HashMap;
 use std::thread::spawn;
@@ -42,7 +42,7 @@ pub fn run_tick(battle_state: &mut Battle) -> u32 {
         sum += b.count.load(std::sync::atomic::Ordering::SeqCst);
         sum
     });
-
+    println!("------- March Phase ------");
     // STEP 4: March forward
     if western_army_count > 0 && eastern_army_count >= 0 {
         march_phase(&mut battle_state.army_1_state, &StartingDirection::EAST);

@@ -2,16 +2,21 @@ use std::{collections::HashMap, sync::atomic::AtomicU32};
 
 use serde::{Deserialize, Serialize};
 
-use crate::types::{
-    Army,
-    ArmyName::{
-        self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
-        CastlegateCrossbowmen, DeathDealerAssassins, ElvenArchers, HighbornCavalry,
-        ImperialLegionnaires, MagiEnforcers, MinuteMenMilitia, NorthWatchLongbowmen,
-        OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
-        SkullClanDeathCultists,
+use crate::{
+    entities::{
+        army::Army, battalion::battalion::Battalion, battle_army::battle_army::BattleArmy,
+        nation::Nation, nation_army::nation_army::NationArmy,
     },
-    Battalion, BattleArmy, Nation, NationArmy, StartingDirection,
+    enums::{
+        ArmyName::{
+            self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
+            CastlegateCrossbowmen, DeathDealerAssassins, ElvenArchers, HighbornCavalry,
+            ImperialLegionnaires, MagiEnforcers, MinuteMenMilitia, NorthWatchLongbowmen,
+            OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
+            SkullClanDeathCultists,
+        },
+        StartingDirection,
+    },
 };
 
 use super::create_mocks::{create_mock_army, MockError};
@@ -106,10 +111,9 @@ pub mod test {
     use std::sync::atomic::Ordering;
 
     use crate::{
-        match_up::create_mocks::create_mock_generic_battalion,
-        types::{PartialBattalionForTests, StartingDirection},
-        util::AOE_SPREAD_CELL,
-        GameDefaultsMocks,
+        entities::testing_entities::partial_battalion_for_testing::PartialBattalionForTests,
+        enums::StartingDirection, match_up::create_mocks::create_mock_generic_battalion,
+        util::AOE_SPREAD_CELL, GameDefaultsMocks,
     };
 
     use super::Battalion;

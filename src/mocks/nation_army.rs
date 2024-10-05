@@ -1,4 +1,4 @@
-use crate::types::{ArmyName, NationArmy};
+use crate::{entities::nation_army::nation_army::NationArmy, enums::ArmyName};
 
 #[derive(Default)]
 pub struct NationArmyMock {

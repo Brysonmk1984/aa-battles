@@ -1,5 +1,9 @@
 use crate::{
-    types::{ArmyName, Battalion, BattleResult, Belligerent, EndingBattalionStats, WinType},
+    entities::{
+        battalion::battalion::Battalion, battle_result::battle_result::BattleResult,
+        ending_battalion_stats::EndingBattalionStats,
+    },
+    enums::{ArmyName, Belligerent, WinType},
     util::push_log,
     Battle,
 };
@@ -82,10 +86,12 @@ mod tests {
 
     use super::{check_for_king_captured_condition, determine_army_conquered_condition};
     use crate::{
-        match_up::create_mocks::create_mock_generic_battalion,
-        types::{
-            Battle, BattleResult, Belligerent, PartialBattalionForTests, StartingDirection, WinType,
+        entities::{
+            battle::battle::Battle, battle_result::battle_result::BattleResult,
+            testing_entities::partial_battalion_for_testing::PartialBattalionForTests,
         },
+        enums::{Belligerent, StartingDirection, WinType},
+        match_up::create_mocks::create_mock_generic_battalion,
     };
 
     #[test]
