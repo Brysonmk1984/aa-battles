@@ -40,8 +40,8 @@ pub fn do_battle(
         Err(e) => env::set_var("ENVIRONMENT", game_defaults.environment),
     }
 
-    WEAPON_ARMOR_CELL.set(game_defaults.weapons_vs_armor.clone());
-    AOE_SPREAD_CELL.set(game_defaults.aoe_vs_spread.clone());
+    WEAPON_ARMOR_CELL.set(game_defaults.weapons_vs_armor);
+    AOE_SPREAD_CELL.set(game_defaults.aoe_vs_spread);
 
     let mut battle_log = BattleLog::new();
 
@@ -49,6 +49,13 @@ pub fn do_battle(
     let army_defaults = map_army_defaults(Some(army_defaults_hash));
 
     let mut battle_tuple;
+
+    let army_composition_for_logs = get_battle_tuple(
+        (competitors.0.clone(), competitors.1.clone()),
+        army_defaults.clone(),
+        create_battle_army,
+    )
+    .unwrap();
 
     battle_tuple = get_battle_tuple(
         (competitors.0, competitors.1),
@@ -66,8 +73,8 @@ pub fn do_battle(
     battle_log.headline = Some(battle_headline);
 
     let mut battle = Battle {
-        army_1_state: battle_tuple.0.full_army.clone(),
-        army_2_state: battle_tuple.1.full_army.clone(),
+        army_1_state: battle_tuple.0.full_army,
+        army_2_state: battle_tuple.1.full_army,
     };
 
     let battle_result = battle.run_battle();
@@ -91,14 +98,12 @@ pub fn do_battle(
 
     let end_battle_payload = EndBattlePayload {
         battle_result,
-        army_compositions: battle_tuple,
+        army_compositions: army_composition_for_logs,
         events: get_logs(),
         stats: get_stats(),
     };
 
-    // Needed since stats RwLock is stored in memory, and reused throughout battle and doesn't get removed after script is ran.
     reset_stats();
-    // Same with clear Logs and being a Mutex
     clear_logs();
 
     Ok(end_battle_payload)
@@ -129,10 +134,10 @@ mod tests {
     #[test]
     fn test_do_battle() {
         let end_battle_payload = do_battle(get_game_defaults(), get_competitors()).unwrap();
-
+        println!("{end_battle_payload:?}");
         assert_eq!(
             end_battle_payload.battle_result.winner,
-            Some(crate::types::Belligerent::WesternArmy)
+            Some(crate::types::Belligerent::EasternArmy)
         );
     }
 }

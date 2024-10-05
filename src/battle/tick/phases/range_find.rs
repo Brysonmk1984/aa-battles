@@ -33,7 +33,7 @@ pub fn update_in_range_map<'a>(
 
             // TODO: Consider a more elaborate check for range finding when both are marching and march past each other rather than attack
             // For now, resolved this by adjusting speed down and range up.
-            if in_range && battalion.count > 0 {
+            if in_range && battalion.count.load(std::sync::atomic::Ordering::SeqCst) > 0 {
                 let battalion_name = battalion.name.clone();
                 // insert defenders flyers in the flyer vec, otherwise the ground vec
                 if attacker_range > MIN_RANGE_ATTACK_AIR && battalion.flying {

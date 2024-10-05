@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::sync::atomic::AtomicU32;
+use std::sync::atomic::{AtomicU32, Ordering};
 
 use serde::{Deserialize, Serialize};
 use serde_this_or_that::as_f64;
@@ -14,7 +14,7 @@ use crate::{
     },
     util::determine_aoe_effect,
 };
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Battle {
     pub army_1_state: Vec<Battalion>,
     pub army_2_state: Vec<Battalion>,
@@ -33,11 +33,11 @@ impl Battle {
                 .to_string(),
         );
         let mut a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
-            sum += b.count;
+            sum += b.count.load(Ordering::Acquire);
             sum
         });
         let mut a2_count = self.army_2_state.iter().fold(0, |mut sum, b| {
-            sum += b.count;
+            sum += b.count.load(Ordering::Acquire);
             sum
         });
         let mut total_army_count = a1_count + a2_count;
@@ -67,11 +67,11 @@ impl Battle {
             }
 
             a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
-                sum += b.count;
+                sum += b.count.load(Ordering::Acquire);
                 sum
             });
             a2_count = self.army_2_state.iter().fold(0, |mut sum, b| {
-                sum += b.count;
+                sum += b.count.load(Ordering::Acquire);
                 sum
             });
             battle_result.tick_count += 1;
@@ -84,7 +84,7 @@ impl Battle {
             total_army_count = run_tick(self);
         }
 
-        let ending_army_states = (self.army_1_state.clone(), self.army_2_state.clone());
+        let ending_army_states = (&self.army_1_state, &self.army_2_state);
         determine_army_conquered_condition(ending_army_states, battle_result, a1_count, a2_count)
     }
 
@@ -130,17 +130,39 @@ impl Battle {
      */
     fn format_army_state(&mut self, belligerent: Belligerent, stats: &String) -> String {
         let mut formatted_vec = if belligerent == Belligerent::EasternArmy {
-            self.army_1_state.sort_by(|a, b| b.count.cmp(&a.count));
+            self.army_1_state.sort_by(|a, b| {
+                let a_count = a.count.load(Ordering::Acquire);
+                let b_count = b.count.load(Ordering::Acquire);
+                return b_count.cmp(&a_count);
+            });
             self.army_1_state
                 .iter()
-                .map(|b| format!("{} - {} at position {}", b.name, b.count, b.position))
+                .map(|b| {
+                    format!(
+                        "{} - {} at position {}",
+                        b.name,
+                        b.count.load(Ordering::Acquire),
+                        b.position
+                    )
+                })
                 .collect::<Vec<String>>()
                 .join("\n")
         } else {
-            self.army_2_state.sort_by(|a, b| b.count.cmp(&a.count));
+            self.army_2_state.sort_by(|a, b| {
+                let a_count = a.count.load(Ordering::Acquire);
+                let b_count = b.count.load(Ordering::Acquire);
+                return b_count.cmp(&a_count);
+            });
             self.army_2_state
                 .iter()
-                .map(|b| format!("{} - {} at position {}", b.name, b.count, b.position))
+                .map(|b| {
+                    format!(
+                        "{} - {} at position {}",
+                        b.name,
+                        b.count.load(Ordering::Acquire),
+                        b.position
+                    )
+                })
                 .collect::<Vec<String>>()
                 .join("\n")
         };
@@ -157,7 +179,7 @@ pub enum StartingDirection {
 }
 
 // An Army Type with count belonging to a user. Forms a part of a whole nation's army
-#[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq)]
+#[derive(Debug, Serialize, Deserialize, Default)]
 pub struct Battalion {
     pub name: ArmyName,
     pub count: AtomicU32,
@@ -179,17 +201,6 @@ pub struct Battalion {
 }
 
 impl Battalion {
-    pub fn decrement(&mut self, attacker_aoe: f64, attacker_starting_direction: StartingDirection) {
-        let hits = determine_aoe_effect(&attacker_aoe, self.spread as i32);
-        push_stat_kill(hits as u32, attacker_starting_direction);
-        let new_count = self.count - hits as i32;
-        if new_count > 0 {
-            self.count = new_count;
-        } else {
-            self.count = 0;
-        }
-    }
-
     pub fn set_is_marching(&mut self, march: bool, enemy_engaging_with: Option<&ArmyName>) {
         if self.is_marching != march && march == true {
             push_log(format!("{} are now marching", self.name));
@@ -228,7 +239,7 @@ impl Battalion {
 }
 
 // Full Army a user will use to battle
-#[derive(Debug, Clone, Deserialize, Serialize, Default)]
+#[derive(Debug, Deserialize, Serialize, Default)]
 
 pub struct BattleArmy {
     pub nation_id: i32,
@@ -243,7 +254,8 @@ impl BattleArmy {
             .full_army
             .iter()
             .fold(vec![], |mut acc: Vec<String>, b: &Battalion| {
-                acc.push(format!("{} {}", b.count, b.name));
+                let count = b.count.load(Ordering::Acquire);
+                acc.push(format!("{} {}", count, b.name));
                 acc
             })
             .join(", ");
@@ -354,7 +366,7 @@ pub enum ArmorType {
 
 #[derive(Default)]
 pub struct PartialBattalionForTests {
-    pub count: Option<i32>,
+    pub count: Option<AtomicU32>,
     pub position: Option<i32>,
     pub speed: Option<i32>,
     pub flying: Option<bool>,

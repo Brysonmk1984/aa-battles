@@ -16,13 +16,17 @@ pub fn spawn_attack_threads(
         army_2_state,
     } = battle_state;
 
+    /*
+     * TICKS ARE RUNNING AS EXPECTED IN A LOOP
+     */
+
     thread::scope(|scope| {
         for n in 1..threads_per_army {
             let west_thread_num = n * 2;
             let east_thread_num = n * 2 - 1;
 
             // EAST attacks
-            scope.spawn(|| {
+            scope.spawn(move || {
                 attack_phase_new(
                     attacker_map_east,
                     army_1_state,
@@ -31,7 +35,7 @@ pub fn spawn_attack_threads(
                 )
             });
             // WEST attacks
-            scope.spawn(|| {
+            scope.spawn(move || {
                 attack_phase_new(
                     attacker_map_west,
                     army_2_state,

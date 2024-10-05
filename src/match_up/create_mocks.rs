@@ -1,4 +1,7 @@
-use std::collections::HashMap;
+use std::{
+    collections::HashMap,
+    sync::atomic::{AtomicU32, Ordering},
+};
 
 use serde::de::Error;
 use thiserror::Error;
@@ -55,7 +58,10 @@ pub fn create_mock_generic_battalion(partial_battalion: PartialBattalionForTests
     let mock_battalion = Battalion {
         range: partial_battalion.range.or(Some(5)).unwrap(),
         speed: partial_battalion.speed.or(Some(5)).unwrap(),
-        count: partial_battalion.count.or(Some(1000)).unwrap(),
+        count: partial_battalion
+            .count
+            .or(Some(AtomicU32::new(1000)))
+            .unwrap(),
         position: partial_battalion.position.or(Some(150)).unwrap(),
         aoe: partial_battalion.aoe.or(Some(0.0)).unwrap(),
         is_marching: true,

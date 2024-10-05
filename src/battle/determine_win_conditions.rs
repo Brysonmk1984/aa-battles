@@ -4,6 +4,7 @@ use crate::{
     Battle,
 };
 use anyhow::Context;
+use std::sync::atomic::{AtomicU32, Ordering};
 
 pub fn check_for_king_captured_condition(battle_state: &Battle) -> Option<Belligerent> {
     let eastern_army_reached_enemy_king = battle_state
@@ -28,10 +29,10 @@ pub fn check_for_king_captured_condition(battle_state: &Battle) -> Option<Bellig
 }
 
 pub fn determine_army_conquered_condition(
-    ending_army_states: (Vec<Battalion>, Vec<Battalion>),
+    ending_army_states: (&Vec<Battalion>, &Vec<Battalion>),
     mut battle_result: BattleResult,
-    eastern_count: i32,
-    western_count: i32,
+    eastern_count: u32,
+    western_count: u32,
 ) -> BattleResult {
     if eastern_count > western_count {
         push_log(
@@ -56,7 +57,7 @@ pub fn determine_army_conquered_condition(
         .iter()
         .map(|battalion| EndingBattalionStats {
             name: battalion.name,
-            count: battalion.count,
+            count: battalion.count.load(Ordering::Acquire) as i32,
             position: battalion.position,
         })
         .collect();
@@ -66,7 +67,7 @@ pub fn determine_army_conquered_condition(
         .iter()
         .map(|battalion| EndingBattalionStats {
             name: battalion.name,
-            count: battalion.count,
+            count: battalion.count.load(Ordering::Acquire) as i32,
             position: battalion.position,
         })
         .collect();
@@ -77,6 +78,8 @@ pub fn determine_army_conquered_condition(
 
 #[cfg(test)]
 mod tests {
+    use std::sync::atomic::AtomicU32;
+
     use super::{check_for_king_captured_condition, determine_army_conquered_condition};
     use crate::{
         match_up::create_mocks::create_mock_generic_battalion,
@@ -89,18 +92,18 @@ mod tests {
     fn test_determine_army_conquered_condition_east() {
         let mut battle_result: BattleResult = Default::default();
         let east = vec![create_mock_generic_battalion(PartialBattalionForTests {
-            count: Some(1000),
+            count: Some(AtomicU32::new(1000)),
             starting_direction: Some((StartingDirection::EAST)),
             ..Default::default()
         })];
         let west = vec![create_mock_generic_battalion(PartialBattalionForTests {
-            count: Some(0),
+            count: Some(AtomicU32::new(0)),
             starting_direction: Some((StartingDirection::EAST)),
             ..Default::default()
         })];
 
         let updated_battle_result =
-            determine_army_conquered_condition((east, west), battle_result, 1000, 0);
+            determine_army_conquered_condition((&east, &west), battle_result, 1000, 0);
         assert_eq!(updated_battle_result.winner, Some(Belligerent::EasternArmy));
         assert_eq!(updated_battle_result.loser, Some(Belligerent::WesternArmy));
         assert_eq!(updated_battle_result.win_type, Some(WinType::ArmyConquered));
@@ -110,18 +113,18 @@ mod tests {
     fn test_determine_army_conquered_condition_west() {
         let mut battle_result: BattleResult = Default::default();
         let east = vec![create_mock_generic_battalion(PartialBattalionForTests {
-            count: Some(0),
+            count: Some(AtomicU32::new(0)),
             starting_direction: Some((StartingDirection::EAST)),
             ..Default::default()
         })];
         let west = vec![create_mock_generic_battalion(PartialBattalionForTests {
-            count: Some(1000),
+            count: Some(AtomicU32::new(1000)),
             starting_direction: Some((StartingDirection::EAST)),
             ..Default::default()
         })];
 
         let updated_battle_result =
-            determine_army_conquered_condition((east, west), battle_result, 0, 1000);
+            determine_army_conquered_condition((&east, &west), battle_result, 0, 1000);
         assert_eq!(updated_battle_result.winner, Some(Belligerent::WesternArmy));
         assert_eq!(updated_battle_result.loser, Some(Belligerent::EasternArmy));
         assert_eq!(updated_battle_result.win_type, Some(WinType::ArmyConquered));
@@ -131,7 +134,7 @@ mod tests {
     fn test_check_for_king_captured_condition_east_win() {
         // Ground Army that can't hit air
         let mock_partial_battalion_1 = PartialBattalionForTests {
-            count: Some(1000),
+            count: Some(AtomicU32::new(1000)),
             position: Some(150),
             speed: None,
             flying: Some(false),
@@ -142,7 +145,7 @@ mod tests {
         };
         // Air Army
         let mock_partial_battalion_2 = PartialBattalionForTests {
-            count: Some(1),
+            count: Some(AtomicU32::new(1)),
             position: Some(-100),
             speed: None,
             flying: Some(true),
@@ -167,14 +170,14 @@ mod tests {
     fn test_check_for_king_captured_condition_west_win() {
         // Air Army
         let mock_partial_battalion_1 = PartialBattalionForTests {
-            count: Some(1),
+            count: Some(AtomicU32::new(1)),
             position: Some(-100),
             flying: Some(true),
             ..Default::default()
         };
         // Ground Army that can't hit air
         let mock_partial_battalion_2 = PartialBattalionForTests {
-            count: Some(1000),
+            count: Some(AtomicU32::new(1000)),
             position: Some(-150),
             flying: Some(false),
             ..Default::default()
@@ -193,14 +196,14 @@ mod tests {
     fn test_check_for_king_captured_condition_none() {
         // Air Army
         let mock_partial_battalion_1 = PartialBattalionForTests {
-            count: Some(1),
+            count: Some(AtomicU32::new(1)),
             position: Some(-100),
             flying: Some(true),
             ..Default::default()
         };
         // Ground Army that can't hit air
         let mock_partial_battalion_2 = PartialBattalionForTests {
-            count: Some(1000),
+            count: Some(AtomicU32::new(1000)),
             position: Some(-120),
             flying: Some(false),
             ..Default::default()
@@ -221,14 +224,14 @@ mod tests {
     fn test_check_for_king_captured_condition_air_no_capture() {
         // Air Army
         let mock_partial_battalion_1 = PartialBattalionForTests {
-            count: Some(1),
+            count: Some(AtomicU32::new(1)),
             position: Some(-150),
             flying: Some(false),
             ..Default::default()
         };
         // Ground Army that can't hit air
         let mock_partial_battalion_2 = PartialBattalionForTests {
-            count: Some(1000),
+            count: Some(AtomicU32::new(1000)),
             position: Some(-120),
             flying: Some(false),
             ..Default::default()
