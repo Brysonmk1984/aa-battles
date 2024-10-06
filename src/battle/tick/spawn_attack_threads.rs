@@ -5,7 +5,7 @@ use std::{
 
 use crate::{entities::battle::battle::Battle, enums::ArmyName};
 
-use super::phases::attack_new::attack_phase_new;
+use super::phases::attack::attack_phase;
 
 const threads_per_army: u8 = 1;
 
@@ -31,7 +31,7 @@ pub fn spawn_attack_threads(
 
             scope.spawn(move || {
                 // EAST attacks
-                attack_phase_new(
+                attack_phase(
                     attacker_map_east,
                     army_1_state,
                     army_2_state,
@@ -40,7 +40,7 @@ pub fn spawn_attack_threads(
 
                 // WEST attacks
                 scope.spawn(move || {
-                    attack_phase_new(
+                    attack_phase(
                         attacker_map_west,
                         army_2_state,
                         army_1_state,

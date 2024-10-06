@@ -115,6 +115,8 @@ pub struct EndBattlePayload {
 }
 
 mod tests {
+    use std::time::{Duration, Instant};
+
     use crate::{
         do_battle,
         mocks::game_defaults::{get_competitors, get_game_defaults},
@@ -126,9 +128,16 @@ mod tests {
      */
     #[test]
     fn test_do_battle() {
+        let start = Instant::now();
+
         let end_battle_payload =
-            do_battle(get_game_defaults(), get_competitors(700, 1000)).unwrap();
+            do_battle(get_game_defaults(), get_competitors(100_00, 100_00)).unwrap();
         println!("{end_battle_payload:?}");
+
+        let elapsed = start.elapsed();
+        let milliseconds = elapsed.as_millis();
+        let seconds = Duration::as_secs_f64(&elapsed);
+        println!("{milliseconds:?}ms ({seconds:.4}s) ---- Time elapsed in do_battle()");
         assert_eq!(
             end_battle_payload.battle_result.winner,
             Some(crate::enums::Belligerent::WesternArmy)

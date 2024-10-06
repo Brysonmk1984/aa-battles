@@ -18,7 +18,7 @@ use crate::{
 use rand::Rng;
 use std::string::ToString;
 
-pub fn attack_phase_new(
+pub fn attack_phase(
     attacker_map: &HashMap<ArmyName, Vec<ArmyName>>,
     attackers: &Vec<Battalion>,
     defenders: &Vec<Battalion>,
@@ -244,7 +244,7 @@ pub fn try_armor_defense(
 #[cfg(test)]
 mod tests {
     use crate::{
-        battle::tick::phases::attack_new::{try_block, try_dodge},
+        battle::tick::phases::attack::{try_block, try_dodge},
         enums::StartingDirection,
     };
     use rand::Rng;
