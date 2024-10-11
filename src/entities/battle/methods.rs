@@ -27,11 +27,11 @@ impl Battle {
                 .to_string(),
         );
         let mut a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
-            sum += b.count.load(Ordering::Acquire);
+            sum += b.count.get();
             sum
         });
         let mut a2_count = self.army_2_state.iter().fold(0, |mut sum, b| {
-            sum += b.count.load(Ordering::Acquire);
+            sum += b.count.get();
             sum
         });
         let mut total_army_count = a1_count + a2_count;
@@ -63,11 +63,11 @@ impl Battle {
             }
 
             a1_count = self.army_1_state.iter().fold(0, |mut sum, b| {
-                sum += b.count.load(Ordering::Acquire);
+                sum += b.count.get();
                 sum
             });
             a2_count = self.army_2_state.iter().fold(0, |mut sum, b| {
-                sum += b.count.load(Ordering::Acquire);
+                sum += b.count.get();
                 sum
             });
             battle_result.tick_count += 1;
@@ -130,38 +130,20 @@ impl Battle {
     fn format_army_state(&mut self, belligerent: Belligerent, stats: &String) -> String {
         let mut formatted_vec = if belligerent == Belligerent::EasternArmy {
             self.army_1_state.sort_by(|a, b| {
-                let a_count = a.count.load(Ordering::Acquire);
-                let b_count = b.count.load(Ordering::Acquire);
-                return b_count.cmp(&a_count);
+                return b.count.cmp(&a.count);
             });
             self.army_1_state
                 .iter()
-                .map(|b| {
-                    format!(
-                        "{} - {} at position {}",
-                        b.name,
-                        b.count.load(Ordering::Acquire),
-                        b.position
-                    )
-                })
+                .map(|b| format!("{} - {} at position {}", b.name, b.count.get(), b.position))
                 .collect::<Vec<String>>()
                 .join("\n")
         } else {
             self.army_2_state.sort_by(|a, b| {
-                let a_count = a.count.load(Ordering::Acquire);
-                let b_count = b.count.load(Ordering::Acquire);
-                return b_count.cmp(&a_count);
+                return b.count.cmp(&a.count);
             });
             self.army_2_state
                 .iter()
-                .map(|b| {
-                    format!(
-                        "{} - {} at position {}",
-                        b.name,
-                        b.count.load(Ordering::Acquire),
-                        b.position
-                    )
-                })
+                .map(|b| format!("{} - {} at position {}", b.name, b.count.get(), b.position))
                 .collect::<Vec<String>>()
                 .join("\n")
         };

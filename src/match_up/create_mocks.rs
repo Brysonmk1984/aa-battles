@@ -62,13 +62,10 @@ pub fn create_mock_generic_battalion(partial_battalion: PartialBattalionForTests
     let mock_battalion = Battalion {
         range: partial_battalion.range.or(Some(5)).unwrap(),
         speed: partial_battalion.speed.or(Some(5)).unwrap(),
-        count: partial_battalion
-            .count
-            .or(Some(AtomicU32::new(1000)))
-            .unwrap(),
+        count: partial_battalion.count.or(Some(1000)).unwrap().into(),
         position: partial_battalion.position.or(Some(150)).unwrap(),
         aoe: partial_battalion.aoe.or(Some(0.0)).unwrap(),
-        is_marching: AtomicBool::new(true),
+        is_marching: true.into(),
         spread: partial_battalion.spread.or(Some(1.0)).unwrap(),
         flying: partial_battalion.flying.or(Some(false)).unwrap(),
         ..Default::default()

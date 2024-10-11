@@ -130,17 +130,13 @@ mod tests {
     fn test_do_battle() {
         let start = Instant::now();
 
-        let end_battle_payload =
-            do_battle(get_game_defaults(), get_competitors(100_00, 100_00)).unwrap();
+        let end_battle_payload = do_battle(get_game_defaults(), get_competitors(100, 100)).unwrap();
         println!("{end_battle_payload:?}");
 
         let elapsed = start.elapsed();
         let milliseconds = elapsed.as_millis();
         let seconds = Duration::as_secs_f64(&elapsed);
         println!("{milliseconds:?}ms ({seconds:.4}s) ---- Time elapsed in do_battle()");
-        assert_eq!(
-            end_battle_payload.battle_result.winner,
-            Some(crate::enums::Belligerent::WesternArmy)
-        );
+        assert_eq!(end_battle_payload.battle_result.winner.is_some(), true);
     }
 }

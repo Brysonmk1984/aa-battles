@@ -11,8 +11,7 @@ impl BattleArmy {
             .full_army
             .iter()
             .fold(vec![], |mut acc: Vec<String>, b: &Battalion| {
-                let count = b.count.load(Ordering::Acquire);
-                acc.push(format!("{} {}", count, b.name));
+                acc.push(format!("{} {}", b.count.get(), b.name));
                 acc
             })
             .join(", ");

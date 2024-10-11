@@ -1,10 +1,9 @@
-use std::sync::atomic::Ordering;
-
 use crate::{entities::battalion::battalion::Battalion, enums::StartingDirection};
 
 pub fn march_phase(army: &mut Vec<Battalion>, starting_direction: &StartingDirection) {
     army.iter_mut().for_each(|a| {
-        if a.is_marching.load(Ordering::SeqCst) && a.count.load(Ordering::SeqCst) > 0 {
+        println!("{} is marching {}", a.name, a.is_marching.get());
+        if a.is_marching.get() && a.count.get() > 0 {
             let opposite_direction = if *starting_direction == StartingDirection::EAST {
                 StartingDirection::WEST
             } else {

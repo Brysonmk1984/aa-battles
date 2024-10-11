@@ -19,9 +19,9 @@ use crate::{
 use super::battalion::{self, Battalion};
 
 impl Battalion {
-    pub fn set_is_marching(&self, march: AtomicBool, enemy_engaging_with: Option<&ArmyName>) {
-        let march_command = march.load(Ordering::SeqCst);
-        let battalion_is_marching = self.is_marching.load(Ordering::SeqCst);
+    pub fn set_is_marching(&self, march: bool, enemy_engaging_with: Option<&ArmyName>) {
+        let march_command = march;
+        let battalion_is_marching = self.is_marching.get();
 
         if battalion_is_marching != march_command && march_command == true {
             push_log(format!("{} are now marching", self.name));
@@ -35,7 +35,8 @@ impl Battalion {
                 enemy_engaging_with.unwrap()
             ));
         }
-        self.is_marching.store(march_command, Ordering::SeqCst);
+
+        self.is_marching.set(march_command.into());
     }
 
     pub fn set_is_reverse_direction(&mut self, value: bool) {

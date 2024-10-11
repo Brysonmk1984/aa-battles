@@ -1,4 +1,4 @@
-use std::{collections::HashMap, env, sync::atomic::AtomicBool};
+use std::{collections::HashMap, env};
 
 use rand::seq::SliceRandom;
 
@@ -30,7 +30,7 @@ pub fn update_in_range_map<'a>(
 
             // TODO: Consider a more elaborate check for range finding when both are marching and march past each other rather than attack
             // For now, resolved this by adjusting speed down and range up.
-            if in_range && battalion.count.load(std::sync::atomic::Ordering::SeqCst) > 0 {
+            if in_range && battalion.count.get() > 0 {
                 let battalion_name = battalion.name.clone();
                 // insert defenders flyers in the flyer vec, otherwise the ground vec
                 if attacker_range > MIN_RANGE_ATTACK_AIR && battalion.flying {
@@ -74,7 +74,7 @@ pub fn update_in_range_map<'a>(
                 .iter()
                 .find(|battalion| battalion.name == *battalion_key)
                 .unwrap();
-            attacker_battalion.set_is_marching(AtomicBool::new(true), None);
+            attacker_battalion.is_marching.set(true);
         }
     }
 }

@@ -1,13 +1,13 @@
 use std::{
     collections::HashMap,
     env,
+    num::Wrapping,
     ops::Deref,
     sync::atomic::{AtomicBool, Ordering},
-    thread,
 };
 
 use crate::{
-    entities::battalion::battalion::Battalion,
+    entities::{battalion::battalion::Battalion, battle::battle::Battle},
     enums::{ArmorType, ArmyName, Belligerent, StartingDirection, WeaponType},
     util::{
         determine_aoe_effect, push_log, push_stat_armor, push_stat_block, push_stat_dodge,
@@ -18,85 +18,83 @@ use crate::{
 use rand::Rng;
 use std::string::ToString;
 
-pub fn attack_phase(
+pub fn attack_phase<'a>(
     attacker_map: &HashMap<ArmyName, Vec<ArmyName>>,
     attackers: &Vec<Battalion>,
-    defenders: &Vec<Battalion>,
-    thread_num: u8,
-) {
-    // For each map key
+    defenders: &'a Vec<Battalion>,
+) -> &'a Vec<Battalion> {
+    // For each ATTACKER key, run attack sequence
     attacker_map
         .iter()
-        .enumerate()
-        .for_each(|(i, (attacker, matching_defenders))| {
-            //println!("ATTACKER: {:?}", attacker);
-            // get first in vec of values
-            let defending_b_name = matching_defenders.get(i).or_else(|| None);
+        .for_each(|(attacker, matching_defenders)| {
+            let attacking_battalion = attackers.iter().find(|b| b.name == *attacker).unwrap();
 
-            match defending_b_name {
-                Some(d) => {
-                    println!("AM: {attacker_map:?}");
-                    // get A battalion from a param based on entry key
-                    let attacking_battalion =
-                        attackers.iter().find(|b| b.name == *attacker).unwrap();
-                    println!("{}", attacking_battalion.is_marching.load(Ordering::SeqCst));
-                    //println!("DEF VEC: {defenders:?}");
+            let defending_battalions = matching_defenders
+                .iter()
+                .map(|a| defenders.iter().find(|d| d.name == *a).unwrap())
+                .collect::<Vec<&Battalion>>();
 
-                    run_attack_sequence(attacking_battalion, defenders, thread_num);
-                }
-                None => {
-                    return;
-                }
+            if matching_defenders.len() > 0 {
+                run_attack_sequence(attacking_battalion, &defending_battalions);
+            }
+
+            let post_attack_matching_defender_count =
+                defending_battalions.iter().fold(0, |mut acc, cur| {
+                    acc += cur.count.get();
+                    acc
+                });
+            println!(
+                "AFTER ATTACK marching BEING SET TO {} for {:?}, it was {:?}",
+                post_attack_matching_defender_count == 0,
+                attacking_battalion.name,
+                attacking_battalion.is_marching
+            );
+            if post_attack_matching_defender_count == 0 {
+                attacking_battalion.set_is_marching(true, None);
             }
         });
+    // println!("DEF COUNT{}", post_attack_matching_defender_count);
+    return defenders;
 }
 
 /**
 * fn run_attack_sequence -
    Parent function for running functions related to an attack: try_dodge, try_block, decrement
 */
-fn run_attack_sequence(
-    attacker: &Battalion,
-    combined_active_defenders: &Vec<Battalion>,
-    thread_num: u8,
-) {
-    let attacker_count = attacker.count.load(Ordering::Acquire);
-    // println!("RUNNING ATTACK SEQUENCE - attacker count:{attacker_count}");
-    for n in 0..attacker_count {
-        //println!("{}", combined_active_defenders.len());
+fn run_attack_sequence(attacker: &Battalion, combined_active_defenders: &Vec<&Battalion>) {
+    // todo: not always going to be accurate
+    attacker.set_is_marching(false, Some(&combined_active_defenders[0].name));
+    //println!("RUNNING ATTACK SEQUENCE ");
+    for n in 0..attacker.count.get() {
+        //println!("COMBINED DEFENDERS:{}", combined_active_defenders.len());
         // Pick a defender
         let defender_index = rand::thread_rng().gen_range(0..(combined_active_defenders.len()));
         let defender = combined_active_defenders.get(defender_index).unwrap();
         let mut test_only_count_dodges = 0;
-        attacker.set_is_marching(AtomicBool::new(false), Some(&defender.name));
+
+        // Still need to log this:
+        // attacker.set_is_marching(false, Some(&defender.name));
+
         // Run engagement steps multiple times depending on attack speed
         for a in 0..attacker.attack_speed {
             // Defending battalion loses a member or more depending on aoe
             let result = run_engagement_steps(attacker, defender);
 
             if result == EngagementOutcome::Hit {
-                let hits = determine_aoe_effect(&attacker.aoe, defender.spread as i32);
+                let hits = determine_aoe_effect(&attacker.aoe, defender.spread as i32) as u32;
                 //println!("HITS: {hits:?}");
-                // DO ATOMIC OPERATIONS
-                defender
-                    .count
-                    .fetch_update(Ordering::SeqCst, Ordering::SeqCst, |count| {
-                        //println!("COUNT: {count}");
-                        if count == 0 {
-                            return Some(0);
-                        } else {
-                            let mut actual_hits;
-                            if (0 > (count - hits as u32)) {
-                                println!("OVER HIT: {}", (count - hits as u32));
-                                actual_hits = 0;
-                            } else {
-                                actual_hits = count - hits as u32;
-                                push_stat_kill(hits as u32, attacker.starting_direction);
-                            }
 
-                            return Some(actual_hits);
-                        }
-                    });
+                let defender_count = defender.count.get();
+                let defender_hit_x_times = hits;
+
+                if defender_count.checked_sub(hits).is_some() {
+                    defender.count.set(defender_count - defender_hit_x_times);
+                    push_stat_kill(defender_hit_x_times as u32, attacker.starting_direction);
+                } else {
+                    // Overkill, use defender.count instead for stats
+                    defender.count.set(0);
+                    push_stat_kill(defender.count.get(), attacker.starting_direction);
+                }
             } else if result == EngagementOutcome::Dodged
                 && env::var("ENVIRONMENT").unwrap() == "test".to_string()
             {
@@ -118,7 +116,7 @@ fn run_engagement_steps(attacker: &Battalion, defender: &Battalion) -> Engagemen
     let has_dodged_attack = try_dodge(
         attacker.accuracy,
         defender.agility,
-        defender.is_marching.load(Ordering::SeqCst),
+        defender.is_marching.get(),
         defender.starting_direction,
         || rand::thread_rng().gen_range(0..100),
     );

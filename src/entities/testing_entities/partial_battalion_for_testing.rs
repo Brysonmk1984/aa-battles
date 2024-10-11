@@ -4,7 +4,7 @@ use crate::enums::StartingDirection;
 
 #[derive(Default)]
 pub struct PartialBattalionForTests {
-    pub count: Option<AtomicU32>,
+    pub count: Option<u32>,
     pub position: Option<i32>,
     pub speed: Option<i32>,
     pub flying: Option<bool>,

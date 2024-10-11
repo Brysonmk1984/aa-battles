@@ -1,3 +1,4 @@
+use std::cell::Cell;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
 
@@ -17,10 +18,10 @@ use crate::{
 };
 
 // An Army Type with count belonging to a user. Forms a part of a whole nation's army
-#[derive(Debug, Serialize, Deserialize, Default)]
+#[derive(Debug, Serialize, Deserialize, Default, Clone)]
 pub struct Battalion {
     pub name: ArmyName,
-    pub count: AtomicU32,
+    pub count: Cell<u32>,
     pub position: i32,
     pub shield_rating: f64,
     pub flying: bool,
@@ -33,7 +34,7 @@ pub struct Battalion {
     pub armor_type: ArmorType,
     pub agility: f64,
     pub speed: i32,
-    pub is_marching: AtomicBool,
+    pub is_marching: Cell<bool>,
     pub starting_direction: StartingDirection,
     pub is_reverse_direction: bool,
 }
