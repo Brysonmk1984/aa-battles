@@ -1,7 +1,7 @@
 #![allow(warnings)]
 
 mod battle;
-mod entities;
+pub mod entities;
 mod enums;
 mod match_up;
 mod mocks;
