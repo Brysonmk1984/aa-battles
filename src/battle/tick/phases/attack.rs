@@ -43,6 +43,7 @@ pub fn attack_phase<'a>(
                     acc += cur.count.get();
                     acc
                 });
+            println!("DEF COUNT{}", post_attack_matching_defender_count);
             println!(
                 "AFTER ATTACK marching BEING SET TO {} for {:?}, it was {:?}",
                 post_attack_matching_defender_count == 0,
@@ -53,7 +54,7 @@ pub fn attack_phase<'a>(
                 attacking_battalion.set_is_marching(true, None);
             }
         });
-    // println!("DEF COUNT{}", post_attack_matching_defender_count);
+    //println!("DEF COUNT{}", post_attack_matching_defender_count);
     return defenders;
 }
 
@@ -81,23 +82,24 @@ fn run_attack_sequence(attacker: &Battalion, combined_active_defenders: &Vec<&Ba
             let result = run_engagement_steps(attacker, defender);
 
             if result == EngagementOutcome::Hit {
-                let hits = determine_aoe_effect(&attacker.aoe, defender.spread as i32) as u32;
-                //println!("HITS: {hits:?}");
+                let defender_hit_x_times =
+                    determine_aoe_effect(&attacker.aoe, defender.spread as i32) as u32;
 
                 let defender_count = defender.count.get();
-                let defender_hit_x_times = hits;
 
-                if defender_count.checked_sub(hits).is_some() {
+                if defender_count.checked_sub(defender_hit_x_times).is_some() {
                     defender.count.set(defender_count - defender_hit_x_times);
                     push_stat_kill(defender_hit_x_times as u32, attacker.starting_direction);
                 } else {
-                    // Overkill, use defender.count instead for stats
+                    let count_copy = defender.count.get();
+                    push_stat_kill(count_copy, attacker.starting_direction);
                     defender.count.set(0);
-                    push_stat_kill(defender.count.get(), attacker.starting_direction);
+                    return;
                 }
             } else if result == EngagementOutcome::Dodged
                 && env::var("ENVIRONMENT").unwrap() == "test".to_string()
             {
+                println!("IN DODGED, SHOULDNT HAPPEN");
                 test_only_count_dodges += 1;
             }
         }
@@ -161,6 +163,7 @@ pub fn try_dodge(
     };
     // 1.0 accuracy = 100% chance to hit - (agility + is_marching)
     let chance_to_dodge = d_agility + is_marching_mod;
+    println!("DODGE DETAILS {a_accuracy} {chance_to_dodge} {is_marching_mod}");
     let chance_to_hit = ((a_accuracy - chance_to_dodge) * 100.0) as u64;
 
     if chance_to_hit == 0 {

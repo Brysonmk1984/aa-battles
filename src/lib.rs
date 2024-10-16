@@ -2,10 +2,10 @@
 
 mod battle;
 pub mod entities;
-mod enums;
+pub mod enums;
 mod match_up;
 mod mocks;
-mod util;
+pub mod util;
 
 use anyhow::{Context, Result};
 use entities::{
