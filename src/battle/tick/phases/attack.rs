@@ -163,7 +163,7 @@ pub fn try_dodge(
     };
     // 1.0 accuracy = 100% chance to hit - (agility + is_marching)
     let chance_to_dodge = d_agility + is_marching_mod;
-    println!("DODGE DETAILS {a_accuracy} {chance_to_dodge} {is_marching_mod}");
+    //println!("DODGE DETAILS {a_accuracy} {chance_to_dodge} {is_marching_mod}");
     let chance_to_hit = ((a_accuracy - chance_to_dodge) * 100.0) as u64;
 
     if chance_to_hit == 0 {

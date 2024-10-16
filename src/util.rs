@@ -138,7 +138,7 @@ pub fn reset_stats() {
 pub fn push_stat_dodge(starting_direction: StartingDirection) {
     let mut tuple = STATS_RWLOCK.write().unwrap();
 
-    if starting_direction == StartingDirection::WEST {
+    if starting_direction == StartingDirection::EAST {
         tuple.0.dodge_count += 1;
     } else {
         tuple.1.dodge_count += 1;
