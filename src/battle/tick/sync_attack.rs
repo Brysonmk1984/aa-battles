@@ -5,10 +5,10 @@ use std::{
 
 use crate::{
     entities::{battalion::battalion::Battalion, battle::battle::Battle},
-    enums::ArmyName,
+    enums::{ArmyName, StartingDirection},
 };
 
-use super::phases::attack::attack_phase;
+use super::phases::{attack::attack_phase, march::handle_direction_check};
 
 const threads_per_army: u8 = 1;
 
@@ -34,6 +34,17 @@ pub fn sync_attack(
         &mut state_clone_two.army_1_state,
     )
     .clone();
+
+    handle_direction_check(
+        &mut east_defenders_left,
+        &mut west_defenders_left,
+        StartingDirection::EAST,
+    );
+    handle_direction_check(
+        &mut west_defenders_left,
+        &mut east_defenders_left,
+        StartingDirection::WEST,
+    );
 
     // Need to get the marching status from when they went through their own attack phase
     // SETTING EAST IS_MARCHING STATUS FROM CLONE_ONE (THEIR ATTACK)

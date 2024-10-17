@@ -40,7 +40,7 @@ impl Battalion {
     }
 
     pub fn set_is_reverse_direction(&mut self, value: bool) {
-        push_log(format!("A ground battalion has passed under the {} battalion, causing the fliers to reverse direction.", self.name));
+        push_log(format!("All ground forces have passed under the {} battalion, causing them to reverse direction.", self.name));
         self.is_reverse_direction = value;
     }
 
