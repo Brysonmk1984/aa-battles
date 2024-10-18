@@ -33,7 +33,7 @@ pub fn update_in_range_map<'a>(
             if in_range && battalion.count.get() > 0 {
                 let battalion_name = battalion.name.clone();
                 // insert defenders flyers in the flyer vec, otherwise the ground vec
-                if attacker_range > MIN_RANGE_ATTACK_AIR && battalion.flying {
+                if attacker_range >= MIN_RANGE_ATTACK_AIR && battalion.flying {
                     // println!(
                     //     "{} IN RANGE OF {}, CAN HIT FLYER",
                     //     attacker_battalion.name, battalion.name
@@ -63,7 +63,7 @@ pub fn update_in_range_map<'a>(
 
         // Flyers will be prioritized over ground enemies
         let combined_vec = [flyer_vec, ground_vec].concat();
-
+        println!("{combined_vec:?}");
         // push arranged, combined vec items into the in_range vec on the attacker
         combined_vec.into_iter().for_each(|b_name| {
             in_range_vec.push(b_name);

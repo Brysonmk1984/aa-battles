@@ -10,8 +10,6 @@ use crate::{
 
 use super::phases::{attack::attack_phase, march::handle_direction_check};
 
-const threads_per_army: u8 = 1;
-
 pub fn sync_attack(
     attacker_map_east: &HashMap<ArmyName, Vec<ArmyName>>,
     attacker_map_west: &HashMap<ArmyName, Vec<ArmyName>>,
