@@ -82,7 +82,7 @@ fn run_attack_sequence(attacker: &Battalion, combined_active_defenders: &Vec<&Ba
         for a in 0..attacker.attack_speed {
             // Defending battalion loses a member or more depending on aoe
             let result = run_engagement_steps(attacker, defender);
-
+            println!("ENGAGEMENT OUTCOME {:?}", result);
             if result == EngagementOutcome::Hit {
                 let defender_hit_x_times =
                     determine_aoe_effect(&attacker.aoe, defender.spread as i32) as u32;
@@ -101,7 +101,6 @@ fn run_attack_sequence(attacker: &Battalion, combined_active_defenders: &Vec<&Ba
             } else if result == EngagementOutcome::Dodged
                 && env::var("ENVIRONMENT").unwrap() == "test".to_string()
             {
-                println!("IN DODGED, SHOULDNT HAPPEN");
                 test_only_count_dodges += 1;
             }
         }
@@ -158,7 +157,7 @@ mod tests {
     use crate::battle::tick::phases::march::march_phase;
     use crate::battle::tick::phases::range_find::update_in_range_map;
     use crate::match_up::create_mocks::create_mock_army;
-    use crate::mocks::game_defaults::GameDefaultsMocks;
+    use crate::mocks::game_defaults::{self, GameDefaultsMocks};
 
     use crate::enums::ArmyName::{
         self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
@@ -167,10 +166,96 @@ mod tests {
         OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
         SkullClanDeathCultists,
     };
-    use crate::enums::StartingDirection;
-    use crate::util::{map_army_defaults, WEAPON_ARMOR_CELL};
+    use crate::enums::{ArmorType, StartingDirection};
+    use crate::util::{map_army_defaults, AOE_SPREAD_CELL, WEAPON_ARMOR_CELL};
 
     use std::{collections::HashMap, env};
+
+    /**
+     * attack_phase
+     * The attacking battalion should hit all defenders : magic vs chain w/1 spread
+     */
+    #[test]
+    fn test_aoe_attack() {
+        dotenvy::dotenv().ok();
+        WEAPON_ARMOR_CELL.set(GameDefaultsMocks::generate_weapon_armor_hash());
+        AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![SkullClanDeathCultists],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![CastlegateCrossbowmen],
+        )
+        .unwrap();
+
+        attacker[0].position = -20;
+        attacker[0].count.set(1);
+        attacker[0].accuracy = 1.0;
+        defender[0].position = 0;
+        defender[0].count.set(34);
+        defender[0].armor_type = ArmorType::Chain;
+        defender[0].is_marching.set(false);
+        defender[0].agility = 0.0;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+
+        assert_eq!(defender[0].count.get(), 34);
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+
+        // Still 1 in 100 chance to dodge
+        assert!(cloned_defender[0].count.get() == 1 || cloned_defender[0].count.get() == 34);
+    }
+
+    /**
+     * attack_phase
+     * The attacking battalion should hit multiple times
+     */
+    #[test]
+    fn test_attack_speed() {
+        dotenvy::dotenv().ok();
+        WEAPON_ARMOR_CELL.set(GameDefaultsMocks::generate_weapon_armor_hash());
+        AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![ShinobiMartialArtists],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![MinuteMenMilitia],
+        )
+        .unwrap();
+
+        attacker[0].attack_speed = 3;
+        attacker[0].position = -5;
+        defender[0].position = 0;
+        attacker[0].count.set(10);
+        defender[0].count.set(100);
+        defender[0].is_marching.set(false);
+        defender[0].agility = 0.0;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+
+        assert_eq!(defender[0].count.get(), 100);
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+
+        assert!(cloned_defender[0].count.get() < 90);
+    }
 
     /**
      * attack_phase

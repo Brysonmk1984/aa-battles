@@ -9,10 +9,7 @@ use std::{
 use crate::{
     entities::{battalion::battalion::Battalion, battle::battle::Battle},
     enums::{ArmorType, ArmyName, Belligerent, StartingDirection, WeaponType},
-    util::{
-        determine_aoe_effect, push_log, push_stat_armor, push_stat_block, push_stat_dodge,
-        push_stat_kill, WEAPON_ARMOR_CELL,
-    },
+    util::{push_log, push_stat_dodge, push_stat_kill, WEAPON_ARMOR_CELL},
     IS_MARCHING_AGILITY_MOD,
 };
 use rand::Rng;
@@ -45,7 +42,7 @@ pub fn try_dodge(
     }
 
     let random_dodge_num = randomizer_func();
-
+    println!("{chance_to_hit} {random_dodge_num}");
     let has_dodged = chance_to_hit <= random_dodge_num;
     if has_dodged {
         push_stat_dodge(starting_direction);

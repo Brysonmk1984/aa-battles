@@ -152,62 +152,6 @@ pub mod test {
         );
     }
 
-    // #[test]
-    // fn should_decrease_count_by_one_normal_attack() {
-    //     AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
-    //     let partial_mock_battalion: PartialBattalionForTests = Default::default();
-    //     let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
-
-    //     let test_battalion_ref = test_army.get_mut(0).unwrap();
-    //     let attacking_army_aoe = 0.0;
-    //     assert_eq!(test_battalion_ref.count, 1000);
-    //     //test_battalion_ref.count.fetch_sub(1, Ordering::Release);
-    //     assert_eq!(test_battalion_ref.count, 999);
-    // }
-
-    // #[test]
-    // fn should_decrease_count_by_five_aoe_attack_normal_spread() {
-    //     AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
-    //     let partial_mock_battalion = PartialBattalionForTests {
-    //         aoe: None,
-    //         count: None,
-    //         position: None,
-    //         speed: None,
-    //         flying: None,
-    //         range: None,
-    //         spread: Some(1.0),
-    //         starting_direction: None,
-    //     };
-
-    //     let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
-
-    //     let test_battalion_ref = test_army.get_mut(0).unwrap();
-
-    //     assert_eq!(test_battalion_ref.count.load(Ordering::Acquire), 1000);
-    //     test_battalion_ref.decrement(1.0, test_battalion_ref.starting_direction);
-    //     assert_eq!(test_battalion_ref.count.load(Ordering::Acquire), 995);
-    // }
-
-    // #[test]
-    // fn should_decrease_count_by_two_aoe_attack_extra_spread() {
-    //     AOE_SPREAD_CELL.set(GameDefaultsMocks::generate_aoe_spread_hash());
-    //     let partial_mock_battalion = PartialBattalionForTests {
-    //         aoe: None,
-    //         count: None,
-    //         position: None,
-    //         speed: None,
-    //         flying: None,
-    //         range: None,
-    //         spread: Some(2.0),
-    //         starting_direction: None,
-    //     };
-    //     let mut test_army = vec![create_mock_generic_battalion(partial_mock_battalion)];
-    //     let test_battalion_ref = test_army.get_mut(0).unwrap();
-    //     assert_eq!(test_battalion_ref.count.load(Ordering::Acquire), 1000);
-    //     test_battalion_ref.decrement(1.0, test_battalion_ref.starting_direction);
-    //     assert_eq!(test_battalion_ref.count.load(Ordering::Acquire), 998);
-    // }
-
     #[test]
     fn should_set_is_marching() {
         let partial_mock_battalion: PartialBattalionForTests = Default::default();

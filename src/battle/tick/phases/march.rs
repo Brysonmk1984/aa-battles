@@ -91,6 +91,37 @@ mod test {
 
     use std::{collections::HashMap, env};
 
+    use super::handle_direction_check;
+
+    /**
+     * march_phase
+     * Should stop marching in order to attack when there's a defender in range
+     */
+    #[test]
+    fn test_direction_change() {
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+
+        let mut attacker = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![AvianCliffDwellers],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![HighbornCavalry],
+        )
+        .unwrap();
+        attacker[0].position = 0;
+        defender[0].position = -20;
+
+        assert_eq!(attacker[0].is_reverse_direction, false);
+        handle_direction_check(&mut attacker, &mut defender, StartingDirection::EAST);
+        assert_eq!(attacker[0].is_reverse_direction, true);
+    }
+
     /**
      * attack_phase
      * Should stop marching in order to attack when there's a defender in range

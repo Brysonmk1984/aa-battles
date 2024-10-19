@@ -130,7 +130,7 @@ mod tests {
     fn test_do_battle() {
         let start = Instant::now();
 
-        let end_battle_payload = do_battle(get_game_defaults(), get_competitors(100, 100)).unwrap();
+        let end_battle_payload = do_battle(get_game_defaults(), get_competitors(100000, 100000)).unwrap();
         println!("{end_battle_payload:?}");
 
         let elapsed = start.elapsed();
