@@ -8,7 +8,7 @@ use crate::{
     enums::{ArmyName, StartingDirection},
 };
 
-use super::phases::{attack::attack_phase, march::handle_direction_check};
+use super::phases::{attack::attack_phase::attack_phase, march::handle_direction_check};
 
 pub fn sync_attack(
     attacker_map_east: &HashMap<ArmyName, Vec<ArmyName>>,

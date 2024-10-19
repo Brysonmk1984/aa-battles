@@ -70,3 +70,92 @@ pub fn handle_direction_check(
         }
     }
 }
+
+#[cfg(test)]
+mod test {
+
+    use crate::battle::tick::phases::attack::attack_phase::attack_phase;
+    use crate::battle::tick::phases::range_find::update_in_range_map;
+    use crate::match_up::create_mocks::create_mock_army;
+    use crate::mocks::game_defaults::GameDefaultsMocks;
+
+    use crate::enums::ArmyName::{
+        self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
+        CastlegateCrossbowmen, DeathDealerAssassins, ElvenArchers, HighbornCavalry,
+        ImperialLegionnaires, MagiEnforcers, MinuteMenMilitia, NorthWatchLongbowmen,
+        OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
+        SkullClanDeathCultists,
+    };
+    use crate::enums::StartingDirection;
+    use crate::util::{map_army_defaults, WEAPON_ARMOR_CELL};
+
+    use std::{collections::HashMap, env};
+
+    /**
+     * attack_phase
+     * Should stop marching in order to attack when there's a defender in range
+     */
+    #[test]
+    fn test_attack_phase_no_march() {
+        dotenvy::dotenv().ok();
+        WEAPON_ARMOR_CELL.set(GameDefaultsMocks::generate_weapon_armor_hash());
+
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![NorthWatchLongbowmen],
+        )
+        .unwrap();
+
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![ImperialLegionnaires],
+        )
+        .unwrap();
+        attacker[0].is_marching.set(true);
+        attacker[0].position = -50;
+        defender[0].position = 0;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+        assert!(cloned_attacker[0].is_marching.get() == false);
+    }
+
+    /**
+     * attack_phase
+     * Should start marching when there's no defender in range
+     */
+    #[test]
+    fn test_attack_phase_march() {
+        dotenvy::dotenv().ok();
+
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![NorthWatchLongbowmen],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![ImperialLegionnaires],
+        )
+        .unwrap();
+        attacker[0].is_marching.set(false);
+        attacker[0].position = -150;
+        defender[0].position = 150;
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let mut cloned_attacker = attacker.clone();
+        let mut cloned_defender = defender.clone();
+        attack_phase(&attacker_map, &mut cloned_attacker, &mut cloned_defender);
+        assert!(cloned_attacker[0].is_marching.get() == true);
+    }
+}

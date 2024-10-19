@@ -78,3 +78,160 @@ pub fn update_in_range_map<'a>(
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+    use crate::battle::tick::phases::attack::attack_phase::attack_phase;
+    use crate::battle::tick::phases::march::march_phase;
+    use crate::battle::tick::phases::range_find::update_in_range_map;
+    use crate::match_up::create_mocks::create_mock_army;
+    use crate::mocks::game_defaults::GameDefaultsMocks;
+
+    use crate::enums::ArmyName::{
+        self, AmazonianHuntresses, AvianCliffDwellers, BarbariansOfTheOuterSteppe,
+        CastlegateCrossbowmen, DeathDealerAssassins, ElvenArchers, HighbornCavalry,
+        ImperialLegionnaires, MagiEnforcers, MinuteMenMilitia, NorthWatchLongbowmen,
+        OathSwornKnights, PeacekeeperMonks, RoninImmortals, ShinobiMartialArtists,
+        SkullClanDeathCultists,
+    };
+    use crate::enums::StartingDirection;
+    use crate::util::{map_army_defaults, AOE_SPREAD_CELL, WEAPON_ARMOR_CELL};
+
+    use std::sync::OnceLock;
+    use std::{collections::HashMap, env};
+
+    #[test]
+    fn test_update_in_range_map_in_range() {
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![PeacekeeperMonks],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![HighbornCavalry],
+        )
+        .unwrap();
+        attacker[0].position = 0;
+        defender[0].position = 0;
+
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+
+        assert_eq!(attacker_map.get(&PeacekeeperMonks).unwrap().len(), 1);
+    }
+
+    #[test]
+    fn test_update_in_range_map_none_in_range() {
+        WEAPON_ARMOR_CELL.set(GameDefaultsMocks::generate_weapon_armor_hash());
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![HighbornCavalry],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![NorthWatchLongbowmen],
+        )
+        .unwrap();
+        attacker[0].position = -150;
+        defender[0].position = 150;
+
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        assert_eq!(attacker_map.get(&HighbornCavalry).unwrap().len(), 0);
+    }
+
+    #[test]
+    fn test_update_in_range_map_air_not_in_range_of_melee() {
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![HighbornCavalry],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![AvianCliffDwellers],
+        )
+        .unwrap();
+        attacker[0].position = 0;
+        defender[0].position = 0;
+
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        assert_eq!(attacker_map.get(&HighbornCavalry).unwrap().len(), 0);
+    }
+
+    #[test]
+    fn test_update_in_range_map_zero_count_excluded() {
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![HighbornCavalry],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![PeacekeeperMonks, ImperialLegionnaires],
+        )
+        .unwrap();
+        attacker[0].position = 0;
+        defender[0].position = 0;
+        defender[0].count.set(0);
+        defender[1].position = 0;
+
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        assert_eq!(attacker_map.get(&HighbornCavalry).unwrap().len(), 1);
+    }
+
+    #[test]
+    fn test_update_in_range_map_flying_in_front() {
+        let mut attacker_map: HashMap<ArmyName, Vec<ArmyName>> = HashMap::new();
+        let army_defaults = map_army_defaults(None);
+        let mut attacker = create_mock_army(
+            StartingDirection::WEST,
+            &army_defaults,
+            vec![NorthWatchLongbowmen],
+        )
+        .unwrap();
+        let mut defender = create_mock_army(
+            StartingDirection::EAST,
+            &army_defaults,
+            vec![
+                NorthWatchLongbowmen,
+                PeacekeeperMonks,
+                AvianCliffDwellers,
+                ImperialLegionnaires,
+            ],
+        )
+        .unwrap();
+        attacker[0].position = 0;
+        defender[0].position = 0;
+        defender[1].position = 0;
+        defender[2].position = 0;
+        defender[3].position = 0;
+
+        attacker_map.insert(attacker[0].name.clone(), Vec::new());
+        update_in_range_map(&mut attacker_map, &attacker, &defender);
+        let vec_of_in_range = attacker_map.get(&NorthWatchLongbowmen).unwrap();
+        assert_eq!(vec_of_in_range.len(), 4);
+        assert!(vec_of_in_range[0] == AvianCliffDwellers);
+    }
+}
