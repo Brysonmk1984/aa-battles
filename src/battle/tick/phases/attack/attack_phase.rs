@@ -45,13 +45,13 @@ pub fn attack_phase<'a>(
                     acc += cur.count.get();
                     acc
                 });
-            println!("DEF COUNT{}", post_attack_matching_defender_count);
-            println!(
-                "AFTER ATTACK marching BEING SET TO {} for {:?}, it was {:?}",
-                post_attack_matching_defender_count == 0,
-                attacking_battalion.name,
-                attacking_battalion.is_marching
-            );
+
+            // println!(
+            //     "AFTER ATTACK marching BEING SET TO {} for {:?}, it was {:?}",
+            //     post_attack_matching_defender_count == 0,
+            //     attacking_battalion.name,
+            //     attacking_battalion.is_marching
+            // );
             if post_attack_matching_defender_count == 0 {
                 attacking_battalion.set_is_marching(true, None);
             }
@@ -82,7 +82,7 @@ fn run_attack_sequence(attacker: &Battalion, combined_active_defenders: &Vec<&Ba
         for a in 0..attacker.attack_speed {
             // Defending battalion loses a member or more depending on aoe
             let result = run_engagement_steps(attacker, defender);
-            println!("ENGAGEMENT OUTCOME {:?}", result);
+            //println!("ENGAGEMENT OUTCOME {:?}", result);
             if result == EngagementOutcome::Hit {
                 let defender_hit_x_times =
                     determine_aoe_effect(&attacker.aoe, defender.spread as i32) as u32;

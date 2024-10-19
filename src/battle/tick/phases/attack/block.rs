@@ -28,7 +28,6 @@ pub fn try_block(
     let has_blocked = chance_to_block > random_block_num;
 
     if has_blocked {
-        println!(" BLOCKED {chance_to_block} {random_block_num}");
         push_stat_block(starting_direction);
     }
     has_blocked

@@ -53,8 +53,7 @@ pub fn run_tick(battle_state: &mut Battle) -> u32 {
         sum += b.count.get();
         sum
     });
-    println!("{western_army_count}, {eastern_army_count}");
-    println!("------- March Phase ------");
+
     // STEP 4: March forward
     if western_army_count > 0 && eastern_army_count >= 0 {
         march_phase(&mut battle_state.army_1_state, &StartingDirection::EAST);
